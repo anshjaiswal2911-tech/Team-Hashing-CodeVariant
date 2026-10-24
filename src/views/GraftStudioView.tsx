@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { SalvageModule, ScreenId } from '../types';
 import { downloadSalvageZip } from '../utils/exportArchive';
-import { GraftDonorCard } from '../components/Graft';
+import { GraftDonorCard, OrganCompatibilityRadar } from '../components/Graft';
 import { sampleGraftMatches } from '../data/sampleGraftMatches';
 
 interface GraftStudioViewProps {
@@ -143,6 +143,12 @@ export const GraftStudioView: React.FC<GraftStudioViewProps> = ({
                 <span>Normalized environment variables mapped to .env.example</span>
               </div>
             </div>
+
+            {/* Organ Transplant Preflight Radar */}
+            <OrganCompatibilityRadar
+              targetPreset={selectedPreset}
+              moduleCount={activeModules.length}
+            />
 
             {isSynthesizing && (
               <div className="space-y-2 pt-2">
