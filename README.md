@@ -15,26 +15,6 @@ Code Variant — Build 01 (Round 2) · Problem Statement **PS 05 — The Project
 
 </div>
 
----
-
-## 📖 Table of Contents
-
-1. [The Problem](#-the-problem)
-2. [Our Solution](#-our-solution)
-3. [Features](#-features)
-4. [Screenshots](#-screenshots)
-5. [How It Works](#-how-it-works)
-6. [Design Philosophy](#-design-philosophy)
-7. [Tech Stack](#-tech-stack)
-8. [Getting Started](#-getting-started)
-9. [Scripts](#-scripts)
-10. [Project Structure](#-project-structure)
-11. [Deployment](#-deployment)
-12. [Build Progress](#-build-progress)
-13. [Team](#-team-hashing)
-
----
-
 ## 🥀 The Problem
 
 Every developer, student, and hackathon builder has a folder of abandoned side projects. When time runs out, exams arrive, or priorities shift, valuable code sits forgotten in private repositories.
