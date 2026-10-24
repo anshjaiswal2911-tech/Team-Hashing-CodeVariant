@@ -142,12 +142,6 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
         <div className="absolute -top-16 -right-16 w-80 h-80 rounded-full bg-secondary/15 blur-3xl pointer-events-none" />
 
         <div className="space-y-3 max-w-xl z-10">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/15 border border-secondary/35 text-secondary text-xs font-mono font-bold shadow-2xs">
-            <span>✨</span>
-            <span>Canvas Protocol Active</span>
-          </div>
-
           {/* Large Serif Headline */}
           <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl text-on-surface font-bold tracking-tight leading-[1.08]">
             Drag. Drop. Revive.
@@ -155,7 +149,7 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
 
           {/* Subtitle */}
           <p className="font-sans text-sm sm:text-base text-on-surface-variant font-normal leading-relaxed">
-            No buttons, just actions. Drag data cards to the right zones to perform your tasks and bring your projects back to life.
+            Every dormant repository holds valuable engineering. Drag any project to uncover its root cause, salvage reusable components into your stack, or drop into an action zone to spark its revival.
           </p>
         </div>
 
@@ -258,7 +252,6 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
                     setActiveDraggedSpecimen(item);
                   }}
                   onDragEnd={() => setActiveDraggedSpecimen(null)}
-                  onClick={() => setStagedSpecimen(item)}
                   className={`p-3.5 sm:p-4 rounded-[22px] bg-surface-container-low border transition-all duration-200 flex items-start justify-between gap-3 cursor-grab active:cursor-grabbing hover:-translate-y-0.5 select-none relative ${
                     isDragging
                       ? 'border-secondary scale-[0.98] opacity-50 shadow-inner'
@@ -329,7 +322,16 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
 
           {stagedSpecimen ? (
             /* ─── OPTION A: AI FORENSIC DIAGNOSTIC WORKBENCH ─── */
-            <div className="z-10 w-full flex flex-col gap-4 animate-in fade-in zoom-in-95">
+            <div
+              draggable
+              onDragStart={(e) => {
+                e.dataTransfer.setData('application/json', JSON.stringify({ type: 'specimen', specimen: stagedSpecimen }));
+                e.dataTransfer.effectAllowed = 'copyMove';
+                setActiveDraggedSpecimen(stagedSpecimen);
+              }}
+              onDragEnd={() => setActiveDraggedSpecimen(null)}
+              className="z-10 w-full flex flex-col gap-4 animate-in fade-in zoom-in-95 cursor-grab active:cursor-grabbing"
+            >
               {/* Header Row */}
               <div className="flex items-start justify-between gap-3 border-b border-outline-variant/50 pb-3">
                 <div className="flex items-start gap-3 min-w-0">

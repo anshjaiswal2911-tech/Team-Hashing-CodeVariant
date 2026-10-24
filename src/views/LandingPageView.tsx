@@ -824,30 +824,12 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
             </div>
             <span className="hidden sm:inline text-on-surface-variant/40">•</span>
             <span className="text-[11px] text-on-surface-variant">
-              Developed by <strong className="text-on-surface">Team Hashing</strong> (Rajiv Jha, Mitesh Jha, Ansh Jaiswal, Aryan Jaiswal) • <span className="font-mono text-secondary">PS 05 • Build 01</span>
+              Developed by <strong className="text-on-surface">Team Hashing</strong> (Rajiv Jha, Mitesh Jha, Ansh Jaiswal, Aryan Jaiswal)
             </span>
           </div>
 
-          <div className="flex items-center gap-4 text-[11px]">
-            <button
-              type="button"
-              onClick={() => onNavigate('settings')}
-              className="hover:text-on-surface transition-colors"
-            >
-              Theme Settings
-            </button>
-            <span className="text-on-surface-variant/40">•</span>
-            <button
-              type="button"
-              onClick={() => onNavigate('archive')}
-              className="hover:text-on-surface transition-colors"
-            >
-              Specimen Archive
-            </button>
-            <span className="text-on-surface-variant/40">•</span>
-            <span className="font-mono text-[10px] text-secondary font-bold px-2 py-0.5 rounded bg-secondary/10">
-              ROUND 2 READY
-            </span>
+          <div className="flex items-center gap-2 text-[11px] text-on-surface-variant font-serif italic">
+            <span>Where dead projects become fertile ground.</span>
           </div>
         </div>
       </footer>

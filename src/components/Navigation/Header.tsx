@@ -165,7 +165,7 @@ export const Header: React.FC<HeaderProps> = ({
                         setTheme('botanical-light');
                         setShowThemeMenu(false);
                       }}
-                      className={`w-full p-2.5 rounded-2xl flex items-center justify-between transition-all text-left ${
+                      className={`w-full p-2.5 rounded-xl flex items-center justify-between transition-all text-left ${
                         theme === 'botanical-light'
                           ? 'bg-primary-container text-on-primary-container shadow-sm border border-outline-variant/70'
                           : 'hover:bg-surface-container-high/70 text-on-surface'
@@ -175,16 +175,11 @@ export const Header: React.FC<HeaderProps> = ({
                         <div className="w-8 h-8 rounded-full bg-[#DDEBDD] text-[#144227] flex items-center justify-center flex-shrink-0 shadow-sm">
                           <span aria-hidden="true" className="material-symbols-outlined text-base">eco</span>
                         </div>
-                        <div>
-                          <div className="flex items-center gap-1.5">
-                            <span className="font-sans text-xs font-bold leading-tight">Botanical Ivory</span>
-                            <span className="px-1.5 py-0.2 rounded-full text-[9px] font-mono font-bold uppercase bg-surface-container-lowest text-on-surface-variant border border-outline-variant/60">
-                              PPT DECK
-                            </span>
-                          </div>
-                          <p className="font-sans text-[10px] opacity-80 mt-0.5 leading-snug">
-                            Ivory canvas, deep pine text & warm golden amber
-                          </p>
+                        <div className="flex items-center gap-1.5">
+                          <span className="font-sans text-xs font-bold leading-tight">Botanical Ivory</span>
+                          <span className="px-1.5 py-0.2 rounded-full text-[9px] font-mono font-bold uppercase bg-surface-container-lowest text-on-surface-variant border border-outline-variant/60">
+                            PPT DECK
+                          </span>
                         </div>
                       </div>
                       <div className="pl-2">
@@ -205,7 +200,7 @@ export const Header: React.FC<HeaderProps> = ({
                         setTheme('claymorphic');
                         setShowThemeMenu(false);
                       }}
-                      className={`w-full p-2.5 rounded-2xl flex items-center justify-between transition-all text-left ${
+                      className={`w-full p-2.5 rounded-xl flex items-center justify-between transition-all text-left ${
                         theme === 'claymorphic'
                           ? 'bg-primary-container text-on-primary-container shadow-sm border border-outline-variant/70'
                           : 'hover:bg-surface-container-high/70 text-on-surface'
@@ -215,16 +210,11 @@ export const Header: React.FC<HeaderProps> = ({
                         <div className="w-8 h-8 rounded-full bg-[#D6E8DE] text-[#0E332E] flex items-center justify-center flex-shrink-0 shadow-sm border border-[#0E332E]/20">
                           <span aria-hidden="true" className="material-symbols-outlined text-base">view_in_ar</span>
                         </div>
-                        <div>
-                          <div className="flex items-center gap-1.5">
-                            <span className="font-sans text-xs font-bold leading-tight">Neo-Tactile Soft UI</span>
-                            <span className="px-1.5 py-0.2 rounded-full text-[9px] font-mono font-bold uppercase bg-surface-container-lowest text-on-surface-variant border border-outline-variant/60">
-                              PIVORA KIT
-                            </span>
-                          </div>
-                          <p className="font-sans text-[10px] opacity-80 mt-0.5 leading-snug">
-                            Calm sand (#EFE8DE), deep pine teal buttons & sunken wells
-                          </p>
+                        <div className="flex items-center gap-1.5">
+                          <span className="font-sans text-xs font-bold leading-tight">Neo-Tactile Soft UI</span>
+                          <span className="px-1.5 py-0.2 rounded-full text-[9px] font-mono font-bold uppercase bg-surface-container-lowest text-on-surface-variant border border-outline-variant/60">
+                            PIVORA KIT
+                          </span>
                         </div>
                       </div>
                       <div className="pl-2">
@@ -245,7 +235,7 @@ export const Header: React.FC<HeaderProps> = ({
                         setTheme('glassmorphic');
                         setShowThemeMenu(false);
                       }}
-                      className={`w-full p-2.5 rounded-2xl flex items-center justify-between transition-all text-left ${
+                      className={`w-full p-2.5 rounded-xl flex items-center justify-between transition-all text-left ${
                         theme === 'glassmorphic'
                           ? 'bg-primary-container text-on-primary-container shadow-sm border border-outline-variant/70'
                           : 'hover:bg-surface-container-high/70 text-on-surface'
@@ -255,16 +245,11 @@ export const Header: React.FC<HeaderProps> = ({
                         <div className="w-8 h-8 rounded-full bg-[rgba(52,211,153,0.18)] text-[#34D399] flex items-center justify-center flex-shrink-0 shadow-sm border border-[#34D399]/30">
                           <span aria-hidden="true" className="material-symbols-outlined text-base">blur_on</span>
                         </div>
-                        <div>
-                          <div className="flex items-center gap-1.5">
-                            <span className="font-sans text-xs font-bold leading-tight">Galactic Glass</span>
-                            <span className="px-1.5 py-0.2 rounded-full text-[9px] font-mono font-bold uppercase bg-surface-container-lowest text-on-surface-variant border border-outline-variant/60">
-                              DARK GLASS
-                            </span>
-                          </div>
-                          <p className="font-sans text-[10px] opacity-80 mt-0.5 leading-snug">
-                            Obsidian void, frosted smoky emerald glass & neon mint
-                          </p>
+                        <div className="flex items-center gap-1.5">
+                          <span className="font-sans text-xs font-bold leading-tight">Galactic Glass</span>
+                          <span className="px-1.5 py-0.2 rounded-full text-[9px] font-mono font-bold uppercase bg-surface-container-lowest text-on-surface-variant border border-outline-variant/60">
+                            DARK GLASS
+                          </span>
                         </div>
                       </div>
                       <div className="pl-2">
@@ -285,7 +270,7 @@ export const Header: React.FC<HeaderProps> = ({
                         setTheme('dark');
                         setShowThemeMenu(false);
                       }}
-                      className={`w-full p-2.5 rounded-2xl flex items-center justify-between transition-all text-left ${
+                      className={`w-full p-2.5 rounded-xl flex items-center justify-between transition-all text-left ${
                         theme === 'dark'
                           ? 'bg-primary-container text-on-primary-container shadow-sm border border-outline-variant/70'
                           : 'hover:bg-surface-container-high/70 text-on-surface'
@@ -295,16 +280,11 @@ export const Header: React.FC<HeaderProps> = ({
                         <div className="w-8 h-8 rounded-full bg-[#23382B] text-[#D3E8D2] flex items-center justify-center flex-shrink-0 shadow-sm">
                           <span aria-hidden="true" className="material-symbols-outlined text-base">dark_mode</span>
                         </div>
-                        <div>
-                          <div className="flex items-center gap-1.5">
-                            <span className="font-sans text-xs font-bold leading-tight">Botanical Dark</span>
-                            <span className="px-1.5 py-0.2 rounded-full text-[9px] font-mono font-bold uppercase bg-surface-container-lowest text-on-surface-variant border border-outline-variant/60">
-                              ORIGINAL
-                            </span>
-                          </div>
-                          <p className="font-sans text-[10px] opacity-80 mt-0.5 leading-snug">
-                            Midnight forest depths (#0A100D), sage & golden glow
-                          </p>
+                        <div className="flex items-center gap-1.5">
+                          <span className="font-sans text-xs font-bold leading-tight">Botanical Dark</span>
+                          <span className="px-1.5 py-0.2 rounded-full text-[9px] font-mono font-bold uppercase bg-surface-container-lowest text-on-surface-variant border border-outline-variant/60">
+                            ORIGINAL
+                          </span>
                         </div>
                       </div>
                       <div className="pl-2">
@@ -318,14 +298,14 @@ export const Header: React.FC<HeaderProps> = ({
                       </div>
                     </button>
 
-                    {/* Option 4: Monochrome Enterprise Light */}
+                    {/* Option 5: Monochrome Enterprise Light */}
                     <button
                       type="button"
                       onClick={() => {
                         setTheme('light');
                         setShowThemeMenu(false);
                       }}
-                      className={`w-full p-2.5 rounded-2xl flex items-center justify-between transition-all text-left ${
+                      className={`w-full p-2.5 rounded-xl flex items-center justify-between transition-all text-left ${
                         theme === 'light'
                           ? 'bg-primary-container text-on-primary-container shadow-sm border border-outline-variant/70'
                           : 'hover:bg-surface-container-high/70 text-on-surface'
@@ -335,16 +315,11 @@ export const Header: React.FC<HeaderProps> = ({
                         <div className="w-8 h-8 rounded-full bg-[#050505] text-white flex items-center justify-center flex-shrink-0 shadow-sm">
                           <span aria-hidden="true" className="material-symbols-outlined text-base">wb_sunny</span>
                         </div>
-                        <div>
-                          <div className="flex items-center gap-1.5">
-                            <span className="font-sans text-xs font-bold leading-tight">Monochrome SaaS</span>
-                            <span className="px-1.5 py-0.2 rounded-full text-[9px] font-mono font-bold uppercase bg-surface-container-lowest text-on-surface-variant border border-outline-variant/60">
-                              MINIMAL
-                            </span>
-                          </div>
-                          <p className="font-sans text-[10px] opacity-80 mt-0.5 leading-snug">
-                            High-contrast luxury enterprise black & white
-                          </p>
+                        <div className="flex items-center gap-1.5">
+                          <span className="font-sans text-xs font-bold leading-tight">Monochrome SaaS</span>
+                          <span className="px-1.5 py-0.2 rounded-full text-[9px] font-mono font-bold uppercase bg-surface-container-lowest text-on-surface-variant border border-outline-variant/60">
+                            MINIMAL
+                          </span>
                         </div>
                       </div>
                       <div className="pl-2">
