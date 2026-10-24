@@ -795,7 +795,7 @@ export const RevivalCompassView: React.FC<RevivalCompassViewProps> = ({
             )}
             <div className="space-y-1">
               <div className="flex items-center gap-1 text-outline">
-                <span className="material-symbols-outlined text-base">spa</span>
+                <span className="material-symbols-outlined text-base">inventory_2</span>
                 <span className="font-mono text-[10px] uppercase">Archetype 05</span>
               </div>
               <span className="font-sans text-xs font-semibold text-on-surface block">
