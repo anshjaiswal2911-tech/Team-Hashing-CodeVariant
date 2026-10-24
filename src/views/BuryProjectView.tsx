@@ -274,7 +274,7 @@ export const BuryProjectView: React.FC<BuryProjectViewProps> = ({
                   </span>
                   <h2 className="font-serif text-2xl text-on-surface">The Beginning</h2>
                 </div>
-                <span className="material-symbols-outlined text-primary/40 text-2xl">spa</span>
+                <span className="material-symbols-outlined text-primary/40 text-2xl">inventory_2</span>
               </div>
 
               <div className="space-y-4">
@@ -374,7 +374,7 @@ export const BuryProjectView: React.FC<BuryProjectViewProps> = ({
                   </span>
                   <h2 className="font-serif text-2xl text-on-surface">Specimen Remnants</h2>
                 </div>
-                <span className="material-symbols-outlined text-primary/40 text-2xl">spa</span>
+                <span className="material-symbols-outlined text-primary/40 text-2xl">inventory_2</span>
               </div>
 
               {/* Completion Slider Section */}
@@ -729,7 +729,7 @@ export const BuryProjectView: React.FC<BuryProjectViewProps> = ({
                   onClick={handleFinalBurial}
                   className="px-6 py-2.5 rounded-lg bg-secondary text-on-secondary hover:bg-secondary-fixed transition-all font-sans text-xs font-bold flex items-center gap-2 shadow-[0_4px_20px_rgba(242,189,121,0.45)]"
                 >
-                  <span className="material-symbols-outlined text-base">spa</span>
+                  <span className="material-symbols-outlined text-base">inventory_2</span>
                   <span>Bury with Honors & Harvest Modules</span>
                 </button>
               )}
