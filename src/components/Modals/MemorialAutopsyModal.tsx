@@ -54,7 +54,7 @@ export const MemorialAutopsyModal: React.FC<MemorialAutopsyModalProps> = ({
                 onClick={() => onOpenAiChat(specimen)}
                 className="px-3 py-1 rounded-full bg-primary-container text-on-primary-container hover:bg-primary hover:text-on-primary text-xs font-semibold flex items-center gap-1.5 transition-all shadow-sm"
               >
-                <span className="material-symbols-outlined text-sm">smart_toy</span>
+                <span className="material-symbols-outlined text-sm">smart-toy</span>
                 <span>Ask AI Copilot</span>
               </button>
             )}
