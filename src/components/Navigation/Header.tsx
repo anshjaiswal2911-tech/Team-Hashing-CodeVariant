@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ScreenId } from '../../types';
 import { useTheme } from '../../context/ThemeContext';
+import { SoundToggle } from './SoundToggle';
 
 interface HeaderProps {
   onNavigate: (screen: ScreenId) => void;
@@ -92,6 +93,9 @@ export const Header: React.FC<HeaderProps> = ({
             <span className="material-symbols-outlined text-sm text-secondary">add</span>
             <span className="tracking-tight text-on-surface font-semibold">Bury a Project</span>
           </button>
+
+          {/* Ambient 432Hz Soundscape Toggle */}
+          <SoundToggle />
 
           {/* Theme Switcher Button & Dropdown Menu */}
           <div className="relative">
