@@ -10,6 +10,7 @@ interface OverviewViewProps {
   onSelectSpecimenForRevival: (specimen: ProjectSpecimen) => void;
   onSparkRevival: (specimen: ProjectSpecimen) => void;
   onOpenAiChat?: (specimen: ProjectSpecimen) => void;
+  onDeleteSpecimen?: (id: string) => void;
 }
 
 export const OverviewView: React.FC<OverviewViewProps> = ({
@@ -20,6 +21,7 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
   onSelectSpecimenForRevival,
   onSparkRevival,
   onOpenAiChat,
+  onDeleteSpecimen,
 }) => {
   const [activeFilter, setActiveFilter] = useState<'all' | 'high-potential' | 'rich-salvage' | 'pure-archival'>('all');
   const [timeRange, setTimeRange] = useState<'Day' | 'Week' | 'Month' | 'Year'>('Month');
@@ -316,9 +318,26 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
                   <span className="font-mono text-[10px] text-on-surface-variant uppercase tracking-wider font-semibold">
                     {specimen.folioNumber} · {specimen.specimenNumber}
                   </span>
-                  <span className="px-2.5 py-0.5 rounded-full bg-surface-container-high text-on-surface text-[10px] font-mono border border-outline-variant font-medium">
-                    {specimen.status.toUpperCase()}
-                  </span>
+                  <div className="flex items-center gap-1.5">
+                    <span className="px-2.5 py-0.5 rounded-full bg-surface-container-high text-on-surface text-[10px] font-mono border border-outline-variant font-medium">
+                      {specimen.status.toUpperCase()}
+                    </span>
+                    {onDeleteSpecimen && (
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          if (window.confirm(`Are you sure you want to delete / exhume "${specimen.title}" from the graveyard?`)) {
+                            onDeleteSpecimen(specimen.id);
+                          }
+                        }}
+                        className="w-6 h-6 rounded-full flex items-center justify-center text-outline hover:text-error hover:bg-error/10 transition-colors"
+                        title={`Delete / Exhume ${specimen.title}`}
+                      >
+                        <span className="material-symbols-outlined text-[15px]">delete</span>
+                      </button>
+                    )}
+                  </div>
                 </div>
 
                 {/* Title & Description */}
