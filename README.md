@@ -71,15 +71,17 @@ Every developer, student, and hackathon builder has a folder of abandoned side p
 - **Graft Studio:** combine components from multiple dead projects into the base of a new MVP.
 - **AI Copilot:** a floating assistant that answers questions about the projects in the Crypt.
 
-### ✨ Extras & Power User Tools
-- **Web Audio 432Hz Soundscape:** procedural synthesizer node creating calming focus acoustics with instant mute toggle.
-- **Specimen Folio Sharing:** instant shareable markdown & link generator modal for any preserved project.
-- **Milestone Celebration:** dynamic SVG/CSS confetti burst triggered on revival verdict confirmation.
-- **Version Changelog Modal:** interactive release logs tracking continuous build history and feature milestones.
-- **Power User Hotkeys:** full keyboard navigation cheatsheet (`?` hotkey) and command palette (`⌘K`).
+### ✨ Innovation Features & Power User Tools
+- **Direct GitHub Repository Ingestion:** Live GitHub API integration fetching stars, forks, default branch, language and preventing duplicate project burial.
+- **AST Code Modernizer & Transmutation Engine:** Automatically transforms legacy CommonJS, callbacks, and `var` syntax into modern 2026 ES Modules and TypeScript.
+- **Digital Reincarnation Will & Deed:** Generates formal open-source bequest certificates with cryptographic hash and SVG deed export.
+- **Organ Compatibility Telemetry Radar:** Preflight compatibility assessment for component grafting across projects.
+- **Specimen Folio Sharing & Exhumation:** Instant markdown/link export and one-click graveyard deletion.
+- **Milestone Celebration:** Dynamic SVG/CSS confetti burst triggered on revival verdict confirmation.
+- **Power User Hotkeys:** Full keyboard navigation cheatsheet (`?` hotkey) and Command Palette (`⌘K`) with persistent search history.
 - **Conservatory Themes:** 5 switchable ambience themes (Necropolis Noir, Botanical Ivory, Terracotta Vault, Aero Specimen, Clinical Archives).
-- **Responsive Layout:** fluid experience optimized across desktop, tablet, and mobile displays.
-- **Local Persistence:** browser LocalStorage and SessionStorage persistence without external database locks.
+- **Responsive Layout:** Fluid experience optimized across desktop, tablet, and mobile displays.
+- **Local Persistence:** Browser LocalStorage and SessionStorage persistence without external database locks.
 
 
 ---
