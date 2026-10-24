@@ -25,6 +25,7 @@ import { PatternInsightsView } from './views/PatternInsightsView';
 import { ArchiveView } from './views/ArchiveView';
 import { SettingsView } from './views/SettingsView';
 import { useKeyboardShortcuts } from './hooks';
+import { QuickJumpMenu } from './components/Navigation/QuickJumpMenu';
 
 export default function App() {
   const [currentScreen, setCurrentScreen] = useState<ScreenId>('landing');
@@ -123,6 +124,7 @@ export default function App() {
   };
 
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isQuickJumpOpen, setIsQuickJumpOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   // Full Screen / Collapsible Left Navigation (Zen Focus Mode)
@@ -131,8 +133,10 @@ export default function App() {
   // Global Keyboard Shortcuts
   useKeyboardShortcuts({
     'meta+k': () => setIsSearchOpen((prev) => !prev),
+    'j': () => setIsQuickJumpOpen((prev) => !prev),
     'Escape': () => {
       setIsSearchOpen(false);
+      setIsQuickJumpOpen(false);
       setIsAutopsyOpen(false);
       setIsGraftSprintOpen(false);
     },
@@ -592,6 +596,14 @@ export default function App() {
         handleCloseAgentWelcome();
         openAiChat();
       }}
+    />
+
+    {/* Quick Jump Navigation Modal */}
+    <QuickJumpMenu
+      currentScreen={currentScreen}
+      onNavigate={navigateWithAuth}
+      isOpen={isQuickJumpOpen}
+      onClose={() => setIsQuickJumpOpen(false)}
     />
   </>
   );
