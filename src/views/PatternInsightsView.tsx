@@ -1,5 +1,6 @@
 import React from 'react';
 import { ScreenId } from '../types';
+import { MortalityPieChart } from '../components/Insights/MortalityPieChart';
 
 interface PatternInsightsViewProps {
   onNavigate: (screen: ScreenId) => void;
@@ -98,6 +99,9 @@ export const PatternInsightsView: React.FC<PatternInsightsViewProps> = ({ onNavi
           ))}
         </div>
       </div>
+
+      {/* Root Causes Distribution Chart */}
+      <MortalityPieChart />
 
       {/* Curator’s Antidote Playbook in Deep Dark Luxury Panel */}
       <div className="panel-dark rounded-[28px] p-6 lg:p-7 shadow-xl space-y-4">
