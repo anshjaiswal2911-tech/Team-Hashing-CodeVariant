@@ -71,10 +71,15 @@ Every developer, student, and hackathon builder has a folder of abandoned side p
 - **Graft Studio:** combine components from multiple dead projects into the base of a new MVP.
 - **AI Copilot:** a floating assistant that answers questions about the projects in the Crypt.
 
-### ✨ Extras
-- Calming ambient sound built on the Web Audio API (432 Hz chime), with a mute toggle.
-- Responsive layout for desktop, tablet, and mobile.
-- State is saved in the browser (LocalStorage / SessionStorage), so your data is still there after a refresh.
+### ✨ Extras & Power User Tools
+- **Web Audio 432Hz Soundscape:** procedural synthesizer node creating calming focus acoustics with instant mute toggle.
+- **Specimen Folio Sharing:** instant shareable markdown & link generator modal for any preserved project.
+- **Milestone Celebration:** dynamic SVG/CSS confetti burst triggered on revival verdict confirmation.
+- **Version Changelog Modal:** interactive release logs tracking continuous build history and feature milestones.
+- **Power User Hotkeys:** full keyboard navigation cheatsheet (`?` hotkey) and command palette (`⌘K`).
+- **Conservatory Themes:** 5 switchable ambience themes (Necropolis Noir, Botanical Ivory, Terracotta Vault, Aero Specimen, Clinical Archives).
+- **Responsive Layout:** fluid experience optimized across desktop, tablet, and mobile displays.
+- **Local Persistence:** browser LocalStorage and SessionStorage persistence without external database locks.
 
 
 ---
