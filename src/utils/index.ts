@@ -9,3 +9,4 @@ export * from './markdownExporter';
 export * from './gitDiffParser';
 export * from './colorPaletteGenerator';
 export * from './filterUtils';
+export * from './themeManager';
