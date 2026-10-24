@@ -29,6 +29,7 @@ export const SalvageYardView: React.FC<SalvageYardViewProps> = ({
   const [isGeneratingArchive, setIsGeneratingArchive] = useState<boolean>(false);
   const [archiveToast, setArchiveToast] = useState<string | null>(null);
   const [archiveFormat, setArchiveFormat] = useState<'zip' | 'tar.gz'>('zip');
+  const [isBasketDropHovered, setIsBasketDropHovered] = useState(false);
 
   // Web Audio ambient synthesizer reference
   const audioCtxRef = useRef<AudioContext | null>(null);
@@ -279,7 +280,14 @@ export const SalvageYardView: React.FC<SalvageYardViewProps> = ({
             return (
               <article
                 key={item.id}
-                className="group relative bg-surface-container rounded-[26px] p-6 shadow-md hover:shadow-xl transition-all duration-300 border border-outline-variant/60 clay-card"
+                draggable
+                onDragStart={(e) => {
+                  e.dataTransfer.setData('application/json', JSON.stringify({ type: 'salvage-module', module: item }));
+                  e.dataTransfer.effectAllowed = 'copyMove';
+                }}
+                className={`group relative bg-surface-container rounded-[26px] p-6 shadow-md hover:shadow-xl transition-all duration-300 border-2 clay-card cursor-grab active:cursor-grabbing hover:-translate-y-1 select-none ${
+                  inBasket ? 'border-primary/50' : 'border-outline-variant/60 hover:border-secondary/60'
+                }`}
               >
                 <div className="flex flex-col gap-4">
                   {/* Header Row */}
@@ -416,20 +424,21 @@ export const SalvageYardView: React.FC<SalvageYardViewProps> = ({
                   {/* Action CTAs */}
                   <div className="flex items-center justify-between pt-1 border-t border-surface-container-high/30">
                     <div className="flex items-center gap-3">
-                      <button
-                        type="button"
-                        onClick={() => onToggleBasket(item.id)}
-                        className={`px-4 py-2 rounded font-sans text-xs font-semibold transition-all flex items-center gap-1.5 shadow-sm ${
-                          inBasket
-                            ? 'bg-primary-container text-on-primary-container'
-                            : 'bg-surface-container hover:bg-surface-container-high text-on-surface border border-surface-container-highest'
-                        }`}
-                      >
-                        <span className="material-symbols-outlined text-base text-secondary">
-                          {inBasket ? 'check_circle' : 'add_circle'}
+                      <div className="flex items-center gap-2">
+                        <span
+                          className="px-3 py-1.5 rounded-lg bg-secondary/15 text-secondary font-mono text-xs font-semibold flex items-center gap-1.5 border border-secondary/35 cursor-grab active:cursor-grabbing"
+                          title="Drag this module into the Salvage Basket on the right"
+                        >
+                          <span className="material-symbols-outlined text-sm">drag_indicator</span>
+                          <span>DRAG TO BASKET</span>
                         </span>
-                        <span>{inBasket ? 'In Basket' : 'Add to Basket'}</span>
-                      </button>
+                        {inBasket && (
+                          <span className="px-2.5 py-1 rounded-full bg-primary-container text-on-primary-container font-mono text-[11px] font-bold flex items-center gap-1">
+                            <span className="material-symbols-outlined text-xs">check_circle</span>
+                            <span>In Basket</span>
+                          </span>
+                        )}
+                      </div>
 
                       {item.codeSnippet ? (
                         <button
@@ -492,8 +501,33 @@ export const SalvageYardView: React.FC<SalvageYardViewProps> = ({
 
         {/* Action Sidebar: Salvage Basket & Grafting Dock (4 Cols Sticky) */}
         <aside className="xl:col-span-4 sticky top-20 flex flex-col gap-6">
-          {/* Basket Vitrine Card */}
-          <div className="bg-surface-container rounded-[28px] p-6 shadow-lg flex flex-col gap-4 border border-outline-variant/60 clay-card">
+          {/* Basket Vitrine Card - Canvas Protocol Action Zone */}
+          <div
+            onDragOver={(e) => {
+              e.preventDefault();
+              e.dataTransfer.dropEffect = 'copy';
+              setIsBasketDropHovered(true);
+            }}
+            onDragLeave={() => setIsBasketDropHovered(false)}
+            onDrop={(e) => {
+              e.preventDefault();
+              setIsBasketDropHovered(false);
+              try {
+                const dataStr = e.dataTransfer.getData('application/json');
+                if (dataStr) {
+                  const parsed = JSON.parse(dataStr);
+                  if (parsed.module && parsed.module.id && !basket.includes(parsed.module.id)) {
+                    onToggleBasket(parsed.module.id);
+                  }
+                }
+              } catch {}
+            }}
+            className={`rounded-[28px] p-6 shadow-lg flex flex-col gap-4 border-2 transition-all clay-card select-none ${
+              isBasketDropHovered
+                ? 'bg-secondary/15 border-secondary ring-4 ring-secondary/30 scale-[1.02] shadow-2xl'
+                : 'bg-surface-container border-outline-variant/60'
+            }`}
+          >
             <div className="flex items-center justify-between border-b border-surface-container-high/60 pb-3">
               <div className="flex items-center gap-2">
                 <span className="material-symbols-outlined text-secondary">shopping_basket</span>
@@ -501,6 +535,24 @@ export const SalvageYardView: React.FC<SalvageYardViewProps> = ({
               </div>
               <span className="px-2.5 py-0.5 rounded-full font-mono text-xs bg-secondary text-on-secondary font-semibold shadow-sm">
                 {basket.length} Selected Items
+              </span>
+            </div>
+
+            {/* Canvas Protocol Drop Banner */}
+            <div
+              className={`p-3 rounded-xl border text-xs font-mono transition-all flex items-center gap-2.5 ${
+                isBasketDropHovered
+                  ? 'bg-secondary text-on-secondary border-secondary animate-pulse shadow-md'
+                  : 'bg-surface-container-high/40 text-on-surface-variant border-dashed border-outline-variant/60'
+              }`}
+            >
+              <span className="material-symbols-outlined text-base">
+                {isBasketDropHovered ? 'add_circle' : 'drag_indicator'}
+              </span>
+              <span>
+                {isBasketDropHovered
+                  ? 'Release to harvest module into Basket!'
+                  : 'Canvas Action Zone: Drag & drop module cards here'}
               </span>
             </div>
 
@@ -513,7 +565,7 @@ export const SalvageYardView: React.FC<SalvageYardViewProps> = ({
             <ul className="flex flex-col gap-2 my-1 max-h-64 overflow-y-auto">
               {basketModules.length === 0 ? (
                 <li className="p-4 rounded-lg bg-surface-container/40 text-center text-outline text-xs">
-                  Your salvage basket is currently empty. Click "Add to Basket" on any specimen to harvest it for grafting.
+                  Your salvage basket is currently empty. Drag any module card from the left and drop it here to harvest it.
                 </li>
               ) : (
                 basketModules.map((item) => (
