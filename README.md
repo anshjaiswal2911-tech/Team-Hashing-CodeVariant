@@ -82,13 +82,7 @@ In modern software engineering, **over 90% of internal prototypes, exploratory s
 <table width="100%">
 <tr>
 <td width="50%" valign="top">
-<h3 align="center">🧭 Revival Compass Viability Engine</h3>
-<a href="https://team-hashing-code-variant-ten.vercel.app/">
-  <img src="docs/images/revival-compass.png" width="100%" alt="Revival Compass" style="border-radius: 12px; border: 1px solid rgba(0,0,0,0.1);" />
-</a>
-<p align="center"><sub><strong>Figure 2.1:</strong> Multi-dimensional viability assessment: 3 core health signals, real-time developer momentum sliders, and algorithmic MVP sprint roadmaps.</sub></p>
-</td>
-<td width="50%" valign="top">
+
 <h3 align="center">🤖 Autonomous AI Forensic Copilot</h3>
 <a href="https://team-hashing-code-variant-ten.vercel.app/">
   <img src="docs/images/copilot.png" width="100%" alt="Forensic Copilot" style="border-radius: 12px; border: 1px solid rgba(0,0,0,0.1);" />
@@ -97,6 +91,13 @@ In modern software engineering, **over 90% of internal prototypes, exploratory s
 </td>
 </tr>
 <tr>
+  <h3 align="center">🖐️ The Canvas Protocol (Spatial OS)</h3>
+<a href="https://team-hashing-code-variant-ten.vercel.app/">
+  <img src="docs/images/hero-canvas.png" width="100%" alt="The Canvas Protocol" style="border-radius: 12px; border: 1px solid rgba(0,0,0,0.1);" />
+
+</a>
+<p align="center"><sub><strong>Figure 2.4:</strong> Spatial tri-column drag-and-drop workspace: Drag dormant code into diagnostic dropzones and dispatch into execution gates.</sub></p>
+<td width="50%" valign="top">
 <td width="50%" valign="top">
 <h3 align="center">🪦 Herbarium Vitrine & Archival Ledger</h3>
 <a href="https://team-hashing-code-variant-ten.vercel.app/">
@@ -104,12 +105,14 @@ In modern software engineering, **over 90% of internal prototypes, exploratory s
 </a>
 <p align="center"><sub><strong>Figure 2.3:</strong> Museum-grade specimen vitrines cataloging architectural autopsy cards, death cause tags, and legal open-source reusability seals.</sub></p>
 </td>
+  
 <td width="50%" valign="top">
-<h3 align="center">🖐️ The Canvas Protocol (Spatial OS)</h3>
+  <h3 align="center">🧭 Revival Compass Viability Engine</h3>
 <a href="https://team-hashing-code-variant-ten.vercel.app/">
-  <img src="docs/images/hero-canvas.png" width="100%" alt="The Canvas Protocol" style="border-radius: 12px; border: 1px solid rgba(0,0,0,0.1);" />
+  <img src="docs/images/revival-compass.png" width="100%" alt="Revival Compass" style="border-radius: 12px; border: 1px solid rgba(0,0,0,0.1);" />
 </a>
-<p align="center"><sub><strong>Figure 2.4:</strong> Spatial tri-column drag-and-drop workspace: Drag dormant code into diagnostic dropzones and dispatch into execution gates.</sub></p>
+<p align="center"><sub><strong>Figure 2.1:</strong> Multi-dimensional viability assessment: 3 core health signals, real-time developer momentum sliders, and algorithmic MVP sprint roadmaps.</sub></p>
+
 </td>
 </tr>
 </table>
