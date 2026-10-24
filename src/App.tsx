@@ -49,10 +49,16 @@ export default function App() {
 
   const [currentUser, setCurrentUser] = useState<UserProfile>(() => {
     const saved = localStorage.getItem('graveyard_user');
-    return saved
-      ? JSON.parse(saved)
+    const savedUser: UserProfile | null = saved ? JSON.parse(saved) : null;
+    // Refresh the old demo display name for users who are already signed in.
+    if (savedUser?.name === 'Eleni Vance') {
+      savedUser.name = 'Aryan';
+      localStorage.setItem('graveyard_user', JSON.stringify(savedUser));
+    }
+    return savedUser
+      ? savedUser
       : {
-          name: 'Eleni Vance',
+          name: 'Aryan',
           email: 'eleni@graveyard.dev',
           role: 'Master Curator',
           avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80',
