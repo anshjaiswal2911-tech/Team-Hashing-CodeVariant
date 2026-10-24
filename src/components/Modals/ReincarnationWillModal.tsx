@@ -104,7 +104,7 @@ export const ReincarnationWillModal: React.FC<ReincarnationWillModalProps> = ({
           {/* Certificate Visual Preview Card */}
           <div className="p-6 rounded-xl bg-surface-container-lowest border border-secondary/30 text-center space-y-3 relative overflow-hidden">
             <div className="absolute top-0 right-0 p-3 opacity-10 pointer-events-none">
-              <span className="material-symbols-outlined text-7xl text-secondary">spa</span>
+              <span className="material-symbols-outlined text-7xl text-secondary">inventory_2</span>
             </div>
             <span className="font-mono text-[10px] uppercase tracking-widest text-secondary font-semibold">
               Permanent Testament
