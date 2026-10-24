@@ -61,12 +61,6 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
           <div className="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
 
           <div className="space-y-4 max-w-2xl z-10">
-            {/* Folio Tag */}
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-high/70 border border-outline-variant/60 text-[10px] font-mono tracking-widest text-secondary uppercase">
-              <span className="w-1.5 h-1.5 rounded-full bg-secondary" />
-              <span>Conservatory Folio — No. IV</span>
-            </div>
-
             {/* Hero Title */}
             <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl text-on-surface leading-[1.12] tracking-tight">
               Some ideas deserve another look.
