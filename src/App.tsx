@@ -14,7 +14,7 @@ import { MeetAiAgentModal } from './components/Modals/MeetAiAgentModal';
 import { KeyboardShortcutsModal } from './components/Modals/KeyboardShortcutsModal';
 import { NewProjectModal } from './components/Modals/NewProjectModal';
 import { ProjectAiChatbot } from './components/AiChatbot/ProjectAiChatbot';
-import aiBotImg from './assets/ai-bot.png';
+import { AssistantLauncher } from './components/AiChatbot/AssistantLauncher';
 
 import { OverviewView } from './views/OverviewView';
 import { LandingPageView } from './views/LandingPageView';
@@ -51,10 +51,16 @@ export default function App() {
 
   const [currentUser, setCurrentUser] = useState<UserProfile>(() => {
     const saved = localStorage.getItem('graveyard_user');
-    return saved
-      ? JSON.parse(saved)
+    const savedUser: UserProfile | null = saved ? JSON.parse(saved) : null;
+    // Refresh the old demo display name for users who are already signed in.
+    if (savedUser?.name === 'Eleni Vance') {
+      savedUser.name = 'Aryan';
+      localStorage.setItem('graveyard_user', JSON.stringify(savedUser));
+    }
+    return savedUser
+      ? savedUser
       : {
-          name: 'Eleni Vance',
+          name: 'Aryan',
           email: 'eleni@graveyard.dev',
           role: 'Master Curator',
           avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80',
@@ -183,7 +189,7 @@ export default function App() {
         devTimeSaved: 'Saved 18 hrs dev time',
         badge: {
           label: 'Harvested Specimen',
-          icon: 'spa',
+          icon: 'inventory_2',
           type: 'verified',
         },
       };
@@ -229,7 +235,7 @@ export default function App() {
     // Record activity
     const newActivity: ActivityItem = {
       id: `act-${Date.now()}`,
-      icon: 'spa',
+      icon: 'inventory_2',
       iconBg: 'bg-secondary-container/60',
       iconColor: 'text-secondary',
       timeAgo: 'Just now',
@@ -311,47 +317,11 @@ export default function App() {
           }}
         />
 
-        {/* 3D Floating Motion Robot Assistant (Click robot to open AI Chat) */}
-        <aside aria-label="Ask AI Assistant" className="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50 flex flex-col items-center select-none pointer-events-auto">
-          <button
-            type="button"
-            onClick={() => {
-              if (!isAuthenticated) {
-                // Prompt user to login before they can use AI Chatbot
-                setCurrentScreen('login');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-                return;
-              }
-              if (!aiChatSpecimen && specimens.length > 0) {
-                setAiChatSpecimen(specimens[0]);
-              }
-              setIsAiChatOpen((prev) => !prev);
-            }}
-            className="relative flex flex-col items-center cursor-pointer group bg-transparent border-0 p-0 focus:outline-none"
-            title={!isAuthenticated ? "Please sign in to chat with AI Copilot" : "Click to Open AI Chat"}
-          >
-            {/* Cute Floating "Ask AI Chat" speech pill over Robot head */}
-            <div className="mb-1.5 px-3 py-1 rounded-full bg-[#FAF6F0] hover:bg-[#F4ECE0] border border-white/95 shadow-[0_4px_12px_rgba(120,95,70,0.18),inset_0_1px_2px_rgba(255,255,255,0.9)] flex items-center gap-1.5 transform group-hover:scale-110 group-hover:-translate-y-1 transition-all">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
-              <span className="text-[11px] font-bold text-[#2C241E] font-sans tracking-tight">Ask AI Chat</span>
-              <span className="material-symbols-outlined text-[13px] text-[#DE8553]">auto_awesome</span>
-            </div>
-
-            {/* Animated 3D Robot Figurine in Live Floating Motion inside Claymorphic Capsule */}
-            <div className="relative w-22 sm:w-26 h-28 sm:h-32 rounded-[28px] p-1 bg-[#FAF6F0] border-2 border-white/95 shadow-[0_12px_28px_rgba(120,95,70,0.22),-4px_-4px_16px_rgba(255,255,255,0.9),inset_0_2px_4px_rgba(255,255,255,0.95)] overflow-hidden flex items-center justify-center animate-bot-float group-hover:scale-105 transition-transform duration-300">
-              <img
-                src={aiBotImg}
-                alt="Ask AI Chat"
-                className="w-full h-full object-cover object-[50%_16%] rounded-[24px]"
-              />
-              {/* Glowing Amber Visor Halo Aura */}
-              <div className="absolute top-2 w-12 h-12 rounded-full bg-amber-400/25 blur-md pointer-events-none animate-pulse" />
-            </div>
-
-            {/* Dynamic 3D Ground Shadow that scales with the float */}
-            <div className="w-14 h-2.5 rounded-full bg-black/20 blur-[2px] animate-bot-shadow -mt-1" />
-          </button>
-        </aside>
+        {/* Project assistant launcher */}
+        <AssistantLauncher isOpen={isAiChatOpen} onClick={() => {
+          if (!isAuthenticated) { navigateWithAuth('login'); return; }
+          if (isAiChatOpen) setIsAiChatOpen(false); else openAiChat();
+        }} />
 
         {/* Large AI Forensic Copilot Tool Window (Bottom-Right Anchored) */}
         <ProjectAiChatbot
@@ -402,8 +372,8 @@ export default function App() {
 
       {/* Main Workspace Frame */}
       <div
-        className={`flex-1 flex flex-col min-h-screen transition-all duration-300 ease-in-out ${
-          isSidebarCollapsed ? 'lg:pl-0' : 'lg:pl-64 xl:pl-68'
+        className={`flex-1 min-w-0 flex flex-col min-h-screen transition-all duration-300 ease-in-out ${
+          isSidebarCollapsed ? 'lg:pl-0' : 'lg:pl-68'
         }`}
       >
         {/* Top Header */}
@@ -420,7 +390,7 @@ export default function App() {
         />
 
         {/* View Main Content */}
-        <main className="w-full pt-20 px-4 sm:px-6 lg:px-8 py-6 flex-1 max-w-[1440px] mx-auto">
+        <main className="min-w-0 w-full pt-24 px-4 sm:px-6 lg:px-8 pb-6 flex-1 max-w-[1440px] mx-auto">
           {currentScreen === 'overview' && (
             <OverviewView
               specimens={specimens}
@@ -538,48 +508,17 @@ export default function App() {
           className="fixed left-5 bottom-6 z-40 px-3.5 py-2.5 rounded-full bg-surface-container-high/95 hover:bg-surface-container-highest text-on-surface border border-outline-variant/80 shadow-2xl backdrop-blur-md flex items-center gap-2 text-xs font-semibold hover:border-primary/60 transition-all cursor-pointer animate-in fade-in select-none group"
           title="Restore Left Navigation Sidebar"
         >
-          <span className="material-symbols-outlined text-base text-primary group-hover:scale-110 transition-transform">
+          <span aria-hidden="true" className="material-symbols-outlined text-base text-primary group-hover:scale-110 transition-transform">
             menu_open
           </span>
           <span>Show Nav Menu</span>
         </button>
       )}
 
-      {/* 3D Floating Motion Robot Assistant (Click robot to open AI Chat) */}
-      <aside aria-label="Ask AI Assistant" className="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50 flex flex-col items-center select-none pointer-events-auto">
-        <button
-          type="button"
-          onClick={() => {
-            if (!aiChatSpecimen && specimens.length > 0) {
-              setAiChatSpecimen(specimens[0]);
-            }
-            setIsAiChatOpen((prev) => !prev);
-          }}
-          className="relative flex flex-col items-center cursor-pointer group bg-transparent border-0 p-0 focus:outline-none"
-          title="Click to Open AI Chat"
-        >
-          {/* Cute Floating "Ask AI Chat" speech pill over Robot head */}
-          <div className="mb-1.5 px-3 py-1 rounded-full bg-[#FAF6F0] hover:bg-[#F4ECE0] border border-white/95 shadow-[0_4px_12px_rgba(120,95,70,0.18),inset_0_1px_2px_rgba(255,255,255,0.9)] flex items-center gap-1.5 transform group-hover:scale-110 group-hover:-translate-y-1 transition-all">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
-            <span className="text-[11px] font-bold text-[#2C241E] font-sans tracking-tight">Ask AI Chat</span>
-            <span className="material-symbols-outlined text-[13px] text-[#DE8553]">auto_awesome</span>
-          </div>
-
-          {/* Animated 3D Robot Figurine in Live Floating Motion inside Claymorphic Capsule */}
-          <div className="relative w-22 sm:w-26 h-28 sm:h-32 rounded-[28px] p-1 bg-[#FAF6F0] border-2 border-white/95 shadow-[0_12px_28px_rgba(120,95,70,0.22),-4px_-4px_16px_rgba(255,255,255,0.9),inset_0_2px_4px_rgba(255,255,255,0.95)] overflow-hidden flex items-center justify-center animate-bot-float group-hover:scale-105 transition-transform duration-300">
-            <img
-              src={aiBotImg}
-              alt="Ask AI Chat"
-              className="w-full h-full object-cover object-[50%_16%] rounded-[24px]"
-            />
-            {/* Glowing Amber Visor Halo Aura */}
-            <div className="absolute top-2 w-12 h-12 rounded-full bg-amber-400/25 blur-md pointer-events-none animate-pulse" />
-          </div>
-
-          {/* Dynamic 3D Ground Shadow that scales with the float */}
-          <div className="w-14 h-2.5 rounded-full bg-black/20 blur-[2px] animate-bot-shadow -mt-1" />
-        </button>
-      </aside>
+      {/* Project assistant launcher */}
+      <AssistantLauncher isOpen={isAiChatOpen} onClick={() => {
+        if (isAiChatOpen) setIsAiChatOpen(false); else openAiChat();
+      }} />
 
       {/* Large AI Forensic Copilot Tool Window */}
       <ProjectAiChatbot

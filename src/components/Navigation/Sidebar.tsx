@@ -1,4 +1,5 @@
 import React from 'react';
+import { Archive, LayoutDashboard, Plus, Compass, Package, GitBranch, ChartNoAxesColumn, FolderOpen, Settings, PanelLeftClose, X, LogOut } from 'lucide-react';
 import { ScreenId } from '../../types';
 
 interface SidebarProps {
@@ -27,14 +28,14 @@ export const Sidebar: React.FC<SidebarProps> = ({
   onToggleCollapse,
 }) => {
   const navItems = [
-    { id: 'overview' as ScreenId, label: 'Overview / Cemetery', icon: 'grid_view' },
-    { id: 'bury-a-project' as ScreenId, label: '+ Add / New Project', icon: 'add_circle_outline' },
-    { id: 'revival-compass' as ScreenId, label: 'Revival Compass', icon: 'explore' },
-    { id: 'salvage-yard' as ScreenId, label: 'Salvage Yard', icon: 'inventory_2' },
-    { id: 'graft-studio' as ScreenId, label: 'Graft Studio', icon: 'hub' },
-    { id: 'pattern-insights' as ScreenId, label: 'Pattern Insights', icon: 'bar_chart' },
-    { id: 'archive' as ScreenId, label: 'Archive', icon: 'folder_open' },
-    { id: 'settings' as ScreenId, label: 'Settings', icon: 'settings' },
+    { id: 'overview' as ScreenId, label: 'Overview', icon: LayoutDashboard },
+    { id: 'bury-a-project' as ScreenId, label: 'Add / New Project', icon: Plus },
+    { id: 'revival-compass' as ScreenId, label: 'Revival Compass', icon: Compass },
+    { id: 'salvage-yard' as ScreenId, label: 'Salvage Yard', icon: Package },
+    { id: 'graft-studio' as ScreenId, label: 'Graft Studio', icon: GitBranch },
+    { id: 'pattern-insights' as ScreenId, label: 'Pattern Insights', icon: ChartNoAxesColumn },
+    { id: 'archive' as ScreenId, label: 'Archive', icon: FolderOpen },
+    { id: 'settings' as ScreenId, label: 'Settings', icon: Settings },
   ];
 
   return (
@@ -48,7 +49,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       )}
 
       <aside
-        className={`fixed left-0 top-0 h-full w-64 lg:w-68 bg-surface-container-low/95 backdrop-blur-2xl z-50 flex flex-col justify-between shadow-[0_4px_24px_rgba(0,0,0,0.03)] border-r border-outline-variant/60 transition-transform duration-300 ease-in-out ${
+        className={`fixed left-0 top-0 h-full w-68 bg-surface-container-low/95 backdrop-blur-2xl z-50 flex flex-col justify-between  border-r border-outline-variant/60 transition-transform duration-300 ease-in-out ${
           isOpenMobile
             ? 'translate-x-0'
             : isCollapsed
@@ -59,25 +60,24 @@ export const Sidebar: React.FC<SidebarProps> = ({
         <div className="flex flex-col flex-1 min-h-0">
           {/* Brand Emblem & Header matching AI Studio reference */}
           <div className="px-6 pt-7 pb-5 flex items-center justify-between">
-            <div
-              className="flex items-center gap-3 cursor-pointer group"
+            <button type="button" className="flex items-center gap-3 text-left cursor-pointer group"
               onClick={() => {
                 onNavigate('overview');
                 onCloseMobile?.();
               }}
             >
               <div className="w-8 h-8 rounded-xl bg-secondary/15 text-secondary flex items-center justify-center text-lg">
-                <span className="material-symbols-outlined text-xl text-secondary">spa</span>
+                <Archive size={20} strokeWidth={1.6} aria-hidden="true" />
               </div>
               <div className="flex flex-col">
-                <span className="font-serif text-[17px] font-normal text-on-surface">
+                <span className="font-serif text-[18px] font-normal text-on-surface">
                   Project Graveyard
                 </span>
-                <span className="font-sans text-[10px] text-on-surface-variant italic -mt-0.5">
-                  Not dead. Just waiting for another beginning.
+                <span className="font-sans text-[10px] text-on-surface-variant -mt-0.5">
+                  Your ideas, preserved.
                 </span>
               </div>
-            </div>
+            </button>
 
             <div className="flex items-center gap-1">
               {/* Desktop slide away / collapse button */}
@@ -88,16 +88,16 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   title="Slide Left Navigation Away (Full Screen Mode)"
                   className="hidden lg:flex p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors"
                 >
-                  <span className="material-symbols-outlined text-xl">keyboard_double_arrow_left</span>
+                  <PanelLeftClose size={18} aria-hidden="true" />
                 </button>
               )}
 
               {/* Mobile close button */}
               <button
-                className="lg:hidden p-1.5 text-on-surface-variant hover:text-on-surface"
+                aria-label="Close navigation" className="lg:hidden p-1.5 text-on-surface-variant hover:text-on-surface"
                 onClick={onCloseMobile}
               >
-                <span className="material-symbols-outlined text-xl">close</span>
+                <X size={20} aria-hidden="true" />
               </button>
             </div>
           </div>
@@ -107,30 +107,26 @@ export const Sidebar: React.FC<SidebarProps> = ({
           </div>
 
           {/* Navigation Items with sleek pills matching reference */}
-          <nav className="flex-1 overflow-y-auto px-4 py-3 space-y-1.5">
+          <p className="px-7 pt-5 pb-2 editorial-eyebrow">Workspace</p>
+          <nav aria-label="Workspace" className="flex-1 overflow-y-auto px-4 py-3 space-y-1.5">
             {navItems.map((item) => {
               const isActive = currentScreen === item.id;
               return (
                 <button
                   key={item.id}
+                  aria-current={isActive ? 'page' : undefined}
                   type="button"
                   onClick={() => {
                     onNavigate(item.id);
                     onCloseMobile?.();
                   }}
-                  className={`w-full text-left flex items-center gap-3.5 px-4 py-2.5 rounded-full text-xs transition-all duration-200 ${
+                  className={`w-full text-left flex items-center gap-3.5 px-4 py-3 rounded-xl text-[13px] transition-all duration-200 ${
                     isActive
-                      ? 'bg-primary-container text-on-primary-container font-medium shadow-sm translate-x-0.5 border border-outline-variant/60'
+                      ? 'bg-primary-container text-on-primary-container font-semibold border border-primary/10'
                       : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high/80 font-normal'
                   }`}
                 >
-                  <span
-                    className={`material-symbols-outlined text-[19px] ${
-                      isActive ? 'text-on-primary-container' : 'text-on-surface-variant'
-                    }`}
-                  >
-                    {item.icon}
-                  </span>
+                  <item.icon size={18} strokeWidth={1.7} aria-hidden="true" />
                   <span className="tracking-tight">{item.label}</span>
                 </button>
               );
@@ -140,22 +136,18 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
         {/* Bottom Profile Section matching reference */}
         <div className="p-4 border-t border-outline-variant/40">
-          <div className="p-2.5 rounded-full bg-surface-container-high/50 mb-3 flex items-center justify-between border border-outline-variant/30 px-3.5">
+          <div className="p-2.5 rounded-xl bg-surface-container-high/50 mb-3 flex items-center justify-between border border-outline-variant/30 px-3.5">
             <div className="flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-secondary" />
-              <span className="font-mono text-[10px] text-on-surface-variant tracking-wider">
+              <span className="font-sans text-xs text-on-surface-variant">
                 {restingCount} Resting • {revivedCount} Revived
               </span>
             </div>
-            <span className="material-symbols-outlined text-secondary text-xs">spa</span>
+            <Archive size={15} strokeWidth={1.7} aria-hidden="true" />
           </div>
 
-          <div
-            className="flex items-center justify-between p-2 rounded-2xl hover:bg-surface-container-high/70 transition-colors cursor-pointer group"
-            onClick={() => onNavigate('settings')}
-          >
-            <div
-              className="flex items-center gap-3 min-w-0 cursor-pointer flex-1"
+          <div className="flex items-center justify-between p-2 rounded-xl hover:bg-surface-container-high/70 transition-colors group">
+            <button type="button" className="flex items-center gap-3 min-w-0 text-left flex-1"
               onClick={() => onNavigate('settings')}
             >
               <div className="w-9 h-9 rounded-full overflow-hidden bg-surface-container-highest border border-outline-variant/80 flex-shrink-0 group-hover:scale-105 transition-transform shadow-sm">
@@ -167,13 +159,13 @@ export const Sidebar: React.FC<SidebarProps> = ({
               </div>
               <div className="flex flex-col min-w-0">
                 <span className="font-sans text-xs font-semibold text-on-surface truncate">
-                  {currentUser?.name || "Eleni Vance"}
+                  {currentUser?.name || "Aryan"}
                 </span>
                 <span className="font-mono text-[10px] text-on-surface-variant truncate">
                   {currentUser?.role || "Master Curator"}
                 </span>
               </div>
-            </div>
+            </button>
 
             {onLogout ? (
               <button
@@ -182,7 +174,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 className="p-1 rounded-lg text-on-surface-variant hover:text-error hover:bg-surface-container-highest transition-colors"
                 title="Sign Out"
               >
-                <span className="material-symbols-outlined text-base">logout</span>
+                <LogOut size={17} aria-hidden="true" />
               </button>
             ) : (
               <span className="material-symbols-outlined text-on-surface-variant text-base">

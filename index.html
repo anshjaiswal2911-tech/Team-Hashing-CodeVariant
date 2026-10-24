@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="dark" lang="en">
+<html class="claymorphic" lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -17,13 +17,8 @@
       (function() {
         try {
           var saved = localStorage.getItem('project-graveyard-theme');
-          if (saved === 'light') {
-            document.documentElement.classList.remove('dark');
-            document.documentElement.classList.add('light');
-          } else {
-            document.documentElement.classList.add('dark');
-            document.documentElement.classList.remove('light');
-          }
+          var themes = ['dark', 'light', 'botanical-light', 'claymorphic', 'glassmorphic'];
+          document.documentElement.className = themes.includes(saved) ? saved : 'claymorphic';
         } catch (e) {}
       })();
     </script>

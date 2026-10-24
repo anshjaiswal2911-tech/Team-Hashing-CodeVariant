@@ -17,7 +17,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
   basket = [],
 }) => {
   const { theme, setTheme, toggleTheme } = useTheme();
-  const [curatorName, setCuratorName] = useState('Eleni Vance');
+  const [curatorName, setCuratorName] = useState('Aryan');
   const [curatorRole, setCuratorRole] = useState('Master Curator');
   const [whisperFrequency, setWhisperFrequency] = useState('daily');
   const [autoIndexSalvage, setAutoIndexSalvage] = useState(true);
@@ -282,7 +282,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <span className="material-symbols-outlined text-secondary text-lg">spa</span>
+                  <span className="material-symbols-outlined text-secondary text-lg">inventory_2</span>
                   <span className="font-sans text-xs font-semibold text-on-surface">
                     Botanical Dark (Original)
                   </span>

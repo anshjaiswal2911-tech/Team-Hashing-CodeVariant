@@ -32,18 +32,19 @@ export const Header: React.FC<HeaderProps> = ({
   return (
     <header
       className={`fixed top-0 right-0 h-18 bg-surface-container-low/90 backdrop-blur-2xl z-40 border-b border-outline-variant/60 transition-all duration-300 ease-in-out ${
-        isSidebarCollapsed ? 'left-0' : 'left-0 lg:left-64 xl:left-68'
+        isSidebarCollapsed ? 'left-0' : 'left-0 lg:left-68'
       }`}
     >
       <div className="h-18 w-full px-4 lg:px-7 flex items-center justify-between gap-3">
         {/* Left: Mobile hamburger, Desktop Fullscreen/Nav toggle & Search bar */}
-        <div className="flex items-center gap-2.5 flex-1 max-w-lg">
+        <div className="flex items-center gap-2.5 min-w-0 flex-1 max-w-lg">
           <button
             type="button"
+            aria-label="Open navigation"
             onClick={onOpenMobileMenu}
             className="lg:hidden p-2 text-on-surface-variant hover:text-on-surface rounded-full hover:bg-surface-container"
           >
-            <span className="material-symbols-outlined text-2xl">menu</span>
+            <span aria-hidden="true" className="material-symbols-outlined text-2xl">menu</span>
           </button>
 
           {/* Desktop Full-Screen Zen Mode Toggle */}
@@ -58,42 +59,41 @@ export const Header: React.FC<HeaderProps> = ({
               }
               className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-high/80 hover:bg-surface-container-highest text-on-surface border border-outline-variant/70 hover:border-primary/60 transition-all font-sans text-xs font-semibold shadow-xs shrink-0 cursor-pointer"
             >
-              <span className="material-symbols-outlined text-base text-primary">
+              <span aria-hidden="true" className="material-symbols-outlined text-base text-primary">
                 {isSidebarCollapsed ? 'menu_open' : 'fullscreen'}
               </span>
               <span>{isSidebarCollapsed ? 'Show Nav' : 'Full Screen'}</span>
             </button>
           )}
 
-          <div
-            className="relative w-full cursor-pointer group"
-            onClick={onOpenSearch}
+          <button type="button" aria-label="Search projects and modules" className="relative min-w-0 w-10 sm:w-full shrink-0 cursor-pointer group text-left" onClick={onOpenSearch}
           >
-            <div className="w-full bg-surface-container-high/70 hover:bg-surface-container text-on-surface rounded-full flex items-center px-4 py-2 border border-outline-variant/70 shadow-sm transition-all group-hover:border-primary/40">
-              <span className="material-symbols-outlined text-on-surface-variant text-lg mr-2.5">
+            <div className="w-full bg-surface-container-high/70 hover:bg-surface-container text-on-surface rounded-full flex items-center px-2.5 sm:px-4 py-2 border border-outline-variant/70 shadow-sm transition-all group-hover:border-primary/40">
+              <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant text-lg shrink-0 sm:mr-2.5">
                 search
               </span>
-              <span className="text-on-surface-variant/80 text-xs font-sans flex-1 truncate">
+              <span className="hidden sm:block text-on-surface-variant/80 text-xs font-sans min-w-0 flex-1 truncate">
                 Search dormant vaults, modules...
               </span>
-              <kbd className="px-1.5 py-0.5 text-[10px] text-on-surface-variant bg-surface-container-lowest rounded-md font-mono border border-outline-variant">
+              <kbd className="hidden sm:inline-block px-1.5 py-0.5 text-[10px] text-on-surface-variant bg-surface-container-lowest rounded-md font-mono border border-outline-variant">
                 ⌘K
               </kbd>
             </div>
-          </div>
+          </button>
         </div>
 
         {/* Center / Right widgets matching AI Studio screenshot */}
-        <div className="flex items-center gap-2 sm:gap-2.5">
+        <div className="flex shrink-0 items-center gap-2 sm:gap-2.5">
           {/* Quick Action Pill Button: + Add / New Project */}
           <button
             type="button"
             onClick={onOpenNewProject || (() => onNavigate('bury-a-project'))}
             className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-secondary/15 hover:bg-secondary/25 text-on-surface border border-secondary/35 hover:border-secondary/60 transition-all font-sans text-xs font-semibold shadow-xs cursor-pointer"
             title="Add New Project (Import from GitHub or Inscribe)"
+            aria-label="Add new project"
           >
-            <span className="material-symbols-outlined text-sm text-secondary">add_circle</span>
-            <span className="tracking-tight text-on-surface font-semibold">+ Add / New Project</span>
+            <span aria-hidden="true" className="material-symbols-outlined text-sm text-secondary">add_circle</span>
+            <span className="hidden sm:inline tracking-tight text-on-surface font-semibold">+ Add / New Project</span>
           </button>
 
           {/* Theme Switcher Button & Dropdown Menu */}
@@ -105,7 +105,7 @@ export const Header: React.FC<HeaderProps> = ({
               title="Change Ambience Theme (Click to open menu)"
               aria-label={`Current theme: ${theme}. Click to choose theme.`}
             >
-              <span
+              <span aria-hidden="true"
                 className={`material-symbols-outlined text-[19px] ${
                   theme === 'dark'
                     ? 'text-secondary'
@@ -140,7 +140,7 @@ export const Header: React.FC<HeaderProps> = ({
                 <div className="absolute right-0 top-12 w-80 rounded-3xl glass-panel shadow-2xl p-3 z-50 animate-in fade-in zoom-in-95 duration-150 border border-outline-variant/80">
                   <div className="flex items-center justify-between px-2.5 py-1.5 border-b border-outline-variant/50 mb-2">
                     <div className="flex items-center gap-1.5">
-                      <span className="material-symbols-outlined text-sm text-secondary">palette</span>
+                      <span aria-hidden="true" className="material-symbols-outlined text-sm text-secondary">palette</span>
                       <span className="font-mono text-[10px] uppercase tracking-wider font-bold text-on-surface">
                         Select Ambience Theme
                       </span>
@@ -173,7 +173,7 @@ export const Header: React.FC<HeaderProps> = ({
                     >
                       <div className="flex items-center gap-2.5">
                         <div className="w-8 h-8 rounded-full bg-[#DDEBDD] text-[#144227] flex items-center justify-center flex-shrink-0 shadow-sm">
-                          <span className="material-symbols-outlined text-base">eco</span>
+                          <span aria-hidden="true" className="material-symbols-outlined text-base">eco</span>
                         </div>
                         <div>
                           <div className="flex items-center gap-1.5">
@@ -190,7 +190,7 @@ export const Header: React.FC<HeaderProps> = ({
                       <div className="pl-2">
                         {theme === 'botanical-light' ? (
                           <div className="w-5 h-5 rounded-full bg-[#1E5E3A] text-white flex items-center justify-center shadow-sm">
-                            <span className="material-symbols-outlined text-xs">check</span>
+                            <span aria-hidden="true" className="material-symbols-outlined text-xs">check</span>
                           </div>
                         ) : (
                           <div className="w-4 h-4 rounded-full border border-outline-variant/80" />
@@ -213,7 +213,7 @@ export const Header: React.FC<HeaderProps> = ({
                     >
                       <div className="flex items-center gap-2.5">
                         <div className="w-8 h-8 rounded-full bg-[#D6E8DE] text-[#0E332E] flex items-center justify-center flex-shrink-0 shadow-sm border border-[#0E332E]/20">
-                          <span className="material-symbols-outlined text-base">view_in_ar</span>
+                          <span aria-hidden="true" className="material-symbols-outlined text-base">view_in_ar</span>
                         </div>
                         <div>
                           <div className="flex items-center gap-1.5">
@@ -230,7 +230,7 @@ export const Header: React.FC<HeaderProps> = ({
                       <div className="pl-2">
                         {theme === 'claymorphic' ? (
                           <div className="w-5 h-5 rounded-full bg-[#0E332E] text-white flex items-center justify-center shadow-sm">
-                            <span className="material-symbols-outlined text-xs">check</span>
+                            <span aria-hidden="true" className="material-symbols-outlined text-xs">check</span>
                           </div>
                         ) : (
                           <div className="w-4 h-4 rounded-full border border-outline-variant/80" />
@@ -253,7 +253,7 @@ export const Header: React.FC<HeaderProps> = ({
                     >
                       <div className="flex items-center gap-2.5">
                         <div className="w-8 h-8 rounded-full bg-[rgba(52,211,153,0.18)] text-[#34D399] flex items-center justify-center flex-shrink-0 shadow-sm border border-[#34D399]/30">
-                          <span className="material-symbols-outlined text-base">blur_on</span>
+                          <span aria-hidden="true" className="material-symbols-outlined text-base">blur_on</span>
                         </div>
                         <div>
                           <div className="flex items-center gap-1.5">
@@ -270,7 +270,7 @@ export const Header: React.FC<HeaderProps> = ({
                       <div className="pl-2">
                         {theme === 'glassmorphic' ? (
                           <div className="w-5 h-5 rounded-full bg-[#34D399] text-[#051A11] flex items-center justify-center shadow-sm font-bold">
-                            <span className="material-symbols-outlined text-xs">check</span>
+                            <span aria-hidden="true" className="material-symbols-outlined text-xs">check</span>
                           </div>
                         ) : (
                           <div className="w-4 h-4 rounded-full border border-outline-variant/80" />
@@ -293,7 +293,7 @@ export const Header: React.FC<HeaderProps> = ({
                     >
                       <div className="flex items-center gap-2.5">
                         <div className="w-8 h-8 rounded-full bg-[#23382B] text-[#D3E8D2] flex items-center justify-center flex-shrink-0 shadow-sm">
-                          <span className="material-symbols-outlined text-base">dark_mode</span>
+                          <span aria-hidden="true" className="material-symbols-outlined text-base">dark_mode</span>
                         </div>
                         <div>
                           <div className="flex items-center gap-1.5">
@@ -310,7 +310,7 @@ export const Header: React.FC<HeaderProps> = ({
                       <div className="pl-2">
                         {theme === 'dark' ? (
                           <div className="w-5 h-5 rounded-full bg-primary text-on-primary flex items-center justify-center shadow-sm">
-                            <span className="material-symbols-outlined text-xs">check</span>
+                            <span aria-hidden="true" className="material-symbols-outlined text-xs">check</span>
                           </div>
                         ) : (
                           <div className="w-4 h-4 rounded-full border border-outline-variant/80" />
@@ -333,7 +333,7 @@ export const Header: React.FC<HeaderProps> = ({
                     >
                       <div className="flex items-center gap-2.5">
                         <div className="w-8 h-8 rounded-full bg-[#050505] text-white flex items-center justify-center flex-shrink-0 shadow-sm">
-                          <span className="material-symbols-outlined text-base">wb_sunny</span>
+                          <span aria-hidden="true" className="material-symbols-outlined text-base">wb_sunny</span>
                         </div>
                         <div>
                           <div className="flex items-center gap-1.5">
@@ -350,7 +350,7 @@ export const Header: React.FC<HeaderProps> = ({
                       <div className="pl-2">
                         {theme === 'light' ? (
                           <div className="w-5 h-5 rounded-full bg-[#050505] text-white flex items-center justify-center shadow-sm">
-                            <span className="material-symbols-outlined text-xs">check</span>
+                            <span aria-hidden="true" className="material-symbols-outlined text-xs">check</span>
                           </div>
                         ) : (
                           <div className="w-4 h-4 rounded-full border border-outline-variant/80" />
@@ -369,27 +369,30 @@ export const Header: React.FC<HeaderProps> = ({
               type="button"
               onClick={() => setShowNotifications(!showNotifications)}
               className="w-9 h-9 rounded-full bg-surface-container-high/80 hover:bg-surface-container text-on-surface flex items-center justify-center border border-outline-variant/70 shadow-sm transition-all relative"
-              title="Conservatory Alerts"
+              title="Notifications"
+              aria-label={`Notifications, ${unreadNotificationsCount} unread`}
+              aria-expanded={showNotifications}
             >
-              <span className="material-symbols-outlined text-[19px]">notifications</span>
+              <span aria-hidden="true" className="material-symbols-outlined text-[19px]">notifications</span>
               {unreadNotificationsCount > 0 && (
                 <span className="absolute -top-1 -right-1 min-w-4 h-4 px-1 rounded-full bg-secondary text-on-secondary light:bg-[#050505] light:text-white text-[9px] font-bold flex items-center justify-center border border-surface shadow-sm">
-                  +9
+                  {unreadNotificationsCount}
                 </span>
               )}
             </button>
 
             {showNotifications && (
-              <div className="absolute right-0 mt-3 w-80 rounded-2xl bg-surface-container p-4 shadow-2xl border border-outline-variant text-xs z-50 animate-in fade-in slide-in-from-top-2">
+              <div className="fixed top-18 right-4 sm:absolute sm:top-full sm:right-0 mt-3 w-[min(20rem,calc(100vw-2rem))] rounded-2xl bg-surface-container p-4 shadow-2xl border border-outline-variant text-xs z-50 animate-in fade-in slide-in-from-top-2">
                 <div className="flex items-center justify-between pb-2 border-b border-outline-variant/70 mb-3">
                   <span className="font-semibold text-on-surface uppercase tracking-wider font-mono text-[11px]">
                     Conservatory Notifications
                   </span>
                   <button
+                    aria-label="Close notifications"
                     onClick={() => setShowNotifications(false)}
                     className="text-on-surface-variant hover:text-on-surface p-1 rounded-full hover:bg-surface-container-high"
                   >
-                    <span className="material-symbols-outlined text-sm">close</span>
+                    <span aria-hidden="true" className="material-symbols-outlined text-sm">close</span>
                   </button>
                 </div>
                 <div className="space-y-2">
@@ -430,7 +433,7 @@ export const Header: React.FC<HeaderProps> = ({
 
           {/* User Profile Avatar & Sign Out */}
           {currentUser && (
-            <div className="flex items-center gap-2 pl-2 border-l border-outline-variant/60">
+            <div className="hidden sm:flex items-center gap-2 pl-2 border-l border-outline-variant/60">
               <img
                 src={currentUser.avatar}
                 alt={currentUser.name}
@@ -451,7 +454,7 @@ export const Header: React.FC<HeaderProps> = ({
                   className="w-8 h-8 rounded-full bg-surface-container-high/60 hover:bg-error-container/30 text-on-surface-variant hover:text-error flex items-center justify-center transition-colors"
                   title="Sign Out of Conservatory"
                 >
-                  <span className="material-symbols-outlined text-base">logout</span>
+                  <span aria-hidden="true" className="material-symbols-outlined text-base">logout</span>
                 </button>
               )}
             </div>

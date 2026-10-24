@@ -17,7 +17,7 @@ export async function downloadSalvageZip(modules: SalvageModule[], filename = 's
     conservatory: 'Project Graveyard // Specimen Vault',
     archiveFolio: 'ARCHIVE-EXTRACT-38',
     exportedAt: new Date().toISOString(),
-    curator: 'Eleni Vance, Master Curator',
+    curator: 'Aryan, Master Curator',
     motto: 'Not dead. Just waiting for another beginning.',
     moduleCount: modules.length,
     modules: modules.map((m) => ({
@@ -37,7 +37,7 @@ export async function downloadSalvageZip(modules: SalvageModule[], filename = 's
   // 2. Botanical README.md
   const readmeContent = `# Project Graveyard — Salvaged Modules Archive
 > "When a tree falls in the forest, its heartwood nourishes saplings for decades. Treat code and models with identical reverence."
-> — *Eleni Vance, Master Curator*
+> — *Aryan, Master Curator*
 
 Exported on **${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}** from the Conservatory Vault.
 
