@@ -8,3 +8,4 @@ export * from './sprintEstimator';
 export * from './markdownExporter';
 export * from './gitDiffParser';
 export * from './colorPaletteGenerator';
+export * from './filterUtils';
