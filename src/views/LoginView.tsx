@@ -53,7 +53,7 @@ export const LoginView: React.FC<LoginViewProps> = ({
 
       const isJudge = usernameOrEmail.toLowerCase().includes('judge');
       const user: UserProfile = {
-        name: isJudge ? 'CodeVariant Judge' : 'Eleni Vance',
+        name: isJudge ? 'CodeVariant Judge' : 'Aryan',
         email: usernameOrEmail,
         role: isJudge ? 'Round 2 Hackathon Evaluator' : 'Master Curator',
         avatar: isJudge
