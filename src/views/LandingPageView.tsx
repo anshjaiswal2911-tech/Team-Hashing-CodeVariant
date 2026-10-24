@@ -190,12 +190,11 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
             
             {/* Left Column: Vision & Value Proposition */}
-            <div className="lg:col-span-7 space-y-7">
-              <p className="editorial-eyebrow"><span className="w-6 h-px bg-secondary" /> Preserve. Recover. Begin again.</p>
+            <div className="lg:col-span-7 space-y-6">
               {/* Main Headline */}
-              <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl text-on-surface leading-[1.1] tracking-tight">
+              <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl text-on-surface leading-[1.12] tracking-tight">
                 Where dead projects become{' '}
-                <span className="italic font-normal text-secondary">
+                <span className="italic font-normal text-secondary underline decoration-secondary/30 underline-offset-8">
                   fertile ground.
                 </span>
               </h1>
@@ -216,10 +215,10 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
                 <button
                   type="button"
                   onClick={() => onNavigate('overview')}
-                  className="px-6 py-3.5 rounded-2xl bg-primary text-on-primary font-medium text-sm flex items-center gap-2 shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all"
+                  className="px-6 py-3.5 rounded-2xl bg-primary text-on-primary font-medium text-sm flex items-center gap-2 shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
                 >
                   <span aria-hidden="true" className="material-symbols-outlined text-lg">grid_view</span>
-                  <span>Explore your archive</span>
+                  <span>Enter Cemetery & Dashboard</span>
                   <span aria-hidden="true" className="material-symbols-outlined text-sm">arrow_forward</span>
                 </button>
 
