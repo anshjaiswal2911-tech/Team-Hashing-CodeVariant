@@ -59,7 +59,7 @@ export const MeetAiAgentModal: React.FC<MeetAiAgentModalProps> = ({
             </div>
           ))}
         </div>
-        <button type="button" onClick={onClose} className="w-full rounded-xl bg-primary text-on-primary py-3 text-sm font-semibold">Explore my workspace</button>
+        <button type="button" onClick={onClose} className="w-full rounded-xl bg-secondary text-on-secondary py-3 text-sm font-semibold">Explore my workspace</button>
         {onOpenCopilot && <button type="button" onClick={() => { onClose(); onOpenCopilot(); }} className="mt-3 flex w-full items-center justify-center gap-2 rounded-xl py-3 text-sm text-on-surface-variant hover:bg-surface-container-high">Open assistant <ArrowUpRight size={16} aria-hidden="true" /></button>}
       </div>
     </div>
