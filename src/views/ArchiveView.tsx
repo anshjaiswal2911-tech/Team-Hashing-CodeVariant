@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ProjectSpecimen } from '../types';
+import { ArchiveFolioCard } from '../components/Archive';
 
 interface ArchiveViewProps {
   specimens: ProjectSpecimen[];
@@ -16,6 +17,7 @@ export const ArchiveView: React.FC<ArchiveViewProps> = ({
 }) => {
   const [search, setSearch] = useState('');
   const [filterStatus, setFilterStatus] = useState<string>('all');
+  const [viewMode, setViewMode] = useState<'standard' | 'folios'>('folios');
 
   const filtered = specimens.filter((s) => {
     if (filterStatus !== 'all' && s.status !== filterStatus) return false;
@@ -86,11 +88,18 @@ export const ArchiveView: React.FC<ArchiveViewProps> = ({
 
       {/* Grid of Archive Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        {filtered.map((specimen) => (
-          <div
-            key={specimen.id}
-            className="group rounded-[26px] bg-surface-container border border-outline-variant/80 hover:border-on-surface/40 p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between space-y-4 clay-card"
-          >
+        {filtered.map((specimen) =>
+          viewMode === 'folios' ? (
+            <ArchiveFolioCard
+              key={specimen.id}
+              specimen={specimen}
+              onInspect={onSelectSpecimenForAutopsy}
+            />
+          ) : (
+            <div
+              key={specimen.id}
+              className="group rounded-[26px] bg-surface-container border border-outline-variant/80 hover:border-on-surface/40 p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between space-y-4 clay-card"
+            >
             <div className="space-y-3">
               <div className="flex items-start justify-between">
                 <div>
@@ -170,7 +179,8 @@ export const ArchiveView: React.FC<ArchiveViewProps> = ({
               </div>
             </div>
           </div>
-        ))}
+        )
+      )}
       </div>
     </div>
   );
