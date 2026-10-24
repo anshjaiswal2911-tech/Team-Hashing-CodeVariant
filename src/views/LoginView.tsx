@@ -341,44 +341,6 @@ export const LoginView: React.FC<LoginViewProps> = ({
             </button>
           </div>
 
-          {/* ─────────────────────────────────────────────────────────────
-              1-Click Mock Credentials Box (Hackathon & Judge Friendly)
-             ───────────────────────────────────────────────────────────── */}
-          <div className="mt-4 p-3 rounded-2xl bg-surface-container-high/40 border border-outline-variant/60 space-y-2">
-            <div className="flex items-center justify-between text-[10px] font-mono font-bold uppercase text-on-surface-variant">
-              <span>Quick Mock Data Login</span>
-              <span className="text-secondary">Instant 1-Click</span>
-            </div>
-
-            <div className="grid grid-cols-2 gap-2">
-              <button
-                type="button"
-                onClick={() => handleQuickLogin('curator')}
-                className="p-2 rounded-xl bg-surface-container hover:bg-surface-container-high border border-outline-variant/70 text-left transition-all hover:scale-[1.02] shadow-sm group"
-              >
-                <div className="font-sans text-[11px] font-bold text-on-surface group-hover:text-primary flex items-center gap-1">
-                  <span>Curator</span>
-                </div>
-                <div className="text-[9px] font-mono text-on-surface-variant truncate">
-                  eleni@graveyard.dev
-                </div>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => handleQuickLogin('judge')}
-                className="p-2 rounded-xl bg-surface-container hover:bg-surface-container-high border border-outline-variant/70 text-left transition-all hover:scale-[1.02] shadow-sm group"
-              >
-                <div className="font-sans text-[11px] font-bold text-on-surface group-hover:text-secondary flex items-center gap-1">
-                  <span>Judge demo</span>
-                </div>
-                <div className="text-[9px] font-mono text-on-surface-variant truncate">
-                  judge@codevariant.org
-                </div>
-              </button>
-            </div>
-          </div>
-
           {/* Sign Up / Switch Mode Link */}
           <div className="mt-4 text-center">
             <p className="text-[11px] font-sans text-on-surface-variant">

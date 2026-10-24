@@ -306,7 +306,9 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
           }}
           onDragLeave={() => setHoveredZone(null)}
           onDrop={(e) => handleDropOnZone('center', e)}
-          className={`lg:col-span-4 rounded-[28px] border-2 transition-all duration-300 p-5 sm:p-6 flex flex-col justify-between relative min-h-[520px] clay-card select-none ${
+          className={`lg:col-span-4 rounded-[28px] border-2 transition-all duration-300 p-5 sm:p-6 flex flex-col relative min-h-[520px] clay-card select-none ${
+            stagedSpecimen ? 'justify-between' : 'items-center justify-center'
+          } ${
             hoveredZone === 'center'
               ? 'border-secondary bg-secondary/15 ring-4 ring-secondary/30 scale-[1.01] shadow-2xl'
               : stagedSpecimen
@@ -449,7 +451,7 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
             </div>
           ) : (
             /* ─── DEFAULT IDLE STATE (Matching Image 1) ─── */
-            <div className="z-10 flex flex-col items-center justify-center space-y-4 my-auto">
+            <div className="z-10 w-full flex flex-col items-center justify-center space-y-4 text-center my-auto">
               {/* Hand Tapping Card Doodle */}
               <div className="w-16 h-16 rounded-2xl bg-surface-container flex items-center justify-center text-on-surface-variant/80 border border-outline-variant/60 shadow-xs mb-1">
                 <svg className="w-8 h-8" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -461,11 +463,11 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
               </div>
 
               {/* Headline */}
-              <div className="space-y-1">
-                <h3 className="font-serif text-2xl text-on-surface font-semibold">
+              <div className="space-y-1 text-center">
+                <h3 className="font-serif text-2xl text-on-surface font-semibold text-center">
                   Drop a project card here
                 </h3>
-                <p className="font-sans text-xs text-on-surface-variant font-light max-w-xs">
+                <p className="font-sans text-xs text-on-surface-variant font-light max-w-xs mx-auto text-center">
                   to view project autopsy, salvage modules & viability score
                 </p>
               </div>
@@ -484,7 +486,7 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
               </div>
 
               {/* Curvy arrow doodle */}
-              <div className="pt-4 flex flex-col items-center">
+              <div className="pt-2 flex flex-col items-center">
                 <div className="font-serif italic text-xs text-on-surface-variant flex items-center gap-1.5">
                   <span>Turn your ideas into impact</span>
                   <span className="material-symbols-outlined text-sm text-secondary">north_east</span>
@@ -502,7 +504,7 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
               <span className="material-symbols-outlined text-secondary text-xl">track_changes</span>
               <div>
                 <h2 className="font-serif text-xl text-on-surface font-semibold leading-tight">Action Zones</h2>
-                <p className="font-sans text-xs text-on-surface-variant font-light">Drop cards here to perform primary actions</p>
+                <p className="font-sans text-xs text-on-surface-variant font-light">Drop cards here to perform required actions</p>
               </div>
             </div>
             <span className="material-symbols-outlined text-outline text-base">unfold_more</span>

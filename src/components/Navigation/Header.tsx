@@ -47,24 +47,7 @@ export const Header: React.FC<HeaderProps> = ({
             <span aria-hidden="true" className="material-symbols-outlined text-2xl">menu</span>
           </button>
 
-          {/* Desktop Full-Screen Zen Mode Toggle */}
-          {onToggleSidebar && (
-            <button
-              type="button"
-              onClick={onToggleSidebar}
-              title={
-                isSidebarCollapsed
-                  ? 'Restore Navigation Sidebar'
-                  : 'Full Screen Mode: Slide Navigation Away'
-              }
-              className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-high/80 hover:bg-surface-container-highest text-on-surface border border-outline-variant/70 hover:border-primary/60 transition-all font-sans text-xs font-semibold shadow-xs shrink-0 cursor-pointer"
-            >
-              <span aria-hidden="true" className="material-symbols-outlined text-base text-primary">
-                {isSidebarCollapsed ? 'menu_open' : 'fullscreen'}
-              </span>
-              <span>{isSidebarCollapsed ? 'Show Nav' : 'Full Screen'}</span>
-            </button>
-          )}
+
 
           <button type="button" aria-label="Search projects and modules" className="relative min-w-0 w-10 sm:w-full shrink-0 cursor-pointer group text-left" onClick={onOpenSearch}
           >

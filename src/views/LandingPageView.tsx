@@ -299,21 +299,10 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent" />
                     
-                    {/* Website Agenda Mission Badge */}
-                    <div className="absolute top-2.5 left-2.5">
-                      <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-emerald-300 text-[10px] font-mono font-medium shadow-xs">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                        <span>Fertile Ground • Rebirth of Code</span>
-                      </span>
-                    </div>
-                    
                     <div className="absolute bottom-3 left-3 right-3 text-white">
-                      <div className="flex items-center justify-between">
+                      <div>
                         <span className="text-[10px] font-mono tracking-widest uppercase text-secondary font-bold">
                           {activeSpecimen.category}
-                        </span>
-                        <span className="px-2 py-0.5 rounded-full bg-white/20 backdrop-blur-md text-[10px] font-mono">
-                          {activeSpecimen.folioNumber}
                         </span>
                       </div>
                       <h3 className="font-serif text-xl font-normal text-white mt-0.5">
@@ -727,10 +716,6 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
             <span className="text-[11px] text-on-surface-variant">
               Developed by <strong className="text-on-surface">Team Hashing</strong> (Rajiv Jha, Mitesh Jha, Ansh Jaiswal, Aryan Jaiswal)
             </span>
-          </div>
-
-          <div className="flex items-center gap-2 text-[11px] text-on-surface-variant font-serif italic">
-            <span>Where dead projects become fertile ground.</span>
           </div>
         </div>
       </footer>
