@@ -19,7 +19,7 @@ export const LoginView: React.FC<LoginViewProps> = ({
 }) => {
 
   const [mode, setMode] = useState<'login' | 'signup'>('login');
-  const [usernameOrEmail, setUsernameOrEmail] = useState('eleni@graveyard.dev');
+  const [usernameOrEmail, setUsernameOrEmail] = useState('aryan@graveyard.dev');
   const [password, setPassword] = useState('curator2026');
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -28,7 +28,7 @@ export const LoginView: React.FC<LoginViewProps> = ({
   // 1-Click Mock Credentials
   const handleQuickLogin = (role: 'curator' | 'judge') => {
     if (role === 'curator') {
-      setUsernameOrEmail('eleni@graveyard.dev');
+      setUsernameOrEmail('aryan@graveyard.dev');
       setPassword('curator2026');
     } else {
       setUsernameOrEmail('judge@codevariant.org');
@@ -53,9 +53,9 @@ export const LoginView: React.FC<LoginViewProps> = ({
 
       const isJudge = usernameOrEmail.toLowerCase().includes('judge');
       const user: UserProfile = {
-        name: isJudge ? 'CodeVariant Judge' : 'Aryan',
+        name: isJudge ? 'CodeVariant Judge' : 'Aryan Jaiswal',
         email: usernameOrEmail,
-        role: isJudge ? 'Round 2 Hackathon Evaluator' : 'Master Curator',
+        role: isJudge ? 'Round 2 Hackathon Evaluator' : 'Software Developer',
         avatar: isJudge
           ? 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80'
           : 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80',

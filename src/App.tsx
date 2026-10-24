@@ -57,8 +57,11 @@ export default function App() {
     const MALE_AVATAR = 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80';
     // Refresh the old demo display name and avatar for users who are already signed in.
     if (savedUser) {
-      if (savedUser.name === 'Eleni Vance' || !savedUser.name) {
-        savedUser.name = 'Aryan';
+      if (savedUser.name === 'Eleni Vance' || savedUser.name === 'Aryan' || !savedUser.name) {
+        savedUser.name = 'Aryan Jaiswal';
+      }
+      if (!savedUser.role || savedUser.role === 'Master Curator' || savedUser.role === 'Master Curator & Lead Engineer') {
+        savedUser.role = 'Software Developer';
       }
       if (!savedUser.avatar || savedUser.avatar.includes('1544005313-94ddf0286df2')) {
         savedUser.avatar = MALE_AVATAR;
@@ -67,9 +70,9 @@ export default function App() {
       return savedUser;
     }
     return {
-      name: 'Aryan',
+      name: 'Aryan Jaiswal',
       email: 'aryan@graveyard.dev',
-      role: 'Master Curator',
+      role: 'Software Developer',
       avatar: MALE_AVATAR,
     };
   });

@@ -42,21 +42,30 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
   const [curatorName, setCuratorName] = useState(() => {
     try {
       const saved = localStorage.getItem(ACCOUNT_STORAGE_KEY);
-      if (saved) return JSON.parse(saved).name || 'Aryan';
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed.name && parsed.name !== 'Eleni Vance' && parsed.name !== 'Aryan') return parsed.name;
+      }
     } catch {}
-    return 'Aryan';
+    return 'Aryan Jaiswal';
   });
   const [curatorRole, setCuratorRole] = useState(() => {
     try {
       const saved = localStorage.getItem(ACCOUNT_STORAGE_KEY);
-      if (saved) return JSON.parse(saved).role || 'Master Curator & Lead Engineer';
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed.role && parsed.role !== 'Master Curator' && parsed.role !== 'Master Curator & Lead Engineer') return parsed.role;
+      }
     } catch {}
-    return 'Master Curator & Lead Engineer';
+    return 'Software Developer';
   });
   const [curatorEmail, setCuratorEmail] = useState(() => {
     try {
       const saved = localStorage.getItem(ACCOUNT_STORAGE_KEY);
-      if (saved) return JSON.parse(saved).email || 'aryan@graveyard.dev';
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed.email && parsed.email !== 'eleni@graveyard.dev') return parsed.email;
+      }
     } catch {}
     return 'aryan@graveyard.dev';
   });
@@ -343,16 +352,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
               />
               <div className="space-y-1 flex-1">
                 <h3 className="font-serif text-xl text-on-surface font-semibold">{curatorName}</h3>
-                <p className="font-sans text-xs text-on-surface-variant">{curatorRole}</p>
-                <div className="pt-2 flex flex-wrap gap-2">
-                  <input
-                    type="url"
-                    value={curatorAvatar}
-                    onChange={(e) => setCuratorAvatar(e.target.value)}
-                    placeholder="Enter Avatar Image URL"
-                    className="text-xs px-3 py-1.5 rounded-lg bg-surface-container-high border border-outline-variant/70 text-on-surface focus:outline-none focus:border-secondary w-full sm:w-80"
-                  />
-                </div>
+                <p className="font-sans text-xs text-on-surface-variant">Aspiring Software Developer</p>
               </div>
             </div>
 

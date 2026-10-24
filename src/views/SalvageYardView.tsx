@@ -688,7 +688,7 @@ export const SalvageYardView: React.FC<SalvageYardViewProps> = ({
               perfected."
             </p>
             <div className="text-right font-serif italic text-primary/80 text-xs pt-1">
-              — Aryan, Master Curator
+              — Aryan Jaiswal, Software Developer
             </div>
           </div>
         </aside>

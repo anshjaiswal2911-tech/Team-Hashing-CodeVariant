@@ -159,10 +159,10 @@ export const Sidebar: React.FC<SidebarProps> = ({
               </div>
               <div className="flex flex-col min-w-0">
                 <span className="font-sans text-xs font-semibold text-on-surface truncate">
-                  {currentUser?.name || "Aryan"}
+                  {currentUser?.name || "Aryan Jaiswal"}
                 </span>
                 <span className="font-mono text-[10px] text-on-surface-variant truncate">
-                  {currentUser?.role || "Master Curator"}
+                  {currentUser?.role || "Software Developer"}
                 </span>
               </div>
             </button>
