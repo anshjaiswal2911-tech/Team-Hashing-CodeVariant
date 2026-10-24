@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ProjectSpecimen } from '../types';
 import { ArchiveFolioCard } from '../components/Archive';
+import { EmptyState } from '../components/Common/EmptyState';
 
 interface ArchiveViewProps {
   specimens: ProjectSpecimen[];
@@ -87,8 +88,20 @@ export const ArchiveView: React.FC<ArchiveViewProps> = ({
       </div>
 
       {/* Grid of Archive Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        {filtered.map((specimen) =>
+      {filtered.length === 0 ? (
+        <EmptyState
+          icon="search_off"
+          title="No archived specimens match your search"
+          description="Try broadening your search query or reset the status filter."
+          actionLabel="Clear Filter"
+          onAction={() => {
+            setSearch('');
+            setFilterStatus('all');
+          }}
+        />
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {filtered.map((specimen) =>
           viewMode === 'folios' ? (
             <ArchiveFolioCard
               key={specimen.id}
@@ -182,6 +195,7 @@ export const ArchiveView: React.FC<ArchiveViewProps> = ({
         )
       )}
       </div>
+    )}
     </div>
   );
 };
