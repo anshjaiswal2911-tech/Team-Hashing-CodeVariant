@@ -206,7 +206,7 @@ The app is a static frontend, so it deploys easily to Vercel or Netlify:
 3. Output directory: `dist`
 4. Every push to `main` redeploys automatically.
 
-Live URL: **https://YOUR-LIVE-URL-HERE**
+Live URL: **https://OUR-LIVE-URL-HERE**
 
 ---
 
