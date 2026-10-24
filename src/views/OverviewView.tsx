@@ -12,6 +12,7 @@ interface OverviewViewProps {
   onDeleteSpecimen?: (id: string) => void;
   onOpenNewProject?: () => void;
   onOpenDigitalWill?: (specimen: ProjectSpecimen) => void;
+  onStageSpecimen?: (specimen: ProjectSpecimen) => void;
 }
 
 export const OverviewView: React.FC<OverviewViewProps> = ({
@@ -23,6 +24,7 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
   onDeleteSpecimen,
   onOpenNewProject,
   onOpenDigitalWill,
+  onStageSpecimen,
 }) => {
   const [activeDraggedSpecimen, setActiveDraggedSpecimen] = useState<ProjectSpecimen | null>(null);
   const [stagedSpecimen, setStagedSpecimen] = useState<ProjectSpecimen | null>(null);
@@ -64,7 +66,8 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
 
     if (zone === 'center') {
       setStagedSpecimen(specimenToAct);
-      notifyAction(`✨ "${specimenToAct.title}" staged on the Canvas. Drag to any Action Zone to execute.`);
+      notifyAction(`"${specimenToAct.title}" staged on the Canvas. Drag to any Action Zone to execute.`);
+      if (onStageSpecimen) onStageSpecimen(specimenToAct);
       return;
     }
 
@@ -321,7 +324,7 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
           </div>
 
           {stagedSpecimen ? (
-            /* ─── OPTION A: AI FORENSIC DIAGNOSTIC WORKBENCH ─── */
+            /* ─── CLEAN FORENSIC INSPECTION WORKBENCH ─── */
             <div
               draggable
               onDragStart={(e) => {
@@ -335,13 +338,13 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
               {/* Header Row */}
               <div className="flex items-start justify-between gap-3 border-b border-outline-variant/50 pb-3">
                 <div className="flex items-start gap-3 min-w-0">
-                  <div className="w-10 h-10 rounded-2xl bg-secondary/15 text-secondary flex items-center justify-center shrink-0 shadow-xs">
-                    <span className="material-symbols-outlined text-xl">psychology</span>
+                  <div className="w-10 h-10 rounded-2xl bg-surface-container-high text-on-surface flex items-center justify-center shrink-0 border border-outline-variant/60 shadow-xs">
+                    <span className="material-symbols-outlined text-lg">folder_open</span>
                   </div>
                   <div className="flex flex-col min-w-0">
                     <div className="flex items-center gap-1.5 flex-wrap">
-                      <span className="px-2 py-0.5 rounded-full bg-secondary/20 text-secondary text-[10px] font-mono font-bold uppercase tracking-wider">
-                        AI DIAGNOSTIC ACTIVE
+                      <span className="px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface-variant border border-outline-variant/60 text-[10px] font-mono font-medium uppercase tracking-wider">
+                        {stagedSpecimen.category}
                       </span>
                       <span className="text-outline-variant text-xs">•</span>
                       <span className="font-mono text-[11px] text-on-surface-variant">
@@ -386,14 +389,11 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
                 </div>
               </div>
 
-              {/* Autopsy Diagnosis Chamber */}
-              <div className="p-3 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-left space-y-1">
-                <div className="flex items-center justify-between text-xs font-mono font-bold text-amber-700 dark:text-amber-300">
-                  <span className="flex items-center gap-1.5">
-                    <span className="material-symbols-outlined text-sm">medical_services</span>
-                    <span>Cause of Demise</span>
-                  </span>
-                  <span className="px-2 py-0.5 rounded-full bg-amber-500/20 text-[10px]">
+              {/* Autopsy Diagnosis */}
+              <div className="p-3.5 rounded-2xl bg-surface-container border border-outline-variant/50 text-left space-y-1.5">
+                <div className="flex items-center justify-between text-xs font-mono font-semibold text-on-surface">
+                  <span>Cause of Demise</span>
+                  <span className="px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface-variant text-[10px] font-mono border border-outline-variant/40">
                     {stagedSpecimen.causeCategory}
                   </span>
                 </div>
@@ -403,34 +403,29 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
               </div>
 
               {/* Preserved Reusable Modules */}
-              <div className="space-y-1.5 text-left">
+              <div className="space-y-2 text-left">
                 <div className="flex items-center justify-between text-xs font-mono font-semibold text-on-surface">
-                  <span className="flex items-center gap-1.5">
-                    <span className="material-symbols-outlined text-sm text-secondary">extension</span>
-                    <span>Preserved Salvage Modules</span>
-                  </span>
-                  <span className="text-[11px] text-secondary font-mono">
-                    {stagedSpecimen.preservedSalvageModules.length} Salvageable
+                  <span>Preserved Salvage Modules</span>
+                  <span className="text-[11px] text-on-surface-variant font-mono">
+                    {stagedSpecimen.preservedSalvageModules.length} Modules
                   </span>
                 </div>
                 <div className="flex flex-wrap gap-1.5">
                   {stagedSpecimen.preservedSalvageModules.map((mod, idx) => (
                     <span
                       key={idx}
-                      className="px-2.5 py-1 rounded-xl bg-surface-container border border-outline-variant/50 text-[11px] font-mono text-on-surface flex items-center gap-1.5 shadow-2xs"
+                      className="px-2.5 py-1 rounded-xl bg-surface-container border border-outline-variant/50 text-[11px] font-mono text-on-surface shadow-2xs"
                     >
-                      <span className="material-symbols-outlined text-xs text-primary">{mod.icon}</span>
-                      <span>{mod.name}</span>
+                      {mod.name}
                     </span>
                   ))}
                 </div>
               </div>
 
-              {/* Curator AI Analysis / Resurrect Estimate */}
-              <div className="p-3 rounded-2xl bg-secondary/10 border border-secondary/25 text-left space-y-1">
-                <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-secondary">
-                  <span className="material-symbols-outlined text-sm">auto_awesome</span>
-                  <span>AI Curator Assessment</span>
+              {/* Curator Assessment */}
+              <div className="p-3.5 rounded-2xl bg-surface-container border border-outline-variant/50 text-left space-y-1.5">
+                <div className="text-xs font-mono font-semibold text-on-surface">
+                  Curator Assessment
                 </div>
                 <p className="font-sans text-xs text-on-surface-variant line-clamp-3 leading-relaxed">
                   {stagedSpecimen.curatorAnalysis ||
@@ -440,8 +435,7 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
 
               {/* Action Canvas Directives */}
               <div className="pt-2 border-t border-outline-variant/40 flex items-center justify-between gap-2">
-                <div className="flex items-center gap-1.5 text-secondary font-mono text-[11px] font-bold">
-                  <span className="material-symbols-outlined text-sm animate-pulse">pan_tool</span>
+                <div className="flex items-center gap-1.5 text-secondary font-mono text-[11px] font-semibold">
                   <span>Drag into Right Action Zones ➔</span>
                 </div>
                 <button
@@ -472,20 +466,20 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
                   Drop a project card here
                 </h3>
                 <p className="font-sans text-xs text-on-surface-variant font-light max-w-xs">
-                  to run instant AI Forensic Autopsy & Salvage Diagnostics
+                  to view project autopsy, salvage modules & viability score
                 </p>
               </div>
 
               {/* Feature Pill Tags */}
               <div className="flex flex-wrap items-center justify-center gap-1.5 pt-2">
                 <span className="px-2.5 py-1 rounded-full bg-surface-container-high text-[11px] font-mono text-on-surface-variant">
-                  🧠 Root Cause
+                  Root Cause
                 </span>
                 <span className="px-2.5 py-1 rounded-full bg-surface-container-high text-[11px] font-mono text-on-surface-variant">
-                  🧩 Salvage Modules
+                  Salvage Modules
                 </span>
                 <span className="px-2.5 py-1 rounded-full bg-surface-container-high text-[11px] font-mono text-on-surface-variant">
-                  ⚡ Viability Meter
+                  Viability Meter
                 </span>
               </div>
 

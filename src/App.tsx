@@ -29,6 +29,7 @@ import { ArchiveView } from './views/ArchiveView';
 import { SettingsView } from './views/SettingsView';
 import { useKeyboardShortcuts } from './hooks';
 import { QuickJumpMenu } from './components/Navigation/QuickJumpMenu';
+import { DormancyAlertToast } from './components/Common/DormancyAlertToast';
 
 export default function App() {
   const [currentScreen, setCurrentScreen] = useState<ScreenId>('landing');
@@ -150,6 +151,9 @@ export default function App() {
     setIsDigitalWillOpen(true);
   };
 
+  // Dormancy Alert Toast State for projects inactive > 2-3 months
+  const [dormancyAlertSpecimen, setDormancyAlertSpecimen] = useState<ProjectSpecimen | null>(null);
+
   // Full Screen / Collapsible Left Navigation (Zen Focus Mode)
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
 
@@ -229,11 +233,13 @@ export default function App() {
   const openAutopsy = (specimen: ProjectSpecimen) => {
     setAutopsySpecimen(specimen);
     setIsAutopsyOpen(true);
+    setDormancyAlertSpecimen(specimen);
   };
 
   const navigateToRevivalCompass = (specimen: ProjectSpecimen) => {
     setRevivalSpecimen(specimen);
     setCurrentScreen('revival-compass');
+    setDormancyAlertSpecimen(specimen);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -436,6 +442,7 @@ export default function App() {
               onDeleteSpecimen={handleDeleteProject}
               onOpenNewProject={() => setIsNewProjectModalOpen(true)}
               onOpenDigitalWill={openDigitalWill}
+              onStageSpecimen={(s) => setDormancyAlertSpecimen(s)}
             />
           )}
 
@@ -460,7 +467,10 @@ export default function App() {
             <RevivalCompassView
               specimens={specimens}
               selectedSpecimen={revivalSpecimen}
-              onSelectSpecimen={setRevivalSpecimen}
+              onSelectSpecimen={(s) => {
+                setRevivalSpecimen(s);
+                setDormancyAlertSpecimen(s);
+              }}
               onOpenGraftSprint={sparkRevivalSprint}
             />
           )}
@@ -611,6 +621,13 @@ export default function App() {
       specimen={digitalWillSpecimen}
       isOpen={isDigitalWillOpen}
       onClose={() => setIsDigitalWillOpen(false)}
+    />
+
+    {/* Top-Right Dormancy Alert Popup for Projects Inactive > 2-3 Months */}
+    <DormancyAlertToast
+      specimen={dormancyAlertSpecimen}
+      onClose={() => setDormancyAlertSpecimen(null)}
+      onNavigateToCompass={navigateToRevivalCompass}
     />
   </>
   );

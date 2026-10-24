@@ -111,58 +111,10 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
   ];
 
   // Active specimen for interactive vitrine
-  const [activeSpecimenIndex, setActiveSpecimenIndex] = useState(0);
-  const activeSpecimen = SAMPLE_SPECIMENS[activeSpecimenIndex] || SAMPLE_SPECIMENS[0];
+  const activeSpecimen = SAMPLE_SPECIMENS[0];
 
   // Active tab inside hero visual vitrine
   const [heroTab, setHeroTab] = useState<'autopsy' | 'salvage' | 'revival'>('autopsy');
-
-  // Ambient sound state
-  const [isPlayingSound, setIsPlayingSound] = useState(false);
-
-  // Play serene botanical ambient synthesizer sound via Web Audio API
-  const handleToggleAmbient = () => {
-    try {
-      if (isPlayingSound) {
-        setIsPlayingSound(false);
-        return;
-      }
-
-      const AudioContextClass = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
-      const ctx = new AudioContextClass();
-      
-      const osc1 = ctx.createOscillator();
-      const osc2 = ctx.createOscillator();
-      const gain = ctx.createGain();
-
-      // 432Hz Botanical Harmonic Chime
-      osc1.type = 'sine';
-      osc1.frequency.setValueAtTime(432, ctx.currentTime);
-      osc1.frequency.exponentialRampToValueAtTime(540, ctx.currentTime + 1.2);
-
-      osc2.type = 'triangle';
-      osc2.frequency.setValueAtTime(216, ctx.currentTime);
-      osc2.frequency.exponentialRampToValueAtTime(270, ctx.currentTime + 1.5);
-
-      gain.gain.setValueAtTime(0.001, ctx.currentTime);
-      gain.gain.linearRampToValueAtTime(0.08, ctx.currentTime + 0.3);
-      gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 2.5);
-
-      osc1.connect(gain);
-      osc2.connect(gain);
-      gain.connect(ctx.destination);
-
-      osc1.start();
-      osc2.start();
-      osc1.stop(ctx.currentTime + 2.6);
-      osc2.stop(ctx.currentTime + 2.6);
-
-      setIsPlayingSound(true);
-      setTimeout(() => setIsPlayingSound(false), 2600);
-    } catch {
-      // Audio context may require explicit user gesture in some browsers
-    }
-  };
 
   return (
     <div className="landing-page min-h-screen bg-surface text-on-surface font-sans selection:bg-primary-container selection:text-on-primary-container pb-20">
@@ -337,35 +289,8 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
 
               {/* Main Vitrine Card */}
               <div className="clay-card rounded-3xl p-5 sm:p-6 bg-surface-container border border-outline-variant/80 shadow-2xl relative overflow-hidden backdrop-blur-md">
-                {/* Specimen Header & Status */}
-                <div className="flex items-center justify-between pb-4 border-b border-outline-variant/50">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2.5 h-2.5 rounded-full bg-secondary" />
-                    <span className="font-mono text-[11px] font-bold text-on-surface tracking-wider uppercase">
-                      {activeSpecimen.specimenNumber} • DORMANT
-                    </span>
-                  </div>
-
-                  {/* Ambient Synthesizer Button */}
-                  <button
-                    type="button"
-                    onClick={handleToggleAmbient}
-                    className={`px-2.5 py-1 rounded-full text-[10px] font-mono flex items-center gap-1.5 transition-all border ${
-                      isPlayingSound
-                        ? 'bg-secondary text-on-secondary border-secondary font-bold shadow-md'
-                        : 'bg-surface-container-high/80 text-on-surface-variant hover:text-on-surface border-outline-variant/60'
-                    }`}
-                    title="Play 432Hz Botanical Harmonic Chime"
-                  >
-                    <span aria-hidden="true" className="material-symbols-outlined text-xs">
-                      {isPlayingSound ? 'graphic_eq' : 'volume_up'}
-                    </span>
-                    <span>{isPlayingSound ? '432Hz Sounding' : 'Chime'}</span>
-                  </button>
-                </div>
-
                 {/* Specimen Profile Preview */}
-                <div className="pt-4 space-y-3">
+                <div className="space-y-3">
                   <div className="relative h-44 rounded-2xl overflow-hidden border border-outline-variant/60 group">
                     <img
                       src={activeSpecimen.plateImage}
@@ -508,30 +433,6 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
                       </p>
                     </div>
                   )}
-
-                  {/* Bottom Action inside Chamber - visual showcase only */}
-                  <div className="pt-2 flex items-center justify-between">
-                    <div className="flex items-center gap-1.5 text-[11px] font-mono text-on-surface-variant">
-                      <span className="w-1.5 h-1.5 rounded-full bg-secondary" />
-                      <span>Specimen Showcase • Live Preview</span>
-                    </div>
-
-                    <div className="flex items-center gap-1">
-                      {SAMPLE_SPECIMENS.map((_, idx) => (
-                        <button
-                          key={idx}
-                          type="button"
-                          onClick={() => setActiveSpecimenIndex(idx)}
-                          className={`w-2.5 h-2.5 rounded-full transition-all ${
-                            activeSpecimenIndex === idx
-                              ? 'bg-primary w-5'
-                              : 'bg-outline-variant hover:bg-outline'
-                          }`}
-                          title={`Inspect Sample #${idx + 1}`}
-                        />
-                      ))}
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
