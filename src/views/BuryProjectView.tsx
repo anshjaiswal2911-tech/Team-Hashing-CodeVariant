@@ -120,11 +120,6 @@ export const BuryProjectView: React.FC<BuryProjectViewProps> = ({
             and recover what was built.
           </p>
         </div>
-
-        <div className="flex items-center gap-2 self-start md:self-auto bg-surface-container-low px-4 py-1.5 rounded-xl border border-surface-container-high/60 shadow-sm">
-          <span className="material-symbols-outlined text-primary text-base">multiple_airports</span>
-          <span className="font-sans text-xs text-on-surface-variant">Est. 4 min remaining</span>
-        </div>
       </div>
 
       {/* Dignified Minimalist Progress Stepper */}

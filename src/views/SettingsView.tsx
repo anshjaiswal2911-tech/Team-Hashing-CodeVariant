@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ProjectSpecimen, SalvageModule, ActivityItem } from '../types';
 import { useTheme } from '../context/ThemeContext';
 import { AVAILABLE_THEMES } from '../utils/themeManager';
@@ -10,38 +10,175 @@ interface SettingsViewProps {
   basket?: string[];
 }
 
+interface DisplayPreferences {
+  brightness: number; // 70 - 130 (%)
+  contrast: number; // 70 - 130 (%)
+  transparency: number; // 60 - 100 (%)
+  customAccent: string | null;
+}
+
+const DEFAULT_DISPLAY_PREFS: DisplayPreferences = {
+  brightness: 100,
+  contrast: 100,
+  transparency: 100,
+  customAccent: null,
+};
+
+const DISPLAY_STORAGE_KEY = 'project-graveyard-display-prefs';
+const ACCOUNT_STORAGE_KEY = 'project-graveyard-account-prefs';
+
 export const SettingsView: React.FC<SettingsViewProps> = ({
   specimens = [],
   salvageModules = [],
   activities = [],
   basket = [],
 }) => {
-  const { theme, setTheme, toggleTheme } = useTheme();
-  const [curatorName, setCuratorName] = useState('Aryan');
-  const [curatorRole, setCuratorRole] = useState('Master Curator');
-  const [whisperFrequency, setWhisperFrequency] = useState('daily');
-  const [autoIndexSalvage, setAutoIndexSalvage] = useState(true);
+  const { theme, setTheme } = useTheme();
+
+  // Active Settings Tab
+  const [activeTab, setActiveTab] = useState<'account' | 'appearance' | 'preferences' | 'privacy'>('account');
+
+  // Account Settings
+  const [curatorName, setCuratorName] = useState(() => {
+    try {
+      const saved = localStorage.getItem(ACCOUNT_STORAGE_KEY);
+      if (saved) return JSON.parse(saved).name || 'Aryan';
+    } catch {}
+    return 'Aryan';
+  });
+  const [curatorRole, setCuratorRole] = useState(() => {
+    try {
+      const saved = localStorage.getItem(ACCOUNT_STORAGE_KEY);
+      if (saved) return JSON.parse(saved).role || 'Master Curator & Lead Engineer';
+    } catch {}
+    return 'Master Curator & Lead Engineer';
+  });
+  const [curatorEmail, setCuratorEmail] = useState(() => {
+    try {
+      const saved = localStorage.getItem(ACCOUNT_STORAGE_KEY);
+      if (saved) return JSON.parse(saved).email || 'aryan@graveyard.dev';
+    } catch {}
+    return 'aryan@graveyard.dev';
+  });
+  const [curatorBio, setCuratorBio] = useState(() => {
+    try {
+      const saved = localStorage.getItem(ACCOUNT_STORAGE_KEY);
+      if (saved) return JSON.parse(saved).bio || 'Preserving abandoned engineering prototypes into fertile software foundations.';
+    } catch {}
+    return 'Preserving abandoned engineering prototypes into fertile software foundations.';
+  });
+  const MALE_AVATAR = 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80';
+
+  const [curatorAvatar, setCuratorAvatar] = useState(() => {
+    try {
+      const saved = localStorage.getItem(ACCOUNT_STORAGE_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed.avatar && !parsed.avatar.includes('1534528741775')) return parsed.avatar;
+      }
+      const graveyardUser = localStorage.getItem('graveyard_user');
+      if (graveyardUser) {
+        const parsed = JSON.parse(graveyardUser);
+        if (parsed.avatar && !parsed.avatar.includes('1534528741775')) return parsed.avatar;
+      }
+    } catch {}
+    return MALE_AVATAR;
+  });
+
+  // Display Calibration (Brightness, Contrast, Transparency, Accent Color)
+  const [displayPrefs, setDisplayPrefs] = useState<DisplayPreferences>(() => {
+    try {
+      const saved = localStorage.getItem(DISPLAY_STORAGE_KEY);
+      if (saved) return { ...DEFAULT_DISPLAY_PREFS, ...JSON.parse(saved) };
+    } catch {}
+    return DEFAULT_DISPLAY_PREFS;
+  });
+
+  // Preferences & Toggles
   const [ambientSounds, setAmbientSounds] = useState(true);
-  const [showSavedToast, setShowSavedToast] = useState(false);
-  const [backupToast, setBackupToast] = useState<string | null>(null);
+  const [dormancyAlerts, setDormancyAlerts] = useState(true);
+  const [autoIndexSalvage, setAutoIndexSalvage] = useState(true);
 
-  // Pivora Neo-Tactile Component Studio Interactive States
-  const [isSending, setIsSending] = useState(false);
-  const [activeTactileTab, setActiveTactileTab] = useState<'overview' | 'details' | 'settings'>('overview');
-  const [tactileSwitch, setTactileSwitch] = useState(true);
-  const [tactileEmail, setTactileEmail] = useState('');
-  const [tactileCheckbox, setTactileCheckbox] = useState(true);
-  const [tactileRadio, setTactileRadio] = useState<'opt1' | 'opt2'>('opt1');
-  const [tactileSlider, setTactileSlider] = useState(75);
+  // Notification feedbacks
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
 
-  const handleSimulateSubmit = () => {
-    setIsSending(true);
-    setTimeout(() => setIsSending(false), 2000);
+  const showToast = (msg: string) => {
+    setToastMessage(msg);
+    setTimeout(() => setToastMessage(null), 3000);
   };
 
-  const handleSave = () => {
-    setShowSavedToast(true);
-    setTimeout(() => setShowSavedToast(false), 2500);
+  // Live CSS Filter & Variable Application for Display Controls
+  useEffect(() => {
+    const root = document.documentElement;
+
+    // Apply brightness and contrast filters
+    if (displayPrefs.brightness === 100 && displayPrefs.contrast === 100) {
+      root.style.removeProperty('filter');
+    } else {
+      root.style.filter = `brightness(${displayPrefs.brightness}%) contrast(${displayPrefs.contrast}%)`;
+    }
+
+    // Apply transparency
+    if (displayPrefs.transparency === 100) {
+      root.style.removeProperty('--surface-opacity');
+    } else {
+      root.style.setProperty('--surface-opacity', `${displayPrefs.transparency / 100}`);
+    }
+
+    // Apply custom accent tint if selected
+    if (displayPrefs.customAccent) {
+      root.style.setProperty('--primary', displayPrefs.customAccent);
+      root.style.setProperty('--secondary', displayPrefs.customAccent);
+    } else {
+      root.style.removeProperty('--primary');
+      root.style.removeProperty('--secondary');
+    }
+
+    // Save to localStorage
+    try {
+      localStorage.setItem(DISPLAY_STORAGE_KEY, JSON.stringify(displayPrefs));
+    } catch {}
+  }, [displayPrefs]);
+
+  const handleResetDisplayDefaults = () => {
+    setDisplayPrefs(DEFAULT_DISPLAY_PREFS);
+    const root = document.documentElement;
+    root.style.removeProperty('filter');
+    root.style.removeProperty('--surface-opacity');
+    root.style.removeProperty('--primary');
+    root.style.removeProperty('--secondary');
+    showToast('Display settings reset to default theme baseline');
+  };
+
+  const handleSaveAccount = (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const payload = {
+        name: curatorName,
+        role: curatorRole,
+        email: curatorEmail,
+        bio: curatorBio,
+        avatar: curatorAvatar,
+      };
+      localStorage.setItem(ACCOUNT_STORAGE_KEY, JSON.stringify(payload));
+
+      const graveyardUser = localStorage.getItem('graveyard_user');
+      const currentUserData = graveyardUser ? JSON.parse(graveyardUser) : {};
+      localStorage.setItem(
+        'graveyard_user',
+        JSON.stringify({
+          ...currentUserData,
+          name: curatorName,
+          email: curatorEmail,
+          role: curatorRole,
+          avatar: curatorAvatar,
+        })
+      );
+
+      showToast('Account details updated successfully');
+    } catch (err) {
+      showToast(`Save failed: ${(err as Error).message}`);
+    }
   };
 
   const handleExportVaultJson = () => {
@@ -54,12 +191,9 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
         curator: {
           name: curatorName,
           title: curatorRole,
+          email: curatorEmail,
         },
-        preferences: {
-          whisperFrequency,
-          autoIndexSalvage,
-          ambientSounds,
-        },
+        displayPreferences: displayPrefs,
         vaultSummary: {
           totalSpecimensPreserved: specimens.length,
           reusableModulesIndexed: salvageModules.length,
@@ -83,684 +217,586 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
       document.body.removeChild(link);
       URL.revokeObjectURL(url);
 
-      setBackupToast(`✓ Downloaded ${link.download} (${specimens.length} specimens, ${salvageModules.length} modules)`);
-      setTimeout(() => setBackupToast(null), 4000);
+      showToast(`Exported ${link.download} successfully`);
     } catch (err) {
-      alert(`Export failed: ${(err as Error).message}`);
+      showToast(`Export failed: ${(err as Error).message}`);
     }
   };
 
+  const handleClearCache = () => {
+    if (window.confirm('Are you sure you want to clear your local workspace cache? This will reset local drafts and restore default mock data.')) {
+      try {
+        localStorage.removeItem(DISPLAY_STORAGE_KEY);
+        localStorage.removeItem(ACCOUNT_STORAGE_KEY);
+        handleResetDisplayDefaults();
+        showToast('Local cache cleared. Workspace restored.');
+      } catch {}
+    }
+  };
+
+  const ACCENT_COLOR_PRESETS = [
+    { label: 'Theme Default', color: null },
+    { label: 'Terracotta', color: '#DE8553' },
+    { label: 'Botanical Pine', color: '#144227' },
+    { label: 'Aero Teal', color: '#0E7490' },
+    { label: 'Azure Sky', color: '#0284C7' },
+    { label: 'Amethyst', color: '#7C3AED' },
+    { label: 'Rose Gold', color: '#E11D48' },
+  ];
+
   return (
-    <div className="flex flex-col w-full space-y-8 pb-16 max-w-4xl">
-      {/* Header */}
-      <div className="space-y-2">
-        <div className="flex items-center gap-2 text-outline font-mono text-xs uppercase tracking-widest">
-          <span className="material-symbols-outlined text-sm">settings</span>
-          <span>Conservatory Protocol // Preferences</span>
+    <div className="flex flex-col w-full space-y-6 pb-20 max-w-5xl mx-auto">
+      {/* ─────────────────────────────────────────────────────────────
+          1. HEADER & SECTION BADGE
+         ───────────────────────────────────────────────────────────── */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-outline-variant/60 pb-5">
+        <div>
+          <div className="flex items-center gap-2 text-secondary font-mono text-xs uppercase tracking-widest mb-1">
+            <span className="material-symbols-outlined text-sm">tune</span>
+            <span>Preferences & Settings</span>
+          </div>
+          <h1 className="font-serif text-3xl sm:text-4xl text-on-surface font-semibold tracking-tight">
+            Settings
+          </h1>
+          <p className="font-sans text-xs sm:text-sm text-on-surface-variant font-light mt-1">
+            Customize your account profile, theme ambience, display calibration, and data privacy.
+          </p>
         </div>
-        <h1 className="font-serif text-3xl sm:text-4xl text-on-surface">Curator Settings</h1>
-        <p className="font-sans text-sm text-on-surface-variant leading-relaxed">
-          Configure vault telemetry, reminder cadences for dormant seeds, and archival display
-          parameters.
-        </p>
+
+        {/* Feedback Toast */}
+        {toastMessage && (
+          <div className="self-start sm:self-center px-4 py-2 rounded-xl bg-secondary text-on-secondary text-xs font-sans font-semibold shadow-md flex items-center gap-2 animate-in fade-in">
+            <span className="material-symbols-outlined text-sm">check_circle</span>
+            <span>{toastMessage}</span>
+          </div>
+        )}
       </div>
 
-      <div className="space-y-6">
-        {/* Curator Profile Section */}
-        <div className="p-6 rounded-xl bg-surface-container-low border border-surface-container-high/50 space-y-4">
-          <h2 className="font-serif text-xl text-on-surface">Curator Credentials</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label className="font-sans text-xs font-semibold text-on-surface block mb-1">
-                Curator Name
-              </label>
-              <input
-                type="text"
-                value={curatorName}
-                onChange={(e) => setCuratorName(e.target.value)}
-                className="w-full p-2.5 rounded-lg bg-surface-container text-xs text-on-surface border border-surface-container-high focus:outline-none focus:border-primary"
+      {/* ─────────────────────────────────────────────────────────────
+          2. TAB NAVIGATION (Account, Appearance, Preferences, Privacy)
+         ───────────────────────────────────────────────────────────── */}
+      <div className="flex items-center gap-2 overflow-x-auto pb-1 border-b border-outline-variant/40">
+        <button
+          type="button"
+          onClick={() => setActiveTab('account')}
+          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-sans font-semibold transition-all whitespace-nowrap cursor-pointer ${
+            activeTab === 'account'
+              ? 'bg-secondary text-on-secondary shadow-sm'
+              : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container'
+          }`}
+        >
+          <span className="material-symbols-outlined text-base">person</span>
+          <span>Account & Profile</span>
+        </button>
+
+        <button
+          type="button"
+          onClick={() => setActiveTab('appearance')}
+          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-sans font-semibold transition-all whitespace-nowrap cursor-pointer ${
+            activeTab === 'appearance'
+              ? 'bg-secondary text-on-secondary shadow-sm'
+              : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container'
+          }`}
+        >
+          <span className="material-symbols-outlined text-base">palette</span>
+          <span>Appearance & Display</span>
+        </button>
+
+        <button
+          type="button"
+          onClick={() => setActiveTab('preferences')}
+          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-sans font-semibold transition-all whitespace-nowrap cursor-pointer ${
+            activeTab === 'preferences'
+              ? 'bg-secondary text-on-secondary shadow-sm'
+              : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container'
+          }`}
+        >
+          <span className="material-symbols-outlined text-base">notifications</span>
+          <span>Preferences & Audio</span>
+        </button>
+
+        <button
+          type="button"
+          onClick={() => setActiveTab('privacy')}
+          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-sans font-semibold transition-all whitespace-nowrap cursor-pointer ${
+            activeTab === 'privacy'
+              ? 'bg-secondary text-on-secondary shadow-sm'
+              : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container'
+          }`}
+        >
+          <span className="material-symbols-outlined text-base">shield</span>
+          <span>Privacy & Security</span>
+        </button>
+      </div>
+
+      {/* ─────────────────────────────────────────────────────────────
+          TAB 1: ACCOUNT & PROFILE SETTINGS
+         ───────────────────────────────────────────────────────────── */}
+      {activeTab === 'account' && (
+        <form onSubmit={handleSaveAccount} className="space-y-6 animate-in fade-in">
+          <div className="p-6 rounded-2xl bg-surface-container border border-outline-variant/60 shadow-sm clay-card space-y-6">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 pb-6 border-b border-outline-variant/40">
+              <img
+                src={curatorAvatar}
+                alt={curatorName}
+                className="w-20 h-20 rounded-2xl object-cover border-2 border-secondary/40 shadow-sm"
               />
-            </div>
-            <div>
-              <label className="font-sans text-xs font-semibold text-on-surface block mb-1">
-                Official Title / Rank
-              </label>
-              <input
-                type="text"
-                value={curatorRole}
-                onChange={(e) => setCuratorRole(e.target.value)}
-                className="w-full p-2.5 rounded-lg bg-surface-container text-xs text-on-surface border border-surface-container-high focus:outline-none focus:border-primary"
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Conservatory Visual Ambience & Theme Protocol */}
-        <div className="p-6 rounded-xl bg-surface-container-low border border-surface-container-high/50 space-y-4">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div>
-              <h2 className="font-serif text-xl text-on-surface">Visual Ambience & Theme Protocol</h2>
-              <p className="font-sans text-xs text-on-surface-variant mt-0.5">
-                Select between Midnight Botanical (Original Dark), Botanical Ivory (Pitch Deck), and Monochrome Enterprise.
-              </p>
-            </div>
-            <button
-              type="button"
-              onClick={toggleTheme}
-              className="px-3.5 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-xs font-sans font-semibold text-secondary flex items-center gap-1.5 border border-surface-container-highest transition-colors shadow-sm self-start sm:self-auto"
-            >
-              <span className="material-symbols-outlined text-base">
-                {theme === 'dark' ? 'dark_mode' : theme === 'botanical-light' ? 'eco' : 'wb_sunny'}
-              </span>
-              <span>
-                Cycle Theme (
-                {theme === 'dark'
-                  ? 'Original Dark'
-                  : theme === 'botanical-light'
-                  ? 'Botanical Ivory PPT'
-                  : theme === 'claymorphic'
-                  ? 'Claymorphic 3D'
-                  : theme === 'glassmorphic'
-                  ? 'Galactic Glass'
-                  : 'Monochrome Light'}
-                )
-              </span>
-            </button>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3.5 pt-1">
-            {/* Theme 1: Botanical Ivory (Pitch Deck Theme) */}
-            <div
-              onClick={() => setTheme('botanical-light')}
-              className={`p-4 rounded-2xl cursor-pointer transition-all border flex flex-col justify-between space-y-3 ${
-                theme === 'botanical-light'
-                  ? 'bg-surface-container border-primary shadow-md ring-2 ring-primary/40'
-                  : 'bg-surface-container/60 border-outline-variant hover:border-outline opacity-80 hover:opacity-100'
-              }`}
-            >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="material-symbols-outlined text-primary text-lg">eco</span>
-                  <span className="font-sans text-xs font-semibold text-on-surface">
-                    Botanical Ivory (PPT)
-                  </span>
-                </div>
-                {theme === 'botanical-light' && (
-                  <span className="px-2 py-0.5 rounded-full bg-primary text-on-primary font-mono text-[10px] font-bold uppercase">
-                    Active
-                  </span>
-                )}
-              </div>
-              <p className="font-sans text-[11px] text-on-surface-variant leading-relaxed">
-                Warm ivory canvas (#F7FAF7), pure white cards, deep pine text (#132E20), soft sage pills, and golden amber (#C9862B).
-              </p>
-              <div className="flex items-center gap-1.5 pt-1">
-                <span className="w-3.5 h-3.5 rounded-full bg-[#F7FAF7] border border-[#E0E9DF]" title="Warm Ivory Canvas"></span>
-                <span className="w-3.5 h-3.5 rounded-full bg-[#FFFFFF] border border-[#E0E9DF]" title="Pure White Surface"></span>
-                <span className="w-3.5 h-3.5 rounded-full bg-[#132E20]" title="Deep Pine Text"></span>
-                <span className="w-3.5 h-3.5 rounded-full bg-[#DDEBDD]" title="Soft Sage Pill"></span>
-                <span className="w-3.5 h-3.5 rounded-full bg-[#C9862B]" title="Warm Golden Amber"></span>
-              </div>
-            </div>
-
-            {/* Theme 2: Neo-Tactile Soft UI (Pivora Kit) */}
-            <div
-              onClick={() => setTheme('claymorphic')}
-              className={`p-4 rounded-2xl cursor-pointer transition-all border flex flex-col justify-between space-y-3 ${
-                theme === 'claymorphic'
-                  ? 'bg-surface-container border-[#0E332E] shadow-md ring-2 ring-[#0E332E]/40'
-                  : 'bg-surface-container/60 border-outline-variant hover:border-outline opacity-80 hover:opacity-100'
-              }`}
-            >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="material-symbols-outlined text-[#0E332E] text-lg">view_in_ar</span>
-                  <span className="font-sans text-xs font-semibold text-on-surface">
-                    Neo-Tactile Soft UI
-                  </span>
-                </div>
-                {theme === 'claymorphic' && (
-                  <span className="px-2 py-0.5 rounded-full bg-[#0E332E] text-white font-mono text-[10px] font-bold uppercase">
-                    Active
-                  </span>
-                )}
-              </div>
-              <p className="font-sans text-[11px] text-on-surface-variant leading-relaxed">
-                Pivora design system: Calm sand (#EFE8DE), deep pine 'Submit Now' teal (#0E332E), raised cream buttons, and inset wells.
-              </p>
-              <div className="flex items-center gap-1.5 pt-1">
-                <span className="w-3.5 h-3.5 rounded-full bg-[#EFE8DE] border border-[#DFD5C6]" title="Calm Sand Canvas"></span>
-                <span className="w-3.5 h-3.5 rounded-full bg-[#FAF6F0] border border-[#DFD5C6]" title="Raised Cream Layer"></span>
-                <span className="w-3.5 h-3.5 rounded-full bg-[#0E332E]" title="Deep Pine Teal Button"></span>
-                <span className="w-3.5 h-3.5 rounded-full bg-[#E8E0D4]" title="Sunken Inset Well"></span>
-                <span className="w-3.5 h-3.5 rounded-full bg-[#DE8553]" title="Terracotta Accent"></span>
-              </div>
-            </div>
-
-            {/* Theme 3: Galactic Glass (Dark Glassmorphism - Pinterest Reference) */}
-            <div
-              onClick={() => setTheme('glassmorphic')}
-              className={`p-4 rounded-2xl cursor-pointer transition-all border flex flex-col justify-between space-y-3 ${
-                theme === 'glassmorphic'
-                  ? 'bg-surface-container border-[#34D399] shadow-md ring-2 ring-[#34D399]/40'
-                  : 'bg-surface-container/60 border-outline-variant hover:border-outline opacity-80 hover:opacity-100'
-              }`}
-            >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="material-symbols-outlined text-[#34D399] text-lg">blur_on</span>
-                  <span className="font-sans text-xs font-semibold text-on-surface">
-                    Galactic Glass
-                  </span>
-                </div>
-                {theme === 'glassmorphic' && (
-                  <span className="px-2 py-0.5 rounded-full bg-[#34D399] text-[#051A11] font-mono text-[10px] font-bold uppercase">
-                    Active
-                  </span>
-                )}
-              </div>
-              <p className="font-sans text-[11px] text-on-surface-variant leading-relaxed">
-                Obsidian deep space void (#0B1310), frosted smoky emerald glass, neon mint (#34D399) & topaz glow.
-              </p>
-              <div className="flex items-center gap-1.5 pt-1">
-                <span className="w-3.5 h-3.5 rounded-full bg-[#0B1310] border border-[#34D399]/30" title="Obsidian Void"></span>
-                <span className="w-3.5 h-3.5 rounded-full bg-[rgba(16,29,23,0.8)] border border-[#34D399]/40" title="Smoky Glass"></span>
-                <span className="w-3.5 h-3.5 rounded-full bg-[#34D399]" title="Neon Mint"></span>
-                <span className="w-3.5 h-3.5 rounded-full bg-[#FBBF24]" title="Topaz Amber"></span>
-                <span className="w-3.5 h-3.5 rounded-full bg-[#2DD4BF]" title="Aqua Jade"></span>
-              </div>
-            </div>
-
-            {/* Theme 3: Original Botanical Dark */}
-            <div
-              onClick={() => setTheme('dark')}
-              className={`p-4 rounded-2xl cursor-pointer transition-all border flex flex-col justify-between space-y-3 ${
-                theme === 'dark'
-                  ? 'bg-surface-container border-primary shadow-md ring-2 ring-primary/40'
-                  : 'bg-surface-container/60 border-outline-variant hover:border-outline opacity-80 hover:opacity-100'
-              }`}
-            >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="material-symbols-outlined text-secondary text-lg">inventory_2</span>
-                  <span className="font-sans text-xs font-semibold text-on-surface">
-                    Botanical Dark (Original)
-                  </span>
-                </div>
-                {theme === 'dark' && (
-                  <span className="px-2 py-0.5 rounded-full bg-primary text-on-primary font-mono text-[10px] font-bold uppercase">
-                    Active
-                  </span>
-                )}
-              </div>
-              <p className="font-sans text-[11px] text-on-surface-variant leading-relaxed">
-                Deep forest green (#0A100D), sage accents (#B3CEB2), warm golden amber (#F2BD79), and parchment typography.
-              </p>
-              <div className="flex items-center gap-1.5 pt-1">
-                <span className="w-4 h-4 rounded-full bg-[#0A100D] border border-[#23332A]" title="Deep Forest Background"></span>
-                <span className="w-4 h-4 rounded-full bg-[#14211B]" title="Conservatory Container"></span>
-                <span className="w-4 h-4 rounded-full bg-[#B3CEB2]" title="Sage Green Primary"></span>
-                <span className="w-4 h-4 rounded-full bg-[#F2BD79]" title="Warm Amber Accent"></span>
-              </div>
-            </div>
-
-            {/* Theme 4: Monochrome Enterprise Light */}
-            <div
-              onClick={() => setTheme('light')}
-              className={`p-4 rounded-2xl cursor-pointer transition-all border flex flex-col justify-between space-y-3 ${
-                theme === 'light'
-                  ? 'bg-surface-container border-on-surface shadow-md ring-2 ring-on-surface/30'
-                  : 'bg-surface-container/60 border-outline-variant hover:border-outline opacity-80 hover:opacity-100'
-              }`}
-            >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="material-symbols-outlined text-on-surface text-lg">wb_sunny</span>
-                  <span className="font-sans text-xs font-semibold text-on-surface">
-                    Monochrome Enterprise
-                  </span>
-                </div>
-                {theme === 'light' && (
-                  <span className="px-2 py-0.5 rounded-full bg-[#050505] text-white font-mono text-[10px] font-bold uppercase">
-                    Active
-                  </span>
-                )}
-              </div>
-              <p className="font-sans text-[11px] text-on-surface-variant leading-relaxed">
-                High-contrast luxury SaaS (#F1F1F1), pure white cards (#FFFFFF), dark panels, and jet-black buttons (#050505).
-              </p>
-              <div className="flex items-center gap-1.5 pt-1">
-                <span className="w-4 h-4 rounded-full bg-[#F1F1F1] border border-[#E2E2E2]" title="Canvas"></span>
-                <span className="w-4 h-4 rounded-full bg-[#FFFFFF] border border-[#E2E2E2]" title="Main Surface"></span>
-                <span className="w-4 h-4 rounded-full bg-[#080808]" title="Dark Panels"></span>
-                <span className="w-4 h-4 rounded-full bg-[#050505]" title="Primary Buttons"></span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* ─────────────────────────────────────────────────────────────
-            Pivora Neo-Tactile Soft UI Component Studio (Pinterest Board)
-           ───────────────────────────────────────────────────────────── */}
-        <div className="clay-card p-6 sm:p-8 rounded-3xl bg-surface-container border border-outline-variant/80 shadow-xl space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-outline-variant/50">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-2xl bg-[#0E332E] text-white flex items-center justify-center shadow-md">
-                <span className="material-symbols-outlined text-xl">view_in_ar</span>
-              </div>
-              <div>
-                <div className="flex items-center gap-2">
-                  <h2 className="font-serif text-xl sm:text-2xl text-on-surface">
-                    Neo-Tactile Soft UI Design Kit
-                  </h2>
-                  <span className="px-2 py-0.5 rounded-full bg-[#0E332E]/10 text-[#0E332E] font-mono text-[9px] font-bold uppercase border border-[#0E332E]/20">
-                    PIVORA KIT
-                  </span>
-                </div>
-                <p className="font-sans text-xs text-on-surface-variant">
-                  Live interactive implementation of the Pinterest Neo-Tactile style guide & component baseline grid.
-                </p>
-              </div>
-            </div>
-
-            <button
-              type="button"
-              onClick={() => setTheme('claymorphic')}
-              className="px-3.5 py-1.5 rounded-xl bg-primary text-on-primary text-xs font-medium self-start sm:self-auto shadow-sm"
-            >
-              Apply Theme Globally
-            </button>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Column 1: Controls & Action States */}
-            <div className="space-y-4 p-4 rounded-2xl bg-surface-container-high/40 border border-outline-variant/40">
-              <div className="font-mono text-[10px] text-on-surface-variant uppercase tracking-wider font-bold">
-                01. Controls & Buttons
-              </div>
-
-              {/* Primary 'Submit Now' / Pressed 'Sending...' */}
-              <div className="space-y-1.5">
-                <span className="text-[11px] font-medium text-on-surface-variant">
-                  Primary Button (Click to test pressed state):
-                </span>
-                <button
-                  type="button"
-                  onClick={handleSimulateSubmit}
-                  className="w-full py-3 px-4 rounded-xl neo-tactile-btn-primary font-sans text-xs font-semibold flex items-center justify-center gap-2 shadow-md cursor-pointer"
-                >
-                  {isSending ? (
-                    <>
-                      <span className="material-symbols-outlined text-sm animate-spin">progress_activity</span>
-                      <span>Sending...</span>
-                    </>
-                  ) : (
-                    <>
-                      <span>Submit Now</span>
-                      <span className="material-symbols-outlined text-sm">arrow_forward</span>
-                    </>
-                  )}
-                </button>
-              </div>
-
-              {/* Raised Secondary Button */}
-              <div className="space-y-1.5">
-                <span className="text-[11px] font-medium text-on-surface-variant">
-                  Raised Layer Button:
-                </span>
-                <button
-                  type="button"
-                  className="w-full py-2.5 px-4 rounded-xl neo-tactile-btn-secondary font-sans text-xs font-semibold flex items-center justify-center gap-2 cursor-pointer"
-                >
-                  <span>Base Layer (Raised)</span>
-                </button>
-              </div>
-
-              {/* Checkbox & Switch Controls */}
-              <div className="space-y-2 pt-2 border-t border-outline-variant/40">
-                <div className="flex items-center justify-between text-xs">
-                  <span className="text-on-surface-variant">Tactile Checkbox:</span>
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={tactileCheckbox}
-                      onChange={(e) => setTactileCheckbox(e.target.checked)}
-                      className="w-4 h-4 rounded accent-[#0E332E] cursor-pointer"
-                    />
-                    <span className="text-xs text-on-surface font-medium">Option 1</span>
-                  </label>
-                </div>
-
-                <div className="flex items-center justify-between text-xs">
-                  <span className="text-on-surface-variant">Tactile Switch:</span>
-                  <button
-                    type="button"
-                    onClick={() => setTactileSwitch(!tactileSwitch)}
-                    className={`w-12 h-6 rounded-full transition-all relative p-0.5 ${
-                      tactileSwitch ? 'bg-[#0E332E]' : 'bg-[#E4DCD0]'
-                    }`}
-                    style={{
-                      boxShadow: tactileSwitch
-                        ? 'inset 1px 1px 3px rgba(0,0,0,0.4)'
-                        : 'inset 2px 2px 4px rgba(120,95,70,0.2), inset -1px -1px 2px #FFFFFF',
-                    }}
-                  >
-                    <div
-                      className={`w-5 h-5 rounded-full bg-white shadow-md transition-all ${
-                        tactileSwitch ? 'translate-x-6' : 'translate-x-0'
-                      }`}
-                    />
-                  </button>
-                </div>
-
-                {/* Slider */}
-                <div className="space-y-1 pt-1">
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="text-on-surface-variant">Slider:</span>
-                    <span className="font-mono text-[10px] font-bold text-[#0E332E]">
-                      {tactileSlider}%
-                    </span>
-                  </div>
+              <div className="space-y-1 flex-1">
+                <h3 className="font-serif text-xl text-on-surface font-semibold">{curatorName}</h3>
+                <p className="font-sans text-xs text-on-surface-variant">{curatorRole}</p>
+                <div className="pt-2 flex flex-wrap gap-2">
                   <input
-                    type="range"
-                    min="0"
-                    max="100"
-                    value={tactileSlider}
-                    onChange={(e) => setTactileSlider(Number(e.target.value))}
-                    className="w-full accent-[#0E332E] cursor-pointer"
+                    type="url"
+                    value={curatorAvatar}
+                    onChange={(e) => setCuratorAvatar(e.target.value)}
+                    placeholder="Enter Avatar Image URL"
+                    className="text-xs px-3 py-1.5 rounded-lg bg-surface-container-high border border-outline-variant/70 text-on-surface focus:outline-none focus:border-secondary w-full sm:w-80"
                   />
                 </div>
               </div>
             </div>
 
-            {/* Column 2: Inset Wells & Navigation */}
-            <div className="space-y-4 p-4 rounded-2xl bg-surface-container-high/40 border border-outline-variant/40">
-              <div className="font-mono text-[10px] text-on-surface-variant uppercase tracking-wider font-bold">
-                02. Inset Wells & Navigation
-              </div>
-
-              {/* Inset Textfield */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-1.5">
-                <span className="text-[11px] font-medium text-on-surface-variant">
-                  Textfield (Inset Well):
-                </span>
+                <label className="text-xs font-sans font-semibold text-on-surface">
+                  Full Name
+                </label>
                 <input
                   type="text"
-                  placeholder="Email Address (e.g. curator@conservatory.io)"
-                  value={tactileEmail}
-                  onChange={(e) => setTactileEmail(e.target.value)}
-                  className="w-full px-3.5 py-2.5 text-xs rounded-xl neo-tactile-well placeholder:text-on-surface-variant/60"
+                  value={curatorName}
+                  onChange={(e) => setCuratorName(e.target.value)}
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-high border border-outline-variant/70 text-xs font-sans text-on-surface focus:outline-none focus:border-secondary"
+                  required
                 />
               </div>
 
-              {/* Segmented Tabs */}
               <div className="space-y-1.5">
-                <span className="text-[11px] font-medium text-on-surface-variant">
-                  Navigation Tabs (Capsule Track):
-                </span>
-                <div className="grid grid-cols-3 gap-1 p-1 rounded-2xl neo-tactile-tabs text-[11px]">
-                  {(['overview', 'details', 'settings'] as const).map((tab) => (
-                    <button
-                      key={tab}
-                      type="button"
-                      onClick={() => setActiveTactileTab(tab)}
-                      className={`py-1.5 px-2 rounded-xl capitalize transition-all ${
-                        activeTactileTab === tab
-                          ? 'neo-tactile-tab-active shadow-sm'
-                          : 'text-on-surface-variant hover:text-on-surface'
-                      }`}
-                    >
-                      {tab}
-                    </button>
-                  ))}
-                </div>
+                <label className="text-xs font-sans font-semibold text-on-surface">
+                  Curator Title / Role
+                </label>
+                <input
+                  type="text"
+                  value={curatorRole}
+                  onChange={(e) => setCuratorRole(e.target.value)}
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-high border border-outline-variant/70 text-xs font-sans text-on-surface focus:outline-none focus:border-secondary"
+                  required
+                />
               </div>
 
-              {/* Badges & Micro Pills */}
-              <div className="space-y-1.5 pt-2 border-t border-outline-variant/40">
-                <span className="text-[11px] font-medium text-on-surface-variant">
-                  Data Display Badges:
-                </span>
-                <div className="flex items-center gap-2">
-                  <span className="px-2.5 py-1 rounded-full neo-tactile-badge font-mono text-[10px] font-bold text-on-surface">
-                    New
-                  </span>
-                  <span className="px-2.5 py-1 rounded-full bg-[#0E332E] text-white font-mono text-[10px] font-bold shadow-sm">
-                    Beta
-                  </span>
-                  <span className="px-2.5 py-1 rounded-full bg-[#DE8553]/15 text-[#873C13] border border-[#DE8553]/30 font-mono text-[10px] font-bold">
-                    74 Salvaged
-                  </span>
-                </div>
+              <div className="space-y-1.5 sm:col-span-2">
+                <label className="text-xs font-sans font-semibold text-on-surface">
+                  Registered Email Address
+                </label>
+                <input
+                  type="email"
+                  value={curatorEmail}
+                  onChange={(e) => setCuratorEmail(e.target.value)}
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-high border border-outline-variant/70 text-xs font-sans text-on-surface focus:outline-none focus:border-secondary"
+                  required
+                />
               </div>
 
-              {/* Breadcrumb Preview */}
-              <div className="pt-2 text-xs font-sans text-on-surface-variant flex items-center gap-1.5">
-                <span>Vault</span>
-                <span>/</span>
-                <span className="text-on-surface font-semibold">Specimen #0841</span>
-                <span>/</span>
-                <span className="text-[#0E332E] font-medium">Autopsy</span>
+              <div className="space-y-1.5 sm:col-span-2">
+                <label className="text-xs font-sans font-semibold text-on-surface">
+                  Curator Philosophy / Bio
+                </label>
+                <textarea
+                  value={curatorBio}
+                  onChange={(e) => setCuratorBio(e.target.value)}
+                  rows={3}
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-high border border-outline-variant/70 text-xs font-sans text-on-surface focus:outline-none focus:border-secondary leading-relaxed resize-none"
+                />
               </div>
             </div>
 
-            {/* Column 3: Foundations & Elevation Levels */}
-            <div className="space-y-4 p-4 rounded-2xl bg-surface-container-high/40 border border-outline-variant/40">
-              <div className="font-mono text-[10px] text-on-surface-variant uppercase tracking-wider font-bold">
-                03. Elevation & Feedback
-              </div>
+            <div className="flex items-center justify-end gap-3 pt-4 border-t border-outline-variant/40">
+              <button
+                type="submit"
+                className="px-5 py-2.5 rounded-xl bg-secondary hover:bg-secondary-fixed text-on-secondary text-xs font-sans font-semibold shadow-sm transition-all flex items-center gap-1.5 active:scale-95 cursor-pointer"
+              >
+                <span className="material-symbols-outlined text-sm">save</span>
+                <span>Save Profile Changes</span>
+              </button>
+            </div>
+          </div>
+        </form>
+      )}
 
-              {/* Elevation Layers */}
-              <div className="grid grid-cols-2 gap-2 text-[10px] font-mono text-center">
-                <div className="p-3 rounded-xl bg-surface-container border border-outline-variant/40 flex flex-col items-center justify-center">
-                  <span className="font-bold">BASE LAYER</span>
-                  <span className="text-on-surface-variant text-[9px]">Flat 0px</span>
-                </div>
-                <div className="p-3 rounded-xl neo-tactile-card flex flex-col items-center justify-center">
-                  <span className="font-bold text-[#0E332E]">RAISED LAYER</span>
-                  <span className="text-on-surface-variant text-[9px]">Elevated 3D</span>
-                </div>
-              </div>
-
-              {/* Feedback Confirmation Snippet */}
-              <div className="p-3 rounded-2xl bg-surface-container border border-outline-variant/50 space-y-2">
-                <div className="flex items-center gap-2">
-                  <span className="material-symbols-outlined text-secondary text-base">warning</span>
-                  <span className="text-xs font-semibold text-on-surface">Confirm Graft Sprint?</span>
-                </div>
-                <p className="text-[10px] text-on-surface-variant">
-                  Cross-pollinate selected AST modules into fresh repository branch.
+      {/* ─────────────────────────────────────────────────────────────
+          TAB 2: APPEARANCE & DISPLAY CALIBRATION
+         ───────────────────────────────────────────────────────────── */}
+      {activeTab === 'appearance' && (
+        <div className="space-y-6 animate-in fade-in">
+          {/* A. Clean Theme Selector (Closed / Compact Way) */}
+          <div className="p-6 rounded-2xl bg-surface-container border border-outline-variant/60 shadow-sm clay-card space-y-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="font-serif text-lg text-on-surface font-semibold">Visual Ambience Theme</h3>
+                <p className="font-sans text-xs text-on-surface-variant font-light mt-0.5">
+                  Select your primary conservatory aesthetic palette.
                 </p>
-                <div className="flex items-center justify-end gap-2 pt-1">
-                  <button
-                    type="button"
-                    className="px-2.5 py-1 rounded-lg neo-tactile-btn-secondary text-[10px] font-medium"
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    type="button"
-                    className="px-3 py-1 rounded-lg neo-tactile-btn-primary text-[10px] font-bold"
-                  >
-                    Proceed
-                  </button>
-                </div>
               </div>
-
-              {/* Toast Pill */}
-              <div className="flex items-center gap-2 p-2 rounded-xl bg-[#0E332E]/10 border border-[#0E332E]/30 text-xs text-[#0E332E] font-medium">
-                <span className="material-symbols-outlined text-sm">check_circle</span>
-                <span>Success: Specimen cleansed & vaulted</span>
-              </div>
+              <span className="text-xs font-mono font-bold text-secondary uppercase bg-secondary/10 px-2.5 py-1 rounded-full border border-secondary/20">
+                Active: {theme}
+              </span>
             </div>
-          </div>
-        </div>
 
-        {/* Ambience & Theme Switcher Section */}
-        <div className="p-6 rounded-xl bg-surface-container-low border border-surface-container-high/50 space-y-4">
-          <div className="flex items-center justify-between">
-            <div>
-              <h2 className="font-serif text-xl text-on-surface">Conservatory Ambience & Themes</h2>
-              <p className="font-sans text-xs text-on-surface-variant mt-0.5">
-                Switch visual atmosphere and color depth across the graveyard.
-              </p>
-            </div>
-            <button
-              type="button"
-              onClick={toggleTheme}
-              className="px-3 py-1.5 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface text-xs font-mono font-medium flex items-center gap-1.5 transition-colors border border-outline-variant/60"
-            >
-              <span className="material-symbols-outlined text-sm text-secondary">cached</span>
-              <span>Cycle Theme</span>
-            </button>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {AVAILABLE_THEMES.map((opt) => {
-              const isSelected = theme === opt.id;
-              return (
-                <div
-                  key={opt.id}
-                  onClick={() => setTheme(opt.id)}
-                  className={`p-3.5 rounded-xl cursor-pointer transition-all border flex flex-col justify-between gap-3 text-left ${
-                    isSelected
-                      ? 'bg-secondary/15 border-secondary shadow-md scale-[1.01]'
-                      : 'bg-surface-container/70 border-surface-container-high hover:border-secondary/40 hover:bg-surface-container'
-                  }`}
-                >
-                  <div className="flex items-start justify-between gap-2">
-                    <div className="flex items-center gap-2">
+            {/* Compact Theme Cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 pt-2">
+              {AVAILABLE_THEMES.map((opt) => {
+                const isSelected = theme === opt.id;
+                return (
+                  <button
+                    key={opt.id}
+                    type="button"
+                    onClick={() => setTheme(opt.id)}
+                    className={`p-3 rounded-xl border text-left transition-all flex flex-col justify-between h-24 cursor-pointer relative ${
+                      isSelected
+                        ? 'border-secondary bg-secondary/10 ring-2 ring-secondary/30 shadow-sm'
+                        : 'border-outline-variant/60 bg-surface-container-high/60 hover:bg-surface-container-high hover:border-outline-variant'
+                    }`}
+                  >
+                    <div className="flex items-center justify-between">
                       <div
-                        className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 shadow-xs"
-                        style={{ background: opt.previewBg }}
+                        className="w-5 h-5 rounded-full flex items-center justify-center text-white text-[10px]"
+                        style={{ backgroundColor: opt.accentColor }}
                       >
-                        <span
-                          className="material-symbols-outlined text-base"
-                          style={{ color: opt.accentColor }}
-                        >
-                          {opt.icon}
-                        </span>
+                        <span className="material-symbols-outlined text-xs">{opt.icon}</span>
                       </div>
-                      <div>
-                        <span className="font-sans text-xs font-semibold text-on-surface block leading-tight">
-                          {opt.label}
-                        </span>
-                        <span className="font-mono text-[9px] uppercase tracking-wider text-outline">
-                          {opt.id}
-                        </span>
+                      {isSelected && (
+                        <span className="w-2 h-2 rounded-full bg-secondary animate-pulse" />
+                      )}
+                    </div>
+                    <div>
+                      <div className="font-sans text-xs font-bold text-on-surface truncate">
+                        {opt.label}
+                      </div>
+                      <div className="font-mono text-[10px] text-on-surface-variant truncate">
+                        {opt.id}
                       </div>
                     </div>
-                    {isSelected && (
-                      <span className="material-symbols-outlined text-secondary text-base">
-                        check_circle
-                      </span>
-                    )}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* B. Live Display Calibration (Brightness, Contrast, Transparency, Accent) */}
+          <div className="p-6 rounded-2xl bg-surface-container border border-outline-variant/60 shadow-sm clay-card space-y-6">
+            <div className="flex items-center justify-between border-b border-outline-variant/40 pb-4">
+              <div>
+                <h3 className="font-serif text-lg text-on-surface font-semibold">Display Calibration</h3>
+                <p className="font-sans text-xs text-on-surface-variant font-light mt-0.5">
+                  Fine-tune brightness, contrast, and surface transparency on top of your selected theme. Default stays pristine until modified.
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={handleResetDisplayDefaults}
+                className="px-3 py-1.5 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface-variant hover:text-on-surface text-xs font-sans font-semibold border border-outline-variant/70 transition-all flex items-center gap-1.5 cursor-pointer"
+              >
+                <span className="material-symbols-outlined text-xs">restart_alt</span>
+                <span>Reset Defaults</span>
+              </button>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+              {/* 1. Brightness Slider */}
+              <div className="space-y-2 p-4 rounded-xl bg-surface-container-high/40 border border-outline-variant/50">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-sans font-semibold text-on-surface flex items-center gap-1.5">
+                    <span className="material-symbols-outlined text-sm text-secondary">brightness_medium</span>
+                    <span>Brightness</span>
+                  </span>
+                  <span className="font-mono text-xs font-bold text-secondary">
+                    {displayPrefs.brightness}%
+                  </span>
+                </div>
+                <input
+                  type="range"
+                  min="75"
+                  max="125"
+                  step="1"
+                  value={displayPrefs.brightness}
+                  onChange={(e) =>
+                    setDisplayPrefs((prev) => ({ ...prev, brightness: Number(e.target.value) }))
+                  }
+                  className="w-full accent-secondary cursor-pointer"
+                />
+                <div className="flex justify-between text-[10px] font-mono text-on-surface-variant">
+                  <span>75% (Dim)</span>
+                  <span>100% (Default)</span>
+                  <span>125% (Vivid)</span>
+                </div>
+              </div>
+
+              {/* 2. Contrast Slider */}
+              <div className="space-y-2 p-4 rounded-xl bg-surface-container-high/40 border border-outline-variant/50">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-sans font-semibold text-on-surface flex items-center gap-1.5">
+                    <span className="material-symbols-outlined text-sm text-secondary">contrast</span>
+                    <span>Contrast</span>
+                  </span>
+                  <span className="font-mono text-xs font-bold text-secondary">
+                    {displayPrefs.contrast}%
+                  </span>
+                </div>
+                <input
+                  type="range"
+                  min="75"
+                  max="125"
+                  step="1"
+                  value={displayPrefs.contrast}
+                  onChange={(e) =>
+                    setDisplayPrefs((prev) => ({ ...prev, contrast: Number(e.target.value) }))
+                  }
+                  className="w-full accent-secondary cursor-pointer"
+                />
+                <div className="flex justify-between text-[10px] font-mono text-on-surface-variant">
+                  <span>75% (Soft)</span>
+                  <span>100% (Default)</span>
+                  <span>125% (Punchy)</span>
+                </div>
+              </div>
+
+              {/* 3. Transparency Slider */}
+              <div className="space-y-2 p-4 rounded-xl bg-surface-container-high/40 border border-outline-variant/50">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-sans font-semibold text-on-surface flex items-center gap-1.5">
+                    <span className="material-symbols-outlined text-sm text-secondary">opacity</span>
+                    <span>Transparency</span>
+                  </span>
+                  <span className="font-mono text-xs font-bold text-secondary">
+                    {displayPrefs.transparency}%
+                  </span>
+                </div>
+                <input
+                  type="range"
+                  min="60"
+                  max="100"
+                  step="1"
+                  value={displayPrefs.transparency}
+                  onChange={(e) =>
+                    setDisplayPrefs((prev) => ({ ...prev, transparency: Number(e.target.value) }))
+                  }
+                  className="w-full accent-secondary cursor-pointer"
+                />
+                <div className="flex justify-between text-[10px] font-mono text-on-surface-variant">
+                  <span>60% (Frosted)</span>
+                  <span>80% (Glass)</span>
+                  <span>100% (Solid)</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Custom Accent Color Palette */}
+            <div className="space-y-3 pt-2">
+              <label className="text-xs font-sans font-semibold text-on-surface flex items-center gap-1.5">
+                <span className="material-symbols-outlined text-sm text-secondary">colorize</span>
+                <span>Custom Brand Accent Color</span>
+              </label>
+              <div className="flex flex-wrap items-center gap-2">
+                {ACCENT_COLOR_PRESETS.map((p, idx) => {
+                  const isActive = displayPrefs.customAccent === p.color;
+                  return (
+                    <button
+                      key={idx}
+                      type="button"
+                      onClick={() => setDisplayPrefs((prev) => ({ ...prev, customAccent: p.color }))}
+                      className={`px-3 py-1.5 rounded-xl border text-xs font-sans font-medium flex items-center gap-2 transition-all cursor-pointer ${
+                        isActive
+                          ? 'border-secondary bg-secondary/15 font-bold shadow-2xs'
+                          : 'border-outline-variant/60 bg-surface-container-high hover:bg-surface-container-highest text-on-surface'
+                      }`}
+                    >
+                      {p.color ? (
+                        <span
+                          className="w-3 h-3 rounded-full border border-black/20"
+                          style={{ backgroundColor: p.color }}
+                        />
+                      ) : (
+                        <span className="w-3 h-3 rounded-full bg-outline-variant" />
+                      )}
+                      <span>{p.label}</span>
+                    </button>
+                  );
+                })}
+
+                {/* Custom Color Picker input */}
+                <div className="flex items-center gap-1.5 pl-2 border-l border-outline-variant/60">
+                  <input
+                    type="color"
+                    value={displayPrefs.customAccent || '#DE8553'}
+                    onChange={(e) =>
+                      setDisplayPrefs((prev) => ({ ...prev, customAccent: e.target.value }))
+                    }
+                    className="w-8 h-8 rounded-lg cursor-pointer bg-transparent border-0 p-0"
+                    title="Choose custom color"
+                  />
+                  <span className="font-mono text-[11px] text-on-surface-variant">
+                    {displayPrefs.customAccent || 'Theme Native'}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ─────────────────────────────────────────────────────────────
+          TAB 3: PREFERENCES & AUDIO
+         ───────────────────────────────────────────────────────────── */}
+      {activeTab === 'preferences' && (
+        <div className="space-y-6 animate-in fade-in">
+          <div className="p-6 rounded-2xl bg-surface-container border border-outline-variant/60 shadow-sm clay-card space-y-5">
+            <h3 className="font-serif text-lg text-on-surface font-semibold">Interaction Preferences</h3>
+
+            <div className="space-y-4 divide-y divide-outline-variant/40">
+              {/* Dormancy Toast Notification */}
+              <div className="flex items-center justify-between pt-3">
+                <div className="space-y-0.5">
+                  <div className="text-xs font-sans font-bold text-on-surface">
+                    Dormancy Alert Notifications
                   </div>
-                  <p className="font-sans text-[11px] text-on-surface-variant line-clamp-2 leading-relaxed">
-                    {opt.tagline}
+                  <div className="text-xs font-sans text-on-surface-variant font-light">
+                    Display top-right alert when opening repositories resting for over 2 months.
+                  </div>
+                </div>
+                <input
+                  type="checkbox"
+                  checked={dormancyAlerts}
+                  onChange={(e) => setDormancyAlerts(e.target.checked)}
+                  className="w-4 h-4 accent-secondary cursor-pointer"
+                />
+              </div>
+
+              {/* Harmonic Audio Synthesizer */}
+              <div className="flex items-center justify-between pt-3">
+                <div className="space-y-0.5">
+                  <div className="text-xs font-sans font-bold text-on-surface">
+                    Harmonic Audio Feedback (432Hz)
+                  </div>
+                  <div className="text-xs font-sans text-on-surface-variant font-light">
+                    Enable Web Audio botanical chime synthesizer for archival actions.
+                  </div>
+                </div>
+                <input
+                  type="checkbox"
+                  checked={ambientSounds}
+                  onChange={(e) => setAmbientSounds(e.target.checked)}
+                  className="w-4 h-4 accent-secondary cursor-pointer"
+                />
+              </div>
+
+              {/* Auto-Index Salvaged Code */}
+              <div className="flex items-center justify-between pt-3">
+                <div className="space-y-0.5">
+                  <div className="text-xs font-sans font-bold text-on-surface">
+                    Auto-Index Salvage Modules
+                  </div>
+                  <div className="text-xs font-sans text-on-surface-variant font-light">
+                    Automatically catalog extracted auth tokens and schemas upon project burial.
+                  </div>
+                </div>
+                <input
+                  type="checkbox"
+                  checked={autoIndexSalvage}
+                  onChange={(e) => setAutoIndexSalvage(e.target.checked)}
+                  className="w-4 h-4 accent-secondary cursor-pointer"
+                />
+              </div>
+            </div>
+
+            <div className="pt-4 border-t border-outline-variant/40 flex justify-end">
+              <button
+                type="button"
+                onClick={() => showToast('Preferences updated successfully')}
+                className="px-4 py-2 rounded-xl bg-secondary hover:bg-secondary-fixed text-on-secondary text-xs font-sans font-semibold shadow-sm transition-all cursor-pointer"
+              >
+                Save Preferences
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ─────────────────────────────────────────────────────────────
+          TAB 4: PRIVACY, BACKUPS & DATA SECURITY
+         ───────────────────────────────────────────────────────────── */}
+      {activeTab === 'privacy' && (
+        <div className="space-y-6 animate-in fade-in">
+          {/* A. Security Enclave Badge */}
+          <div className="p-6 rounded-2xl bg-surface-container border border-outline-variant/60 shadow-sm clay-card space-y-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2.5">
+                <div className="w-9 h-9 rounded-xl bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
+                  <span className="material-symbols-outlined text-lg">verified_user</span>
+                </div>
+                <div>
+                  <h3 className="font-serif text-base text-on-surface font-semibold">
+                    100% Client-Side Privacy Enclave
+                  </h3>
+                  <p className="font-sans text-xs text-on-surface-variant font-light">
+                    Zero remote server telemetry or code scraping.
                   </p>
                 </div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Conservatory Routine Settings */}
-        <div className="p-6 rounded-xl bg-surface-container-low border border-surface-container-high/50 space-y-4">
-          <h2 className="font-serif text-xl text-on-surface">Conservatory Automation</h2>
-          <div className="space-y-3">
-            <div className="flex items-center justify-between p-3 rounded-lg bg-surface-container/60">
-              <div>
-                <span className="font-sans text-xs font-semibold text-on-surface block">
-                  Automatic Salvage Extraction
-                </span>
-                <span className="font-sans text-[11px] text-on-surface-variant">
-                  Automatically parse AST exports from buried repos into the Salvage Yard.
-                </span>
               </div>
-              <input
-                type="checkbox"
-                checked={autoIndexSalvage}
-                onChange={(e) => setAutoIndexSalvage(e.target.checked)}
-                className="w-4 h-4 accent-primary cursor-pointer"
-              />
-            </div>
-
-            <div className="flex items-center justify-between p-3 rounded-lg bg-surface-container/60">
-              <div>
-                <span className="font-sans text-xs font-semibold text-on-surface block">
-                  Today's Whisper Discovery Cadence
-                </span>
-                <span className="font-sans text-[11px] text-on-surface-variant">
-                  How often the herbarium unearths a high-viability dormant specimen.
-                </span>
-              </div>
-              <select
-                value={whisperFrequency}
-                onChange={(e) => setWhisperFrequency(e.target.value)}
-                className="bg-surface-container-high text-xs text-on-surface px-3 py-1.5 rounded border border-surface-container-highest"
-              >
-                <option value="daily">Every morning</option>
-                <option value="weekly">Weekly Sunday Folio</option>
-                <option value="quiet">Quiet contemplation (manual only)</option>
-              </select>
-            </div>
-
-            <div className="flex items-center justify-between p-3 rounded-lg bg-surface-container/60">
-              <div>
-                <span className="font-sans text-xs font-semibold text-on-surface block">
-                  Botanical Ambient Tone Generator
-                </span>
-                <span className="font-sans text-[11px] text-on-surface-variant">
-                  Enable procedural synth audio nodes in the Salvage Yard player.
-                </span>
-              </div>
-              <input
-                type="checkbox"
-                checked={ambientSounds}
-                onChange={(e) => setAmbientSounds(e.target.checked)}
-                className="w-4 h-4 accent-secondary cursor-pointer"
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Vault Backup & Export */}
-        <div className="p-6 rounded-xl bg-surface-container-low border border-surface-container-high/50 space-y-3">
-          <h2 className="font-serif text-xl text-on-surface">Deep Soil Vault Backup</h2>
-          <p className="font-sans text-xs text-on-surface-variant">
-            Export a full JSON archive containing all {specimens.length} project memorials, custom autopsies, and
-            salvaged snippet records.
-          </p>
-          <div className="pt-2 flex flex-wrap items-center gap-3">
-            <button
-              type="button"
-              onClick={handleExportVaultJson}
-              className="px-4 py-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface text-xs font-sans font-semibold border border-surface-container-highest transition-colors flex items-center gap-1.5 shadow-sm"
-            >
-              <span className="material-symbols-outlined text-sm text-secondary">download</span>
-              <span>Export Full Vault JSON</span>
-            </button>
-            <button
-              type="button"
-              onClick={handleSave}
-              className="px-5 py-2 rounded-lg bg-secondary hover:bg-secondary-fixed text-on-secondary text-xs font-sans font-semibold transition-colors shadow-sm"
-            >
-              Save Preferences
-            </button>
-            {showSavedToast && (
-              <span className="text-secondary font-mono text-xs animate-in fade-in">
-                ✓ Preferences updated
+              <span className="px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-mono text-[10px] font-bold uppercase border border-emerald-500/20">
+                Encrypted Local
               </span>
-            )}
-          </div>
-          {backupToast && (
-            <div className="p-2.5 rounded bg-primary-container/20 border border-primary/30 text-primary font-mono text-xs animate-in fade-in">
-              {backupToast}
             </div>
-          )}
+
+            {/* Privacy Policy Points */}
+            <div className="p-4 rounded-xl bg-surface-container-high/40 border border-outline-variant/50 space-y-2 text-xs font-sans text-on-surface-variant">
+              <div className="font-semibold text-on-surface">Privacy Policy & Architecture Guarantee:</div>
+              <ul className="list-disc list-inside space-y-1.5 leading-relaxed font-light">
+                <li><strong className="text-on-surface">Zero Cloud Telemetry:</strong> All your repositories, code snippets, autopsies, and notes reside solely within your browser's local sandbox storage.</li>
+                <li><strong className="text-on-surface">No Third-Party AI Data Training:</strong> Your intellectual property is never forwarded to external training models or third-party advertisers.</li>
+                <li><strong className="text-on-surface">Total Data Portability:</strong> You can export or delete your entire vault ledger in standard JSON and Markdown at any time.</li>
+              </ul>
+            </div>
+          </div>
+
+          {/* B. Backup & Export */}
+          <div className="p-6 rounded-2xl bg-surface-container border border-outline-variant/60 shadow-sm clay-card space-y-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="font-serif text-base text-on-surface font-semibold">Vault Export & Portability</h3>
+                <p className="font-sans text-xs text-on-surface-variant font-light mt-0.5">
+                  Download a comprehensive JSON package of all {specimens.length} preserved specimens and {salvageModules.length} salvage modules.
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={handleExportVaultJson}
+                className="px-4 py-2 rounded-xl bg-surface-container-high hover:bg-surface-container-highest border border-outline-variant/70 text-on-surface text-xs font-sans font-semibold transition-all flex items-center gap-1.5 shadow-xs cursor-pointer"
+              >
+                <span className="material-symbols-outlined text-sm text-secondary">download</span>
+                <span>Export Vault JSON</span>
+              </button>
+            </div>
+          </div>
+
+          {/* C. Clear Cache & Reset */}
+          <div className="p-6 rounded-2xl bg-error/5 border border-error/25 shadow-sm space-y-3">
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="font-serif text-base text-error font-semibold">Workspace Cache Maintenance</h3>
+                <p className="font-sans text-xs text-on-surface-variant font-light mt-0.5">
+                  Clear cached display filters, temporary draft burials, and return to default workspace state.
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={handleClearCache}
+                className="px-4 py-2 rounded-xl border border-error/40 hover:bg-error hover:text-white text-error text-xs font-sans font-semibold transition-all cursor-pointer"
+              >
+                Clear Workspace Cache
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

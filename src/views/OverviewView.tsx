@@ -677,11 +677,6 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
               <span>Watch it happen!</span>
             </div>
           </div>
-
-          <div className="hidden sm:flex items-center gap-1.5 font-serif italic text-xs text-on-surface-variant">
-            <span>Different Actions, Same Goal</span>
-            <span className="material-symbols-outlined text-base -rotate-12 text-secondary">send</span>
-          </div>
         </div>
 
         {/* Floating Dark Toast (4 Cols) */}

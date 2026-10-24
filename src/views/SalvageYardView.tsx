@@ -148,13 +148,6 @@ export const SalvageYardView: React.FC<SalvageYardViewProps> = ({
 
       {/* Editorial Botanical Header */}
       <div className="relative flex flex-col gap-4 mb-8">
-        <div className="flex items-center gap-1.5 text-on-surface-variant/70 font-mono text-[11px] tracking-widest uppercase">
-          <span className="material-symbols-outlined text-sm text-primary">eco</span>
-          <span>Specimen Vault // Section VII: Salvage Yard</span>
-          <span className="text-outline">/</span>
-          <span className="text-secondary font-semibold">ARCHIVE-EXTRACT-38</span>
-        </div>
-
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-end">
           <div className="lg:col-span-8 space-y-2">
             <h1 className="font-serif text-3xl sm:text-4xl lg:text-[40px] text-on-surface tracking-tight leading-tight">
