@@ -10,7 +10,7 @@ interface QuickJumpMenuProps {
 
 const SCREENS: Array<{ id: ScreenId; label: string; icon: string }> = [
   { id: 'overview', label: 'Conservatory Grounds', icon: 'grid_view' },
-  { id: 'bury-a-project', label: 'Bury a Specimen', icon: 'spa' },
+  { id: 'bury-a-project', label: 'Bury a Specimen', icon: 'inventory_2' },
   { id: 'salvage-yard', label: 'The Salvage Yard', icon: 'inventory_2' },
   { id: 'revival-compass', label: 'The Revival Compass', icon: 'explore' },
   { id: 'graft-studio', label: 'Grafting Studio', icon: 'alt_route' },
