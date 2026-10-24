@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ProjectSpecimen } from '../types';
 import { SprintRoadmap } from '../components/Revival';
+import { ConfettiBurst } from '../components/Common/ConfettiBurst';
 
 interface RevivalCompassViewProps {
   specimens: ProjectSpecimen[];
@@ -23,6 +24,7 @@ export const RevivalCompassView: React.FC<RevivalCompassViewProps> = ({
   const [isSolo, setIsSolo] = useState<boolean>(true);
   const [lastCalculatedText, setLastCalculatedText] = useState('Just now');
   const [isCalculating, setIsCalculating] = useState(false);
+  const [showConfetti, setShowConfetti] = useState(false);
 
   // Dynamic factor calculations
   // Fixed dimensions for the specimen:
@@ -291,6 +293,14 @@ export const RevivalCompassView: React.FC<RevivalCompassViewProps> = ({
               <p className="font-sans text-xs opacity-80 max-w-sm mt-1 leading-relaxed">
                 {determinationDesc}
               </p>
+              <button
+                type="button"
+                onClick={() => setShowConfetti(true)}
+                className="mt-2.5 px-3.5 py-1.5 rounded-full bg-secondary/15 hover:bg-secondary/25 text-secondary border border-secondary/30 text-xs font-semibold flex items-center gap-1.5 transition-all shadow-sm active:scale-95"
+              >
+                <span className="material-symbols-outlined text-sm">celebration</span>
+                <span>Spark Revival Celebration</span>
+              </button>
             </div>
 
             {/* Specimen Executive Rationale */}
@@ -830,7 +840,10 @@ export const RevivalCompassView: React.FC<RevivalCompassViewProps> = ({
 
           <button
             type="button"
-            onClick={() => onOpenGraftSprint(currentSpecimen)}
+            onClick={() => {
+              setShowConfetti(true);
+              setTimeout(() => onOpenGraftSprint(currentSpecimen), 400);
+            }}
             className="w-full sm:w-auto px-6 py-3 rounded-lg bg-secondary hover:bg-secondary-fixed text-on-secondary font-sans text-xs font-semibold transition-all shadow-md flex items-center justify-center gap-2"
           >
             <span>Proceed to Verdict & First 2-Hour Move</span>
@@ -838,6 +851,8 @@ export const RevivalCompassView: React.FC<RevivalCompassViewProps> = ({
           </button>
         </div>
       </div>
+
+      <ConfettiBurst trigger={showConfetti} onComplete={() => setShowConfetti(false)} />
     </div>
   );
 };
