@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ProjectSpecimen } from '../types';
+import { SprintRoadmap } from '../components/Revival';
 
 interface RevivalCompassViewProps {
   specimens: ProjectSpecimen[];
@@ -807,6 +808,9 @@ export const RevivalCompassView: React.FC<RevivalCompassViewProps> = ({
             <span className="font-mono text-[10px] text-outline mt-2">Score Threshold: &lt;35</span>
           </div>
         </div>
+
+        {/* 120-Minute Revival Sprint Blueprint */}
+        <SprintRoadmap projectTitle={currentSpecimen.title} />
 
         {/* Final Action Banner */}
         <div className="pt-3 flex flex-col sm:flex-row items-center justify-between gap-4 bg-surface-container-low p-4 rounded-lg border border-surface-container-high/40">
