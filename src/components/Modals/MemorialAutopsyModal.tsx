@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ProjectSpecimen } from '../../types';
 import { ForensicTimeline, TechStackMatrix, RootCauseBreakdown } from '../Autopsy';
+import { ShareSpecimenModal } from './ShareSpecimenModal';
 
 interface MemorialAutopsyModalProps {
   specimen: ProjectSpecimen | null;
@@ -19,6 +20,8 @@ export const MemorialAutopsyModal: React.FC<MemorialAutopsyModalProps> = ({
   onSalvageModule,
   onOpenAiChat,
 }) => {
+  const [isShareOpen, setIsShareOpen] = useState(false);
+
   if (!isOpen || !specimen) return null;
 
   return (
@@ -34,6 +37,15 @@ export const MemorialAutopsyModal: React.FC<MemorialAutopsyModalProps> = ({
             </span>
           </div>
           <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => setIsShareOpen(true)}
+              className="px-3 py-1 rounded-full bg-surface-container-high text-on-surface hover:bg-secondary/20 hover:text-secondary text-xs font-semibold flex items-center gap-1.5 transition-all border border-outline-variant/60 shadow-sm"
+              title="Share Specimen Folio"
+            >
+              <span className="material-symbols-outlined text-sm">share</span>
+              <span>Share Folio</span>
+            </button>
             {onOpenAiChat && (
               <button
                 type="button"
@@ -189,6 +201,14 @@ export const MemorialAutopsyModal: React.FC<MemorialAutopsyModalProps> = ({
               </button>
             )}
             <button
+              type="button"
+              onClick={() => setIsShareOpen(true)}
+              className="px-4 py-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface text-xs font-semibold flex items-center gap-1.5 transition-colors border border-outline-variant/60 shadow-sm"
+            >
+              <span className="material-symbols-outlined text-sm text-secondary">share</span>
+              <span>Share</span>
+            </button>
+            <button
               onClick={() => {
                 onCalculateRevival(specimen);
                 onClose();
@@ -201,6 +221,13 @@ export const MemorialAutopsyModal: React.FC<MemorialAutopsyModalProps> = ({
           </div>
         </div>
       </div>
+
+      {/* Share Specimen Modal */}
+      <ShareSpecimenModal
+        specimen={specimen}
+        isOpen={isShareOpen}
+        onClose={() => setIsShareOpen(false)}
+      />
     </div>
   );
 };
