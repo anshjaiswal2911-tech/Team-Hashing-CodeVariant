@@ -42,9 +42,11 @@
 
 **[🌐 Launch Console](https://team-hashing-code-variant-ten.vercel.app/)** &nbsp;&bull;&nbsp;
 **[🖐️ The Canvas Protocol](#-the-canvas-protocol-spatial-developer-os)** &nbsp;&bull;&nbsp;
-**[🔬 Forensic Autopsy](#-forensic-autopsy--herbarium-vault)** &nbsp;&bull;&nbsp;
-**[🧭 Viability Compass](#-the-revival-compass--heuristic-decision-engine)** &nbsp;&bull;&nbsp;
-**[📦 Salvage Yard](#-salvage-yard--client-side-code-harvester)** &nbsp;&bull;&nbsp;
+**[🔬 Forensic Autopsy](#1--forensic-autopsy--herbarium-vault)** &nbsp;&bull;&nbsp;
+**[🎨 Display Calibration](#2--ambient-designer-themes--display-calibration)** &nbsp;&bull;&nbsp;
+**[🤖 AI Copilot](#3--context-aware-ai-forensic-copilot)** &nbsp;&bull;&nbsp;
+**[🧭 Viability Compass](#4--the-revival-compass--heuristic-decision-engine)** &nbsp;&bull;&nbsp;
+**[📦 Salvage Yard](#5--salvage-yard--client-side-code-harvester)** &nbsp;&bull;&nbsp;
 **[🏗️ Architecture](#-system-architecture--engineering-specifications)** &nbsp;&bull;&nbsp;
 **[🚀 Quickstart](#-quickstart--local-setup)** &nbsp;&bull;&nbsp;
 **[👥 Engineering Team](#-engineered-by-team-hashing)**
@@ -82,7 +84,13 @@ In modern software engineering, **over 90% of internal prototypes, exploratory s
 <table width="100%">
 <tr>
 <td width="50%" valign="top">
-
+<h3 align="center">🖐️ The Canvas Protocol (Spatial OS)</h3>
+<a href="https://team-hashing-code-variant-ten.vercel.app/">
+  <img src="docs/images/hero-canvas.png" width="100%" alt="The Canvas Protocol" style="border-radius: 12px; border: 1px solid rgba(0,0,0,0.1);" />
+</a>
+<p align="center"><sub><strong>Figure 2.1:</strong> Spatial tri-column drag-and-drop workspace: Drag dormant code from the catalog into diagnostic dropzones and dispatch directly into execution gates.</sub></p>
+</td>
+<td width="50%" valign="top">
 <h3 align="center">🤖 Autonomous AI Forensic Copilot</h3>
 <a href="https://team-hashing-code-variant-ten.vercel.app/">
   <img src="docs/images/copilot.png" width="100%" alt="Forensic Copilot" style="border-radius: 12px; border: 1px solid rgba(0,0,0,0.1);" />
@@ -91,28 +99,19 @@ In modern software engineering, **over 90% of internal prototypes, exploratory s
 </td>
 </tr>
 <tr>
-  <h3 align="center">🖐️ The Canvas Protocol (Spatial OS)</h3>
-<a href="https://team-hashing-code-variant-ten.vercel.app/">
-  <img src="docs/images/hero-canvas.png" width="100%" alt="The Canvas Protocol" style="border-radius: 12px; border: 1px solid rgba(0,0,0,0.1);" />
-
-</a>
-<p align="center"><sub><strong>Figure 2.4:</strong> Spatial tri-column drag-and-drop workspace: Drag dormant code into diagnostic dropzones and dispatch into execution gates.</sub></p>
 <td width="50%" valign="top">
+<h3 align="center">🧭 Revival Compass Viability Engine</h3>
+<a href="https://team-hashing-code-variant-ten.vercel.app/">
+  <img src="docs/images/revival-compass.png" width="100%" alt="Revival Compass" style="border-radius: 12px; border: 1px solid rgba(0,0,0,0.1);" />
+</a>
+<p align="center"><sub><strong>Figure 2.3:</strong> Multi-dimensional viability assessment: 3 core health signals, real-time developer momentum sliders, and algorithmic MVP sprint roadmaps.</sub></p>
+</td>
 <td width="50%" valign="top">
 <h3 align="center">🪦 Herbarium Vitrine & Archival Ledger</h3>
 <a href="https://team-hashing-code-variant-ten.vercel.app/">
   <img src="docs/images/workspace.png" width="100%" alt="Herbarium Vault" style="border-radius: 12px; border: 1px solid rgba(0,0,0,0.1);" />
 </a>
-<p align="center"><sub><strong>Figure 2.3:</strong> Museum-grade specimen vitrines cataloging architectural autopsy cards, death cause tags, and legal open-source reusability seals.</sub></p>
-</td>
-  
-<td width="50%" valign="top">
-  <h3 align="center">🧭 Revival Compass Viability Engine</h3>
-<a href="https://team-hashing-code-variant-ten.vercel.app/">
-  <img src="docs/images/revival-compass.png" width="100%" alt="Revival Compass" style="border-radius: 12px; border: 1px solid rgba(0,0,0,0.1);" />
-</a>
-<p align="center"><sub><strong>Figure 2.1:</strong> Multi-dimensional viability assessment: 3 core health signals, real-time developer momentum sliders, and algorithmic MVP sprint roadmaps.</sub></p>
-
+<p align="center"><sub><strong>Figure 2.4:</strong> Museum-grade specimen vitrines cataloging architectural autopsy cards, death cause tags, and legal open-source reusability seals.</sub></p>
 </td>
 </tr>
 </table>
@@ -157,7 +156,20 @@ The **Canvas Protocol (`Drag. Drop. Revive.`)** replaces traditional flat CRUD d
 - **Herbarium Specimen Sheets**: Assigns museum-grade catalog folio records (e.g. `LL-02`, `EV-01`), architectural diagrams, and developer post-mortems.
 - **Reincarnation Will & Legal Clearance**: Evaluates OSS licensing compatibility (MIT, Apache 2.0, BSD) ensuring extracted modules can be legally grafted into proprietary or new open-source codebases.
 
-### 2. 🧭 The Revival Compass & Heuristic Decision Engine
+### 2. 🎨 Ambient Designer Themes & Display Calibration
+- **5 High-Precision Curated Themes**:
+  - 🌿 **Botanical Ivory (Pitch Deck Edition)**: Warm ivory canvas with deep pine typography.
+  - 🧊 **Neo-Tactile Soft UI (Pivora Kit)**: Calm sand textures with sunken wells and raised cream tactile surfaces.
+  - 🌌 **Galactic Glass (Dark Glassmorphism)**: Smoky emerald glass over an obsidian deep void.
+  - 🌙 **Botanical Dark (Original Conservatory)**: Midnight forest depths with sage accents.
+  - ☀️ **Monochrome SaaS (Enterprise Minimal)**: High-contrast luxury black and white.
+- **Hardware Display Calibration**: Real-time interactive controls for **Brightness**, **Contrast**, **Transparency**, and **Accent Tone** persisted across sessions via reactive local state.
+
+### 3. 🤖 Context-Aware AI Forensic Copilot
+- **Free-Floating, Cursor-Movable Interface**: Non-obtrusive assistant widget that can be positioned anywhere across multi-monitor setups.
+- **Smart Dormancy Detection**: Contextually alerts developers when dormant code reaches critical milestones (e.g., 90+ days without commit).
+
+### 4. 🧭 The Revival Compass & Heuristic Decision Engine
 - **3-Pillar Clarity Model**:
   1. 💻 **Code & Architecture Viability**: Volume of clean schemas, tested endpoints, and modular UI.
   2. 💡 **Market & Problem Urgency**: Validates whether user pain points remain relevant today.
@@ -173,30 +185,17 @@ The **Canvas Protocol (`Drag. Drop. Revive.`)** replaces traditional flat CRUD d
   - `Repurpose Component Gems Only` (Score 45–59)
   - `Honor & Archive in Deep Soil` (Score &lt; 35)
 
-### 3. 📦 Salvage Yard & Client-Side Code Harvester
+### 5. 📦 Salvage Yard & Client-Side Code Harvester
 - **Zero-Latency In-Browser Bundling**: Powered by `JSZip`, the platform extracts modular components and compiles a complete, organized `.zip` distribution archive entirely inside the client’s browser.
 - **Production Asset Manifest**: Each exported bundle includes a structured `manifest.json`, component documentation, and clean directory structure ready for immediate `npm install` or local inclusion.
 
-### 4. 🌱 Graft Studio: Cross-Repository Module Transplantation
+### 6. 🌱 Graft Studio: Cross-Repository Module Transplantation
 - **Transplantation Matrix**: Synthesizes harvested components into modern starter frameworks (Next.js, Vite React, Remix, SvelteKit).
 - **Dependency Compatibility Checker**: Scans runtime version mismatches before grafting code into destination repositories.
 
-### 5. 📊 Pattern Insights: Post-Mortem Engineering Analytics
+### 7. 📊 Pattern Insights: Post-Mortem Engineering Analytics
 - **Macro Engineering Retrospective**: Aggregates behavioral analytics across your entire portfolio of projects.
 - **Systemic Failure Diagnostics**: Visual charts revealing repeated anti-patterns so engineering teams avoid recurring bottlenecks in subsequent initiatives.
-
-### 6. 🎨 Ambient Designer Themes & Display Calibration
-- **5 High-Precision Curated Themes**:
-  - 🌿 **Botanical Ivory (Pitch Deck Edition)**: Warm ivory canvas with deep pine typography.
-  - 🧊 **Neo-Tactile Soft UI (Pivora Kit)**: Calm sand textures with sunken wells and raised cream tactile surfaces.
-  - 🌌 **Galactic Glass (Dark Glassmorphism)**: Smoky emerald glass over an obsidian deep void.
-  - 🌙 **Botanical Dark (Original Conservatory)**: Midnight forest depths with sage accents.
-  - ☀️ **Monochrome SaaS (Enterprise Minimal)**: High-contrast luxury black and white.
-- **Hardware Display Calibration**: Real-time interactive controls for **Brightness**, **Contrast**, **Transparency**, and **Accent Tone** persisted across sessions via reactive local state.
-
-### 7. 🤖 Context-Aware AI Forensic Copilot
-- **Free-Floating, Cursor-Movable Interface**: Non-obtrusive assistant widget that can be positioned anywhere across multi-monitor setups.
-- **Smart Dormancy Detection**: Contextually alerts developers when dormant code reaches critical milestones (e.g., 90+ days without commit).
 
 ---
 
