@@ -252,24 +252,32 @@ html[data-theme="botanical-light"] {
   --theme-on-background: #132E20;
 }
 
+/* Claymorphic 3D & Glassmorphism Theme (Pinterest Tactile Edition)
+   Canvas: Soft Warm Sand Clay #F4EDE4 | Card Surfaces: Tactile Cream #FAF6F0
+   Headings & Primary Text: Deep Forest Clay #192C20 | Secondary: #607266
+   Primary: Eucalyptus Botanical Green #2F6948 | Primary Container: #D4E8DC | On Primary Container: #113821
+   Secondary: Terracotta Peach Amber #DE8553 | Secondary Container: #FCE8DE | On Secondary Container: #873C13
+   Tertiary: Sage Mint #73A385 | Container: #E0EFE6
+   Borders: #E0D5C5 | Well/Track: #E8DFD3
+*/
 html.claymorphic,
 html[data-theme="claymorphic"] {
-  --theme-background: #F5F3EE;             /* Pivora Neo-Tactile calm warm sand canvas */
-  --theme-surface: #F5F3EE;
-  --theme-surface-dim: #EBE7DF;            /* Sunken clay tone */
+  --theme-background: #EFE8DE;             /* Pivora Neo-Tactile calm warm sand canvas */
+  --theme-surface: #EFE8DE;
+  --theme-surface-dim: #E5DCCE;            /* Sunken clay tone */
   --theme-surface-bright: #FFFFFF;
   --theme-surface-container-lowest: #FFFFFF;
-  --theme-surface-container-low: #FDFCF9;  /* Tactile cream sidebar & base layers */
-  --theme-surface-container: #FDFCF9;      /* Main 3D raised clay card surface */
-  --theme-surface-container-high: #EFEEE8; /* Inset layer (inputs / wells / tracks) */
-  --theme-surface-container-highest: #DDDCD3;
-  --theme-surface-variant: #EAE9E2;
+  --theme-surface-container-low: #FAF6F0;  /* Tactile cream sidebar & base layers */
+  --theme-surface-container: #FAF6F0;      /* Main 3D raised clay card surface */
+  --theme-surface-container-high: #E8E0D4; /* Inset layer (inputs / wells / tracks) */
+  --theme-surface-container-highest: #DFD5C6;
+  --theme-surface-variant: #E6DDD0;
   --theme-on-surface: #132822;             /* Deep pine-espresso text */
-  --theme-on-surface-variant: #5F6C64;     /* Muted sage slate */
+  --theme-on-surface-variant: #62756A;     /* Muted sage slate */
   --theme-inverse-surface: #0E332E;        /* Pivora primary deep pine teal */
   --theme-inverse-on-surface: #FFFFFF;
   --theme-outline: #7D8D82;
-  --theme-outline-variant: #DDDCD3;        /* Organic clay border */
+  --theme-outline-variant: #DFD5C6;        /* Organic clay border */
   --theme-surface-tint: #0E332E;
 
   --theme-primary: #0E332E;                /* Pivora Primary Teal 'Submit Now' Button */
@@ -282,21 +290,21 @@ html[data-theme="claymorphic"] {
   --theme-on-primary-fixed: #0D2E29;
   --theme-on-primary-fixed-variant: #0E332E;
 
-  --theme-secondary: #A65D3B;              /* Terracotta peach amber */
+  --theme-secondary: #DE8553;              /* Terracotta peach amber */
   --theme-on-secondary: #FFFFFF;
   --theme-secondary-container: #FCE8DE;    /* Warm terracotta pill */
   --theme-on-secondary-container: #873C13; /* Deep terracotta text */
   --theme-secondary-fixed: #FCE8DE;
-  --theme-secondary-fixed-dim: #A65D3B;
+  --theme-secondary-fixed-dim: #DE8553;
   --theme-on-secondary-fixed: #873C13;
-  --theme-on-secondary-fixed-variant: #A65D3B;
+  --theme-on-secondary-fixed-variant: #DE8553;
 
-  --theme-tertiary: #477C5A;               /* Fresh leaf clay */
+  --theme-tertiary: #73A385;               /* Fresh leaf clay */
   --theme-on-tertiary: #FFFFFF;
   --theme-tertiary-container: #E0EFE6;     /* Mint pill */
   --theme-on-tertiary-container: #154127;
   --theme-tertiary-fixed: #E0EFE6;
-  --theme-tertiary-fixed-dim: #477C5A;
+  --theme-tertiary-fixed-dim: #73A385;
   --theme-on-tertiary-fixed: #154127;
   --theme-on-tertiary-fixed-variant: #245536;
 
@@ -375,34 +383,141 @@ html[data-theme="glassmorphic"] {
 
 
 
-
 @layer base {
-  html, body { margin: 0; padding: 0; background-color: var(--theme-surface); color: var(--theme-on-surface); font-family: var(--font-sans); }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--color-surface);
+    color: var(--color-on-surface);
+    font-family: var(--font-sans);
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  body {
+    overscroll-behavior: none;
+  }
 }
 
-/* Warm archival surfaces: subtle elevation, crisp boundaries. */
-html.claymorphic :is(.shadow-sm, .shadow-md) {
-  box-shadow: 0 2px 5px rgb(28 46 35 / 4%);
+/* Monochromatic Luxury Enterprise delicate card elevation in Light Mode */
+html.light .shadow-sm {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px -1px rgba(0, 0, 0, 0.03);
 }
-html.claymorphic :is(.shadow-lg, .shadow-xl, .shadow-2xl) {
-  box-shadow: 0 12px 36px -16px rgb(28 46 35 / 18%);
+
+html.light .shadow-md {
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.04), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
 }
-html.claymorphic .panel-dark {
-  background: #173B30;
+
+html.light .shadow-lg,
+html.light .shadow-xl {
+  box-shadow: 0 10px 25px -4px rgba(0, 0, 0, 0.05), 0 4px 10px -3px rgba(0, 0, 0, 0.03);
+}
+
+html.light .shadow-2xl {
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.08), 0 8px 16px -6px rgba(0, 0, 0, 0.03);
+}
+
+/* Botanical Ivory Presentation Deck card elevation */
+html.botanical-light .shadow-sm,
+html[data-theme="botanical-light"] .shadow-sm {
+  box-shadow: 0 1px 3px 0 rgba(19, 46, 32, 0.04), 0 1px 2px -1px rgba(19, 46, 32, 0.02);
+}
+
+html.botanical-light .shadow-md,
+html[data-theme="botanical-light"] .shadow-md {
+  box-shadow: 0 4px 14px 0 rgba(19, 46, 32, 0.05), 0 2px 4px -1px rgba(19, 46, 32, 0.02);
+}
+
+html.botanical-light .shadow-lg,
+html.botanical-light .shadow-xl,
+html[data-theme="botanical-light"] .shadow-lg,
+html[data-theme="botanical-light"] .shadow-xl {
+  box-shadow: 0 10px 25px -4px rgba(19, 46, 32, 0.06), 0 4px 10px -3px rgba(19, 46, 32, 0.03);
+}
+
+html.botanical-light .shadow-2xl,
+html[data-theme="botanical-light"] .shadow-2xl {
+  box-shadow: 0 20px 40px -10px rgba(19, 46, 32, 0.08), 0 8px 16px -6px rgba(19, 46, 32, 0.04);
+}
+
+html.botanical-light .panel-dark,
+html[data-theme="botanical-light"] .panel-dark {
+  background-color: #133E2B;
   color: #FFFFFF;
-  border: 1px solid rgb(255 255 255 / 12%);
-  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 28px;
 }
-html.claymorphic .panel-white {
-  background: var(--theme-surface-container);
-  border: 1px solid var(--theme-outline-variant);
-  border-radius: 20px;
+
+html.botanical-light .panel-white,
+html[data-theme="botanical-light"] .panel-white {
+  background-color: #FFFFFF;
+  border: 1px solid #E0E9DF;
+  border-radius: 28px;
+}
+
+/* Claymorphic 3D (Pinterest Edition) tactile elevation */
+html.claymorphic .shadow-sm,
+html[data-theme="claymorphic"] .shadow-sm {
+  box-shadow:
+    4px 6px 14px -2px rgba(120, 95, 70, 0.09),
+    -3px -3px 8px 0 rgba(255, 255, 255, 0.85),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.9),
+    inset -1px -1px 2px rgba(120, 95, 70, 0.04);
+}
+
+html.claymorphic .shadow-md,
+html[data-theme="claymorphic"] .shadow-md {
+  box-shadow:
+    8px 14px 26px -4px rgba(110, 85, 60, 0.11),
+    -6px -6px 16px 0 rgba(255, 255, 255, 0.9),
+    inset 1.5px 1.5px 3px rgba(255, 255, 255, 0.9),
+    inset -1.5px -1.5px 3px rgba(110, 85, 60, 0.05);
+}
+
+html.claymorphic .shadow-lg,
+html.claymorphic .shadow-xl,
+html[data-theme="claymorphic"] .shadow-lg,
+html[data-theme="claymorphic"] .shadow-xl {
+  box-shadow:
+    12px 22px 36px -6px rgba(100, 75, 50, 0.13),
+    -8px -8px 20px 0 rgba(255, 255, 255, 0.95),
+    inset 2px 2px 4px rgba(255, 255, 255, 0.9),
+    inset -2px -2px 4px rgba(100, 75, 50, 0.06);
+}
+
+html.claymorphic .shadow-2xl,
+html[data-theme="claymorphic"] .shadow-2xl {
+  box-shadow:
+    18px 30px 52px -10px rgba(90, 65, 45, 0.16),
+    -10px -10px 24px 0 rgba(255, 255, 255, 0.95),
+    inset 2px 2px 5px rgba(255, 255, 255, 0.95);
+}
+
+html.claymorphic .panel-dark,
+html[data-theme="claymorphic"] .panel-dark {
+  background: linear-gradient(145deg, #1D3B2B 0%, #13281E 100%);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow:
+    10px 18px 32px -4px rgba(15, 35, 25, 0.35),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.25);
+  border-radius: 28px;
+}
+
+html.claymorphic .panel-white,
+html[data-theme="claymorphic"] .panel-white {
+  background-color: #FAF6F0;
+  border: 1px solid #E0D5C5;
+  box-shadow:
+    6px 10px 20px -3px rgba(120, 95, 70, 0.08),
+    -4px -4px 10px rgba(255, 255, 255, 0.85),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.9);
+  border-radius: 28px;
 }
 
 /* Dark Glassmorphism Galactic Botanical Glass (Pinterest Reference) */
 html.glassmorphic body,
 html[data-theme="glassmorphic"] body {
-  background: 
+  background:
     radial-gradient(circle at 85% 15%, rgba(52, 211, 153, 0.08) 0%, transparent 45%),
     radial-gradient(circle at 15% 80%, rgba(45, 212, 191, 0.07) 0%, transparent 40%),
     radial-gradient(circle at 50% 50%, rgba(20, 40, 30, 0.4) 0%, transparent 70%),
@@ -418,7 +533,7 @@ html[data-theme="glassmorphic"] .panel-white {
   backdrop-filter: blur(24px) saturate(170%);
   -webkit-backdrop-filter: blur(24px) saturate(170%);
   border: 1px solid rgba(94, 234, 180, 0.22) !important;
-  box-shadow: 
+  box-shadow:
     0 16px 36px -8px rgba(0, 0, 0, 0.7),
     0 0 20px -2px rgba(52, 211, 153, 0.08),
     inset 1px 1px 2px rgba(255, 255, 255, 0.12),
@@ -428,7 +543,7 @@ html[data-theme="glassmorphic"] .panel-white {
 html.glassmorphic .clay-card:hover,
 html[data-theme="glassmorphic"] .clay-card:hover {
   border-color: rgba(94, 234, 180, 0.4) !important;
-  box-shadow: 
+  box-shadow:
     0 20px 44px -6px rgba(0, 0, 0, 0.8),
     0 0 28px 2px rgba(52, 211, 153, 0.18),
     inset 1px 1px 2px rgba(255, 255, 255, 0.2) !important;
@@ -440,7 +555,7 @@ html[data-theme="glassmorphic"] .panel-dark {
   backdrop-filter: blur(28px);
   -webkit-backdrop-filter: blur(28px);
   border: 1px solid rgba(94, 234, 180, 0.3);
-  box-shadow: 
+  box-shadow:
     0 20px 48px -10px rgba(0, 0, 0, 0.75),
     0 0 32px -4px rgba(52, 211, 153, 0.16),
     inset 1px 1px 3px rgba(255, 255, 255, 0.22);
@@ -468,62 +583,269 @@ html[data-theme="glassmorphic"] .shadow-2xl {
 }
 
 
-/* Shared surface and control primitives. */
+/* Universal Tactile Claymorphism & Frosted Glass Classes */
 .glass-panel {
-  background: color-mix(in srgb, var(--theme-surface-container) 92%, transparent);
-  backdrop-filter: blur(16px);
-  border: 1px solid var(--theme-outline-variant);
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
 }
-.clay-card, .neo-tactile-card {
-  border-radius: 20px;
-  box-shadow: 0 2px 8px rgb(0 0 0 / 4%);
-  transition: border-color 180ms ease, box-shadow 180ms ease;
+
+html.dark .glass-panel {
+  background: rgba(14, 23, 19, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(179, 206, 178, 0.18);
 }
-html.claymorphic .clay-card {
-  background-color: var(--theme-surface-container);
-  border: 1px solid var(--theme-outline-variant);
+
+html.claymorphic .glass-panel {
+  background: rgba(250, 246, 240, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.7);
 }
-.clay-card:hover { border-color: var(--theme-outline); }
-.clay-inset, .neo-tactile-well { box-shadow: inset 0 1px 3px rgb(0 0 0 / 4%); }
-.clay-pill { border: 1px solid var(--theme-outline-variant); }
-html.claymorphic :is(button.bg-primary, a.bg-primary, .btn-primary),
+
+.clay-card {
+  border-radius: 26px;
+  box-shadow:
+    6px 10px 22px -3px rgba(0, 0, 0, 0.06),
+    -3px -3px 8px rgba(255, 255, 255, 0.85),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.9);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html.dark .clay-card {
+  box-shadow:
+    8px 14px 28px -4px rgba(0, 0, 0, 0.5),
+    -2px -2px 6px rgba(255, 255, 255, 0.03),
+    inset 1px 1px 2px rgba(179, 206, 178, 0.12);
+}
+
+.clay-card:hover {
+  transform: translateY(-2px);
+}
+
+.clay-inset {
+  box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.06), inset -1px -1px 3px rgba(255, 255, 255, 0.85);
+}
+
+html.dark .clay-inset {
+  box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.5), inset -1px -1px 2px rgba(255, 255, 255, 0.03);
+}
+
+.clay-pill {
+  box-shadow:
+    3px 5px 10px -1px rgba(0, 0, 0, 0.07),
+    -2px -2px 5px rgba(255, 255, 255, 0.7),
+    inset 1px 1px 1.5px rgba(255, 255, 255, 0.8);
+  transition: all 0.15s ease;
+}
+
+html.dark .clay-pill {
+  box-shadow:
+    3px 5px 10px -1px rgba(0, 0, 0, 0.4),
+    -1px -1px 4px rgba(255, 255, 255, 0.04),
+    inset 1px 1px 1.5px rgba(179, 206, 178, 0.15);
+}
+
+.clay-pill:active {
+  transform: scale(0.97);
+  box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Pivora UI Kits Neo-Tactile Soft UI System (Pinterest Reference)
+   - Foundations: Base Layer, Raised Layer (Hover), Inset Layer (Wells), Pressed Layer
+   - Controls: Primary Button 'Submit Now', Secondary Raised Buttons, Inset Inputs
+   - Navigation: Segmented Tabs (Overview, Details, Settings), Badges, Pills
+   ───────────────────────────────────────────────────────────── */
+
+/* 1. Primary Button ('Submit Now' in Pin) */
+html.claymorphic .btn-primary,
+html.claymorphic button.bg-primary,
+html.claymorphic a.bg-primary,
 .neo-tactile-btn-primary {
-  background: var(--theme-primary);
-  color: var(--theme-on-primary);
-  border: 1px solid transparent;
+  background: #0E332E !important;
+  color: #FFFFFF !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border-radius: 14px;
+  box-shadow:
+    0 6px 16px -2px rgba(14, 51, 46, 0.38),
+    0 2px 4px 0 rgba(14, 51, 46, 0.2),
+    inset 0 1px 1.5px rgba(255, 255, 255, 0.35),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.25) !important;
+  transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+html.claymorphic .btn-primary:hover,
+html.claymorphic button.bg-primary:hover,
+html.claymorphic a.bg-primary:hover,
+.neo-tactile-btn-primary:hover {
+  background: #14443D !important;
+  box-shadow:
+    0 8px 20px -2px rgba(14, 51, 46, 0.48),
+    inset 0 1px 2px rgba(255, 255, 255, 0.45) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Pressed State ('Sending...' in Pin) */
+html.claymorphic .btn-primary:active,
+html.claymorphic button.bg-primary:active,
+html.claymorphic a.bg-primary:active,
+.neo-tactile-btn-primary:active {
+  background: #092420 !important;
+  box-shadow:
+    inset 2.5px 2.5px 5px rgba(0, 0, 0, 0.5),
+    inset -1px -1px 2px rgba(255, 255, 255, 0.15) !important;
+  transform: translateY(1px) !important;
+}
+
+/* 2. Secondary / Raised Buttons ('Raised Layer (Hover)' in Pin) */
+html.claymorphic button.bg-surface-container,
+html.claymorphic button.bg-surface-container-high,
+.neo-tactile-btn-secondary {
+  background-color: #FAF6F0 !important;
+  color: #132822 !important;
+  border: 1px solid rgba(255, 255, 255, 0.95) !important;
+  border-radius: 14px;
+  box-shadow:
+    4px 6px 14px -2px rgba(130, 105, 80, 0.12),
+    -3px -3px 8px 0 rgba(255, 255, 255, 0.95),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.95),
+    inset -1px -1px 2px rgba(130, 105, 80, 0.04) !important;
+  transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+html.claymorphic button.bg-surface-container:hover,
+html.claymorphic button.bg-surface-container-high:hover,
+.neo-tactile-btn-secondary:hover {
+  box-shadow:
+    6px 8px 18px -2px rgba(130, 105, 80, 0.16),
+    -4px -4px 10px 0 rgba(255, 255, 255, 1),
+    inset 1px 1px 2px #FFFFFF !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Pressed Secondary State */
+html.claymorphic button.bg-surface-container:active,
+html.claymorphic button.bg-surface-container-high:active,
+.neo-tactile-btn-secondary:active {
+  box-shadow:
+    inset 2.5px 2.5px 5px rgba(130, 105, 80, 0.18),
+    inset -1px -1px 3px rgba(255, 255, 255, 0.8) !important;
+  transform: translateY(1px) !important;
+}
+
+/* 3. Inset Wells for Inputs / Searchbars ('Inset Layer' in Pin) */
+html.claymorphic input,
+html.claymorphic textarea,
+html.claymorphic select,
+.neo-tactile-well {
+  background-color: #E8E0D4 !important;
+  border: 1px solid #DFD5C6 !important;
+  box-shadow:
+    inset 2.5px 2.5px 5px rgba(120, 95, 70, 0.15),
+    inset -2px -2px 4px rgba(255, 255, 255, 0.85) !important;
   border-radius: 12px;
-  box-shadow: 0 2px 4px rgb(14 51 46 / 10%);
+  color: #132822 !important;
+  transition: all 0.15s ease !important;
 }
-html.claymorphic :is(button.bg-secondary, a.bg-secondary) {
-  background: var(--theme-secondary);
-  color: var(--theme-on-secondary);
-  border-radius: 12px;
-  box-shadow: 0 2px 4px rgb(14 51 46 / 8%);
+
+html.claymorphic input:focus,
+html.claymorphic textarea:focus,
+html.claymorphic select:focus,
+.neo-tactile-well:focus-within {
+  outline: none !important;
+  border-color: #0E332E !important;
+  box-shadow:
+    inset 2px 2px 4px rgba(120, 95, 70, 0.15),
+    0 0 0 3px rgba(14, 51, 46, 0.18) !important;
 }
-html.claymorphic :is(input, textarea, select) {
-  background-color: var(--theme-surface-container-lowest);
-  color: var(--theme-on-surface);
-  border: 1px solid var(--theme-outline-variant);
-  border-radius: 10px;
-  box-shadow: none;
-}
-html.claymorphic :is(input, textarea, select):focus {
-  border-color: var(--theme-primary);
-  outline: 2px solid color-mix(in srgb, var(--theme-primary) 20%, transparent);
-  outline-offset: 2px;
-}
-html.claymorphic .tab-group-container, .neo-tactile-tabs {
-  background: var(--theme-surface-container-high);
-  border: 1px solid var(--theme-outline-variant);
-  border-radius: 12px;
+
+/* 4. Segmented Control & Navigation Tabs in Claymorphic */
+html.claymorphic .tab-group-container,
+.neo-tactile-tabs {
+  background-color: #E8E0D4 !important;
+  border: 1px solid #DFD5C6 !important;
+  box-shadow:
+    inset 2.5px 2.5px 5px rgba(120, 95, 70, 0.14),
+    inset -1.5px -1.5px 3px rgba(255, 255, 255, 0.9) !important;
+  border-radius: 16px;
   padding: 4px;
 }
-html.claymorphic .tab-active, .neo-tactile-tab-active {
-  background: var(--theme-surface-container);
-  color: var(--theme-primary);
-  border-radius: 8px;
-  box-shadow: 0 1px 3px rgb(0 0 0 / 6%);
+
+html.claymorphic .tab-active,
+.neo-tactile-tab-active {
+  background-color: #FAF6F0 !important;
+  color: #0E332E !important;
+  box-shadow:
+    3px 4px 10px rgba(130, 105, 80, 0.12),
+    -2px -2px 6px rgba(255, 255, 255, 0.95),
+    inset 1px 1px 2px #FFFFFF !important;
+  border-radius: 12px;
+  font-weight: 600 !important;
 }
+
+/* 5. Raised Tactile Cards ('Level 3 Raised' in Pin) */
+html.claymorphic .clay-card,
+.neo-tactile-card {
+  background-color: #FAF6F0 !important;
+  border: 1px solid rgba(255, 255, 255, 0.85) !important;
+  border-radius: 24px;
+  box-shadow:
+    8px 14px 26px -4px rgba(120, 95, 70, 0.11),
+    -6px -6px 16px 0 rgba(255, 255, 255, 0.95),
+    inset 1.5px 1.5px 3px rgba(255, 255, 255, 0.95),
+    inset -1.5px -1.5px 3px rgba(120, 95, 70, 0.05) !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html.claymorphic .clay-card:hover,
+.neo-tactile-card:hover {
+  box-shadow:
+    10px 18px 32px -4px rgba(120, 95, 70, 0.14),
+    -8px -8px 20px 0 rgba(255, 255, 255, 1),
+    inset 1.5px 1.5px 3px rgba(255, 255, 255, 1) !important;
+  transform: translateY(-2px);
+}
+
+/* 6. Tactile Badges & Pills ('Data Display: Badges' in Pin) */
+html.claymorphic .clay-pill:not([class*="bg-"]),
+.neo-tactile-badge {
+  background-color: #FAF6F0 !important;
+  border: 1px solid rgba(255, 255, 255, 0.85) !important;
+  box-shadow:
+    3px 4px 8px -1px rgba(130, 105, 80, 0.1),
+    -2px -2px 5px rgba(255, 255, 255, 0.9),
+    inset 1px 1px 1.5px rgba(255, 255, 255, 0.95) !important;
+}
+
+/* Secondary Accent Button Support in Claymorphic / Pivora */
+html.claymorphic button.bg-secondary,
+html.claymorphic a.bg-secondary,
+.neo-tactile-btn-secondary-amber {
+  background: #DE8553 !important;
+  color: #FFFFFF !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  box-shadow:
+    0 6px 16px -2px rgba(222, 133, 83, 0.4),
+    0 2px 4px 0 rgba(222, 133, 83, 0.2),
+    inset 0 1px 1.5px rgba(255, 255, 255, 0.45),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.15) !important;
+  transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+html.claymorphic button.bg-secondary:hover,
+html.claymorphic a.bg-secondary:hover {
+  background: #E8905E !important;
+  box-shadow:
+    0 8px 20px -2px rgba(222, 133, 83, 0.5),
+    inset 0 1px 2px rgba(255, 255, 255, 0.5) !important;
+  transform: translateY(-1px) !important;
+}
+
+
+
 
 /* Glass & Card Classes inspired by the reference */
 .card-enterprise {
@@ -674,6 +996,54 @@ html.dark .panel-dark {
   animation: float-reverse 5s ease-in-out infinite;
 }
 
+/* 3D Floating Motion Robot Assistant Animations */
+@keyframes bot-hover {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(1.2deg);
+  }
+}
+
+@keyframes bot-shadow {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.35;
+  }
+  50% {
+    transform: scale(0.75);
+    opacity: 0.15;
+  }
+}
+
+.animate-bot-float {
+  animation: bot-hover 3.2s ease-in-out infinite;
+}
+
+.animate-bot-shadow {
+  animation: bot-shadow 3.2s ease-in-out infinite;
+}
+
+
+
+/* Refined elevation preserves the original palette and control colors. */
+
+html.claymorphic :is(.shadow-sm, .shadow-md) {
+  box-shadow: 0 2px 5px rgb(28 46 35 / 4%);
+}
+html.claymorphic :is(.shadow-lg, .shadow-xl, .shadow-2xl) {
+  box-shadow: 0 12px 36px -16px rgb(28 46 35 / 18%);
+}
+.clay-card, html.claymorphic .clay-card {
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 4%) !important;
+  transition: border-color 180ms ease, box-shadow 180ms ease;
+}
+.clay-card:hover, html.claymorphic .clay-card:hover {
+  transform: none;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 6%) !important;
+}
 
 /* Editorial hierarchy and accessible interactions. */
 html { scroll-padding-top: 6rem; }
