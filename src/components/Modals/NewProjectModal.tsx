@@ -41,6 +41,7 @@ export const NewProjectModal: React.FC<NewProjectModalProps> = ({
   const [manualDesc, setManualDesc] = useState('');
   const [manualCompletion, setManualCompletion] = useState(65);
   const [manualStack, setManualStack] = useState('React, TypeScript, Tailwind');
+  const [isModalVaultHovered, setIsModalVaultHovered] = useState(false);
 
   if (!isOpen) return null;
 
@@ -414,21 +415,79 @@ export const NewProjectModal: React.FC<NewProjectModalProps> = ({
                     </div>
                   )}
 
-                  <button
-                    type="button"
-                    disabled={isDuplicateGithub}
-                    onClick={handleConfirmGithubImport}
-                    className="w-full py-2.5 rounded-lg bg-secondary hover:bg-secondary-fixed text-on-secondary text-xs font-semibold flex items-center justify-center gap-1.5 shadow-md transition-all active:scale-98 disabled:opacity-40 disabled:cursor-not-allowed"
-                  >
-                    <span className="material-symbols-outlined text-sm">
-                      {isDuplicateGithub ? 'block' : 'inventory_2'}
-                    </span>
-                    <span>
-                      {isDuplicateGithub
-                        ? 'This Project Already Exists in Graveyard'
-                        : `Inscribe & Add ${githubRepoData.name} to Graveyard`}
-                    </span>
-                  </button>
+                  {/* The Canvas Protocol: Draggable Repository Relic & Soil Portal */}
+                  <div className="pt-2 space-y-3">
+                    <div
+                      draggable={!isDuplicateGithub}
+                      onDragStart={(e) => {
+                        e.dataTransfer.setData('application/json', JSON.stringify({ type: 'github-relic', data: githubRepoData }));
+                        e.dataTransfer.effectAllowed = 'copyMove';
+                      }}
+                      className={`p-3 rounded-xl border-2 transition-all flex items-center justify-between gap-2 select-none ${
+                        isDuplicateGithub
+                          ? 'bg-surface-container-high/60 border-outline-variant/40 opacity-60 cursor-not-allowed'
+                          : 'bg-secondary/15 border-secondary/60 cursor-grab active:cursor-grabbing hover:scale-[1.01] shadow-xs group'
+                      }`}
+                    >
+                      <div className="flex items-center gap-2">
+                        <span className="material-symbols-outlined text-secondary text-lg group-hover:rotate-12 transition-transform">
+                          drag_indicator
+                        </span>
+                        <div>
+                          <span className="font-serif text-xs font-bold text-on-surface block">
+                            {githubRepoData.name} Repository Relic
+                          </span>
+                          <span className="font-mono text-[10px] text-secondary font-semibold">
+                            ✥ DRAG THIS RELIC CARD INTO THE SOIL PORTAL BELOW ✥
+                          </span>
+                        </div>
+                      </div>
+                      <span className="px-2 py-0.5 rounded bg-secondary text-on-secondary font-mono text-[9px] font-bold">
+                        DRAGGABLE
+                      </span>
+                    </div>
+
+                    {/* Consecrated Soil Portal Drop Target */}
+                    <div
+                      onDragOver={(e) => {
+                        if (isDuplicateGithub) return;
+                        e.preventDefault();
+                        e.dataTransfer.dropEffect = 'copy';
+                        setIsModalVaultHovered(true);
+                      }}
+                      onDragLeave={() => setIsModalVaultHovered(false)}
+                      onDrop={(e) => {
+                        e.preventDefault();
+                        setIsModalVaultHovered(false);
+                        if (!isDuplicateGithub) {
+                          handleConfirmGithubImport();
+                        }
+                      }}
+                      className={`p-4 rounded-xl border-2 border-dashed transition-all flex flex-col items-center justify-center text-center select-none ${
+                        isDuplicateGithub
+                          ? 'bg-error/10 border-error/40 cursor-not-allowed'
+                          : isModalVaultHovered
+                          ? 'bg-secondary/25 border-secondary scale-[1.02] shadow-lg ring-2 ring-secondary/30'
+                          : 'bg-surface-container hover:bg-surface-container-high border-outline-variant/80 cursor-pointer'
+                      }`}
+                    >
+                      <span className="material-symbols-outlined text-xl text-secondary mb-1">
+                        {isDuplicateGithub ? 'lock' : isModalVaultHovered ? 'lock_open' : 'spa'}
+                      </span>
+                      <span className="font-serif text-xs font-bold text-on-surface">
+                        {isDuplicateGithub
+                          ? 'Vault Locked: Duplicate Project Exists'
+                          : isModalVaultHovered
+                          ? 'Release Here to Commit to the Graveyard!'
+                          : 'Consecrated Soil Portal (Drop Relic Here)'}
+                      </span>
+                      <span className="text-[10px] font-mono text-outline mt-0.5">
+                        {isDuplicateGithub
+                          ? 'Cannot add duplicate repository'
+                          : 'Drag the relic card above and drop here to finalize inscription'}
+                      </span>
+                    </div>
+                  </div>
                 </div>
               )}
             </div>
@@ -525,21 +584,83 @@ export const NewProjectModal: React.FC<NewProjectModalProps> = ({
                 </div>
               )}
 
-              <button
-                type="button"
-                disabled={!manualTitle.trim() || isDuplicateManual}
-                onClick={handleConfirmManual}
-                className="w-full py-2.5 rounded-lg bg-secondary hover:bg-secondary-fixed text-on-secondary text-xs font-semibold flex items-center justify-center gap-1.5 shadow-md disabled:opacity-40 disabled:cursor-not-allowed transition-all"
-              >
-                <span className="material-symbols-outlined text-sm">
-                  {isDuplicateManual ? 'block' : 'inventory_2'}
-                </span>
-                <span>
-                  {isDuplicateManual
-                    ? 'This Project Already Exists in Graveyard'
-                    : 'Inscribe New Project into Cemetery'}
-                </span>
-              </button>
+              {/* The Canvas Protocol: Draggable Inscription Relic & Soil Portal */}
+              <div className="pt-2 space-y-3">
+                <div
+                  draggable={Boolean(manualTitle.trim() && !isDuplicateManual)}
+                  onDragStart={(e) => {
+                    e.dataTransfer.setData('application/json', JSON.stringify({ type: 'manual-relic', title: manualTitle }));
+                    e.dataTransfer.effectAllowed = 'copyMove';
+                  }}
+                  className={`p-3 rounded-xl border-2 transition-all flex items-center justify-between gap-2 select-none ${
+                    !manualTitle.trim() || isDuplicateManual
+                      ? 'bg-surface-container-high/60 border-outline-variant/40 opacity-60 cursor-not-allowed'
+                      : 'bg-secondary/15 border-secondary/60 cursor-grab active:cursor-grabbing hover:scale-[1.01] shadow-xs group'
+                  }`}
+                >
+                  <div className="flex items-center gap-2">
+                    <span className="material-symbols-outlined text-secondary text-lg group-hover:rotate-12 transition-transform">
+                      drag_indicator
+                    </span>
+                    <div>
+                      <span className="font-serif text-xs font-bold text-on-surface block">
+                        {manualTitle.trim() || 'Untitled Inscription'} Relic
+                      </span>
+                      <span className="font-mono text-[10px] text-secondary font-semibold">
+                        ✥ DRAG THIS RELIC CARD INTO THE SOIL PORTAL BELOW ✥
+                      </span>
+                    </div>
+                  </div>
+                  <span className="px-2 py-0.5 rounded bg-secondary text-on-secondary font-mono text-[9px] font-bold">
+                    DRAGGABLE
+                  </span>
+                </div>
+
+                {/* Soil Portal Drop Target */}
+                <div
+                  onDragOver={(e) => {
+                    if (!manualTitle.trim() || isDuplicateManual) return;
+                    e.preventDefault();
+                    e.dataTransfer.dropEffect = 'copy';
+                    setIsModalVaultHovered(true);
+                  }}
+                  onDragLeave={() => setIsModalVaultHovered(false)}
+                  onDrop={(e) => {
+                    e.preventDefault();
+                    setIsModalVaultHovered(false);
+                    if (manualTitle.trim() && !isDuplicateManual) {
+                      handleConfirmManual();
+                    }
+                  }}
+                  className={`p-4 rounded-xl border-2 border-dashed transition-all flex flex-col items-center justify-center text-center select-none ${
+                    isDuplicateManual
+                      ? 'bg-error/10 border-error/40 cursor-not-allowed'
+                      : !manualTitle.trim()
+                      ? 'bg-surface-container/50 border-outline-variant/40 opacity-60 cursor-not-allowed'
+                      : isModalVaultHovered
+                      ? 'bg-secondary/25 border-secondary scale-[1.02] shadow-lg ring-2 ring-secondary/30'
+                      : 'bg-surface-container hover:bg-surface-container-high border-outline-variant/80 cursor-pointer'
+                  }`}
+                >
+                  <span className="material-symbols-outlined text-xl text-secondary mb-1">
+                    {!manualTitle.trim() ? 'edit_note' : isDuplicateManual ? 'lock' : isModalVaultHovered ? 'lock_open' : 'spa'}
+                  </span>
+                  <span className="font-serif text-xs font-bold text-on-surface">
+                    {isDuplicateManual
+                      ? 'Vault Locked: Duplicate Project'
+                      : !manualTitle.trim()
+                      ? 'Enter a title above to unlock relic'
+                      : isModalVaultHovered
+                      ? 'Release Here to Commit to the Graveyard!'
+                      : 'Consecrated Soil Portal (Drop Relic Here)'}
+                  </span>
+                  <span className="text-[10px] font-mono text-outline mt-0.5">
+                    {manualTitle.trim() && !isDuplicateManual
+                      ? 'Drag the relic card above and drop here to finalize'
+                      : 'Canvas Protocol Drop Target'}
+                  </span>
+                </div>
+              </div>
             </div>
           )}
         </div>
