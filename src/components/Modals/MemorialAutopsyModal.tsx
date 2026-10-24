@@ -28,7 +28,7 @@ export const MemorialAutopsyModal: React.FC<MemorialAutopsyModalProps> = ({
         {/* Header Bar */}
         <div className="px-6 py-4 bg-surface-container-low border-b border-surface-container-high flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <span className="material-symbols-outlined text-secondary text-lg">spa</span>
+            <span className="material-symbols-outlined text-secondary text-lg">inventory_2</span>
             <span className="font-mono text-xs uppercase tracking-widest text-outline">
               Archival Autopsy Plate // {specimen.folioNumber}
             </span>
