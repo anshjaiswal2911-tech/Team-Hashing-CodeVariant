@@ -101,7 +101,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                   }}
                   className="flex items-center gap-2 p-2 rounded-lg bg-surface-container-low hover:bg-surface-container-high text-left text-xs transition-colors"
                 >
-                  <span className="material-symbols-outlined text-secondary text-base">spa</span>
+                  <span className="material-symbols-outlined text-secondary text-base">inventory_2</span>
                   <span className="text-on-surface">Bury a New Project Ritual</span>
                 </button>
                 <button
