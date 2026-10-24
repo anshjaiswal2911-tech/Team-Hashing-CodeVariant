@@ -13,6 +13,7 @@ import { GraftSprintModal } from './components/Modals/GraftSprintModal';
 import { MeetAiAgentModal } from './components/Modals/MeetAiAgentModal';
 import { KeyboardShortcutsModal } from './components/Modals/KeyboardShortcutsModal';
 import { NewProjectModal } from './components/Modals/NewProjectModal';
+import { ReincarnationWillModal } from './components/Modals/ReincarnationWillModal';
 import { ProjectAiChatbot } from './components/AiChatbot/ProjectAiChatbot';
 import { AssistantLauncher } from './components/AiChatbot/AssistantLauncher';
 
@@ -52,19 +53,24 @@ export default function App() {
   const [currentUser, setCurrentUser] = useState<UserProfile>(() => {
     const saved = localStorage.getItem('graveyard_user');
     const savedUser: UserProfile | null = saved ? JSON.parse(saved) : null;
-    // Refresh the old demo display name for users who are already signed in.
-    if (savedUser?.name === 'Eleni Vance') {
-      savedUser.name = 'Aryan';
+    const MALE_AVATAR = 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80';
+    // Refresh the old demo display name and avatar for users who are already signed in.
+    if (savedUser) {
+      if (savedUser.name === 'Eleni Vance' || !savedUser.name) {
+        savedUser.name = 'Aryan';
+      }
+      if (!savedUser.avatar || savedUser.avatar.includes('1544005313-94ddf0286df2')) {
+        savedUser.avatar = MALE_AVATAR;
+      }
       localStorage.setItem('graveyard_user', JSON.stringify(savedUser));
+      return savedUser;
     }
-    return savedUser
-      ? savedUser
-      : {
-          name: 'Aryan',
-          email: 'eleni@graveyard.dev',
-          role: 'Master Curator',
-          avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80',
-        };
+    return {
+      name: 'Aryan',
+      email: 'aryan@graveyard.dev',
+      role: 'Master Curator',
+      avatar: MALE_AVATAR,
+    };
   });
 
   const handleLoginSuccess = (user: UserProfile) => {
@@ -136,6 +142,13 @@ export default function App() {
   const [isShortcutsOpen, setIsShortcutsOpen] = useState(false);
   const [isNewProjectModalOpen, setIsNewProjectModalOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [digitalWillSpecimen, setDigitalWillSpecimen] = useState<ProjectSpecimen | null>(null);
+  const [isDigitalWillOpen, setIsDigitalWillOpen] = useState(false);
+
+  const openDigitalWill = (specimen: ProjectSpecimen) => {
+    setDigitalWillSpecimen(specimen);
+    setIsDigitalWillOpen(true);
+  };
 
   // Full Screen / Collapsible Left Navigation (Zen Focus Mode)
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
@@ -422,6 +435,7 @@ export default function App() {
               onOpenAiChat={openAiChat}
               onDeleteSpecimen={handleDeleteProject}
               onOpenNewProject={() => setIsNewProjectModalOpen(true)}
+              onOpenDigitalWill={openDigitalWill}
             />
           )}
 
@@ -590,6 +604,13 @@ export default function App() {
       onClose={() => setIsNewProjectModalOpen(false)}
       onAddProject={handleProjectBuried}
       existingSpecimens={specimens}
+    />
+
+    {/* Reincarnation Digital Will Modal */}
+    <ReincarnationWillModal
+      specimen={digitalWillSpecimen}
+      isOpen={isDigitalWillOpen}
+      onClose={() => setIsDigitalWillOpen(false)}
     />
   </>
   );

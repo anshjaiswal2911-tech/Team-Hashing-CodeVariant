@@ -154,7 +154,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 <img
                   alt="Profile"
                   className="w-full h-full object-cover"
-                  src={currentUser?.avatar || "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80"}
+                  src={currentUser?.avatar || "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80"}
                 />
               </div>
               <div className="flex flex-col min-w-0">

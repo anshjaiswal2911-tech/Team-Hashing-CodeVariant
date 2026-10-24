@@ -58,7 +58,7 @@ export const LoginView: React.FC<LoginViewProps> = ({
         role: isJudge ? 'Round 2 Hackathon Evaluator' : 'Master Curator',
         avatar: isJudge
           ? 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80'
-          : 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80',
+          : 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80',
       };
 
       onLoginSuccess(user);
