@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ProjectSpecimen, SalvageModule, ActivityItem } from '../types';
 import { useTheme } from '../context/ThemeContext';
+import { AVAILABLE_THEMES } from '../utils/themeManager';
 
 interface SettingsViewProps {
   specimens?: ProjectSpecimen[];
@@ -592,6 +593,75 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
                 <span>Success: Specimen cleansed & vaulted</span>
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* Ambience & Theme Switcher Section */}
+        <div className="p-6 rounded-xl bg-surface-container-low border border-surface-container-high/50 space-y-4">
+          <div className="flex items-center justify-between">
+            <div>
+              <h2 className="font-serif text-xl text-on-surface">Conservatory Ambience & Themes</h2>
+              <p className="font-sans text-xs text-on-surface-variant mt-0.5">
+                Switch visual atmosphere and color depth across the graveyard.
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={toggleTheme}
+              className="px-3 py-1.5 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface text-xs font-mono font-medium flex items-center gap-1.5 transition-colors border border-outline-variant/60"
+            >
+              <span className="material-symbols-outlined text-sm text-secondary">cached</span>
+              <span>Cycle Theme</span>
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {AVAILABLE_THEMES.map((opt) => {
+              const isSelected = theme === opt.id;
+              return (
+                <div
+                  key={opt.id}
+                  onClick={() => setTheme(opt.id)}
+                  className={`p-3.5 rounded-xl cursor-pointer transition-all border flex flex-col justify-between gap-3 text-left ${
+                    isSelected
+                      ? 'bg-secondary/15 border-secondary shadow-md scale-[1.01]'
+                      : 'bg-surface-container/70 border-surface-container-high hover:border-secondary/40 hover:bg-surface-container'
+                  }`}
+                >
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="flex items-center gap-2">
+                      <div
+                        className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 shadow-xs"
+                        style={{ background: opt.previewBg }}
+                      >
+                        <span
+                          className="material-symbols-outlined text-base"
+                          style={{ color: opt.accentColor }}
+                        >
+                          {opt.icon}
+                        </span>
+                      </div>
+                      <div>
+                        <span className="font-sans text-xs font-semibold text-on-surface block leading-tight">
+                          {opt.label}
+                        </span>
+                        <span className="font-mono text-[9px] uppercase tracking-wider text-outline">
+                          {opt.id}
+                        </span>
+                      </div>
+                    </div>
+                    {isSelected && (
+                      <span className="material-symbols-outlined text-secondary text-base">
+                        check_circle
+                      </span>
+                    )}
+                  </div>
+                  <p className="font-sans text-[11px] text-on-surface-variant line-clamp-2 leading-relaxed">
+                    {opt.tagline}
+                  </p>
+                </div>
+              );
+            })}
           </div>
         </div>
 
