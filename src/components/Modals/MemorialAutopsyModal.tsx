@@ -1,5 +1,6 @@
 import React from 'react';
 import { ProjectSpecimen } from '../../types';
+import { ForensicTimeline, TechStackMatrix, RootCauseBreakdown } from '../Autopsy';
 
 interface MemorialAutopsyModalProps {
   specimen: ProjectSpecimen | null;
@@ -81,15 +82,11 @@ export const MemorialAutopsyModal: React.FC<MemorialAutopsyModalProps> = ({
 
           {/* Autopsy Diagnosis & Progress */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="p-4 rounded-lg bg-surface-container-low border border-surface-container-high/40 space-y-2">
-              <span className="text-[11px] uppercase tracking-wider font-mono text-outline">
-                Cause of Dormancy Autopsy
-              </span>
-              <p className="text-sm text-on-surface font-medium">{specimen.rootCause}</p>
-              <div className="text-xs text-on-surface-variant/90 pt-1">
-                <strong className="text-outline">Unfinished Trails:</strong> {specimen.unfinishedNotes}
-              </div>
-            </div>
+            <RootCauseBreakdown
+              causeCategory={specimen.causeCategory}
+              rootCause={specimen.rootCause}
+              unfinishedNotes={specimen.unfinishedNotes}
+            />
 
             <div className="p-4 rounded-lg bg-surface-container-low border border-surface-container-high/40 space-y-2">
               <div className="flex items-center justify-between">
@@ -158,22 +155,11 @@ export const MemorialAutopsyModal: React.FC<MemorialAutopsyModalProps> = ({
             </div>
           </div>
 
-          {/* Tech Stack Pills */}
-          <div className="space-y-1.5">
-            <span className="text-[11px] uppercase tracking-wider font-mono text-outline">
-              Preserved Tech Stack
-            </span>
-            <div className="flex flex-wrap gap-1.5">
-              {specimen.techStack.map((tech) => (
-                <span
-                  key={tech}
-                  className="px-2.5 py-1 rounded bg-surface-container-high text-on-surface-variant font-mono text-xs"
-                >
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </div>
+          {/* Forensic Tech Stack Compatibility Matrix */}
+          <TechStackMatrix technologies={specimen.techStack} />
+
+          {/* Forensic Git Cadence & Demise Timeline */}
+          <ForensicTimeline />
 
           {/* Heartfelt Epitaph */}
           <div className="p-4 rounded-lg bg-surface-container-lowest border border-surface-container-high text-center">
