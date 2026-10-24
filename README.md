@@ -147,6 +147,8 @@ The **Canvas Protocol (`Drag. Drop. Revive.`)** replaces traditional flat CRUD d
 4. **Synthesized Acoustic Feedback (Web Audio API)**:
    - Micro-auditory feedback synthesized natively in-browser on card pick-up, drop events, and stage transitions without external audio assets.
 
+> 📖 **Technical Architecture Notes**: For detailed interaction contracts, payload structures, and dropzone integration specifications, see [`docs/CANVAS-PROTOCOL.md`](docs/CANVAS-PROTOCOL.md).
+
 ---
 
 ## 🔬 Core Platform Architecture
