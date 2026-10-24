@@ -252,7 +252,7 @@ export const ProjectAiChatbot: React.FC<ProjectAiChatbotProps> = ({
         {/* 1. Tool Window Top Bar (Android Studio / Antigravity Style) */}
         <div className="px-4 py-3 bg-surface-container-low border-b border-outline-variant/60 flex items-center justify-between gap-2 flex-shrink-0 cursor-default select-none">
           <div className="flex items-center gap-2.5 min-w-0">
-            <div className="relative w-9 h-9 rounded-2xl overflow-hidden bg-primary-container text-on-primary-container border border-outline-variant shadow-sm flex-shrink-0 flex items-center justify-center">
+            <div className="relative w-9 h-9 rounded-2xl overflow-hidden bg-[#FAF6F0] border border-[#DE8553]/40 shadow-sm flex-shrink-0 flex items-center justify-center">
               <img src={aiBotImg} alt="" className="w-full h-full object-cover object-[50%_15%]" />
               <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-1 ring-white" />
             </div>
