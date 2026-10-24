@@ -11,6 +11,7 @@ import { CommandPalette } from './components/CommandPalette/CommandPalette';
 import { MemorialAutopsyModal } from './components/Modals/MemorialAutopsyModal';
 import { GraftSprintModal } from './components/Modals/GraftSprintModal';
 import { MeetAiAgentModal } from './components/Modals/MeetAiAgentModal';
+import { KeyboardShortcutsModal } from './components/Modals/KeyboardShortcutsModal';
 import { ProjectAiChatbot } from './components/AiChatbot/ProjectAiChatbot';
 import aiBotImg from './assets/ai-bot.png';
 
@@ -125,6 +126,7 @@ export default function App() {
 
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isQuickJumpOpen, setIsQuickJumpOpen] = useState(false);
+  const [isShortcutsOpen, setIsShortcutsOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   // Full Screen / Collapsible Left Navigation (Zen Focus Mode)
@@ -134,11 +136,13 @@ export default function App() {
   useKeyboardShortcuts({
     'meta+k': () => setIsSearchOpen((prev) => !prev),
     'j': () => setIsQuickJumpOpen((prev) => !prev),
+    '?': () => setIsShortcutsOpen((prev) => !prev),
     'Escape': () => {
       setIsSearchOpen(false);
       setIsQuickJumpOpen(false);
       setIsAutopsyOpen(false);
       setIsGraftSprintOpen(false);
+      setIsShortcutsOpen(false);
     },
   });
 
@@ -604,6 +608,12 @@ export default function App() {
       onNavigate={navigateWithAuth}
       isOpen={isQuickJumpOpen}
       onClose={() => setIsQuickJumpOpen(false)}
+    />
+
+    {/* Keyboard Shortcuts Cheatsheet Modal */}
+    <KeyboardShortcutsModal
+      isOpen={isShortcutsOpen}
+      onClose={() => setIsShortcutsOpen(false)}
     />
   </>
   );
