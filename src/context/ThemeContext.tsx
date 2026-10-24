@@ -28,7 +28,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     } catch {
       // ignore
     }
-    return 'dark'; // Dark theme is default for first-time visitors
+    return 'claymorphic'; // Warm editorial palette for first-time visitors
   });
 
   useEffect(() => {
