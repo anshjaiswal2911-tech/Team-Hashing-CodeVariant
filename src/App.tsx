@@ -24,6 +24,7 @@ import { GraftStudioView } from './views/GraftStudioView';
 import { PatternInsightsView } from './views/PatternInsightsView';
 import { ArchiveView } from './views/ArchiveView';
 import { SettingsView } from './views/SettingsView';
+import { useKeyboardShortcuts } from './hooks';
 
 export default function App() {
   const [currentScreen, setCurrentScreen] = useState<ScreenId>('landing');
@@ -127,17 +128,15 @@ export default function App() {
   // Full Screen / Collapsible Left Navigation (Zen Focus Mode)
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
 
-  // Keyboard shortcut for ⌘K
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
-        e.preventDefault();
-        setIsSearchOpen((prev) => !prev);
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  // Global Keyboard Shortcuts
+  useKeyboardShortcuts({
+    'meta+k': () => setIsSearchOpen((prev) => !prev),
+    'Escape': () => {
+      setIsSearchOpen(false);
+      setIsAutopsyOpen(false);
+      setIsGraftSprintOpen(false);
+    },
+  });
 
   // Basket actions
   const toggleBasket = (moduleId: string) => {

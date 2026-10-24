@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { ProjectSpecimen } from '../types';
-import { initialSpecimens } from '../data/mockSpecimens';
+import { INITIAL_SPECIMENS } from '../data/mockData';
 
 const STORAGE_KEY = 'project_graveyard_specimens_v1';
 
@@ -17,7 +17,7 @@ export const useSpecimenStorage = () => {
     } catch {
       // JSON parse error or disabled localStorage
     }
-    return initialSpecimens;
+    return INITIAL_SPECIMENS;
   });
 
   // Sync state to LocalStorage
@@ -38,7 +38,7 @@ export const useSpecimenStorage = () => {
   }, []);
 
   const resetToDefault = useCallback(() => {
-    setSpecimens(initialSpecimens);
+    setSpecimens(INITIAL_SPECIMENS);
     try {
       localStorage.removeItem(STORAGE_KEY);
     } catch {

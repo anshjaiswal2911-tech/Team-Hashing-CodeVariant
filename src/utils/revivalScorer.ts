@@ -12,7 +12,9 @@ export interface RevivalBreakdown {
   recommendations: string[];
 }
 
-export function calculateRevivalViability(specimen: Partial<ProjectSpecimen>): RevivalBreakdown {
+export function calculateRevivalViability(
+  specimen: Partial<ProjectSpecimen> & { gitHistory?: Array<{ hash?: string; message?: string }> }
+): RevivalBreakdown {
   let techScore = 20;
   const modernTech = ['TypeScript', 'React', 'Tailwind CSS', 'Next.js', 'PostgreSQL', 'Node.js', 'Go', 'Python'];
   const deprecatedTech = ['PHP 5', 'AngularJS', 'jQuery', 'Flash', 'CoffeeScript'];
