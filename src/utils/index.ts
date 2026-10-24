@@ -10,3 +10,4 @@ export * from './gitDiffParser';
 export * from './colorPaletteGenerator';
 export * from './filterUtils';
 export * from './themeManager';
+export * from './astModernizer';
