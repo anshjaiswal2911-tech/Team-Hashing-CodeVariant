@@ -7,6 +7,7 @@
 
 [![Code Variant 2026](https://img.shields.io/badge/Code_Variant-Build_01_Round_2-144227?style=for-the-badge&logo=target)](https://github.com/anshjaiswal2911-tech/Team-Hashing-CodeVariant)
 [![Problem Statement 05](https://img.shields.io/badge/PS_05-The_Project_Graveyard-DE8553?style=for-the-badge&logo=git)](https://github.com/anshjaiswal2911-tech/Team-Hashing-CodeVariant)
+[![Surprise Challenge](https://img.shields.io/badge/Surprise_Challenge-Option_A:_The_Canvas_Protocol-2E7D32?style=for-the-badge&logo=codeforces)](https://github.com/anshjaiswal2911-tech/Team-Hashing-CodeVariant)
 [![React 19](https://img.shields.io/badge/React_19-0E332E?style=for-the-badge&logo=react)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript_5-3178C6?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
 [![Tailwind CSS v4](https://img.shields.io/badge/Tailwind_CSS_v4-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
@@ -68,6 +69,16 @@ Over **90% of software side-projects die silently in neglected local folders and
 </td>
 </tr>
 </table>
+
+---
+
+## 🔥 Round 2 Surprise Challenge: The Canvas Protocol
+> **Challenge Option A Selected & Fully Implemented**
+> 
+> As part of the **6:00 PM Round 2 Surprise Challenge**, Team Hashing implemented **Option A: The Canvas Protocol (`Drag. Drop. Revive.`)** — replacing static tables and forms with an interactive spatial operating system:
+> - 🎯 **Spatial Tri-Column Architecture**: Project Catalog (Left) &rarr; Central Diagnostic Dropzone (Center) &rarr; Action Execution Gates (Right).
+> - ⚡ **Instant Dropzone Diagnostics**: Staging repositories onto the center workbench triggers an instant deep forensic autopsy without manual page reloads.
+> - 🚀 **Action Gate Dispatch**: Direct drag-and-drop into Deploy, Publish, Archive, or Remove zones with zero-friction visual transitions.
 
 ---
 
@@ -226,6 +237,14 @@ npm run build
 # Preview production build locally
 npm run preview
 ```
+
+---
+
+## 🌐 Live Deployment & Submission Links
+
+- **GitHub Repository**: [https://github.com/anshjaiswal2911-tech/Team-Hashing-CodeVariant](https://github.com/anshjaiswal2911-tech/Team-Hashing-CodeVariant)
+- **Live Deployment Demo**: *Production live link will be updated here post-9:00 PM Checkpoint 4 deployment.*
+- **Zero-Config Static Architecture**: High-speed Single Page App (SPA) targeting `dist/` — ready for instantaneous Vercel / Netlify / Cloudflare deployment.
 
 ---
 
