@@ -22,9 +22,97 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
   onLogout,
 }) => {
 
+  const SAMPLE_SPECIMENS: ProjectSpecimen[] = [
+    {
+      id: 'SAMPLE-001',
+      specimenNumber: 'SAMPLE SPECIMEN #001',
+      folioNumber: 'Folio #SP-01',
+      title: 'Sample Project: Fertile Ground',
+      category: 'Sample Prototype • Regenerative Code',
+      description: 'A dormant codebase resting in digital soil — ready for its reusable modules to sprout into new applications.',
+      buriedDate: 'Demo Vault',
+      dormantDuration: 'Sample Stasis',
+      status: 'resting',
+      completionPercentage: 74,
+      revivalScore: 88,
+      rootCause: 'Scope Creep (Sample prototype preserved for architectural reference).',
+      causeCategory: 'Scope Creep',
+      techStack: ['TypeScript', 'React', 'TailwindCSS', 'PostgreSQL'],
+      preservedSalvageModules: [
+        { name: 'Auth JWT Engine', icon: 'token' },
+        { name: 'Reactive Data Store', icon: 'database' },
+        { name: 'Modular Theme Tokens', icon: 'palette' },
+      ],
+      unfinishedNotes: 'Sample project demonstrating zero-dependency component extraction and AI revival calculations.',
+      epitaph: '“Where dead projects become fertile ground.”',
+      plateImage: 'https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=800&q=80',
+      salvageViability: {
+        level: 'Prime (3 Reusable Modules)',
+        score: 88,
+      },
+      curatorAnalysis: 'Exemplary specimen structure. Clean separation between UI presentation and data layer makes it prime for modular grafting.',
+    },
+    {
+      id: 'SAMPLE-002',
+      specimenNumber: 'SAMPLE SPECIMEN #002',
+      folioNumber: 'Folio #SP-02',
+      title: 'Sample Project: Second Life',
+      category: 'Sample Prototype • Component Salvage',
+      description: 'Unfinished code preserved with dignified closure — extracting verified bricks for zero-dependency reuse.',
+      buriedDate: 'Demo Vault',
+      dormantDuration: 'Sample Stasis',
+      status: 'resting',
+      completionPercentage: 82,
+      revivalScore: 92,
+      rootCause: 'Time Shortage (Sample project paused during prototype phase).',
+      causeCategory: 'Time Shortage',
+      techStack: ['Web Audio API', 'TypeScript', 'Vite', 'Tailwind'],
+      preservedSalvageModules: [
+        { name: 'WebAudio Soundscape Core', icon: 'graphic_eq' },
+        { name: 'Focus Timer Engine', icon: 'timer' },
+      ],
+      unfinishedNotes: 'Sample ambient audio engine ready for instant component grafting.',
+      epitaph: '“Unfinished doesn\'t mean worthless. A second chance for abandoned ideas.”',
+      plateImage: 'https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=800&q=80',
+      salvageViability: {
+        level: 'Prime (2 Core Modules)',
+        score: 92,
+      },
+      curatorAnalysis: 'High viability audio pipeline with zero external dependencies.',
+    },
+    {
+      id: 'SAMPLE-003',
+      specimenNumber: 'SAMPLE SPECIMEN #003',
+      folioNumber: 'Folio #SP-03',
+      title: 'Sample Project: Revival Seed',
+      category: 'Sample Prototype • AI Resurrection',
+      description: 'Forensic autopsy diagnostics estimating viability and guiding developers through a 120-minute revival sprint.',
+      buriedDate: 'Demo Vault',
+      dormantDuration: 'Sample Stasis',
+      status: 'dormant',
+      completionPercentage: 65,
+      revivalScore: 80,
+      rootCause: 'Pivot to New Stack (Sample architecture preserved for study).',
+      causeCategory: 'Pivot to New Stack',
+      techStack: ['Canvas API', 'TypeScript', 'Node.js', 'D3'],
+      preservedSalvageModules: [
+        { name: 'Spatial Node Graph Engine', icon: 'hub' },
+        { name: 'SVG Geometry Parser', icon: 'gesture' },
+      ],
+      unfinishedNotes: 'Sample graph visualization pipeline ready for extraction.',
+      epitaph: '“The leaves rested, but the roots remain fertile for the next harvest.”',
+      plateImage: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=800&q=80',
+      salvageViability: {
+        level: 'High (Node Graph Engine)',
+        score: 80,
+      },
+      curatorAnalysis: 'Clean algorithmic canvas rendering with solid frame rates.',
+    },
+  ];
+
   // Active specimen for interactive vitrine
   const [activeSpecimenIndex, setActiveSpecimenIndex] = useState(0);
-  const activeSpecimen = specimens[activeSpecimenIndex] || specimens[0];
+  const activeSpecimen = SAMPLE_SPECIMENS[activeSpecimenIndex] || SAMPLE_SPECIMENS[0];
 
   // Active tab inside hero visual vitrine
   const [heroTab, setHeroTab] = useState<'autopsy' | 'salvage' | 'revival'>('autopsy');
@@ -286,6 +374,14 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent" />
                     
+                    {/* Website Agenda Mission Badge */}
+                    <div className="absolute top-2.5 left-2.5">
+                      <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-emerald-300 text-[10px] font-mono font-medium shadow-xs">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                        <span>Fertile Ground • Rebirth of Code</span>
+                      </span>
+                    </div>
+                    
                     <div className="absolute bottom-3 left-3 right-3 text-white">
                       <div className="flex items-center justify-between">
                         <span className="text-[10px] font-mono tracking-widest uppercase text-secondary font-bold">
@@ -421,7 +517,7 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
                     </div>
 
                     <div className="flex items-center gap-1">
-                      {specimens.slice(0, 3).map((_, idx) => (
+                      {SAMPLE_SPECIMENS.map((_, idx) => (
                         <button
                           key={idx}
                           type="button"
@@ -431,7 +527,7 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
                               ? 'bg-primary w-5'
                               : 'bg-outline-variant hover:bg-outline'
                           }`}
-                          title={`Inspect Specimen #${idx + 1}`}
+                          title={`Inspect Sample #${idx + 1}`}
                         />
                       ))}
                     </div>
