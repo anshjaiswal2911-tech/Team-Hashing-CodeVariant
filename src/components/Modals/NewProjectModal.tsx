@@ -384,7 +384,7 @@ export const NewProjectModal: React.FC<NewProjectModalProps> = ({
                     onClick={handleConfirmGithubImport}
                     className="w-full py-2.5 rounded-lg bg-secondary hover:bg-secondary-fixed text-on-secondary text-xs font-semibold flex items-center justify-center gap-1.5 shadow-md transition-all active:scale-98"
                   >
-                    <span className="material-symbols-outlined text-sm">spa</span>
+                    <span className="material-symbols-outlined text-sm">inventory_2</span>
                     <span>Inscribe & Add {githubRepoData.name} to Graveyard</span>
                   </button>
                 </div>
@@ -482,7 +482,7 @@ export const NewProjectModal: React.FC<NewProjectModalProps> = ({
                 onClick={handleConfirmManual}
                 className="w-full py-2.5 rounded-lg bg-secondary hover:bg-secondary-fixed text-on-secondary text-xs font-semibold flex items-center justify-center gap-1.5 shadow-md disabled:opacity-40 transition-all"
               >
-                <span className="material-symbols-outlined text-sm">spa</span>
+                <span className="material-symbols-outlined text-sm">inventory_2</span>
                 <span>Inscribe New Project into Cemetery</span>
               </button>
             </div>
