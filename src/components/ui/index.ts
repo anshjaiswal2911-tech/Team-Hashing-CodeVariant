@@ -7,3 +7,4 @@ export * from './CodeDiffHighlighter';
 export * from './Tooltip';
 export * from './SkeletonLoader';
 export * from './ToastNotification';
+export * from './StatCard';
