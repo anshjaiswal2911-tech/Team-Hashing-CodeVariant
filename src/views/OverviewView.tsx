@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ProjectSpecimen, ActivityItem, ScreenId } from '../types';
+import { Badge, KbdShortcut, TelemetryChip } from '../components/ui';
 
 interface OverviewViewProps {
   specimens: ProjectSpecimen[];
@@ -95,6 +96,7 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
               <span className="material-symbols-outlined text-base text-secondary">explore</span>
               <span>Wander Through Cemetery</span>
             </button>
+            <KbdShortcut shortcut="⌘K" description="Quick search remains" />
           </div>
         </div>
 
@@ -118,6 +120,11 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
               <p className="font-sans text-xs text-on-surface-variant leading-relaxed">
                 14 projects preserved in deep soil. 3 prime specimens primed for revival grafting.
               </p>
+            </div>
+
+            <div className="flex flex-wrap gap-2 pt-2">
+              <TelemetryChip label="Soil Health" value="98.2%" status="healthy" />
+              <TelemetryChip label="Resonance" value="432 Hz" status="healthy" />
             </div>
           </div>
 
