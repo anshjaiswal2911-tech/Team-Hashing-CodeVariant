@@ -96,19 +96,6 @@ Every developer, student, and hackathon builder has a folder of abandoned side p
 - Responsive layout for desktop, tablet, and mobile.
 - State is saved in the browser (LocalStorage / SessionStorage), so your data is still there after a refresh.
 
----
-
-## 🖼️ Screenshots
-
-> Replace these placeholders with real screenshots (save images in `public/screenshots/`).
-
-| Landing | Crypt & Autopsy |
-| :---: | :---: |
-| ![Landing](public/screenshots/landing.png) | ![Crypt](public/screenshots/crypt.png) |
-
-| Revival Compass | Salvage Yard |
-| :---: | :---: |
-| ![Compass](public/screenshots/compass.png) | ![Salvage](public/screenshots/salvage.png) |
 
 ---
 
