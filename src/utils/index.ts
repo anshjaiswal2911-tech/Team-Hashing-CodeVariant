@@ -5,3 +5,6 @@ export * from './licenseChecker';
 export * from './dateHelpers';
 export * from './codeSanitizer';
 export * from './sprintEstimator';
+export * from './markdownExporter';
+export * from './gitDiffParser';
+export * from './colorPaletteGenerator';
