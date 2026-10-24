@@ -1,24 +1,24 @@
 <div align="center">
 
 # 🪦 Project Graveyard
-### *Where Dead Projects Become Fertile Ground.*
+### *The Forensic Archival, Code Salvage & Rebirth Engine for Modern Software Teams.*
 
-**A Dignified Archival, Forensic Autopsy & Code Rebirth Engine for Modern Developers.**
+**Transforming abandoned engineering repositories into fertile foundations for next-generation software.**
 
 <br />
 
-<!-- LIVE DEMO SHOWCASE CALLOUT -->
+<!-- PRODUCTION CLOUD DEPLOYMENT CALLOUT -->
 <table align="center" border="0" cellpadding="0" cellspacing="0">
   <tr>
-    <td align="center" style="background: linear-gradient(135deg, #144227 0%, #0E332E 100%); padding: 18px 28px; border-radius: 16px; box-shadow: 0 10px 30px rgba(20, 66, 39, 0.25); border: 1px solid rgba(242, 189, 121, 0.35);">
-      <h3 style="color: #F2BD79; margin: 0 0 10px 0; font-family: serif; font-size: 20px; letter-spacing: 0.5px;">
-        ✨ LIVE PRODUCTION DEMO
+    <td align="center" style="background: linear-gradient(135deg, #144227 0%, #0E332E 100%); padding: 20px 32px; border-radius: 16px; box-shadow: 0 12px 32px rgba(20, 66, 39, 0.28); border: 1px solid rgba(242, 189, 121, 0.4);">
+      <h3 style="color: #F2BD79; margin: 0 0 10px 0; font-family: serif; font-size: 21px; letter-spacing: 0.5px;">
+        ⚡ PRODUCTION DEPLOYMENT ACTIVE
       </h3>
       <a href="https://team-hashing-code-variant-ten.vercel.app/" target="_blank">
-        <img src="https://img.shields.io/badge/🚀_LAUNCH_LIVE_APPLICATION-team--hashing--code--variant--ten.vercel.app-F2BD79?style=for-the-badge&logo=vercel&logoColor=0E332E&labelColor=144227" alt="Launch Live Demo" height="42" />
+        <img src="https://img.shields.io/badge/🚀_LAUNCH_ENTERPRISE_CONSOLE-team--hashing--code--variant--ten.vercel.app-F2BD79?style=for-the-badge&logo=vercel&logoColor=0E332E&labelColor=144227" alt="Launch Live Console" height="42" />
       </a>
-      <p style="color: #E2E8F0; margin: 10px 0 0 0; font-size: 13px; font-family: sans-serif;">
-        <strong>Direct URL:</strong> <a href="https://team-hashing-code-variant-ten.vercel.app/" target="_blank" style="color: #6EE7B7; text-decoration: underline;">https://team-hashing-code-variant-ten.vercel.app/</a>
+      <p style="color: #E2E8F0; margin: 12px 0 0 0; font-size: 13px; font-family: sans-serif;">
+        <strong>Live Production URL:</strong> <a href="https://team-hashing-code-variant-ten.vercel.app/" target="_blank" style="color: #6EE7B7; text-decoration: underline; font-weight: 600;">https://team-hashing-code-variant-ten.vercel.app/</a>
       </p>
     </td>
   </tr>
@@ -26,37 +26,37 @@
 
 <br />
 
-<!-- BADGES STRIP -->
-[![Live Demo Status](https://img.shields.io/badge/Deployment-Live_on_Vercel-144227?style=for-the-badge&logo=vercel&logoColor=white)](https://team-hashing-code-variant-ten.vercel.app/)
-[![Code Variant 2026](https://img.shields.io/badge/Code_Variant-Build_01_Round_2-2E7D32?style=for-the-badge&logo=target&logoColor=white)](https://github.com/anshjaiswal2911-tech/Team-Hashing-CodeVariant)
-[![Problem Statement 05](https://img.shields.io/badge/PS_05-The_Project_Graveyard-DE8553?style=for-the-badge&logo=git&logoColor=white)](https://github.com/anshjaiswal2911-tech/Team-Hashing-CodeVariant)
-[![Surprise Challenge](https://img.shields.io/badge/Round_2_Challenge-Option_A:_The_Canvas_Protocol-4A6741?style=for-the-badge&logo=codeforces&logoColor=white)](https://github.com/anshjaiswal2911-tech/Team-Hashing-CodeVariant)
+<!-- ENTERPRISE BADGES STRIP -->
+[![Deployment Status](https://img.shields.io/badge/Production-Live_on_Vercel_Edge-144227?style=for-the-badge&logo=vercel&logoColor=white)](https://team-hashing-code-variant-ten.vercel.app/)
+[![Release Version](https://img.shields.io/badge/Release-v1.0.0--Production-2E7D32?style=for-the-badge&logo=git&logoColor=white)](https://github.com/anshjaiswal2911-tech/Team-Hashing-CodeVariant)
+[![Architecture](https://img.shields.io/badge/Architecture-Local--First_|_Zero--Leakage-DE8553?style=for-the-badge&logo=shield&logoColor=white)](https://github.com/anshjaiswal2911-tech/Team-Hashing-CodeVariant)
 <br />
 [![React 19](https://img.shields.io/badge/React_19-0E332E?style=flat-square&logo=react)](https://react.dev/)
 [![TypeScript Strict](https://img.shields.io/badge/TypeScript_Strict-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Tailwind CSS v4](https://img.shields.io/badge/Tailwind_CSS_v4-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![Vite 8](https://img.shields.io/badge/Vite_8-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vitejs.dev/)
-[![Build Passing](https://img.shields.io/badge/Build-Passing_0_Errors-brightgreen?style=flat-square&logo=checkmarx&logoColor=white)](https://team-hashing-code-variant-ten.vercel.app/)
+[![Build Verification](https://img.shields.io/badge/Build-Passing_0_Errors-brightgreen?style=flat-square&logo=checkmarx&logoColor=white)](https://team-hashing-code-variant-ten.vercel.app/)
 [![License MIT](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](LICENSE)
 
 <br />
 
-**[🌐 Launch Live App](https://team-hashing-code-variant-ten.vercel.app/)** &nbsp;&bull;&nbsp;
-**[🖐️ The Canvas Protocol](#-round-2-surprise-challenge-the-canvas-protocol-option-a)** &nbsp;&bull;&nbsp;
-**[🧭 Core Capabilities](#-core-capabilities)** &nbsp;&bull;&nbsp;
-**[🏗️ Architecture](#-system-architecture)** &nbsp;&bull;&nbsp;
-**[🏆 Rubric Matrix](#-hackathon-evaluation-rubric--deliverables-matrix)** &nbsp;&bull;&nbsp;
-**[🚀 Quickstart](#-quickstart-guide)** &nbsp;&bull;&nbsp;
-**[👥 Team Hashing](#-built-with-pride-by-team-hashing)**
+**[🌐 Launch Console](https://team-hashing-code-variant-ten.vercel.app/)** &nbsp;&bull;&nbsp;
+**[🖐️ The Canvas Protocol](#-the-canvas-protocol-spatial-developer-os)** &nbsp;&bull;&nbsp;
+**[🔬 Forensic Autopsy](#-forensic-autopsy--herbarium-vault)** &nbsp;&bull;&nbsp;
+**[🧭 Viability Compass](#-the-revival-compass--heuristic-decision-engine)** &nbsp;&bull;&nbsp;
+**[📦 Salvage Yard](#-salvage-yard--client-side-code-harvester)** &nbsp;&bull;&nbsp;
+**[🏗️ Architecture](#-system-architecture--engineering-specifications)** &nbsp;&bull;&nbsp;
+**[🚀 Quickstart](#-quickstart--local-setup)** &nbsp;&bull;&nbsp;
+**[👥 Engineering Team](#-engineered-by-team-hashing)**
 
 <br />
 
 <a href="https://team-hashing-code-variant-ten.vercel.app/">
-  <img src="docs/images/hero-canvas.png" alt="Project Graveyard Interactive Canvas Protocol" width="100%" style="border-radius: 18px; box-shadow: 0 20px 45px rgba(0,0,0,0.18); border: 1px solid rgba(222,133,83,0.35);" />
+  <img src="docs/images/hero-canvas.png" alt="Project Graveyard Spatial Canvas Operating System" width="100%" style="border-radius: 18px; box-shadow: 0 20px 48px rgba(0,0,0,0.18); border: 1px solid rgba(222,133,83,0.35);" />
 </a>
 
 <p align="center">
-  <sub><strong>Figure 1.0:</strong> The <em>Canvas Protocol</em> in action on production — Spatial tri-column drag-and-drop workspace with autonomous dropzone forensics and instant action execution gates.</sub>
+  <sub><strong>Figure 1.0:</strong> Production Overview — The <em>Canvas Protocol</em> spatial tri-column workspace featuring real-time diagnostic dropzones, forensic telemetry, and multi-gate action execution.</sub>
 </p>
 
 </div>
@@ -65,280 +65,275 @@
 
 ## ⚡ Executive Summary: The Graveyard-to-Greenhouse Paradigm
 
-Over **90% of software side projects die silently** in abandoned local directories and private GitHub repositories. Developers walk away with lingering guilt, lost momentum, and context decay. Yet inside those neglected codebases lie:
-- ✅ **Tested, battle-hardened code gems** (*Custom auth mechanisms, Prisma schemas, Stripe webhooks, responsive UI kits, API wrappers*).
-- ✅ **Unvalidated product ideas** whose market timing may finally have arrived today.
-- ✅ **Invaluable technical insights** that go unrecorded, causing engineers to repeatedly stumble on the same pitfalls (*Scope Creep, Framework Churn, Solo Isolation*).
+In modern software engineering, **over 90% of internal prototypes, exploratory side-projects, and skunkworks experiments stall or cease active development**. Engineering organizations and solo builders routinely abandon these repositories due to shifting priorities, context decay, or scope creep. Yet within these dormant codebases lies substantial intellectual property:
 
-**Project Graveyard** transforms this digital cemetery into a **fertile innovation greenhouse**. Rather than letting code rot in digital obscurity, it grants repositories a **dignified burial**, extracts their reusable genetic material, computes a transparent **Revival Viability Index**, and cross-pollinates salvageable assets into fresh applications via our proprietary **Graft Studio**.
+- ✅ **Battle-Hardened Modular Assets**: Tested auth workflows, custom React hooks, database migrations, Stripe connectors, and clean UI components.
+- ✅ **Unvalidated Product Timing**: Ideas that failed previously due to market unreadiness, but whose technological or market prerequisites now exist.
+- ✅ **Critical Failure Pattern Intelligence**: Post-mortem telemetry detailing exact failure vectors (*Over-Engineering, Vendor Lock-In, Framework Churn, Solo Isolation*).
 
-> *"When a tree falls in the forest, its heartwood nourishes saplings for decades. We don't just mourn dead code — we harvest its seeds to birth the next generation of software."*
+**Project Graveyard** eliminates code abandonment guilt by treating dormant repositories as **fertile technological compost**. It provides a dignified archival workflow, performs deep forensic autopsies, isolates reusable micro-modules with browser-native extraction, and cross-pollinates tested assets into new production projects via an intuitive **Graft Studio**.
+
+> *"When a tree falls in the forest, its heartwood nourishes saplings for decades. Software should follow the same biological law: never discard what has already been perfected."*
 
 ---
 
-## 🌟 Visual Showcase & Live Screen Tours
+## 🌟 Visual Showcase & Production Interface
 
 <table width="100%">
 <tr>
 <td width="50%" valign="top">
-<h3 align="center">🧭 Revival Compass Diagnostic</h3>
+<h3 align="center">🧭 Revival Compass Viability Engine</h3>
 <a href="https://team-hashing-code-variant-ten.vercel.app/">
   <img src="docs/images/revival-compass.png" width="100%" alt="Revival Compass" style="border-radius: 12px; border: 1px solid rgba(0,0,0,0.1);" />
 </a>
-<p align="center"><sub><strong>Figure 2.1:</strong> Multi-dimensional viability assessment: 3 core health signals, real-time developer pulse calibration sliders, and actionable 120-minute MVP sprint blueprints.</sub></p>
+<p align="center"><sub><strong>Figure 2.1:</strong> Multi-dimensional viability assessment: 3 core health signals, real-time developer momentum sliders, and algorithmic MVP sprint roadmaps.</sub></p>
 </td>
 <td width="50%" valign="top">
-<h3 align="center">🤖 Context-Aware AI Forensic Copilot</h3>
+<h3 align="center">🤖 Autonomous AI Forensic Copilot</h3>
 <a href="https://team-hashing-code-variant-ten.vercel.app/">
   <img src="docs/images/copilot.png" width="100%" alt="Forensic Copilot" style="border-radius: 12px; border: 1px solid rgba(0,0,0,0.1);" />
 </a>
-<p align="center"><sub><strong>Figure 2.2:</strong> Draggable, floating autonomous forensic copilot diagnosing commit histories, extracting reusable components, and advising next sprint actions.</sub></p>
+<p align="center"><sub><strong>Figure 2.2:</strong> Draggable, floating conversational intelligence agent auditing commit histories, identifying salvageable code blocks, and advising refactoring paths.</sub></p>
 </td>
 </tr>
 <tr>
 <td width="50%" valign="top">
-<h3 align="center">🪦 Dignified Herbarium Vault</h3>
+<h3 align="center">🪦 Herbarium Vitrine & Archival Ledger</h3>
 <a href="https://team-hashing-code-variant-ten.vercel.app/">
   <img src="docs/images/workspace.png" width="100%" alt="Herbarium Vault" style="border-radius: 12px; border: 1px solid rgba(0,0,0,0.1);" />
 </a>
 <p align="center"><sub><strong>Figure 2.3:</strong> Museum-grade specimen vitrines cataloging architectural autopsy cards, death cause tags, and legal open-source reusability seals.</sub></p>
 </td>
 <td width="50%" valign="top">
-<h3 align="center">🖐️ The Canvas Protocol (Option A)</h3>
+<h3 align="center">🖐️ The Canvas Protocol (Spatial OS)</h3>
 <a href="https://team-hashing-code-variant-ten.vercel.app/">
   <img src="docs/images/hero-canvas.png" width="100%" alt="The Canvas Protocol" style="border-radius: 12px; border: 1px solid rgba(0,0,0,0.1);" />
 </a>
-<p align="center"><sub><strong>Figure 2.4:</strong> Spatial triage: Drag catalog specimens into the center forensic autopsy dropzone, then dispatch directly into execution gates.</sub></p>
+<p align="center"><sub><strong>Figure 2.4:</strong> Spatial tri-column drag-and-drop workspace: Drag dormant code into diagnostic dropzones and dispatch into execution gates.</sub></p>
 </td>
 </tr>
 </table>
 
 ---
 
-## 🔥 Round 2 Surprise Challenge: The Canvas Protocol (Option A)
+## 🖐️ The Canvas Protocol: Spatial Developer OS
 
-> ### 🏆 Challenge Option A Selected & 100% Implemented
-> During the **Round 2 Surprise Challenge**, Team Hashing engineered **Option A: The Canvas Protocol (`Drag. Drop. Revive.`)** — replacing static CRUD tables and form wizards with an interactive, fluid spatial operating system:
+The **Canvas Protocol (`Drag. Drop. Revive.`)** replaces traditional flat CRUD dashboards with a spatial, tactile operating environment engineered for rapid triage:
 
-| Canvas Layer | Technical Implementation | User Experience Impact |
-| :--- | :--- | :--- |
-| **1. Catalog Column (Left)** | Real-time filtered specimen list with dormancy badges, category tags, and viability score previews. | Drag any card smoothly with tactile shadow elevation. |
-| **2. Diagnostic Dropzone (Center)** | Autonomous staging dropzone with auto-centering alignment, forensic telemetry, and completion analysis. | Dropping any card immediately reveals completion percentage, primary cause of demise, and salvageable gems. |
-| **3. Action Execution Gates (Right)** | 4 distinct drop targets: **Deploy** (120-min sprint), **Submit** (deep autopsy), **Save** (archive vault), and **Delete** (safe removal). | Direct physical dispatch of codebases into real operational workflows without manual button clicks. |
-| **4. Tactile Audio Feedback** | Built-in synthesizer utilizing the browser **Web Audio API**. | Subtle acoustic click and chime on card pick-up, drop, and successful triage. |
+```
+┌─────────────────────────┐     ┌─────────────────────────┐     ┌─────────────────────────┐
+│     PROJECT CATALOG     │ ──► │   DIAGNOSTIC DROPZONE   │ ──► │     EXECUTION GATES     │
+│   • Dormant Specimen    │     │   • Viability Index     │     │   🚀 Deploy 120m Sprint │
+│   • Dormancy Badges     │     │   • Root-Cause Autopsy  │     │   🔬 Deep Autopsy Folio │
+│   • Reusability Scores  │     │   • Extracted Modules   │     │   📦 Archive Herbarium  │
+│   • Real-Time Search    │     │   • Real-time Telemetry │     │   🗑️ Safe Expunction    │
+└─────────────────────────┘     └─────────────────────────┘     └─────────────────────────┘
+```
+
+### Technical Workflow Highlights:
+1. **Catalog Deck (Left Column)**:
+   - High-density visual cards with dormancy age tags (`3 mos`, `6 mos`, `2 yrs`), completion metrics, and reusability badges.
+   - Smooth pointer grab with physical elevation and dynamic shadow rendering.
+2. **Diagnostic Staging Dropzone (Center Stage)**:
+   - Dropping any project card immediately activates an automated architectural autopsy.
+   - Computes completion percentage, flags technical debt, determines primary cause of demise, and previews harvestable component packages.
+3. **Action Execution Gates (Right Column)**:
+   - **Deploy Gate**: Automatically scaffolds a prioritized 120-minute MVP revival sprint with aggressive scope pruning.
+   - **Submit Gate**: Triggers comprehensive code dissection and issues a certified digital folio and Reincarnation Will.
+   - **Archive Gate**: Safely seals the project into the botanical herbarium vault with legal clearance tags.
+   - **Delete Gate**: Verified, non-destructive removal with confirmation safeguards.
+4. **Synthesized Acoustic Feedback (Web Audio API)**:
+   - Micro-auditory feedback synthesized natively in-browser on card pick-up, drop events, and stage transitions without external audio assets.
 
 ---
 
-## 🎯 Core Capabilities
+## 🔬 Core Platform Architecture
 
-### 1. 🖐️ The Canvas Protocol (`Drag. Drop. Revive.`)
-- **Spatial Tri-Column Workbench**: Replaces static dashboards with an interactive tactile canvas.
-- **Drag-to-Diagnose**: Drag any project card from the left catalog and drop it into the central **AI Forensic Dropzone** to immediately compute its completion percentage, salvage potential, and cause of demise.
-- **Instant Action Zones**: Drop staged specimens directly into right-side execution gates:
-  - 🚀 **Deploy / Launch**: Launches a 120-minute revival sprint with focused scope pruning.
-  - 🔬 **Submit / Publish**: Commences an in-depth forensic autopsy and issues a shareable digital folio.
-  - 📦 **Save / Archive**: Preserves the specimen with honors in the Botanical Herbarium Vault.
-  - 🗑️ **Delete / Remove**: Clean removal with safety guards.
+### 1. 🪦 Forensic Autopsy & Herbarium Vault
+- **Taxonomic Cause Classification**: Automated categorization into standardized failure modes (*Circumstantial Scope Creep, Technical Debt Saturation, Market Evaporation, Framework Fatigue, Solo Isolation*).
+- **Herbarium Specimen Sheets**: Assigns museum-grade catalog folio records (e.g. `LL-02`, `EV-01`), architectural diagrams, and developer post-mortems.
+- **Reincarnation Will & Legal Clearance**: Evaluates OSS licensing compatibility (MIT, Apache 2.0, BSD) ensuring extracted modules can be legally grafted into proprietary or new open-source codebases.
 
-### 2. 🪦 Dignified Burial Ceremony & Forensic Autopsy
-- **Root-Cause Classification**: Automatically diagnoses why the project paused (*Circumstantial Scope Creep, Technical Debt, Lost Momentum, Solo Isolation*).
-- **Herbarium Specimen Sheets**: Assigns museum-grade catalog folio numbers (e.g. `LL-02`, `EV-01`), botanical plates, and heartfelt developer epitaphs.
-- **Reincarnation Will & Legal Clearance**: Generates certified export documentation and legal license verification ensuring salvaged components can be safely reused.
+### 2. 🧭 The Revival Compass & Heuristic Decision Engine
+- **3-Pillar Clarity Model**:
+  1. 💻 **Code & Architecture Viability**: Volume of clean schemas, tested endpoints, and modular UI.
+  2. 💡 **Market & Problem Urgency**: Validates whether user pain points remain relevant today.
+  3. ⏱️ **Effort-to-Ship**: Concrete, actionable MVP sprint blueprints (*Prune non-essentials &rarr; Update API secrets &rarr; Ship 1-core-feature MVP*).
+- **Dynamic Developer Pulse Sliders**: Interactive calibration for real-time recalculation of revival feasibility:
+  - *Current Personal Excitement (0–100%)*
+  - *Skill Growth Since Burial (0–100%)*
+  - *Team vs. Solo Operational Bandwidth*
+- **5 Actionable Archetype Verdicts**:
+  - `Restart from Scratch` (Score &lt; 45)
+  - `Continue with a Smaller Scope` (Score 75–90)
+  - `Pivot Core Architecture` (Score 60–74)
+  - `Repurpose Component Gems Only` (Score 45–59)
+  - `Honor & Archive in Deep Soil` (Score &lt; 35)
 
-### 3. 🧭 Revival Compass & Viability Index
-- **3-Pillar High-Clarity Verdict**:
-  1. 💻 **Code & Reusable Assets Built**: Preserved schema, auth, and tested UI.
-  2. 💡 **Problem Relevance & Market Demand**: Verifies whether the customer problem is still urgent today.
-  3. ⏱️ **Effort to Ship MVP**: Actionable 3-step path (*Prune scope &rarr; Re-link modern keys &rarr; Ship 1-feature MVP*).
-- **Developer Pulse Check**: Real-time interactive calibration sliders (*Excitement*, *Skill Growth Since Burial*, *Solo vs. Team Overhead*) that dynamically recalculate the project's viability index.
-- **5 Standard Archetypes**: Directs every codebase to its honest destiny:
-  1. *Restart from Scratch* (Score &lt; 45)
-  2. *Continue with a Smaller Scope* (Score 75–90)
-  3. *Change the Core Idea* (Score 60–74)
-  4. *Repurpose Component Gems Only* (Score 45–59)
-  5. *Honor & Archive in Deep Soil* (Score &lt; 35)
+### 3. 📦 Salvage Yard & Client-Side Code Harvester
+- **Zero-Latency In-Browser Bundling**: Powered by `JSZip`, the platform extracts modular components and compiles a complete, organized `.zip` distribution archive entirely inside the client’s browser.
+- **Production Asset Manifest**: Each exported bundle includes a structured `manifest.json`, component documentation, and clean directory structure ready for immediate `npm install` or local inclusion.
 
-### 4. 📦 Salvage Yard & Real Client-Side Code Harvester
-- **Modular Extraction**: Dissects monolithic dead repos into isolated, production-ready modules (*Auth Systems, Stripe Checkouts, UI Kits, Custom Hooks*).
-- **1-Click Client-Side Export**: Generates and downloads real `.zip` archives directly in the browser using `JSZip` — zero remote server latency, zero data privacy leaks.
+### 4. 🌱 Graft Studio: Cross-Repository Module Transplantation
+- **Transplantation Matrix**: Synthesizes harvested components into modern starter frameworks (Next.js, Vite React, Remix, SvelteKit).
+- **Dependency Compatibility Checker**: Scans runtime version mismatches before grafting code into destination repositories.
 
-### 5. 🌱 Graft Studio (Code Cross-Pollination)
-- **Botanical Grafting Engine**: Takes harvested modules from Project A and grafts them into a fresh starter scaffold (Next.js, Vite React, Svelte, or Remix).
-- **Dependency & Compatibility Check**: Evaluates runtime version gaps before code transplantation.
+### 5. 📊 Pattern Insights: Post-Mortem Engineering Analytics
+- **Macro Engineering Retrospective**: Aggregates behavioral analytics across your entire portfolio of projects.
+- **Systemic Failure Diagnostics**: Visual charts revealing repeated anti-patterns so engineering teams avoid recurring bottlenecks in subsequent initiatives.
 
-### 6. 📊 Pattern Insights (The Developer's Mirror)
-- **Macro Retrospective**: Surfaces overarching habits across your graveyard.
-- **Failure Analytics**: Visual breakdown of why past projects paused so developers never repeat the same mistakes in future sprints.
-
-### 7. 🎨 Ambient Theming System & Custom Display Calibration
-- **5 Curated Designer Themes**:
-  - 🌿 **Botanical Ivory (Pitch Deck Edition)**: Warm ivory canvas with deep pine forest typography.
-  - 🧊 **Neo-Tactile Soft UI (Pivora Kit)**: Calm sand textures with sunken wells and raised cream tactile buttons.
+### 6. 🎨 Ambient Designer Themes & Display Calibration
+- **5 High-Precision Curated Themes**:
+  - 🌿 **Botanical Ivory (Pitch Deck Edition)**: Warm ivory canvas with deep pine typography.
+  - 🧊 **Neo-Tactile Soft UI (Pivora Kit)**: Calm sand textures with sunken wells and raised cream tactile surfaces.
   - 🌌 **Galactic Glass (Dark Glassmorphism)**: Smoky emerald glass over an obsidian deep void.
   - 🌙 **Botanical Dark (Original Conservatory)**: Midnight forest depths with sage accents.
   - ☀️ **Monochrome SaaS (Enterprise Minimal)**: High-contrast luxury black and white.
-- **Display Calibration Engine**: Real-time sliders for **Brightness**, **Contrast**, **Transparency**, and **Accent Tone** — allowing every developer to customize their visual workspace.
+- **Hardware Display Calibration**: Real-time interactive controls for **Brightness**, **Contrast**, **Transparency**, and **Accent Tone** persisted across sessions via reactive local state.
 
-### 8. 🤖 Context-Aware AI Forensic Copilot
-- **Free-Floating, Cursor-Movable Assistant**: Draggable chat companion that can be repositioned anywhere on the screen.
-- **Dormancy Warning Intelligence**: Non-intrusive notification badges alerting developers when long-dormant codebases require seasonal check-ups.
-- **Autonomous Forensic Advice**: Answers natural-language questions regarding repository architecture, refactoring strategies, and salvage recommendations.
-
----
-
-## 🏆 Hackathon Evaluation Rubric & Deliverables Matrix
-
-This matrix provides judges with direct verification of all requirements for **Problem Statement 05** and the **Round 2 Surprise Challenge**:
-
-| Evaluation Criterion | Requirement Description | Implementation in Project Graveyard | Live Verification Route |
-| :--- | :--- | :--- | :--- |
-| **1. Archival & Burial** | Dignified burial ceremony, epitaphs, death cause taxonomy | Full burial wizard with root-cause categorization, epitaph generator, and archival records. | [`/workspace`](https://team-hashing-code-variant-ten.vercel.app/) &rarr; "Bury a Project" |
-| **2. Viability Heuristics** | Objective decision framework for resurrecting code | Revival Compass with 3-pillar scoring, dynamic pulse sliders, and 5 distinct archetypes. | [`/workspace`](https://team-hashing-code-variant-ten.vercel.app/) &rarr; "Revival Compass" |
-| **3. Asset Salvage** | Extract reusable components from dead codebases | Salvage Yard with category filters, modular inspection, and real client-side `.zip` download. | [`/workspace`](https://team-hashing-code-variant-ten.vercel.app/) &rarr; "Salvage Yard" |
-| **4. Grafting / Rebirth** | Cross-pollinate code into new projects | Graft Studio allowing users to graft salvaged modules into modern scaffolds (Next.js/Vite/Remix). | [`/workspace`](https://team-hashing-code-variant-ten.vercel.app/) &rarr; "Graft Studio" |
-| **5. Retrospective Insights**| Analytics on failure patterns to improve developer habits | Pattern Insights view charting common failure modes, dormant timeline distributions, and lessons. | [`/workspace`](https://team-hashing-code-variant-ten.vercel.app/) &rarr; "Pattern Insights" |
-| **6. Surprise Challenge** | **Option A: The Canvas Protocol** (`Drag. Drop. Revive.`) | Tri-column spatial drag-and-drop workspace, instant dropzone autopsy, and 4 execution gates. | [`/workspace`](https://team-hashing-code-variant-ten.vercel.app/) &rarr; "Canvas Protocol" |
-| **7. Production Quality** | Fast, responsive, accessible, zero runtime crash | Single Page App deployed on Vercel with clean build, strict TypeScript, and SPA routing rewrites. | [Live Vercel App](https://team-hashing-code-variant-ten.vercel.app/) |
+### 7. 🤖 Context-Aware AI Forensic Copilot
+- **Free-Floating, Cursor-Movable Interface**: Non-obtrusive assistant widget that can be positioned anywhere across multi-monitor setups.
+- **Smart Dormancy Detection**: Contextually alerts developers when dormant code reaches critical milestones (e.g., 90+ days without commit).
 
 ---
 
-## 🏗️ System Architecture
+## 🏗️ System Architecture & Engineering Specifications
 
-Project Graveyard is engineered as a **100% client-driven, zero-latency progressive web application**. It requires no heavy database cold-starts or expensive third-party infrastructure to experience full functionality.
+Project Graveyard is engineered on a **100% Local-First, Zero-Cloud Lock-In architecture**. All computations, viability heuristics, telemetry parsing, and zip archive generation occur locally within the client execution environment:
 
 ```mermaid
 flowchart TB
-    subgraph ClientWorkspace["Project Graveyard Architecture"]
+    subgraph ClientRuntime["Project Graveyard Client-Side Architecture"]
         direction TB
         
         subgraph UI["Presentation Layer (React 19 + Tailwind CSS v4)"]
-            Canvas["Canvas Protocol<br/>(Drag & Drop Spatial OS)"]
+            Canvas["Canvas Protocol<br/>(Spatial Drag & Drop OS)"]
             Compass["Revival Compass<br/>(3-Pillar Heuristics)"]
-            Autopsy["Autopsy Vitrine<br/>(Forensic Herbarium)"]
-            Graft["Graft Studio<br/>(Code Transplantation)"]
-            Copilot["Forensic Copilot<br/>(Movable AI Agent)"]
-            Settings["Display & Preferences<br/>(Calibration Engine)"]
+            Autopsy["Autopsy Vitrine<br/>(Herbarium Vault)"]
+            Graft["Graft Studio<br/>(Transplantation Engine)"]
+            Copilot["Forensic Copilot<br/>(Draggable AI Assistant)"]
+            DisplayCalibration["Display Calibration<br/>(Theme Engine)"]
         end
 
-        subgraph Engines["Core Engine Layer"]
+        subgraph CoreEngines["Core Computational Engines"]
             ViabilityEngine["Viability Index Calculator<br/>(Code + Demand + Pulse Sliders)"]
-            TaxonomyEngine["Root-Cause Classifier<br/>(Forensic Taxonomy)"]
-            ZipHarvester["Client-Side Bundler<br/>(JSZip Module Exporter)"]
-            ThemeEngine["Ambience Manager<br/>(CSS Variable Tokens)"]
-            AudioEngine["Acoustic Synthesizer<br/>(Web Audio API)"]
+            TaxonomyEngine["Root-Cause Classifier<br/>(Failure Taxonomy)"]
+            ZipHarvester["In-Memory Bundler<br/>(JSZip Client Archiver)"]
+            ThemeEngine["Ambience Engine<br/>(CSS HSL Variable Tokens)"]
+            AudioSynth["Acoustic Synthesizer<br/>(Web Audio API)"]
         end
 
-        subgraph StateLayer["Storage & Cache"]
-            LocalVault["Reactive Local Vault<br/>(Persistent LocalStorage)"]
-            GitHubAPI["GitHub REST API<br/>(Public Repo Metadata Intake)"]
+        subgraph Persistence["Local Storage & Edge Network"]
+            ReactiveVault["Reactive Local Vault<br/>(Zero-Data-Leakage Storage)"]
+            EdgeCDN["Vercel Global Edge Network<br/>(Sub-50ms Static Delivery)"]
         end
     end
 
     Canvas --> ViabilityEngine
     Canvas --> ZipHarvester
-    Canvas --> AudioEngine
+    Canvas --> AudioSynth
     Compass --> ViabilityEngine
     Autopsy --> TaxonomyEngine
     UI --> ThemeEngine
-    GitHubAPI --> LocalVault
-    LocalVault --> Engines
+    UI --> ReactiveVault
+    EdgeCDN --> ClientRuntime
 ```
 
 ---
 
-## 💻 Tech Stack & Engineering Rigor
+## 💻 Tech Stack & Production Standards
 
-| Layer | Technology | Engineering Rationale |
+| Layer | Technology | Production Rationale |
 | :--- | :--- | :--- |
-| **Frontend Framework** | **React 19** | Latest React architecture utilizing automatic compiler optimizations and modern hooks. |
-| **Language** | **TypeScript Strict** | Comprehensive typed contracts across specimens, modules, telemetry, and forensic diagnoses (`tsc --noEmit` clean). |
-| **Styling & Design Tokens** | **Tailwind CSS v4** | Next-generation zero-config CSS engine with high-performance CSS theme variable tokens. |
-| **Build Tooling** | **Vite 8** | Sub-second production bundle generation and instant Hot Module Replacement (HMR). |
-| **Deployment Platform** | **Vercel** | Global edge network delivery with SPA client-side rewrite rules configured in `vercel.json`. |
-| **Iconography** | **Lucide React + Material Symbols** | Consistent botanical, mechanical, and developer symbols with accessible SVGs. |
-| **Client-Side Export** | **JSZip** | Compiles real file system directory trees in browser memory for instant download. |
-| **Haptic & Sound Design** | **Web Audio API** | Subtle synthesized acoustic feedback for card drops, sprigs, and burial ceremonies. |
+| **Frontend Framework** | **React 19** | Modern React architecture leveraging automated compiler optimizations, concurrent rendering, and clean hook abstractions. |
+| **Language** | **TypeScript Strict** | 100% strict type safety across specimen schemas, salvage manifests, and viability telemetry (`tsc --noEmit` clean). |
+| **Styling & Design Tokens** | **Tailwind CSS v4** | Next-generation zero-runtime engine with CSS variables, fluid responsive layouts, and claymorphic soft-UI utilities. |
+| **Bundling & Build Pipeline** | **Vite 8** | Sub-500ms production builds, native ESM path resolution, and instant Hot Module Replacement (HMR). |
+| **Deployment & Edge Delivery** | **Vercel** | Global edge CDN distribution with client-side SPA routing rewrites configured via `vercel.json`. |
+| **In-Browser Archiver** | **JSZip** | Compiles valid ZIP directory hierarchies directly in browser memory without server-side processing. |
+| **Acoustic Feedback** | **Web Audio API** | Real-time parametric oscillator generating subtle haptic audio cues with zero external MP3/WAV dependencies. |
+| **Iconography** | **Lucide React + Material Symbols** | Scalable, accessible SVGs maintaining architectural and botanical consistency. |
 
 ---
 
-## ⌨️ Productivity Keyboard Shortcuts
+## ⌨️ Power-User Keyboard Shortcuts
 
-For power developers and hackathon judges, Project Graveyard features built-in global shortcuts:
+For keyboard-first engineers and power users, Project Graveyard includes a full command-bar suite:
 
-| Shortcut | Action | Scope |
+| Key Combination | Action | Operational Scope |
 | :---: | :--- | :--- |
 | <kbd>Cmd</kbd> + <kbd>K</kbd> / <kbd>Ctrl</kbd> + <kbd>K</kbd> | Open Global Command Palette & Specimen Search | App-wide |
-| <kbd>J</kbd> | Quick-Jump to Workspace Views | Workspace |
-| <kbd>N</kbd> or <kbd>B</kbd> | Open "Bury a Project / Add Specimen" Modal | Workspace |
-| <kbd>?</kbd> | View Interactive Keyboard Shortcuts Reference | App-wide |
-| <kbd>Esc</kbd> | Dismiss any open modal, drawer, or theme menu | Global |
-| <kbd>Enter</kbd> / <kbd>Shift + Enter</kbd> | Send Copilot message / Insert multiline code | AI Copilot |
+| <kbd>J</kbd> | Quick-Jump to Workspace Modules | Workspace |
+| <kbd>N</kbd> or <kbd>B</kbd> | Launch "Bury a Project / Add Specimen" Modal | Workspace |
+| <kbd>?</kbd> | Display Interactive Keyboard Shortcuts Guide | App-wide |
+| <kbd>Esc</kbd> | Dismiss any active modal, drawer, or dropdown menu | Global |
+| <kbd>Enter</kbd> / <kbd>Shift + Enter</kbd> | Send Copilot message / Insert multiline code snippet | AI Copilot |
 
 ---
 
-## 🚀 Quickstart Guide
+## 🚀 Quickstart & Local Setup
 
-### Prerequisites
-- **Node.js**: `v20` or newer (Tested cleanly on Node `v22.22.1` & `v24.12.0`).
-- **npm**: `v10+` and Git.
+### System Prerequisites
+- **Node.js**: `v20.x` or newer (Fully verified on `v22.22.1` LTS and `v24.x`).
+- **npm**: `v10.x` or newer, Git.
 
-### Installation & Local Run
+### 1. Clone & Install
 
 ```bash
-# 1. Clone the repository
+# Clone the repository
 git clone https://github.com/anshjaiswal2911-tech/Team-Hashing-CodeVariant.git
 cd Team-Hashing-CodeVariant
 
-# 2. Install dependencies (peer-dependency clean via .npmrc)
+# Install dependencies with lockfile synchronization
 npm install
 
-# 3. Start high-speed local dev server
+# Start local high-performance development server
 npm run dev
 ```
 
-Open your browser to **`http://localhost:3000`** (or the port indicated in your terminal).
+Visit **`http://localhost:3000`** (or the port specified in your terminal output).
 
-### Production Build & Verification
+### 2. Production Build Verification
 
 ```bash
-# Verify TypeScript typing with zero errors
+# Run strict TypeScript static typecheck (0 errors required)
 npm run lint
 
 # Generate production bundle in dist/
 npm run build
 
-# Preview production build locally
+# Preview optimized production bundle locally
 npm run preview
 ```
 
 ---
 
-## 🌐 Live Deployment & Submission Links
+## 🌐 Production Deployment Architecture
 
-- **🚀 Live Production Web App**: [https://team-hashing-code-variant-ten.vercel.app/](https://team-hashing-code-variant-ten.vercel.app/)
+- **🚀 Live Application URL**: [https://team-hashing-code-variant-ten.vercel.app/](https://team-hashing-code-variant-ten.vercel.app/)
 - **📂 GitHub Source Repository**: [https://github.com/anshjaiswal2911-tech/Team-Hashing-CodeVariant](https://github.com/anshjaiswal2911-tech/Team-Hashing-CodeVariant)
-- **⚙️ Edge Routing Configuration**: Single Page Application rewrite rules powered by [`vercel.json`](vercel.json) ensuring seamless page refreshes across all routes.
-- **⚡ Dependency Resolution**: Secured via [`.npmrc`](.npmrc) with automatic `legacy-peer-deps=true` configuration.
+- **⚙️ Edge Routing Configuration**: Powered by [`vercel.json`](vercel.json) ensuring seamless client-side single page routing across all URLs and sub-views.
+- **⚡ Dependency Configuration**: Configured with [`.npmrc`](.npmrc) (`legacy-peer-deps=true`) for reproducible zero-conflict continuous integration and deployment.
 
 ---
 
-## 👥 Built with Pride by Team Hashing
+## 👥 Engineered by Team Hashing
 
-Developed for **Code Variant Hackathon — Build 01 (Round 2)** addressing **Problem Statement 05: The Project Graveyard**.
+Crafted with dedication by **Team Hashing** to elevate software salvage and architectural preservation across the engineering industry:
 
 <div align="center">
 
-| Member | Focus Area | GitHub Profile |
+| Engineer | Focus & Core Contributions | GitHub Profile |
 | :--- | :--- | :---: |
-| **Ansh Jaiswal** | **Team Lead & Frontend Architecture** | [@anshjaiswal2911-tech](https://github.com/anshjaiswal2911-tech) |
-| **Aryan Jaiswal** | **UI/UX, Ambience Themes & Display Systems** | [@AryanJaiswalDev](https://github.com/AryanJaiswalDev) |
-| **Mitesh Jha** | **The Canvas Protocol, Spatial Drag-and-Drop & Audio** | [@jhamitesh0302-afk](https://github.com/jhamitesh0302-afk) |
-| **Rajiv Jha** | **Forensics Methodology, Data Schemas & Architecture** | [@jharajiv315](https://github.com/jharajiv315) |
+| **Ansh Jaiswal** | **Lead Architect & Frontend Systems** | [@anshjaiswal2911-tech](https://github.com/anshjaiswal2911-tech) |
+| **Aryan Jaiswal** | **Software Developer & UI/UX Design Systems** | [@AryanJaiswalDev](https://github.com/AryanJaiswalDev) |
+| **Mitesh Jha** | **The Canvas Protocol & Spatial Drag-and-Drop OS** | [@jhamitesh0302-afk](https://github.com/jhamitesh0302-afk) |
+| **Rajiv Jha** | **Forensics Methodology & Data Schemas** | [@jharajiv315](https://github.com/jharajiv315) |
 
 <br />
 
 <p align="center">
-  <sub>Project Graveyard &copy; 2026 Team Hashing. Distributed under the MIT License.</sub>
+  <sub>Project Graveyard &copy; 2026 Team Hashing. Released under the open-source MIT License.</sub>
 </p>
 
 </div>
