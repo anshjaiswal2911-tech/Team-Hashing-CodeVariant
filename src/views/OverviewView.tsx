@@ -13,6 +13,7 @@ interface OverviewViewProps {
   onSparkRevival: (specimen: ProjectSpecimen) => void;
   onOpenAiChat?: (specimen: ProjectSpecimen) => void;
   onDeleteSpecimen?: (id: string) => void;
+  onOpenNewProject?: () => void;
 }
 
 export const OverviewView: React.FC<OverviewViewProps> = ({
@@ -24,6 +25,7 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
   onSparkRevival,
   onOpenAiChat,
   onDeleteSpecimen,
+  onOpenNewProject,
 }) => {
   const [activeFilter, setActiveFilter] = useState<'all' | 'high-potential' | 'rich-salvage' | 'pure-archival'>('all');
   const [timeRange, setTimeRange] = useState<'Day' | 'Week' | 'Month' | 'Year'>('Month');
@@ -82,7 +84,13 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
           <div className="flex flex-wrap items-center gap-3 pt-6 z-10">
             <button
               type="button"
-              onClick={() => onNavigate('bury-a-project')}
+              onClick={() => {
+                if (onOpenNewProject) {
+                  onOpenNewProject();
+                } else {
+                  onNavigate('bury-a-project');
+                }
+              }}
               className="px-5 py-2.5 rounded-full bg-secondary text-on-secondary hover:brightness-110 active:scale-95 transition-all font-sans text-xs font-bold shadow-md flex items-center gap-2 border border-secondary/40 cursor-pointer"
             >
               <Plus size={17} strokeWidth={1.7} aria-hidden="true" />

@@ -312,6 +312,7 @@ export default function App() {
             navigateWithAuth(screen);
             setIsSearchOpen(false);
           }}
+          onOpenNewProject={() => setIsNewProjectModalOpen(true)}
         />
 
         {/* Memorial Autopsy Vitrine Modal */}
@@ -420,6 +421,7 @@ export default function App() {
               onSparkRevival={sparkRevivalSprint}
               onOpenAiChat={openAiChat}
               onDeleteSpecimen={handleDeleteProject}
+              onOpenNewProject={() => setIsNewProjectModalOpen(true)}
             />
           )}
 
@@ -496,6 +498,7 @@ export default function App() {
           setCurrentScreen(screen);
           setIsSearchOpen(false);
         }}
+        onOpenNewProject={() => setIsNewProjectModalOpen(true)}
       />
 
       {/* Memorial Autopsy Vitrine Modal */}

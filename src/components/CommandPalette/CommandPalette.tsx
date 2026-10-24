@@ -8,6 +8,7 @@ interface CommandPaletteProps {
   salvageModules: SalvageModule[];
   onSelectSpecimen: (specimen: ProjectSpecimen) => void;
   onNavigate: (screen: ScreenId) => void;
+  onOpenNewProject?: () => void;
 }
 
 export const CommandPalette: React.FC<CommandPaletteProps> = ({
@@ -17,6 +18,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
   salvageModules,
   onSelectSpecimen,
   onNavigate,
+  onOpenNewProject,
 }) => {
   const [query, setQuery] = useState('');
   const [recentSearches, setRecentSearches] = useState<string[]>(() => {
@@ -168,7 +170,11 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                 <button
                   type="button"
                   onClick={() => {
-                    onNavigate('bury-a-project');
+                    if (onOpenNewProject) {
+                      onOpenNewProject();
+                    } else {
+                      onNavigate('bury-a-project');
+                    }
                     onClose();
                   }}
                   className="flex items-center gap-2 p-2 rounded-lg bg-surface-container-low hover:bg-surface-container-high text-left text-xs transition-colors"
