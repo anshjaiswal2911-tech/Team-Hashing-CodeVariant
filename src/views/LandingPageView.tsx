@@ -197,14 +197,6 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
             
             {/* Left Column: Vision & Value Proposition */}
             <div className="lg:col-span-7 space-y-6">
-              {/* Eyebrow Pill */}
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary-container/60 border border-primary/30 text-on-primary-container text-xs font-mono font-medium shadow-sm">
-                <span className="w-2 h-2 rounded-full bg-secondary animate-pulse" />
-                <span>REGENERATIVE CODE RECLAMATION PROTOCOL</span>
-                <span className="text-on-primary-container/50">•</span>
-                <span className="opacity-90">ROUND 2 READY</span>
-              </div>
-
               {/* Main Headline */}
               <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl text-on-surface leading-[1.1] tracking-tight">
                 Where dead projects become{' '}

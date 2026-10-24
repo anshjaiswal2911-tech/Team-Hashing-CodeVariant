@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { SalvageModule, ScreenId } from '../types';
 import { downloadSalvageZip } from '../utils/exportArchive';
+import { GraftDonorCard } from '../components/Graft';
+import { sampleGraftMatches } from '../data/sampleGraftMatches';
 
 interface GraftStudioViewProps {
   salvagedModules: SalvageModule[];
@@ -271,6 +273,35 @@ export const GraftStudioView: React.FC<GraftStudioViewProps> = ({
               </button>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Recommended Cross-Project Graft Pairings */}
+      <div className="space-y-4 pt-6 border-t border-outline-variant/60">
+        <div>
+          <div className="flex items-center gap-2 text-secondary font-mono text-xs uppercase tracking-widest">
+            <span className="material-symbols-outlined text-sm">auto_fix_high</span>
+            <span>Algorithmic Compatibility Index // Automated Pairings</span>
+          </div>
+          <h2 className="font-serif text-2xl text-on-surface mt-1">
+            Recommended Donor-Recipient Slices
+          </h2>
+          <p className="text-xs text-on-surface-variant font-sans">
+            AI-detected high compatibility modules from resting projects ready for zero-dependency transplantation.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {sampleGraftMatches.map((graft) => (
+            <GraftDonorCard
+              key={graft.id}
+              moduleName={graft.donorModule}
+              donorProject={graft.donorProject}
+              category={graft.graftBenefit}
+              compatibilityScore={graft.compatibilityScore}
+              timeSavedHours={graft.timeSavedHours}
+            />
+          ))}
         </div>
       </div>
     </div>

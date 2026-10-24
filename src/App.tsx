@@ -24,6 +24,8 @@ import { GraftStudioView } from './views/GraftStudioView';
 import { PatternInsightsView } from './views/PatternInsightsView';
 import { ArchiveView } from './views/ArchiveView';
 import { SettingsView } from './views/SettingsView';
+import { useKeyboardShortcuts } from './hooks';
+import { QuickJumpMenu } from './components/Navigation/QuickJumpMenu';
 
 export default function App() {
   const [currentScreen, setCurrentScreen] = useState<ScreenId>('landing');
@@ -122,22 +124,23 @@ export default function App() {
   };
 
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isQuickJumpOpen, setIsQuickJumpOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   // Full Screen / Collapsible Left Navigation (Zen Focus Mode)
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
 
-  // Keyboard shortcut for ⌘K
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
-        e.preventDefault();
-        setIsSearchOpen((prev) => !prev);
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  // Global Keyboard Shortcuts
+  useKeyboardShortcuts({
+    'meta+k': () => setIsSearchOpen((prev) => !prev),
+    'j': () => setIsQuickJumpOpen((prev) => !prev),
+    'Escape': () => {
+      setIsSearchOpen(false);
+      setIsQuickJumpOpen(false);
+      setIsAutopsyOpen(false);
+      setIsGraftSprintOpen(false);
+    },
+  });
 
   // Basket actions
   const toggleBasket = (moduleId: string) => {
@@ -593,6 +596,14 @@ export default function App() {
         handleCloseAgentWelcome();
         openAiChat();
       }}
+    />
+
+    {/* Quick Jump Navigation Modal */}
+    <QuickJumpMenu
+      currentScreen={currentScreen}
+      onNavigate={navigateWithAuth}
+      isOpen={isQuickJumpOpen}
+      onClose={() => setIsQuickJumpOpen(false)}
     />
   </>
   );

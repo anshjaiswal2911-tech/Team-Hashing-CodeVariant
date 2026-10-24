@@ -181,13 +181,33 @@ Copy `.env.example` to `.env` and fill in only the values you need. **Never comm
 
 ```
 Team-Hashing-CodeVariant/
-├── public/            # Static assets (icons, images, screenshots)
-├── src/               # Application source (components, context, utils, styles)
-├── index.html         # App entry HTML
-├── vite.config.ts     # Vite configuration
-├── tsconfig.json      # TypeScript configuration
-├── package.json       # Dependencies and scripts
-└── .env.example       # Example environment variables
+├── docs/                      # Architectural specifications & technical guides
+│   ├── forensics-taxonomy.md  # 6 Forensic failure modes and antidote protocols
+│   ├── grafting-doctrine.md   # Zero-dependency module transplantation rules
+│   ├── salvage-manifest-spec.md # JSON manifest and sanitization specs
+│   ├── cemetery-curation-guide.md # Curation ethics & specimen vaulting standards
+│   └── security-sanitization.md # Secret stripping and credential safety
+├── public/                    # Static assets & favicon
+├── src/
+│   ├── assets/                # Botanical icons & transparent 3D copilot assets
+│   ├── components/
+│   │   ├── AiChatbot/         # Forensic Copilot tool window
+│   │   ├── Archive/           # Archival Folio vitrines
+│   │   ├── Autopsy/           # Git timeline, stack audit & root cause breakdown
+│   │   ├── CommandPalette/    # ⌘K global forensic search
+│   │   ├── Graft/             # Donor transplantation cards
+│   │   ├── Modals/            # Memorial autopsy, welcome showcase, export modals
+│   │   ├── Navigation/        # Header, collapsible sidebar, quick jump menu
+│   │   ├── Revival/           # 120-minute sprint roadmap & viability score cards
+│   │   ├── Salvage/           # Syntax previewer, filter bars & dependency graphs
+│   │   └── ui/                # Reusable primitives (Badge, GlassPill, RadarScore, DiffHighlighter)
+│   ├── hooks/                 # Web Audio synthesis, LocalStorage, hotkeys, focus traps
+│   ├── utils/                 # Revival scorer, code sanitizer, sprint estimator, license checker
+│   ├── views/                 # Landing, Overview, Bury, Salvage, Revival, Graft, Archive, Insights
+│   └── data/                  # Mock specimens, telemetry, graft pairings, blueprints
+├── tests/                     # Unit test suites for scoring, classification & compliance
+├── package.json
+└── tsconfig.json
 ```
 
 ---

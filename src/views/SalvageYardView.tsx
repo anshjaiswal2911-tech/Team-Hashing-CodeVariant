@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { SalvageModule, ScreenId } from '../types';
 import { downloadSalvageZip, downloadSalvageTarGz } from '../utils/exportArchive';
 import { ExportRepoModal } from '../components/Modals/ExportRepoModal';
+import { CodeBundlePreview, DependencyGraph } from '../components/Salvage';
 
 interface SalvageYardViewProps {
   modules: SalvageModule[];
@@ -655,6 +656,20 @@ export const SalvageYardView: React.FC<SalvageYardViewProps> = ({
             <p className="text-xs text-on-surface-variant leading-relaxed">
               {inspectingModule.description}
             </p>
+
+            <DependencyGraph
+              moduleName={inspectingModule.title}
+              linesOfCode={inspectingModule.codeSnippet ? inspectingModule.codeSnippet.code.split('\n').length : 120}
+              externalDepsCount={0}
+            />
+
+            {inspectingModule.codeSnippet && (
+              <CodeBundlePreview
+                filename={inspectingModule.codeSnippet.filename}
+                code={inspectingModule.codeSnippet.code}
+                exportName={inspectingModule.codeSnippet.exportName}
+              />
+            )}
 
             {inspectingModule.synopsisDoc && (
               <div className="p-4 rounded-lg bg-surface-container-lowest font-mono text-xs text-on-surface-variant whitespace-pre-wrap border border-surface-container-high">
