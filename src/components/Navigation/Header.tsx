@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ScreenId } from '../../types';
 import { useTheme } from '../../context/ThemeContext';
 import { SoundToggle } from './SoundToggle';
+import { ChangelogModal } from '../Modals/ChangelogModal';
 
 interface HeaderProps {
   onNavigate: (screen: ScreenId) => void;
@@ -26,6 +27,7 @@ export const Header: React.FC<HeaderProps> = ({
 }) => {
   const [showNotifications, setShowNotifications] = useState(false);
   const [showThemeMenu, setShowThemeMenu] = useState(false);
+  const [showChangelog, setShowChangelog] = useState(false);
   const { theme, setTheme, toggleTheme } = useTheme();
 
   return (
@@ -96,6 +98,16 @@ export const Header: React.FC<HeaderProps> = ({
 
           {/* Ambient 432Hz Soundscape Toggle */}
           <SoundToggle />
+
+          {/* Engine Version Changelog Button */}
+          <button
+            type="button"
+            onClick={() => setShowChangelog(true)}
+            className="w-9 h-9 rounded-full bg-surface-container-high/80 hover:bg-surface-container text-on-surface flex items-center justify-center border border-outline-variant/70 shadow-sm transition-all hover:scale-105"
+            title="Version Changelog & Build Releases"
+          >
+            <span className="material-symbols-outlined text-[19px] text-primary">history_edu</span>
+          </button>
 
           {/* Theme Switcher Button & Dropdown Menu */}
           <div className="relative">
@@ -459,6 +471,12 @@ export const Header: React.FC<HeaderProps> = ({
           )}
         </div>
       </div>
+
+      {/* Version Changelog Modal */}
+      <ChangelogModal
+        isOpen={showChangelog}
+        onClose={() => setShowChangelog(false)}
+      />
     </header>
   );
 };
