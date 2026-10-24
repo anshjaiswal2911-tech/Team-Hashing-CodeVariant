@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ProjectSpecimen } from '../../types';
 import { ForensicTimeline, TechStackMatrix, RootCauseBreakdown } from '../Autopsy';
 import { ShareSpecimenModal } from './ShareSpecimenModal';
+import { ReincarnationWillModal } from './ReincarnationWillModal';
 
 interface MemorialAutopsyModalProps {
   specimen: ProjectSpecimen | null;
@@ -21,6 +22,7 @@ export const MemorialAutopsyModal: React.FC<MemorialAutopsyModalProps> = ({
   onOpenAiChat,
 }) => {
   const [isShareOpen, setIsShareOpen] = useState(false);
+  const [isWillOpen, setIsWillOpen] = useState(false);
 
   if (!isOpen || !specimen) return null;
 
@@ -202,6 +204,15 @@ export const MemorialAutopsyModal: React.FC<MemorialAutopsyModalProps> = ({
             )}
             <button
               type="button"
+              onClick={() => setIsWillOpen(true)}
+              className="px-4 py-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface text-xs font-semibold flex items-center gap-1.5 transition-colors border border-outline-variant/60 shadow-sm"
+              title="Project Digital Will & Reincarnation Deed"
+            >
+              <span className="material-symbols-outlined text-sm text-secondary">history_edu</span>
+              <span>Digital Will</span>
+            </button>
+            <button
+              type="button"
               onClick={() => setIsShareOpen(true)}
               className="px-4 py-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface text-xs font-semibold flex items-center gap-1.5 transition-colors border border-outline-variant/60 shadow-sm"
             >
@@ -227,6 +238,13 @@ export const MemorialAutopsyModal: React.FC<MemorialAutopsyModalProps> = ({
         specimen={specimen}
         isOpen={isShareOpen}
         onClose={() => setIsShareOpen(false)}
+      />
+
+      {/* Digital Will & Reincarnation Deed Modal */}
+      <ReincarnationWillModal
+        specimen={specimen}
+        isOpen={isWillOpen}
+        onClose={() => setIsWillOpen(false)}
       />
     </div>
   );
