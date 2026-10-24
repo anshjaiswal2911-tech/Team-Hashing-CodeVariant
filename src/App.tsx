@@ -252,6 +252,25 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handleDeleteProject = (id: string) => {
+    const target = specimens.find((s) => s.id === id);
+    setSpecimens((prev) => prev.filter((s) => s.id !== id));
+    if (target) {
+      const deleteActivity: ActivityItem = {
+        id: `act-${Date.now()}`,
+        icon: 'delete',
+        iconBg: 'bg-error/20',
+        iconColor: 'text-error',
+        timeAgo: 'Just now',
+        headline: `Exhumed and removed ${target.title} from the graveyard vaults.`,
+        projectHighlight: target.title,
+        subtext: 'Project record catalog deleted',
+        type: 'epitaph',
+      };
+      setActivities((prev) => [deleteActivity, ...prev]);
+    }
+  };
+
   const restingCount = specimens.filter((s) => s.status === 'resting' || s.status === 'dormant').length;
   const revivedCount = 2;
 
@@ -400,6 +419,7 @@ export default function App() {
               onSelectSpecimenForRevival={navigateToRevivalCompass}
               onSparkRevival={sparkRevivalSprint}
               onOpenAiChat={openAiChat}
+              onDeleteSpecimen={handleDeleteProject}
             />
           )}
 
@@ -566,6 +586,7 @@ export default function App() {
       isOpen={isNewProjectModalOpen}
       onClose={() => setIsNewProjectModalOpen(false)}
       onAddProject={handleProjectBuried}
+      existingSpecimens={specimens}
     />
   </>
   );

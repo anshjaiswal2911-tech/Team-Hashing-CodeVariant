@@ -5,6 +5,7 @@ interface NewProjectModalProps {
   isOpen: boolean;
   onClose: () => void;
   onAddProject: (project: ProjectSpecimen) => void;
+  existingSpecimens?: ProjectSpecimen[];
 }
 
 interface GitHubRepoData {
@@ -23,6 +24,7 @@ export const NewProjectModal: React.FC<NewProjectModalProps> = ({
   isOpen,
   onClose,
   onAddProject,
+  existingSpecimens = [],
 }) => {
   const [activeTab, setActiveTab] = useState<'github' | 'manual'>('github');
 
@@ -110,8 +112,34 @@ export const NewProjectModal: React.FC<NewProjectModalProps> = ({
     }
   };
 
+  // Duplicate Detection
+  const isDuplicateGithub = Boolean(
+    githubRepoData &&
+    existingSpecimens.some((s) => {
+      const sTitleClean = s.title.toLowerCase().replace(/[^a-z0-9]/g, '');
+      const newTitleClean = githubRepoData.name.toLowerCase().replace(/[^a-z0-9]/g, '');
+      const sDesc = s.description.toLowerCase();
+      const sCause = s.rootCause.toLowerCase();
+      const newFullName = githubRepoData.fullName.toLowerCase();
+      return (
+        sTitleClean === newTitleClean ||
+        sCause.includes(newFullName) ||
+        sDesc.includes(newFullName)
+      );
+    })
+  );
+
+  const isDuplicateManual = Boolean(
+    manualTitle.trim() &&
+    existingSpecimens.some(
+      (s) =>
+        s.title.toLowerCase().replace(/[^a-z0-9]/g, '') ===
+        manualTitle.trim().toLowerCase().replace(/[^a-z0-9]/g, '')
+    )
+  );
+
   const handleConfirmGithubImport = () => {
-    if (!githubRepoData) return;
+    if (!githubRepoData || isDuplicateGithub) return;
 
     const newSpecimen: ProjectSpecimen = {
       id: `SPEC-${Date.now().toString().slice(-4)}`,
@@ -379,13 +407,27 @@ export const NewProjectModal: React.FC<NewProjectModalProps> = ({
                     </select>
                   </div>
 
+                  {isDuplicateGithub && (
+                    <div className="p-3 rounded-xl bg-error/15 border border-error/40 flex items-center gap-2.5 text-error text-xs font-semibold animate-in fade-in">
+                      <span className="material-symbols-outlined text-base">warning</span>
+                      <span>This project already exists in the Graveyard! Duplicate cannot be added.</span>
+                    </div>
+                  )}
+
                   <button
                     type="button"
+                    disabled={isDuplicateGithub}
                     onClick={handleConfirmGithubImport}
-                    className="w-full py-2.5 rounded-lg bg-secondary hover:bg-secondary-fixed text-on-secondary text-xs font-semibold flex items-center justify-center gap-1.5 shadow-md transition-all active:scale-98"
+                    className="w-full py-2.5 rounded-lg bg-secondary hover:bg-secondary-fixed text-on-secondary text-xs font-semibold flex items-center justify-center gap-1.5 shadow-md transition-all active:scale-98 disabled:opacity-40 disabled:cursor-not-allowed"
                   >
-                    <span className="material-symbols-outlined text-sm">inventory_2</span>
-                    <span>Inscribe & Add {githubRepoData.name} to Graveyard</span>
+                    <span className="material-symbols-outlined text-sm">
+                      {isDuplicateGithub ? 'block' : 'inventory_2'}
+                    </span>
+                    <span>
+                      {isDuplicateGithub
+                        ? 'This Project Already Exists in Graveyard'
+                        : `Inscribe & Add ${githubRepoData.name} to Graveyard`}
+                    </span>
                   </button>
                 </div>
               )}
@@ -476,14 +518,27 @@ export const NewProjectModal: React.FC<NewProjectModalProps> = ({
                 </select>
               </div>
 
+              {isDuplicateManual && (
+                <div className="p-3 rounded-xl bg-error/15 border border-error/40 flex items-center gap-2.5 text-error text-xs font-semibold animate-in fade-in">
+                  <span className="material-symbols-outlined text-base">warning</span>
+                  <span>A project with this title already exists in the Graveyard!</span>
+                </div>
+              )}
+
               <button
                 type="button"
-                disabled={!manualTitle.trim()}
+                disabled={!manualTitle.trim() || isDuplicateManual}
                 onClick={handleConfirmManual}
-                className="w-full py-2.5 rounded-lg bg-secondary hover:bg-secondary-fixed text-on-secondary text-xs font-semibold flex items-center justify-center gap-1.5 shadow-md disabled:opacity-40 transition-all"
+                className="w-full py-2.5 rounded-lg bg-secondary hover:bg-secondary-fixed text-on-secondary text-xs font-semibold flex items-center justify-center gap-1.5 shadow-md disabled:opacity-40 disabled:cursor-not-allowed transition-all"
               >
-                <span className="material-symbols-outlined text-sm">inventory_2</span>
-                <span>Inscribe New Project into Cemetery</span>
+                <span className="material-symbols-outlined text-sm">
+                  {isDuplicateManual ? 'block' : 'inventory_2'}
+                </span>
+                <span>
+                  {isDuplicateManual
+                    ? 'This Project Already Exists in Graveyard'
+                    : 'Inscribe New Project into Cemetery'}
+                </span>
               </button>
             </div>
           )}

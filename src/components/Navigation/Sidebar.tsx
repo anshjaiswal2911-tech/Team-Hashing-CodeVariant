@@ -29,7 +29,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 }) => {
   const navItems = [
     { id: 'overview' as ScreenId, label: 'Overview', icon: LayoutDashboard },
-    { id: 'bury-a-project' as ScreenId, label: 'Add / New Project', icon: Plus },
+    { id: 'bury-a-project' as ScreenId, label: 'Bury a Project', icon: Plus },
     { id: 'revival-compass' as ScreenId, label: 'Revival Compass', icon: Compass },
     { id: 'salvage-yard' as ScreenId, label: 'Salvage Yard', icon: Package },
     { id: 'graft-studio' as ScreenId, label: 'Graft Studio', icon: GitBranch },
