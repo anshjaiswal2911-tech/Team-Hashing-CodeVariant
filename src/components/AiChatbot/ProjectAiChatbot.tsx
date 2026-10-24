@@ -253,7 +253,11 @@ export const ProjectAiChatbot: React.FC<ProjectAiChatbotProps> = ({
         <div className="px-4 py-3 bg-surface-container-low border-b border-outline-variant/60 flex items-center justify-between gap-2 flex-shrink-0 cursor-default select-none">
           <div className="flex items-center gap-2.5 min-w-0">
             <div className="relative w-9 h-9 rounded-2xl overflow-hidden bg-[#FAF6F0] border border-[#DE8553]/40 shadow-sm flex-shrink-0 flex items-center justify-center">
-              <img src={aiBotImg} alt="" className="w-full h-full object-cover object-[50%_15%]" />
+              <img
+                src={aiBotImg}
+                alt="AI Copilot"
+                className="w-full h-full object-cover object-[50%_15%]"
+              />
               <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-1 ring-white" />
             </div>
             <div className="min-w-0">
@@ -266,7 +270,7 @@ export const ProjectAiChatbot: React.FC<ProjectAiChatbotProps> = ({
                 </span>
               </div>
               <div className="font-sans text-[11px] text-on-surface-variant flex items-center gap-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                 <span className="truncate">Context: {currentSpecimen.title}</span>
               </div>
             </div>
@@ -281,7 +285,7 @@ export const ProjectAiChatbot: React.FC<ProjectAiChatbotProps> = ({
                 className="p-1.5 rounded-lg text-emerald-400 hover:text-emerald-300 hover:bg-surface-container transition-colors"
                 title="Meet Our AI Agent (Showcase)"
               >
-                <span aria-hidden="true" className="material-symbols-outlined text-base">neurology</span>
+                <span className="material-symbols-outlined text-base">neurology</span>
               </button>
             )}
             <button
@@ -290,7 +294,7 @@ export const ProjectAiChatbot: React.FC<ProjectAiChatbotProps> = ({
               className="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors"
               title="Clear Conversation History"
             >
-              <span aria-hidden="true" className="material-symbols-outlined text-base">delete_sweep</span>
+              <span className="material-symbols-outlined text-base">delete_sweep</span>
             </button>
             <button
               type="button"
@@ -298,7 +302,7 @@ export const ProjectAiChatbot: React.FC<ProjectAiChatbotProps> = ({
               className="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors"
               title={isMaximized ? 'Restore Window (Bottom Right)' : 'Maximize Copilot (Full Screen)'}
             >
-              <span aria-hidden="true" className="material-symbols-outlined text-base">
+              <span className="material-symbols-outlined text-base">
                 {isMaximized ? 'close_fullscreen' : 'open_in_full'}
               </span>
             </button>
@@ -308,7 +312,7 @@ export const ProjectAiChatbot: React.FC<ProjectAiChatbotProps> = ({
               className="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors"
               title="Minimize Copilot Window"
             >
-              <span aria-hidden="true" className="material-symbols-outlined text-lg">close</span>
+              <span className="material-symbols-outlined text-lg">close</span>
             </button>
           </div>
         </div>
@@ -316,7 +320,7 @@ export const ProjectAiChatbot: React.FC<ProjectAiChatbotProps> = ({
         {/* 2. Specimen Context Switcher Strip */}
         <div className="px-4 py-2 bg-surface-container-high/60 border-b border-outline-variant/40 flex items-center justify-between gap-2 text-xs flex-shrink-0">
           <div className="flex items-center gap-1.5 min-w-0 text-[11px]">
-            <span aria-hidden="true" className="material-symbols-outlined text-secondary text-sm flex-shrink-0">
+            <span className="material-symbols-outlined text-secondary text-sm flex-shrink-0">
               folder_zip
             </span>
             <span className="font-mono text-on-surface-variant flex-shrink-0">Specimen:</span>
@@ -386,7 +390,11 @@ export const ProjectAiChatbot: React.FC<ProjectAiChatbotProps> = ({
                 {msg.sender === 'assistant' ? (
                   <>
                     <div className="w-5 h-5 rounded-full overflow-hidden bg-[#FAF6F0] border border-[#DE8553]/40 shadow-xs inline-block shrink-0 flex items-center justify-center">
-                      <img src={aiBotImg} alt="" className="w-full h-full object-cover object-[50%_15%]" />
+                      <img
+                        src={aiBotImg}
+                        alt="AI Bot"
+                        className="w-full h-full object-cover object-[50%_15%]"
+                      />
                     </div>
                     <span className="font-bold text-on-surface">AI Curator</span>
                   </>
@@ -439,7 +447,7 @@ export const ProjectAiChatbot: React.FC<ProjectAiChatbotProps> = ({
                         onClick={() => copyCode(msg.codeSnippet!.code, msg.id)}
                         className="flex items-center gap-1 text-on-surface-variant hover:text-on-surface transition-colors"
                       >
-                        <span aria-hidden="true" className="material-symbols-outlined text-xs">
+                        <span className="material-symbols-outlined text-xs">
                           {copiedCodeId === msg.id ? 'check' : 'content_copy'}
                         </span>
                         <span>{copiedCodeId === msg.id ? 'Copied!' : 'Copy Code'}</span>
@@ -461,7 +469,7 @@ export const ProjectAiChatbot: React.FC<ProjectAiChatbotProps> = ({
                         onClick={() => handleActionClick(act.actionType)}
                         className="px-2.5 py-1 rounded-lg bg-surface-container-high/80 hover:bg-surface-container text-on-surface font-sans text-[10px] font-semibold flex items-center gap-1 border border-outline-variant/50 transition-all hover:scale-[1.02]"
                       >
-                        <span aria-hidden="true" className="material-symbols-outlined text-xs text-primary">
+                        <span className="material-symbols-outlined text-xs text-primary">
                           {act.icon}
                         </span>
                         <span>{act.label}</span>
@@ -475,8 +483,8 @@ export const ProjectAiChatbot: React.FC<ProjectAiChatbotProps> = ({
 
           {/* Typing Indicator */}
           {isTyping && (
-            <div className="flex items-center gap-2 p-3 rounded-xl bg-surface-container-low border border-outline-variant/50 text-xs text-on-surface-variant w-fit">
-              <span aria-hidden="true" className="material-symbols-outlined text-sm text-primary animate-spin">
+            <div className="flex items-center gap-2 p-3 rounded-xl bg-surface-container-low border border-outline-variant/50 text-xs text-on-surface-variant w-fit animate-pulse">
+              <span className="material-symbols-outlined text-sm text-primary animate-spin">
                 progress_activity
               </span>
               <span className="font-mono text-[11px]">
@@ -504,7 +512,7 @@ export const ProjectAiChatbot: React.FC<ProjectAiChatbotProps> = ({
               className="absolute right-1.5 w-8 h-8 rounded-lg bg-primary text-on-primary flex items-center justify-center shadow-sm hover:scale-105 active:scale-95 transition-all disabled:opacity-40 disabled:pointer-events-none"
               title="Send Message"
             >
-              <span aria-hidden="true" className="material-symbols-outlined text-sm">send</span>
+              <span className="material-symbols-outlined text-sm">send</span>
             </button>
           </form>
 
