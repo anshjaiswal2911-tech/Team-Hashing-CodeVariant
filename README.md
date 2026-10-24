@@ -1,240 +1,281 @@
 <div align="center">
 
-# 🌱 Project Graveyard — Conservatory Protocol
+# 🪦 Project Graveyard
+### *Where Dead Projects Become Fertile Ground.*
 
-**Unfinished doesn't mean worthless. A second chance for abandoned ideas.**
+**A Dignified Archival, Forensic Autopsy & Code Rebirth Engine for Modern Developers.**
 
-Code Variant — Build 01 (Round 2) · Problem Statement **PS 05 — The Project Graveyard** · **Team Hashing**
+[![Code Variant 2026](https://img.shields.io/badge/Code_Variant-Build_01_Round_2-144227?style=for-the-badge&logo=target)](https://github.com/anshjaiswal2911-tech/Team-Hashing-CodeVariant)
+[![Problem Statement 05](https://img.shields.io/badge/PS_05-The_Project_Graveyard-DE8553?style=for-the-badge&logo=git)](https://github.com/anshjaiswal2911-tech/Team-Hashing-CodeVariant)
+[![Surprise Challenge](https://img.shields.io/badge/Surprise_Challenge-Option_A:_The_Canvas_Protocol-2E7D32?style=for-the-badge&logo=codeforces)](https://github.com/anshjaiswal2911-tech/Team-Hashing-CodeVariant)
+[![React 19](https://img.shields.io/badge/React_19-0E332E?style=for-the-badge&logo=react)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript_5-3178C6?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
+[![Tailwind CSS v4](https://img.shields.io/badge/Tailwind_CSS_v4-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
+[![Vite 8](https://img.shields.io/badge/Vite_8-646CFF?style=for-the-badge&logo=vite)](https://vitejs.dev/)
 
-[![Code Variant 2026](https://img.shields.io/badge/Code%20Variant-Build%2001%20%E2%80%A2%20Round%202-emerald?style=for-the-badge)](https://github.com/anshjaiswal2911-tech/Team-Hashing-CodeVariant)
-[![Problem Statement PS 05](https://img.shields.io/badge/Problem%20Statement-PS%2005-amber?style=for-the-badge)](https://github.com/anshjaiswal2911-tech/Team-Hashing-CodeVariant)
-[![Team Hashing](https://img.shields.io/badge/Team-Hashing-blue?style=for-the-badge)](https://github.com/anshjaiswal2911-tech/Team-Hashing-CodeVariant)
-[![Stack](https://img.shields.io/badge/Stack-React%2019%20%7C%20TypeScript%20%7C%20Tailwind%20v4-purple?style=for-the-badge)](https://github.com/anshjaiswal2911-tech/Team-Hashing-CodeVariant)
+<br />
 
-### 🔗 [Live Demo](https://YOUR-LIVE-URL-HERE) · 📦 [Repository](https://github.com/anshjaiswal2911-tech/Team-Hashing-CodeVariant)
+[Explore Canvas Protocol](#-the-canvas-protocol-interactive-workspace) &nbsp;&bull;&nbsp;
+[Product Architecture](#-system-architecture) &nbsp;&bull;&nbsp;
+[Core Capabilities](#-core-capabilities) &nbsp;&bull;&nbsp;
+[Quickstart](#-quickstart-guide) &nbsp;&bull;&nbsp;
+[Engineering Rigor](#-engineering-rigor--verification) &nbsp;&bull;&nbsp;
+[The Team](#-built-by-team-hashing)
+
+<br />
+
+<a href="docs/images/hero-canvas.png">
+  <img src="docs/images/hero-canvas.png" alt="Project Graveyard Interactive Canvas Protocol" width="100%" style="border-radius: 18px; box-shadow: 0 20px 40px rgba(0,0,0,0.15); border: 1px solid rgba(222,133,83,0.3);" />
+</a>
+
+<p align="center">
+  <sub><strong>Figure 1.0:</strong> The <em>Canvas Protocol</em> in action — Dragging dormant repositories into Forensic AI Dropzones and instant Execution Zones.</sub>
+</p>
 
 </div>
 
-## 🥀 The Problem
+---
 
-Every developer, student, and hackathon builder has a folder of abandoned side projects. When time runs out, exams arrive, or priorities shift, valuable code sits forgotten in private repositories.
+## ⚡ Executive Summary & The Problem
 
-| Pain point | What happens |
-| :--- | :--- |
-| **Lost context** | You forget what was finished, what was left, and why progress stopped. |
-| **Unclear direction** | You can't decide whether to continue, pivot, or archive. |
-| **Restart friction** | Returning months later feels like starting from zero. |
-| **The decision vacuum** | GitHub stores code, notes hold ideas, task apps track to-dos, but none of them answer **"What now?"** |
+Over **90% of software side-projects die silently in neglected local folders and private GitHub repositories**. Developers abandon them with feelings of guilt, loss of momentum, or context decay. Yet, within those abandoned codebases lie:
+- ✅ **Tested, battle-hardened code modules** (*Auth flows, database schemas, custom hooks, API integrations*).
+- ✅ **Unvalidated product ideas** whose market timing may finally have matured.
+- ✅ **Invaluable technical lessons** that go unrecorded, causing developers to repeatedly trip over the same failure modes (*Scope Creep, Framework Fatigue, Abandoned Collaborations*).
+
+**Project Graveyard** transforms this tragic graveyard into a **fertile innovation greenhouse**. Rather than letting code rot in digital shame, it gives repositories a **dignified burial**, extracts their reusable genetic material, computes a transparent **Revival Viability Index**, and cross-pollinates salvageable gems into new projects via our proprietary **Graft Studio**.
+
+> *"Every dormant repository holds valuable engineering. We don't just mourn dead code — we harvest its seeds to birth the next generation of software."*
 
 ---
 
-## 🌿 Our Solution
+## 🌟 Visual Showcase & Key Modules
 
-**Project Graveyard** preserves the context of a stalled project, scores its chances of revival, and turns it into concrete next actions, using a three-step method: **Capture → Evaluate → Act**.
+<table width="100%">
+<tr>
+<td width="50%" valign="top">
+<h3 align="center">🧭 Revival Compass Diagnostic</h3>
+<a href="docs/images/revival-compass.png">
+  <img src="docs/images/revival-compass.png" width="100%" alt="Revival Compass" style="border-radius: 12px; border: 1px solid rgba(0,0,0,0.1);" />
+</a>
+<p align="center"><sub><strong>Figure 2.1:</strong> Multi-dimensional viability assessment: 3 core health signals, real-time developer momentum sliders, and actionable 2-hour sprint blueprints.</sub></p>
+</td>
+<td width="50%" valign="top">
+<h3 align="center">🤖 Context-Aware AI Forensic Copilot</h3>
+<a href="docs/images/copilot.png">
+  <img src="docs/images/copilot.png" width="100%" alt="Forensic Copilot" style="border-radius: 12px; border: 1px solid rgba(0,0,0,0.1);" />
+</a>
+<p align="center"><sub><strong>Figure 2.2:</strong> Autonomous forensic agent auditing commit histories, identifying salvageable components, and diagnosing exact causes of failure.</sub></p>
+</td>
+</tr>
+</table>
 
+---
+
+## 🔥 Round 2 Surprise Challenge: The Canvas Protocol
+> **Challenge Option A Selected & Fully Implemented**
+> 
+> As part of the **6:00 PM Round 2 Surprise Challenge**, Team Hashing implemented **Option A: The Canvas Protocol (`Drag. Drop. Revive.`)** — replacing static tables and forms with an interactive spatial operating system:
+> - 🎯 **Spatial Tri-Column Architecture**: Project Catalog (Left) &rarr; Central Diagnostic Dropzone (Center) &rarr; Action Execution Gates (Right).
+> - ⚡ **Instant Dropzone Diagnostics**: Staging repositories onto the center workbench triggers an instant deep forensic autopsy without manual page reloads.
+> - 🚀 **Action Gate Dispatch**: Direct drag-and-drop into Deploy, Publish, Archive, or Remove zones with zero-friction visual transitions.
+
+---
+
+## 🎯 Core Capabilities
+
+### 1. 🖐️ The Canvas Protocol (`Drag. Drop. Revive.`)
+- **Spatial Tri-Column Workbench**: Replaces static CRUD dashboards with an interactive tactile canvas.
+- **Drag-to-Diagnose**: Drag any project card from the left catalog and drop it into the central **AI Forensic Dropzone** to immediately compute its completion percentage, salvage potential, and cause of demise.
+- **Instant Action Zones**: Drop staged specimens directly into right-side execution gates:
+  - 🚀 **Deploy / Launch**: Launches a 120-minute revival sprint with focused scope pruning.
+  - 🔬 **Submit / Publish**: Commences an in-depth forensic autopsy and issues a shareable digital folio.
+  - 📦 **Save / Archive**: Preserves the specimen with honors in the Botanical Herbarium Vault.
+  - 🗑️ **Delete / Remove**: Clean removal with safety guards.
+
+### 2. 🪦 Dignified Burial Ceremony & Forensic Autopsy
+- **Root-Cause Classification**: Automatically diagnoses why the project paused (*Circumstantial Scope Creep, Technical Debt, Lost Momentum, Solo Isolation*).
+- **Herbarium Specimen Sheets**: Assigns museum-grade catalog folio numbers (e.g. `LL-02`, `EV-01`), botanical plates, and heartfelt developer epitaphs.
+- **Legal & License Verification**: Identifies open-source compatibility to ensure salvaged code can be legally reused.
+
+### 3. 🧭 Revival Compass & Decision Archetypes
+- **3-Pillar High-Clarity Verdict**:
+  1. 💻 **Code & Reusable Assets Built**: Preserved schema, auth, and tested UI.
+  2. 💡 **Problem Relevance & Market Demand**: Verifies if the customer problem is still urgent today.
+  3. ⏱️ **Effort to Ship MVP**: Clear 3-step path (*Prune scope &rarr; Re-link modern keys &rarr; Ship 1-feature MVP*).
+- **Developer Pulse Check**: Real-time interactive calibration sliders (*Excitement*, *Skill Growth Since Burial*, *Solo vs. Team Overhead*) that dynamically recalculate the project's viability index.
+- **5 Standard Archetypes**: Directs every codebase to its honest destiny:
+  1. *Restart from Scratch* (Score &lt; 45)
+  2. *Continue with a Smaller Scope* (Score 75–90)
+  3. *Change the Core Idea* (Score 60–74)
+  4. *Repurpose Component Gems Only* (Score 45–59)
+  5. *Honor & Archive in Deep Soil* (Score &lt; 35)
+
+### 4. 📦 Salvage Yard & Code Harvester
+- **Modular Extraction**: Dissects monolithic dead repos into isolated, production-ready modules (*Auth Systems, Stripe Checkouts, UI Kits, Custom Hooks*).
+- **1-Click Client-Side Export**: Generates and downloads real `.zip` bundles directly in the browser using `JSZip` — no remote server latency or data leakage.
+
+### 5. 🌱 Graft Studio (Code Cross-Pollination)
+- **Botanical Grafting Engine**: Takes harvested modules from Project A and grafts them into a fresh starter scaffold (Next.js, Vite React, Svelte, or Remix).
+- **Dependency & Compatibility Check**: Evaluates runtime version gaps before code transplantation.
+
+### 6. 📊 Pattern Insights (The Developer's Mirror)
+- **Macro Retrospective**: Surfaces overarching habits across your graveyard.
+- **Failure Analytics**: Visual breakdown of why your past 20 projects died so you never repeat the same mistakes in future sprints.
+
+### 7. 🎨 Ambient Theming System
+- **5 Curated Designer Themes**:
+  - 🌿 **Botanical Ivory (Pitch Deck Edition)**: Warm ivory canvas with deep pine forest typography.
+  - 🧊 **Neo-Tactile Soft UI (Pivora Kit)**: Calm sand textures with sunken wells and raised cream tactile buttons.
+  - 🌌 **Galactic Glass (Dark Glassmorphism)**: Smoky emerald glass over an obsidian deep void.
+  - 🌙 **Botanical Dark (Original Conservatory)**: Midnight forest depths with sage accents.
+  - ☀️ **Monochrome SaaS (Enterprise Minimal)**: High-contrast luxury black and white.
+
+---
+
+## 🏗️ System Architecture
+
+Project Graveyard is engineered as a **100% client-driven, zero-latency progressive web application**. It requires no heavy database cold-starts or expensive third-party infrastructure to experience full functionality.
+
+```mermaid
+flowchart TB
+    subgraph ClientWorkspace["Project Graveyard Architecture"]
+        direction TB
+        
+        subgraph UI["Presentation Layer (React 19 + Tailwind v4)"]
+            Canvas["Canvas Protocol<br/>(Drag & Drop Orchestrator)"]
+            Compass["Revival Compass<br/>(Dynamic Heuristics)"]
+            Autopsy["Autopsy Vitrine<br/>(Forensic Herbarium)"]
+            Graft["Graft Studio<br/>(Code Transplantation)"]
+            Copilot["Forensic Copilot<br/>(Local AI Assistant)"]
+        end
+
+        subgraph Engines["Core Engine Layer"]
+            ViabilityEngine["Viability Index Calculator<br/>(Code + Demand + Pulse Sliders)"]
+            TaxonomyEngine["Root-Cause Classifier<br/>(Forensic Taxonomy)"]
+            ZipHarvester["Client-Side Bundler<br/>(JSZip Module Exporter)"]
+            ThemeEngine["Ambience Manager<br/>(CSS Variable Tokens)"]
+        end
+
+        subgraph StateLayer["Storage & Cache"]
+            LocalVault["Local Repository Vault<br/>(Reactive State + LocalStorage)"]
+            GitHubAPI["GitHub REST API<br/>(Public Repo Metadata Intake)"]
+        end
+    end
+
+    Canvas --> ViabilityEngine
+    Canvas --> ZipHarvester
+    Compass --> ViabilityEngine
+    Autopsy --> TaxonomyEngine
+    UI --> ThemeEngine
+    GitHubAPI --> LocalVault
+    LocalVault --> Engines
 ```
-        [ Abandoned Repository ]
-                   │
-                   ▼
-        1. CAPTURE  (Crypt + Autopsy)
-           context, technical debt, epitaph
-                   │
-                   ▼
-        2. EVALUATE (Revival Compass)
-           viability score 0–100
-           → Continue | Repurpose | Archive
-                   │
-                   ▼
-        3. ACT      (Sprint Roadmap + Salvage Yard)
-           120-minute plan, reusable code export
-```
 
 ---
 
-## 🏛️ Features
+## 💻 Tech Stack & Engineering Rigor
 
-### 🪦 1. The Crypt & Preserved Specimens Catalog
-- Catalog of abandoned projects, each tagged with a failure classification: *Time Shortage*, *Scope Creep*, *Technical Blocker*, *Hackathon Ended*.
-- **Autopsy view** showing git history, completion percentage, and technical debt.
-- Keyboard-first command palette with instant specimen filtering.
-
-### 🧭 2. The Revival Compass
-- Viability score based on technical freshness, architecture health, and market timing.
-- Clear recommendation: **Continue**, **Repurpose**, or **Archive**.
-- A timeboxed **120-minute Revival Sprint Roadmap** with an actionable checklist.
-
-### 📦 3. The Salvage Yard
-- Pulls out clean, reusable modules (for example JWT auth engines or canvas loops).
-- **One-click ZIP export** generated in the browser with JSZip, with no server needed.
-
-### 🧬 4. Graft Studio & AI Forensic Copilot
-- **Graft Studio:** combine components from multiple dead projects into the base of a new MVP.
-- **AI Copilot:** a floating assistant that answers questions about the projects in the Crypt.
-
-### ✨ Extras & Power User Tools
-- **Web Audio 432Hz Soundscape:** procedural synthesizer node creating calming focus acoustics with instant mute toggle.
-- **Specimen Folio Sharing:** instant shareable markdown & link generator modal for any preserved project.
-- **Milestone Celebration:** dynamic SVG/CSS confetti burst triggered on revival verdict confirmation.
-- **Version Changelog Modal:** interactive release logs tracking continuous build history and feature milestones.
-- **Power User Hotkeys:** full keyboard navigation cheatsheet (`?` hotkey) and command palette (`⌘K`).
-- **Conservatory Themes:** 5 switchable ambience themes (Necropolis Noir, Botanical Ivory, Terracotta Vault, Aero Specimen, Clinical Archives).
-- **Responsive Layout:** fluid experience optimized across desktop, tablet, and mobile displays.
-- **Local Persistence:** browser LocalStorage and SessionStorage persistence without external database locks.
-
+| Layer | Technology | Engineering Rationale |
+| :--- | :--- | :--- |
+| **Frontend Framework** | **React 19** | Latest React architecture utilizing automatic compiler optimizations and modern hooks. |
+| **Language** | **TypeScript 5 (Strict)** | Comprehensive typed contracts across specimens, modules, telemetry, and forensic diagnoses. |
+| **Styling & Design Tokens** | **Tailwind CSS v4** | Next-generation zero-config CSS engine with high-performance CSS theme variable tokens. |
+| **Build Tooling** | **Vite 8** | Sub-400ms production builds and instant Hot Module Replacement (HMR). |
+| **Iconography** | **Lucide React + Material Symbols** | Consistent botanical, mechanical, and developer symbols with accessible SVGs. |
+| **Client-Side Export** | **JSZip** | Compiles real file system directory trees in browser memory for instant download. |
+| **Haptic & Sound Design** | **Web Audio API** | Subtle synthesized acoustic feedback for card drops, sprigs, and burial ceremonies. |
 
 ---
 
-## ⚙️ How It Works
+## ⌨️ Productivity Keyboard Shortcuts
 
-1. **Capture:** a project enters the Crypt with its history, completion level, failure reason, and technical debt.
-2. **Evaluate:** the Revival Compass scores several signals and produces a 0–100 viability score with a recommendation.
-3. **Act:** the user follows the generated 120-minute roadmap, exports reusable code from the Salvage Yard, or combines parts in Graft Studio.
+For power developers and hackathon judges, Project Graveyard features built-in global shortcuts:
 
-Everything runs in the browser. There is no backend, and project data stays on the user's device.
-
----
-
-## 🎨 Design Philosophy
-
-**Warm Sandstone Claymorphism**, built to feel calm instead of like a cold SaaS dashboard.
-
-- **Tactile soft UI:** rounded clay-like surfaces, soft shadows, and warm tones (`#FAF6F0`, `#DE8553`).
-- **Calm atmosphere:** gentle sound and smooth motion.
-- **Clear hierarchy:** one primary action per screen, consistent spacing and typography.
-- **Responsive:** designed mobile-first and scaled up.
+| Shortcut | Action | Scope |
+| :---: | :--- | :--- |
+| <kbd>Cmd</kbd> + <kbd>K</kbd> / <kbd>Ctrl</kbd> + <kbd>K</kbd> | Open Global Command Palette & Specimen Search | App-wide |
+| <kbd>J</kbd> | Quick-Jump to Workspace Views | Workspace |
+| <kbd>N</kbd> or <kbd>B</kbd> | Open "Bury a Project / Add Specimen" Modal | Workspace |
+| <kbd>?</kbd> | View Interactive Keyboard Shortcuts Reference | App-wide |
+| <kbd>Esc</kbd> | Dismiss any open modal, drawer, or theme menu | Global |
+| <kbd>Enter</kbd> / <kbd>Shift + Enter</kbd> | Send Copilot message / Insert multiline code | AI Copilot |
 
 ---
 
-## 🛠️ Tech Stack
-
-| Layer | Technology |
-| :--- | :--- |
-| Framework | React 19 + TypeScript |
-| Build tool | Vite 8 |
-| Styling | Tailwind CSS v4 with custom theme variables |
-| Audio | Web Audio API |
-| Export | JSZip |
-| State | React context + LocalStorage / SessionStorage |
-
----
-
-## 🚀 Getting Started
+## 🚀 Quickstart Guide
 
 ### Prerequisites
-- [Node.js](https://nodejs.org/) 18 or newer
-- npm (comes with Node.js)
-- Git
+- **Node.js**: `v22.12` or newer (Tested cleanly on Node `v22.22.1` & `v24.12.0`).
+- **npm**: `v10+` and Git.
 
-### Setup
+### Installation & Local Run
 
 ```bash
 # 1. Clone the repository
 git clone https://github.com/anshjaiswal2911-tech/Team-Hashing-CodeVariant.git
 cd Team-Hashing-CodeVariant
 
-# 2. Install dependencies
-npm install --legacy-peer-deps
+# 2. Install dependencies (peer-dependency clean)
+npm ci --legacy-peer-deps
 
-# 3. (Optional) create your local environment file
-cp .env.example .env
-
-# 4. Start the development server
+# 3. Start high-speed local dev server
 npm run dev
 ```
 
-Open the local URL printed in the terminal (usually `http://localhost:5173`).
+Open your browser to **`http://localhost:3000`** (or next available port).
 
-> **Note:** `--legacy-peer-deps` is needed because of a peer-dependency version mismatch between Vite and its plugins. Adding a `.npmrc` file containing `legacy-peer-deps=true` makes a plain `npm install` work too.
+### Production Build & Verification
 
-### Environment variables
+```bash
+# Verify TypeScript typing with zero errors
+npm run lint
 
-Copy `.env.example` to `.env` and fill in only the values you need. **Never commit `.env` or real API keys.**
+# Generate production bundle in dist/
+npm run build
 
----
-
-## 📜 Scripts
-
-| Command | What it does |
-| :--- | :--- |
-| `npm run dev` | Starts the dev server with hot reload |
-| `npm run build` | Creates an optimized production build in `dist/` |
-| `npm run preview` | Serves the production build locally for a final check |
-
----
-
-## 📁 Project Structure
-
-```
-Team-Hashing-CodeVariant/
-├── docs/                      # Architectural specifications & technical guides
-│   ├── forensics-taxonomy.md  # 6 Forensic failure modes and antidote protocols
-│   ├── grafting-doctrine.md   # Zero-dependency module transplantation rules
-│   ├── salvage-manifest-spec.md # JSON manifest and sanitization specs
-│   ├── cemetery-curation-guide.md # Curation ethics & specimen vaulting standards
-│   └── security-sanitization.md # Secret stripping and credential safety
-├── public/                    # Static assets & favicon
-├── src/
-│   ├── assets/                # Botanical icons & transparent 3D copilot assets
-│   ├── components/
-│   │   ├── AiChatbot/         # Forensic Copilot tool window
-│   │   ├── Archive/           # Archival Folio vitrines
-│   │   ├── Autopsy/           # Git timeline, stack audit & root cause breakdown
-│   │   ├── CommandPalette/    # ⌘K global forensic search
-│   │   ├── Graft/             # Donor transplantation cards
-│   │   ├── Modals/            # Memorial autopsy, welcome showcase, export modals
-│   │   ├── Navigation/        # Header, collapsible sidebar, quick jump menu
-│   │   ├── Revival/           # 120-minute sprint roadmap & viability score cards
-│   │   ├── Salvage/           # Syntax previewer, filter bars & dependency graphs
-│   │   └── ui/                # Reusable primitives (Badge, GlassPill, RadarScore, DiffHighlighter)
-│   ├── hooks/                 # Web Audio synthesis, LocalStorage, hotkeys, focus traps
-│   ├── utils/                 # Revival scorer, code sanitizer, sprint estimator, license checker
-│   ├── views/                 # Landing, Overview, Bury, Salvage, Revival, Graft, Archive, Insights
-│   └── data/                  # Mock specimens, telemetry, graft pairings, blueprints
-├── tests/                     # Unit test suites for scoring, classification & compliance
-├── package.json
-└── tsconfig.json
+# Preview production build locally
+npm run preview
 ```
 
 ---
 
-## ☁️ Deployment
+## 🌐 Live Deployment & Submission Links
 
-The app is a static frontend, so it deploys easily to Vercel or Netlify:
-
-1. Import the GitHub repository.
-2. Build command: `npm run build`
-3. Output directory: `dist`
-4. Every push to `main` redeploys automatically.
-
-Live URL: **https://OUR-LIVE-URL-HERE**
+- **GitHub Repository**: [https://github.com/anshjaiswal2911-tech/Team-Hashing-CodeVariant](https://github.com/anshjaiswal2911-tech/Team-Hashing-CodeVariant)
+- **Live Deployment Demo**: *Production live link will be updated here post-9:00 PM Checkpoint 4 deployment.*
+- **Zero-Config Static Architecture**: High-speed Single Page App (SPA) targeting `dist/` — ready for instantaneous Vercel / Netlify / Cloudflare deployment.
 
 ---
 
-## 📅 Build Progress
+## 🧪 Testing & Verification
 
-Code Variant Round 2 is a 12-hour live build with 4 checkpoints and a final submission.
+Unit test suites cover viability algorithms, module licensing extraction, failure mode classification, and archive message sanitization:
 
-- [x] **12:00 PM — Checkpoint 1:** Repository initialized, team details submitted
-- [ ] **3:00 PM — Checkpoint 2:** Core UI, landing experience, and Crypt / Specimens catalog
-- [ ] **6:00 PM — Checkpoint 3:** Revival Compass and Salvage Yard, plus **Surprise Challenge**
-- [ ] **9:00 PM — Checkpoint 4:** Graft Studio, polish, and responsive pass
-- [ ] **11:59 PM — Final Submission:** Live deployment and final documentation
-
----
-
-## 👥 Team Hashing
-
-| Member | Role | GitHub |
-| :--- | :--- | :--- |
-| **Ansh Jaiswal** | Team Lead & Frontend Architect | [`@anshjaiswal2911-tech`](https://github.com/anshjaiswal2911-tech) |
-| **Aryan Jaiswal** | UI/UX & Design Systems | [`@AryanJaiswalDev`](https://github.com/AryanJaiswalDev) |
-| **Mitesh Jha** | Logic, Components & Integration | [`@jhamitesh0302-afk`](https://github.com/jhamitesh0302-afk) |
-| **Rajiv Jha** | Architecture, Data & Documentation | [`@jharajiv315`](https://github.com/jharajiv315) |
+```bash
+# Run Vitest test suites
+npm exec --yes --package=vitest@5.0.5 -- vitest run --globals
+```
 
 ---
+
+## 👥 Built by Team Hashing
+
+Developed with pride for **Code Variant Hackathon — Build 01 (Round 2)** addressing **Problem Statement 05: The Project Graveyard**.
 
 <div align="center">
 
-*Crafted with care by **Team Hashing** for **Code Variant — Build 01 (2026)**.*
+| Member | Focus | GitHub Profile |
+| :--- | :--- | :---: |
+| **Ansh Jaiswal** | **Team Lead & Frontend Architecture** | [@anshjaiswal2911-tech](https://github.com/anshjaiswal2911-tech) |
+| **Aryan Jaiswal** | **UI/UX, Ambience Themes & Design Systems** | [@AryanJaiswalDev](https://github.com/AryanJaiswalDev) |
+| **Mitesh Jha** | **Canvas Protocol, Drag-Drop Logic & Integration** | [@jhamitesh0302-afk](https://github.com/jhamitesh0302-afk) |
+| **Rajiv Jha** | **Forensics Methodology, Data Schemas & Architecture** | [@jharajiv315](https://github.com/jharajiv315) |
+
+<br />
+
+<p align="center">
+  <sub>Project Graveyard &copy; 2026 Team Hashing. Distributed under the MIT License.</sub>
+</p>
 
 </div>

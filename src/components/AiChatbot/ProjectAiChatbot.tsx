@@ -1,23 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { ProjectSpecimen } from '../../types';
+﻿import { useEffect, useRef, useState, type KeyboardEvent } from 'react';
+import { ArrowRight, ArrowUp, Check, ChevronDown, Clock3, Compass, Copy, Info, LoaderCircle, Maximize2, Minimize2, Package, RotateCcw, Search, X } from 'lucide-react';
+import type { ProjectSpecimen } from '../../types';
 import aiBotImg from '../../assets/ai-bot.png';
-
-interface Message {
-  id: string;
-  sender: 'user' | 'assistant';
-  timestamp: string;
-  text: string;
-  codeSnippet?: {
-    language: string;
-    filename: string;
-    code: string;
-  };
-  actions?: {
-    label: string;
-    icon: string;
-    actionType: 'salvage' | 'revival' | 'compass';
-  }[];
-}
+import { ChatMessageContent } from './ChatMessageContent';
+import { createArchiveReply, createGreeting, createMessage, type ChatAction, type ChatMessage } from './chatMessages';
+import styles from './ProjectAiChatbot.module.css';
 
 interface ProjectAiChatbotProps {
   isOpen: boolean;
@@ -30,500 +17,197 @@ interface ProjectAiChatbotProps {
   onReplayIntro?: () => void;
 }
 
-export const ProjectAiChatbot: React.FC<ProjectAiChatbotProps> = ({
-  isOpen,
-  onClose,
-  specimen,
-  allSpecimens,
-  onSelectSpecimen,
-  onNavigateToRevival,
-  onNavigateToSalvage,
-  onReplayIntro,
-}) => {
-  const [messages, setMessages] = useState<Message[]>([]);
+const suggestions = [
+  { icon: Search, title: 'Why did it stall?', detail: 'Understand the recorded blockers', prompt: 'Why did this project stall?' },
+  { icon: Package, title: 'Find reusable work', detail: 'Review the preserved modules', prompt: 'What modules can I salvage?' },
+  { icon: Clock3, title: 'Plan a two-hour restart', detail: 'Turn the archive into a next step', prompt: 'Create a two-hour revival plan.' },
+];
+const actionIcons = { salvage: Package, revival: Compass, cause: Search };
+
+export function ProjectAiChatbot({ isOpen, onClose, specimen, allSpecimens, onSelectSpecimen, onNavigateToRevival, onNavigateToSalvage, onReplayIntro }: ProjectAiChatbotProps) {
+  const currentSpecimen = allSpecimens.find((project) => project.id === specimen?.id) || allSpecimens[0];
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [conversationProject, setConversationProject] = useState<string>();
   const [inputMessage, setInputMessage] = useState('');
   const [isTyping, setIsTyping] = useState(false);
-  const [copiedCodeId, setCopiedCodeId] = useState<string | null>(null);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
   const [isMaximized, setIsMaximized] = useState(false);
+  const [isMobile, setIsMobile] = useState(() => window.matchMedia('(max-width: 639px)').matches);
+  const [copiedCodeId, setCopiedCodeId] = useState<string | null>(null);
+  const [copyError, setCopyError] = useState(false);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const feedRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
+  const pendingReply = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const copyTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const latestProjectId = useRef(currentSpecimen?.id);
+  latestProjectId.current = currentSpecimen?.id;
+  const isModal = isMobile || isMaximized;
+  const visibleMessages = conversationProject === currentSpecimen?.id ? messages : [];
+  const hasConversation = visibleMessages.some((message) => message.sender === 'user');
 
-  // Active specimen fallback
-  const currentSpecimen = specimen || allSpecimens[0];
+  const cancelReply = () => {
+    if (pendingReply.current !== null) clearTimeout(pendingReply.current);
+    pendingReply.current = null;
+  };
 
-  // Initialize or update greeting when specimen changes
   useEffect(() => {
-    if (!currentSpecimen) return;
+    const media = window.matchMedia('(max-width: 639px)');
+    const update = () => setIsMobile(media.matches);
+    media.addEventListener('change', update);
+    return () => media.removeEventListener('change', update);
+  }, []);
 
-    const initialGreeting: Message = {
-      id: `welcome-${currentSpecimen.id}`,
-      sender: 'assistant',
-      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-      text: `Hello! I am your **Conservatory Forensic Copilot**. I have loaded the complete archival autopsy and AST nodes for **${currentSpecimen.title}** (${currentSpecimen.category} • ${currentSpecimen.specimenNumber}).\n\nI can answer questions regarding why this project was abandoned, which zero-dependency code modules you can salvage, or produce an AI revival blueprint. What would you like to explore?`,
-      actions: [
-        { label: 'Why did this fail?', icon: 'search', actionType: 'compass' },
-        { label: 'View Salvageable Modules', icon: 'inventory_2', actionType: 'salvage' },
-        { label: 'Generate 2-Hr Revival Plan', icon: 'explore', actionType: 'revival' },
-      ],
-    };
-
-    setMessages([initialGreeting]);
+  useEffect(() => {
+    cancelReply();
+    setConversationProject(currentSpecimen?.id);
+    setMessages(currentSpecimen ? [createGreeting(currentSpecimen)] : []);
+    setInputMessage(''); setIsTyping(false); setCopiedCodeId(null); setCopyError(false);
+    if (copyTimer.current !== null) clearTimeout(copyTimer.current);
+    return cancelReply;
   }, [currentSpecimen?.id]);
 
-  // Scroll to bottom when messages change
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages, isTyping]);
+    if (!isOpen) return;
+    const previousFocus = document.activeElement as HTMLElement | null;
+    inputRef.current?.focus({ preventScroll: true });
+    return () => { previousFocus?.focus({ preventScroll: true }); };
+  }, [isOpen]);
 
-  if (!isOpen) return null;
+  useEffect(() => {
+    if (!isOpen || !isModal) return;
+    const overflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = overflow; };
+  }, [isOpen, isModal]);
 
-  // Generate contextual AI answers based on the specimen's real data
-  const generateAiResponse = (userPrompt: string): Message => {
-    const promptLower = userPrompt.toLowerCase();
-    const timeNow = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  useEffect(() => () => { cancelReply(); if (copyTimer.current !== null) clearTimeout(copyTimer.current); }, []);
 
-    // 1. Failure / Root Cause / Demise
-    if (
-      promptLower.includes('why') ||
-      promptLower.includes('fail') ||
-      promptLower.includes('kyu') ||
-      promptLower.includes('cause') ||
-      promptLower.includes('reason') ||
-      promptLower.includes('dormant') ||
-      promptLower.includes('abandon')
-    ) {
-      return {
-        id: `ai-${Date.now()}`,
-        sender: 'assistant',
-        timestamp: timeNow,
-        text: `### 🔍 Forensic Autopsy Report: ${currentSpecimen.title}\n\n**Primary Root Cause:** **${currentSpecimen.causeCategory}**\n${currentSpecimen.rootCause}\n\n**Unfinished Technical Trails:**\n${currentSpecimen.unfinishedNotes}\n\n**Curatorial Verdict:**\n> "${currentSpecimen.curatorAnalysis}"\n\n**Key Takeaway:** The idea did not fail due to a defective premise, but due to friction during the final 38% execution phase. It is currently vaulted with **${currentSpecimen.completionPercentage}% completion preserved**.`,
-        actions: [
-          { label: 'Calculate Revival Viability', icon: 'explore', actionType: 'revival' },
-          { label: 'Inspect Salvage Modules', icon: 'inventory_2', actionType: 'salvage' },
-        ],
-      };
-    }
+  useEffect(() => {
+    const feed = feedRef.current;
+    if (!isOpen || !feed) return;
+    const newestMessage = messages[messages.length - 1];
+    const newestArticle = feed.querySelector<HTMLElement>('article:last-of-type');
+    // Long replies open at their beginning so the assessment can be read in order.
+    feed.scrollTop = newestMessage?.sender === 'assistant' && newestArticle && messages.length > 1
+      ? Math.max(0, newestArticle.offsetTop - 12)
+      : feed.scrollHeight;
+  }, [messages, isTyping, isOpen]);
 
-    // 2. Salvageable Modules / Reuse / Code
-    if (
-      promptLower.includes('salvage') ||
-      promptLower.includes('module') ||
-      promptLower.includes('reuse') ||
-      promptLower.includes('extract') ||
-      promptLower.includes('component') ||
-      promptLower.includes('code')
-    ) {
-      const moduleList = currentSpecimen.preservedSalvageModules
-        .map((m, i) => `${i + 1}. **${m.name}** (Icon: \`${m.icon}\`) — Cleansed of private API keys.`)
-        .join('\n');
+  useEffect(() => {
+    const input = inputRef.current;
+    if (input) { input.style.height = 'auto'; input.style.height = `${Math.min(input.scrollHeight, 132)}px`; }
+  }, [inputMessage, isOpen]);
 
-      return {
-        id: `ai-${Date.now()}`,
-        sender: 'assistant',
-        timestamp: timeNow,
-        text: `### 🌾 Salvage Yard Extraction: ${currentSpecimen.title}\n\nWe have indexed **${currentSpecimen.preservedSalvageModules.length} reusable modules** with **${currentSpecimen.salvageViability.level}** viability:\n\n${moduleList}\n\nHere is a zero-dependency excerpt ready to graft into your current application:`,
-        codeSnippet: {
-          language: 'typescript',
-          filename: `${currentSpecimen.title.replace(/\s+/g, '')}Module.ts`,
-          code: `// Extracted from ${currentSpecimen.title} (${currentSpecimen.specimenNumber})\n// Sanitized of proprietary credentials • Ready for graft\n\nexport interface PreservedConfig {\n  specimenId: "${currentSpecimen.id}";\n  category: "${currentSpecimen.category}";\n  completionVelocity: ${currentSpecimen.completionPercentage};\n}\n\nexport async function initializeModule(config: PreservedConfig) {\n  console.log("Grafting ${currentSpecimen.title} module into new canvas...");\n  return {\n    status: "active",\n    harvestedDate: "${new Date().toISOString()}",\n    reclaimedHours: 18,\n  };\n}`,
-        },
-        actions: [
-          { label: 'Go to Salvage Yard', icon: 'inventory_2', actionType: 'salvage' },
-          { label: 'Start Revival Compass', icon: 'explore', actionType: 'revival' },
-        ],
-      };
-    }
+  function resetConversation() {
+    cancelReply();
+    setMessages(currentSpecimen ? [createGreeting(currentSpecimen)] : []);
+    setIsTyping(false); setInputMessage(''); setCopiedCodeId(null); setCopyError(false);
+    inputRef.current?.focus();
+  }
 
-    // 3. Revival / How to Revive / 2-Hour Sprint
-    if (
-      promptLower.includes('revive') ||
-      promptLower.includes('revival') ||
-      promptLower.includes('sprint') ||
-      promptLower.includes('plan') ||
-      promptLower.includes('roadmap') ||
-      promptLower.includes('kaise') ||
-      promptLower.includes('how')
-    ) {
-      return {
-        id: `ai-${Date.now()}`,
-        sender: 'assistant',
-        timestamp: timeNow,
-        text: `### 🧭 120-Minute Revival Blueprint\n\n**Revival Viability Score:** **${currentSpecimen.revivalScore}/100 (${currentSpecimen.status === 'prime-candidate' ? 'Prime Candidate' : 'High Potential'})**\n\n**Recommended 2-Hour Focus Roadmap:**\n\n1. **Minutes 00–25 [Prune Dead Limbs]:** Remove unmaintained dependencies from \`${currentSpecimen.techStack.join(', ')}\` and clean configuration.\n2. **Minutes 25–65 [Core Circuit Repair]:** Resolve the unfinished trail: *"${currentSpecimen.unfinishedNotes}"*.\n3. **Minutes 65–95 [Graft Modern UI]:** Apply the responsive Neo-Tactile / Galactic Glass tokens to the primary workflow.\n4. **Minutes 95–120 [Deploy & Verify]:** Ship to staging with live client-side validation.\n\n*Estimated engineering hours saved by revival: ~48 dev hours.*`,
-        actions: [
-          { label: 'Launch 2-Hour Graft Sprint Modal', icon: 'timer', actionType: 'revival' },
-        ],
-      };
-    }
-
-    // 4. Tech Stack & Modernization
-    if (
-      promptLower.includes('tech') ||
-      promptLower.includes('stack') ||
-      promptLower.includes('modern') ||
-      promptLower.includes('migrate')
-    ) {
-      return {
-        id: `ai-${Date.now()}`,
-        sender: 'assistant',
-        timestamp: timeNow,
-        text: `### 🛠️ Architecture & Tech Stack Modernization\n\n**Preserved Legacy Stack:**\n${currentSpecimen.techStack.map((t) => `• \`${t}\``).join('\n')}\n\n**2026 Recommended Upgrade Path:**\n• Replace bundler with **Vite 8 + React 19** for instant HMR.\n• Switch styling to **Tailwind CSS v4** tokenized CSS variables.\n• Replace legacy backend with **Supabase Edge Functions** or local SQLite vector storage.\n• Integrate **Gemini Nano / WebLLM** for local client-side inference.`,
-      };
-    }
-
-    // 5. Default Curatorial Assistant Fallback
-    return {
-      id: `ai-${Date.now()}`,
-      sender: 'assistant',
-      timestamp: timeNow,
-      text: `Regarding **${currentSpecimen.title}**:\n\n${currentSpecimen.curatorAnalysis}\n\n• **Folio:** ${currentSpecimen.folioNumber}\n• **Category:** ${currentSpecimen.category}\n• **Buried:** ${currentSpecimen.buriedDate} (${currentSpecimen.dormantDuration})\n• **Completion Level:** ${currentSpecimen.completionPercentage}%\n• **Viability Score:** ${currentSpecimen.revivalScore}/100\n\nYou can ask me specific technical questions like *"Why did this fail?"*, *"Show me the salvageable code"*, or *"Generate a 2-hour revival roadmap"*.`,
-      actions: [
-        { label: 'Why did this fail?', icon: 'help_outline', actionType: 'compass' },
-        { label: 'Salvage Code Bricks', icon: 'inventory_2', actionType: 'salvage' },
-      ],
-    };
-  };
-
-  const handleSendMessage = (e?: React.FormEvent) => {
-    e?.preventDefault();
-    if (!inputMessage.trim() || isTyping) return;
-
-    const userMsg: Message = {
-      id: `user-${Date.now()}`,
-      sender: 'user',
-      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-      text: inputMessage.trim(),
-    };
-
-    const promptText = inputMessage.trim();
-    setMessages((prev) => [...prev, userMsg]);
-    setInputMessage('');
-    setIsTyping(true);
-
-    // Simulate realistic AI thought deliberation
-    setTimeout(() => {
-      const aiReply = generateAiResponse(promptText);
-      setMessages((prev) => [...prev, aiReply]);
+  function sendMessage(prompt = inputMessage) {
+    const text = prompt.trim();
+    if (!text || !currentSpecimen || pendingReply.current !== null) return;
+    const project = currentSpecimen;
+    setMessages((previous) => [...previous, createMessage('user', text)]);
+    setInputMessage(''); setIsTyping(true); setCopyError(false);
+    pendingReply.current = setTimeout(() => {
+      pendingReply.current = null;
+      if (latestProjectId.current !== project.id) return;
+      setMessages((previous) => [...previous, createArchiveReply(text, project)]);
       setIsTyping(false);
-    }, 600);
-  };
+    }, 450);
+    inputRef.current?.focus({ preventScroll: true });
+  }
 
-  const handleActionClick = (actionType: 'salvage' | 'revival' | 'compass') => {
-    if (actionType === 'revival' && onNavigateToRevival) {
-      onNavigateToRevival(currentSpecimen);
-    } else if (actionType === 'salvage' && onNavigateToSalvage) {
-      onNavigateToSalvage();
-    } else {
-      // Trigger prompt
-      setInputMessage('Explain the exact reasons why this project was vaulted.');
-    }
-  };
+  function handleAction(action: ChatAction) {
+    if (action === 'revival' && currentSpecimen && onNavigateToRevival) { onNavigateToRevival(currentSpecimen); onClose(); }
+    else if (action === 'salvage' && onNavigateToSalvage) { onNavigateToSalvage(); onClose(); }
+    else sendMessage(action === 'salvage' ? 'Show the preserved modules.' : action === 'revival' ? 'Create a revival plan.' : 'Why did this project stall?');
+  }
 
-  const copyCode = (code: string, id: string) => {
-    navigator.clipboard.writeText(code);
-    setCopiedCodeId(id);
-    setTimeout(() => setCopiedCodeId(null), 2000);
-  };
+  async function copyCode(message: ChatMessage) {
+    if (!message.codeSnippet) return;
+    setCopiedCodeId(null);
+    try {
+      await navigator.clipboard.writeText(message.codeSnippet.code);
+      setCopiedCodeId(message.id); setCopyError(false);
+      if (copyTimer.current !== null) clearTimeout(copyTimer.current);
+      copyTimer.current = setTimeout(() => setCopiedCodeId(null), 2000);
+    } catch { setCopyError(true); }
+  }
+
+  function handlePanelKey(event: KeyboardEvent<HTMLDivElement>) {
+    if (event.key === 'Escape') { event.preventDefault(); event.stopPropagation(); onClose(); }
+    if (event.key !== 'Tab' || !isModal) return;
+    const focusable = panelRef.current?.querySelectorAll<HTMLElement>('button:not(:disabled), select:not(:disabled), textarea:not(:disabled), [tabindex="0"]');
+    if (!focusable?.length) return;
+    const first = focusable[0], last = focusable[focusable.length - 1];
+    if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+    else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+  }
 
   if (!isOpen) return null;
+  return <>
+    <div className={styles.backdrop} data-expanded={isMaximized} onClick={onClose} aria-hidden="true" />
+    <div ref={panelRef} role="dialog" aria-modal={isModal || undefined} aria-labelledby="copilot-title" aria-describedby="copilot-description"
+      className={`${styles.panel} ${isMaximized ? styles.expanded : ''}`} onKeyDown={handlePanelKey}>
+      <header className={styles.header}>
+        <div className={styles.identity}>
+          <img src={aiBotImg} alt="" className={styles.avatar} />
+          <div className={styles.identityText}><h2 id="copilot-title">Forensic copilot</h2><p id="copilot-description">A fresh look at unfinished work</p></div>
+        </div>
+        <div className={styles.controls}>
+          {onReplayIntro && <button type="button" onClick={() => { onClose(); onReplayIntro(); }} aria-label="About your assistant" title="About your assistant"><Info size={17} aria-hidden="true" /></button>}
+          <button type="button" onClick={resetConversation} aria-label="New conversation" title="New conversation"><RotateCcw size={17} aria-hidden="true" /></button>
+          <button type="button" onClick={() => setIsMaximized((previous) => !previous)} aria-label={isMaximized ? 'Restore chat window' : 'Expand chat window'} title={isMaximized ? 'Restore chat window' : 'Expand chat window'} className={styles.expandControl}>{isMaximized ? <Minimize2 size={17} aria-hidden="true" /> : <Maximize2 size={17} aria-hidden="true" />}</button>
+          <button type="button" onClick={onClose} aria-label="Close assistant" title="Close assistant"><X size={20} aria-hidden="true" /></button>
+        </div>
+      </header>
 
-  return (
-    <>
-      {/* Dim backdrop when maximized or on mobile */}
-      {(isMaximized || (typeof window !== 'undefined' && window.innerWidth < 640)) && (
-        <div
-          className="fixed inset-0 bg-black/45 backdrop-blur-xs z-50 transition-opacity"
-          onClick={() => {
-            if (isMaximized) setIsMaximized(false);
-            else onClose();
-          }}
-        />
-      )}
-
-      {/* ─────────────────────────────────────────────────────────────
-          Bottom-Right Anchored AI Forensic Copilot (Large & Expandable)
-         ───────────────────────────────────────────────────────────── */}
-      <aside
-        className={`fixed z-50 bg-surface-container/95 backdrop-blur-2xl flex flex-col shadow-[-12px_24px_60px_rgba(0,0,0,0.35)] border border-outline-variant/80 transition-all duration-300 ease-out overflow-hidden ${
-          isMaximized
-            ? 'inset-3 sm:inset-6 rounded-3xl'
-            : 'bottom-22 right-4 sm:right-6 w-[95vw] sm:w-[460px] md:w-[500px] lg:w-[540px] max-h-[calc(100vh-105px)] h-[660px] rounded-[28px] animate-in slide-in-from-bottom-6 zoom-in-95'
-        }`}
-        style={{ overscrollBehavior: 'contain' }}
-      >
-        {/* 1. Tool Window Top Bar (Android Studio / Antigravity Style) */}
-        <div className="px-4 py-3 bg-surface-container-low border-b border-outline-variant/60 flex items-center justify-between gap-2 flex-shrink-0 cursor-default select-none">
-          <div className="flex items-center gap-2.5 min-w-0">
-            <div className="relative w-9 h-9 rounded-2xl overflow-hidden bg-[#FAF6F0] border border-[#DE8553]/40 shadow-sm flex-shrink-0 flex items-center justify-center">
-              <img
-                src={aiBotImg}
-                alt="AI Copilot"
-                className="w-full h-full object-cover object-[50%_15%]"
-              />
-              <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-1 ring-white" />
-            </div>
-            <div className="min-w-0">
-              <div className="flex items-center gap-1.5">
-                <span className="font-serif text-sm font-semibold text-on-surface truncate">
-                  AI Forensic Copilot
-                </span>
-                <span className="px-1.5 py-0.2 rounded bg-primary-container text-on-primary-container font-mono text-[9px] font-bold uppercase">
-                  ACTIVE
-                </span>
-              </div>
-              <div className="font-sans text-[11px] text-on-surface-variant flex items-center gap-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                <span className="truncate">Context: {currentSpecimen.title}</span>
-              </div>
-            </div>
+      {currentSpecimen ? <>
+        <div className={styles.context}>
+          <div className={styles.projectPicker}>
+            <label htmlFor="copilot-project">Project context</label>
+            <div className={styles.selectWrap}><select id="copilot-project" value={currentSpecimen.id} onChange={(event) => {
+              const selected = allSpecimens.find((project) => project.id === event.target.value);
+              if (selected) onSelectSpecimen(selected);
+            }} aria-describedby="copilot-project-help">{allSpecimens.map((project) => <option key={project.id} value={project.id}>{project.title}</option>)}</select><ChevronDown size={15} aria-hidden="true" /></div>
+            <span id="copilot-project-help" className={styles.srOnly}>Switching projects starts a fresh conversation.</span>
           </div>
-
-          {/* Window Control Buttons */}
-          <div className="flex items-center gap-1 flex-shrink-0">
-            {onReplayIntro && (
-              <button
-                type="button"
-                onClick={onReplayIntro}
-                className="p-1.5 rounded-lg text-emerald-400 hover:text-emerald-300 hover:bg-surface-container transition-colors"
-                title="Meet Our AI Agent (Showcase)"
-              >
-                <span className="material-symbols-outlined text-base">neurology</span>
-              </button>
-            )}
-            <button
-              type="button"
-              onClick={() => setMessages([])}
-              className="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors"
-              title="Clear Conversation History"
-            >
-              <span className="material-symbols-outlined text-base">delete_sweep</span>
-            </button>
-            <button
-              type="button"
-              onClick={() => setIsMaximized((prev) => !prev)}
-              className="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors"
-              title={isMaximized ? 'Restore Window (Bottom Right)' : 'Maximize Copilot (Full Screen)'}
-            >
-              <span className="material-symbols-outlined text-base">
-                {isMaximized ? 'close_fullscreen' : 'open_in_full'}
-              </span>
-            </button>
-            <button
-              type="button"
-              onClick={onClose}
-              className="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors"
-              title="Minimize Copilot Window"
-            >
-              <span className="material-symbols-outlined text-lg">close</span>
-            </button>
-          </div>
+          <div className={styles.score}><span>Revival score</span><strong>{currentSpecimen.revivalScore}<small>/100</small></strong></div>
         </div>
 
-        {/* 2. Specimen Context Switcher Strip */}
-        <div className="px-4 py-2 bg-surface-container-high/60 border-b border-outline-variant/40 flex items-center justify-between gap-2 text-xs flex-shrink-0">
-          <div className="flex items-center gap-1.5 min-w-0 text-[11px]">
-            <span className="material-symbols-outlined text-secondary text-sm flex-shrink-0">
-              folder_zip
-            </span>
-            <span className="font-mono text-on-surface-variant flex-shrink-0">Specimen:</span>
-            <select
-              value={currentSpecimen.id}
-              onChange={(e) => {
-                const found = allSpecimens.find((s) => s.id === e.target.value);
-                if (found) onSelectSpecimen(found);
-              }}
-              className="bg-surface-container-high border border-outline-variant/60 rounded-md px-2 py-0.5 text-[11px] font-semibold text-on-surface focus:outline-none focus:border-primary truncate max-w-[200px]"
-            >
-              {allSpecimens.map((spec) => (
-                <option key={spec.id} value={spec.id}>
-                  {spec.title} ({spec.specimenNumber})
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <span className="font-mono text-[10px] text-secondary font-bold flex-shrink-0">
-            {currentSpecimen.revivalScore}% Viable
-          </span>
-        </div>
-
-        {/* 3. Quick Suggested Action Chips */}
-        <div className="px-4 py-2 border-b border-outline-variant/30 flex items-center gap-1.5 overflow-x-auto no-scrollbar flex-shrink-0 bg-surface-container/40">
-          <button
-            type="button"
-            onClick={() => {
-              setInputMessage('Why did this project fail? What was the cause of death?');
-            }}
-            className="px-2.5 py-1 rounded-full bg-surface-container-high hover:bg-surface-container text-on-surface text-[10px] font-medium whitespace-nowrap border border-outline-variant/50 transition-all shadow-xs flex items-center gap-1"
-          >
-            <span>🔍 Cause of Demise</span>
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              setInputMessage('What reusable code modules can I salvage right now?');
-            }}
-            className="px-2.5 py-1 rounded-full bg-surface-container-high hover:bg-surface-container text-on-surface text-[10px] font-medium whitespace-nowrap border border-outline-variant/50 transition-all shadow-xs flex items-center gap-1"
-          >
-            <span>🌾 Salvageable Bricks</span>
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              setInputMessage('Generate a 120-minute revival plan for this project.');
-            }}
-            className="px-2.5 py-1 rounded-full bg-surface-container-high hover:bg-surface-container text-on-surface text-[10px] font-medium whitespace-nowrap border border-outline-variant/50 transition-all shadow-xs flex items-center gap-1"
-          >
-            <span>🧭 2-Hour Plan</span>
-          </button>
-        </div>
-
-        {/* 4. Scrollable Chat Message Feed */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-4">
-          {messages.map((msg) => (
-            <div
-              key={msg.id}
-              className={`flex flex-col ${
-                msg.sender === 'user' ? 'items-end' : 'items-start'
-              } space-y-1.5`}
-            >
-              {/* Message Header */}
-              <div className="flex items-center gap-1.5 text-[10px] font-mono text-on-surface-variant px-1">
-                {msg.sender === 'assistant' ? (
-                  <>
-                    <div className="w-5 h-5 rounded-full overflow-hidden bg-[#FAF6F0] border border-[#DE8553]/40 shadow-xs inline-block shrink-0 flex items-center justify-center">
-                      <img
-                        src={aiBotImg}
-                        alt="AI Bot"
-                        className="w-full h-full object-cover object-[50%_15%]"
-                      />
-                    </div>
-                    <span className="font-bold text-on-surface">AI Curator</span>
-                  </>
-                ) : (
-                  <span>You</span>
-                )}
-                <span>•</span>
-                <span>{msg.timestamp}</span>
-              </div>
-
-              {/* Message Bubble */}
-              <div
-                className={`max-w-[90%] rounded-2xl p-3.5 text-xs leading-relaxed shadow-sm ${
-                  msg.sender === 'user'
-                    ? 'bg-primary text-on-primary rounded-tr-xs font-medium'
-                    : 'clay-card bg-surface-container-low border border-outline-variant/60 text-on-surface rounded-tl-xs'
-                }`}
-              >
-                {/* Formatted Markdown-style Content */}
-                <div className="space-y-2 whitespace-pre-wrap">
-                  {msg.text.split('\n\n').map((paragraph, pIdx) => {
-                    if (paragraph.startsWith('### ')) {
-                      return (
-                        <h4 key={pIdx} className="font-serif text-sm font-bold text-secondary">
-                          {paragraph.replace('### ', '')}
-                        </h4>
-                      );
-                    }
-                    if (paragraph.startsWith('> ')) {
-                      return (
-                        <blockquote
-                          key={pIdx}
-                          className="pl-2.5 border-l-2 border-secondary/60 italic text-on-surface-variant font-serif text-[11px]"
-                        >
-                          {paragraph.replace('> ', '')}
-                        </blockquote>
-                      );
-                    }
-                    return <p key={pIdx}>{paragraph}</p>;
-                  })}
-                </div>
-
-                {/* Formatted Code Block (if attached) */}
-                {msg.codeSnippet && (
-                  <div className="mt-3 rounded-xl overflow-hidden border border-outline-variant/80 bg-surface-container-lowest">
-                    <div className="px-3 py-1.5 bg-surface-container-high/70 border-b border-outline-variant/60 flex items-center justify-between text-[10px] font-mono">
-                      <span className="text-secondary font-bold">{msg.codeSnippet.filename}</span>
-                      <button
-                        type="button"
-                        onClick={() => copyCode(msg.codeSnippet!.code, msg.id)}
-                        className="flex items-center gap-1 text-on-surface-variant hover:text-on-surface transition-colors"
-                      >
-                        <span className="material-symbols-outlined text-xs">
-                          {copiedCodeId === msg.id ? 'check' : 'content_copy'}
-                        </span>
-                        <span>{copiedCodeId === msg.id ? 'Copied!' : 'Copy Code'}</span>
-                      </button>
-                    </div>
-                    <pre className="p-3 overflow-x-auto text-[11px] font-mono text-on-surface bg-surface-container-lowest/80 leading-snug">
-                      <code>{msg.codeSnippet.code}</code>
-                    </pre>
-                  </div>
-                )}
-
-                {/* Quick Action Chips inside AI response */}
-                {msg.actions && msg.actions.length > 0 && (
-                  <div className="flex flex-wrap gap-1.5 pt-2 mt-2 border-t border-outline-variant/40">
-                    {msg.actions.map((act, aIdx) => (
-                      <button
-                        key={aIdx}
-                        type="button"
-                        onClick={() => handleActionClick(act.actionType)}
-                        className="px-2.5 py-1 rounded-lg bg-surface-container-high/80 hover:bg-surface-container text-on-surface font-sans text-[10px] font-semibold flex items-center gap-1 border border-outline-variant/50 transition-all hover:scale-[1.02]"
-                      >
-                        <span className="material-symbols-outlined text-xs text-primary">
-                          {act.icon}
-                        </span>
-                        <span>{act.label}</span>
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
+        <div ref={feedRef} className={styles.feed} role="log" aria-label="Conversation" aria-live="polite" aria-relevant="additions text" tabIndex={0}>
+          {visibleMessages.map((message) => <article key={message.id} className={message.sender === 'user' ? styles.userMessage : styles.assistantMessage} aria-label={message.sender === 'user' ? 'Your message' : 'Assistant message'}>
+            <div className={styles.messageMeta}><span>{message.sender === 'user' ? 'You' : 'Project assistant'}</span><time>{message.timestamp}</time></div>
+            <div className={styles.messageBody}>{message.sender === 'user' ? <p className={styles.userText}>{message.text}</p> : <ChatMessageContent text={message.text} />}
+              {message.codeSnippet && <div className={styles.codeBlock}>
+                <div className={styles.codeHeader}><span>{message.codeSnippet.filename}</span><button type="button" onClick={() => copyCode(message)} aria-label="Copy project context">{copiedCodeId === message.id ? <Check size={14} aria-hidden="true" /> : <Copy size={14} aria-hidden="true" />}{copiedCodeId === message.id ? 'Copied' : 'Copy'}</button></div>
+                <pre tabIndex={0}><code>{message.codeSnippet.code}</code></pre>
+              </div>}
+              {message.actions && <div className={styles.messageActions}>{message.actions.map((action) => {
+                const Icon = actionIcons[action.action];
+                return <button key={action.label} type="button" onClick={() => handleAction(action.action)} disabled={isTyping}><Icon size={15} aria-hidden="true" /><span>{action.label}</span><ArrowRight size={14} aria-hidden="true" /></button>;
+              })}</div>}
             </div>
-          ))}
-
-          {/* Typing Indicator */}
-          {isTyping && (
-            <div className="flex items-center gap-2 p-3 rounded-xl bg-surface-container-low border border-outline-variant/50 text-xs text-on-surface-variant w-fit animate-pulse">
-              <span className="material-symbols-outlined text-sm text-primary animate-spin">
-                progress_activity
-              </span>
-              <span className="font-mono text-[11px]">
-                Analyzing AST nodes for {currentSpecimen.title}...
-              </span>
-            </div>
-          )}
-
-          <div ref={messagesEndRef} />
+          </article>)}
+          {!hasConversation && <div className={styles.suggestions} aria-label="Suggested questions">{suggestions.map(({ icon: Icon, title, detail, prompt }) => <button key={title} type="button" onClick={() => sendMessage(prompt)} disabled={isTyping}><span className={styles.suggestionIcon}><Icon size={18} strokeWidth={1.7} aria-hidden="true" /></span><span><strong>{title}</strong><small>{detail}</small></span><ArrowRight size={16} aria-hidden="true" /></button>)}</div>}
+          {isTyping && <div className={styles.typing} role="status"><LoaderCircle size={15} className={styles.spinner} aria-hidden="true" /><span>Reviewing project notes...</span></div>}
         </div>
 
-        {/* 5. Rich Input Dock (Android Studio / Antigravity Style) */}
-        <div className="p-3 sm:p-4 bg-surface-container-low border-t border-outline-variant/60 flex-shrink-0 space-y-2">
-          <form onSubmit={handleSendMessage} className="relative flex items-center">
-            <input
-              type="text"
-              value={inputMessage}
-              onChange={(e) => setInputMessage(e.target.value)}
-              placeholder={`Ask about ${currentSpecimen.title}... (e.g. why did this fail?)`}
-              className="w-full pl-3.5 pr-11 py-2.5 rounded-xl neo-tactile-well text-xs text-on-surface placeholder:text-on-surface-variant/60 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary shadow-inner"
-            />
-            <button
-              type="submit"
-              disabled={!inputMessage.trim() || isTyping}
-              className="absolute right-1.5 w-8 h-8 rounded-lg bg-primary text-on-primary flex items-center justify-center shadow-sm hover:scale-105 active:scale-95 transition-all disabled:opacity-40 disabled:pointer-events-none"
-              title="Send Message"
-            >
-              <span className="material-symbols-outlined text-sm">send</span>
-            </button>
+        <footer className={styles.footer}>
+          {copyError && <p role="status" className={styles.copyError}>Couldn't copy. You can select the text in the code block instead.</p>}
+          <form onSubmit={(event) => { event.preventDefault(); sendMessage(); }} className={styles.composer}>
+            <label htmlFor="copilot-message" className={styles.srOnly}>Message the project assistant</label>
+            <textarea ref={inputRef} id="copilot-message" rows={1} value={inputMessage} onChange={(event) => setInputMessage(event.target.value)} placeholder={`Ask about ${currentSpecimen.title}...`} onKeyDown={(event) => {
+              if (event.key === 'Enter' && !event.shiftKey && !event.nativeEvent.isComposing) { event.preventDefault(); sendMessage(); }
+            }} />
+            <button type="submit" disabled={!inputMessage.trim() || isTyping} aria-label="Send message" title="Send message"><ArrowUp size={19} strokeWidth={2} aria-hidden="true" /></button>
           </form>
-
-          <div className="flex items-center justify-between text-[10px] font-mono text-on-surface-variant px-1">
-            <span>Press Enter to send</span>
-            <span className="text-secondary font-semibold">
-              Folio #{currentSpecimen.folioNumber}
-            </span>
-          </div>
-        </div>
-      </aside>
-    </>
-  );
-};
+          <div className={styles.composerHelp}><span>Based on your archived project notes</span><span className={styles.keyboardHelp}>Enter to send <span aria-hidden="true">/</span> Shift + Enter for a new line</span></div>
+        </footer>
+      </> : <div className={styles.emptyState}><Package size={28} strokeWidth={1.5} aria-hidden="true" /><h3>No projects in your archive yet</h3><p>Preserve a project to give your assistant some context.</p><button type="button" onClick={onClose}>Back to workspace <ArrowRight size={16} aria-hidden="true" /></button></div>}
+    </div>
+  </>;
+}

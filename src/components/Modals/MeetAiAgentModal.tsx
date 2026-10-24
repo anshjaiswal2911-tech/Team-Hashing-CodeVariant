@@ -69,7 +69,6 @@ export const MeetAiAgentModal: React.FC<MeetAiAgentModalProps> = ({
         {/* Header & Title */}
         <div className="text-center space-y-1.5 mb-5">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#EFE8DD] border border-white text-[#7A5A43] text-xs font-medium shadow-[2px_3px_6px_rgba(130,105,80,0.08),-2px_-2px_4px_rgba(255,255,255,0.9)]">
-            <span className="material-symbols-outlined text-sm text-[#DE8553]">auto_awesome</span>
             <span>AI Forensic Curator</span>
           </div>
 

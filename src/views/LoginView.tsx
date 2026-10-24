@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { ScreenId } from '../types';
-import { useTheme } from '../context/ThemeContext';
 
 export interface UserProfile {
   name: string;
@@ -18,12 +17,6 @@ export const LoginView: React.FC<LoginViewProps> = ({
   onLoginSuccess,
   onNavigate,
 }) => {
-  const { setTheme } = useTheme();
-
-  // Lock Login Page strictly to Claymorphic theme as requested
-  React.useEffect(() => {
-    setTheme('claymorphic');
-  }, [setTheme]);
 
   const [mode, setMode] = useState<'login' | 'signup'>('login');
   const [usernameOrEmail, setUsernameOrEmail] = useState('eleni@graveyard.dev');
@@ -60,12 +53,12 @@ export const LoginView: React.FC<LoginViewProps> = ({
 
       const isJudge = usernameOrEmail.toLowerCase().includes('judge');
       const user: UserProfile = {
-        name: isJudge ? 'CodeVariant Judge' : 'Eleni Vance',
+        name: isJudge ? 'CodeVariant Judge' : 'Aryan',
         email: usernameOrEmail,
         role: isJudge ? 'Round 2 Hackathon Evaluator' : 'Master Curator',
         avatar: isJudge
           ? 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80'
-          : 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80',
+          : 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80',
       };
 
       onLoginSuccess(user);
@@ -88,7 +81,7 @@ export const LoginView: React.FC<LoginViewProps> = ({
           onClick={() => onNavigate('landing')}
           className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container/80 hover:bg-surface-container text-xs font-medium text-on-surface border border-outline-variant/60 shadow-sm transition-all hover:-translate-x-0.5 cursor-pointer"
         >
-          <span className="material-symbols-outlined text-sm">arrow_back</span>
+          <span aria-hidden="true" className="material-symbols-outlined text-sm">arrow_back</span>
           <span>Return to Home Page</span>
         </button>
       </header>
@@ -154,15 +147,15 @@ export const LoginView: React.FC<LoginViewProps> = ({
               {/* Hands resting on card border */}
               <ellipse cx="30" cy="74" rx="8" ry="6" fill="#F8E5D5" stroke="#E0C0A8" strokeWidth="1" />
               <ellipse cx="74" cy="74" rx="8" ry="6" fill="#F8E5D5" stroke="#E0C0A8" strokeWidth="1" />
-              
+
               {/* Cute Sweater Shoulders */}
               <path d="M22 84 C22 66 32 60 52 60 C72 60 82 66 82 84 Z" fill="#6B8E70" />
-              
+
               {/* Head */}
               <circle cx="52" cy="44" r="24" fill="#FCEEE3" />
               {/* Hair (Warm Chestnut Bob) */}
               <path d="M30 40 C30 22 40 16 52 16 C64 16 74 22 74 40 C74 42 70 34 66 32 C62 30 56 34 52 34 C48 34 42 30 38 32 C34 34 30 42 30 40 Z" fill="#6E442B" />
-              
+
               {/* Botanical Hair Sprout */}
               <path d="M52 16 Q52 6 56 3" stroke="#48784E" strokeWidth="2.5" strokeLinecap="round" />
               <ellipse cx="58" cy="4" rx="4" ry="2.5" transform="rotate(-30 58 4)" fill="#68A570" />
@@ -188,18 +181,18 @@ export const LoginView: React.FC<LoginViewProps> = ({
           {/* Card Header & Brand Emblem */}
           <div className="text-center pt-2 pb-4 space-y-1">
             <div className="flex items-center justify-center gap-1.5 mb-1">
-              <span className="material-symbols-outlined text-secondary text-base">spa</span>
+              <span aria-hidden="true" className="material-symbols-outlined text-secondary text-base">inventory_2</span>
               <span className="font-serif text-sm tracking-wider uppercase font-semibold text-on-surface">
                 PROJECT GRAVEYARD
               </span>
             </div>
 
             <div className="flex items-center justify-center gap-2">
-              <span className="text-secondary/70 text-xs">🌿</span>
+
               <h1 className="font-serif text-2xl sm:text-[26px] font-normal text-on-surface tracking-tight">
                 {mode === 'login' ? 'Welcome Back' : 'Join Conservatory'}
               </h1>
-              <span className="text-secondary/70 text-xs">🌿</span>
+
             </div>
 
             <p className="font-sans text-[11px] text-on-surface-variant max-w-xs mx-auto leading-relaxed">
@@ -212,7 +205,7 @@ export const LoginView: React.FC<LoginViewProps> = ({
           {/* Error Notice */}
           {errorMessage && (
             <div className="mb-4 p-2.5 rounded-xl bg-error-container/20 border border-error/40 text-error text-[11px] font-medium flex items-center gap-2 animate-in fade-in">
-              <span className="material-symbols-outlined text-sm">error</span>
+              <span aria-hidden="true" className="material-symbols-outlined text-sm">error</span>
               <span>{errorMessage}</span>
             </div>
           )}
@@ -222,11 +215,13 @@ export const LoginView: React.FC<LoginViewProps> = ({
             {/* Input 1: Email or Username */}
             <div className="space-y-1">
               <div className="relative flex items-center">
-                <span className="material-symbols-outlined absolute left-3.5 text-on-surface-variant text-lg pointer-events-none">
+                <span aria-hidden="true" className="material-symbols-outlined absolute left-3.5 text-on-surface-variant text-lg pointer-events-none">
                   person
                 </span>
                 <input
                   type="text"
+                  aria-label="Email or username"
+                  autoComplete="username"
                   placeholder="Email or Username"
                   value={usernameOrEmail}
                   onChange={(e) => setUsernameOrEmail(e.target.value)}
@@ -238,11 +233,13 @@ export const LoginView: React.FC<LoginViewProps> = ({
             {/* Input 2: Password */}
             <div className="space-y-1">
               <div className="relative flex items-center">
-                <span className="material-symbols-outlined absolute left-3.5 text-on-surface-variant text-lg pointer-events-none">
+                <span aria-hidden="true" className="material-symbols-outlined absolute left-3.5 text-on-surface-variant text-lg pointer-events-none">
                   lock
                 </span>
                 <input
                   type={showPassword ? 'text' : 'password'}
+                  aria-label="Password"
+                  autoComplete={mode === 'login' ? 'current-password' : 'new-password'}
                   placeholder="Password or Vault Key"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
@@ -254,7 +251,7 @@ export const LoginView: React.FC<LoginViewProps> = ({
                   className="absolute right-3.5 text-on-surface-variant hover:text-on-surface transition-colors"
                   title={showPassword ? 'Hide Password' : 'Show Password'}
                 >
-                  <span className="material-symbols-outlined text-lg">
+                  <span aria-hidden="true" className="material-symbols-outlined text-lg">
                     {showPassword ? 'visibility_off' : 'visibility'}
                   </span>
                 </button>
@@ -280,13 +277,13 @@ export const LoginView: React.FC<LoginViewProps> = ({
             >
               {isLoading ? (
                 <>
-                  <span className="material-symbols-outlined text-sm animate-spin">progress_activity</span>
+                  <span aria-hidden="true" className="material-symbols-outlined text-sm animate-spin">progress_activity</span>
                   <span>Unlocking Conservatory Vault...</span>
                 </>
               ) : (
                 <>
                   <span>{mode === 'login' ? 'Login' : 'Create Folio'}</span>
-                  <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                  <span aria-hidden="true" className="material-symbols-outlined text-sm">arrow_forward</span>
                 </>
               )}
             </button>
@@ -360,7 +357,7 @@ export const LoginView: React.FC<LoginViewProps> = ({
                 className="p-2 rounded-xl bg-surface-container hover:bg-surface-container-high border border-outline-variant/70 text-left transition-all hover:scale-[1.02] shadow-sm group"
               >
                 <div className="font-sans text-[11px] font-bold text-on-surface group-hover:text-primary flex items-center gap-1">
-                  <span>🌿 Curator</span>
+                  <span>Curator</span>
                 </div>
                 <div className="text-[9px] font-mono text-on-surface-variant truncate">
                   eleni@graveyard.dev
@@ -373,7 +370,7 @@ export const LoginView: React.FC<LoginViewProps> = ({
                 className="p-2 rounded-xl bg-surface-container hover:bg-surface-container-high border border-outline-variant/70 text-left transition-all hover:scale-[1.02] shadow-sm group"
               >
                 <div className="font-sans text-[11px] font-bold text-on-surface group-hover:text-secondary flex items-center gap-1">
-                  <span>⚖️ Judge Demo</span>
+                  <span>Judge demo</span>
                 </div>
                 <div className="text-[9px] font-mono text-on-surface-variant truncate">
                   judge@codevariant.org
@@ -402,15 +399,15 @@ export const LoginView: React.FC<LoginViewProps> = ({
            ───────────────────────────────────────────────────────────── */}
         <div className="mt-5 grid grid-cols-3 gap-2 text-center text-on-surface-variant">
           <div className="p-2 rounded-xl bg-surface-container/60 border border-outline-variant/40 flex flex-col items-center justify-center">
-            <span className="material-symbols-outlined text-sm text-primary mb-0.5">spa</span>
+            <span aria-hidden="true" className="material-symbols-outlined text-sm text-primary mb-0.5">inventory_2</span>
             <span className="text-[10px] font-mono font-medium">Zero Code Waste</span>
           </div>
           <div className="p-2 rounded-xl bg-surface-container/60 border border-outline-variant/40 flex flex-col items-center justify-center">
-            <span className="material-symbols-outlined text-sm text-secondary mb-0.5">lock</span>
+            <span aria-hidden="true" className="material-symbols-outlined text-sm text-secondary mb-0.5">lock</span>
             <span className="text-[10px] font-mono font-medium">100% Client-Side</span>
           </div>
           <div className="p-2 rounded-xl bg-surface-container/60 border border-outline-variant/40 flex flex-col items-center justify-center">
-            <span className="material-symbols-outlined text-sm text-primary mb-0.5">bolt</span>
+            <span aria-hidden="true" className="material-symbols-outlined text-sm text-primary mb-0.5">bolt</span>
             <span className="text-[10px] font-mono font-medium">Instant Graft</span>
           </div>
         </div>

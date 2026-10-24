@@ -8,6 +8,7 @@ interface CommandPaletteProps {
   salvageModules: SalvageModule[];
   onSelectSpecimen: (specimen: ProjectSpecimen) => void;
   onNavigate: (screen: ScreenId) => void;
+  onOpenNewProject?: () => void;
 }
 
 export const CommandPalette: React.FC<CommandPaletteProps> = ({
@@ -16,18 +17,24 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
   specimens,
   salvageModules,
   onSelectSpecimen,
-  onNavigate
+  onNavigate,
+  onOpenNewProject,
 }) => {
   const [query, setQuery] = useState('');
+  const [recentSearches, setRecentSearches] = useState<string[]>(() => {
+    try {
+      const saved = localStorage.getItem('graveyard_recent_searches');
+      return saved ? JSON.parse(saved) : ['CanvasCraft', 'Auth Engine', 'Prisma Schema', 'Next.js 15'];
+    } catch {
+      return ['CanvasCraft', 'Auth Engine', 'Prisma Schema'];
+    }
+  });
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
         e.preventDefault();
         if (isOpen) onClose();
-        else {
-          // open triggered from outside or handled here
-        }
       }
       if (e.key === 'Escape' && isOpen) {
         onClose();
@@ -38,6 +45,25 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
   }, [isOpen, onClose]);
 
   if (!isOpen) return null;
+
+  const handleClearHistory = () => {
+    setRecentSearches([]);
+    try {
+      localStorage.removeItem('graveyard_recent_searches');
+    } catch {}
+  };
+
+  const handleSaveSearch = (term: string) => {
+    if (!term.trim()) return;
+    const clean = term.trim();
+    setRecentSearches((prev) => {
+      const updated = [clean, ...prev.filter((item) => item.toLowerCase() !== clean.toLowerCase())].slice(0, 8);
+      try {
+        localStorage.setItem('graveyard_recent_searches', JSON.stringify(updated));
+      } catch {}
+      return updated;
+    });
+  };
 
   const filteredSpecimens = specimens.filter(
     (s) =>
@@ -56,11 +82,8 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
   );
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 px-4 bg-black/70 backdrop-blur-md animate-in fade-in">
-      <div
-        className="fixed inset-0 -z-10"
-        onClick={onClose}
-      />
+    <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 px-4 bg-black/30 backdrop-blur-[2px] animate-in fade-in">
+      <div className="fixed inset-0 -z-10" onClick={onClose} />
       <div className="w-full max-w-2xl bg-surface-container rounded-xl shadow-2xl border border-surface-container-high overflow-hidden flex flex-col max-h-[75vh]">
         {/* Search Input Box */}
         <div className="flex items-center gap-3 px-4 py-3 border-b border-surface-container-high/60 bg-surface-container-low">
@@ -69,13 +92,20 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
             autoFocus
             value={query}
             onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && query.trim()) {
+                handleSaveSearch(query);
+              }
+            }}
             placeholder="Search dormant projects, reusable modules, epitaphs, tags..."
             className="w-full bg-transparent text-on-surface placeholder:text-outline text-sm focus:outline-none"
           />
           {query && (
             <button
+              type="button"
               onClick={() => setQuery('')}
-              className="text-outline hover:text-on-surface"
+              className="text-outline hover:text-on-surface p-1 rounded hover:bg-surface-container"
+              title="Clear input"
             >
               <span className="material-symbols-outlined text-base">close</span>
             </button>
@@ -87,6 +117,49 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 
         {/* Results List */}
         <div className="overflow-y-auto p-3 space-y-4 flex-1">
+          {/* Recent Searches with Working Clear History */}
+          {!query && (
+            <div className="space-y-2 p-1">
+              <div className="flex items-center justify-between px-1">
+                <span className="text-[10px] uppercase font-mono text-outline tracking-wider flex items-center gap-1.5 font-semibold">
+                  <span className="material-symbols-outlined text-xs text-secondary">history</span>
+                  <span>Recent Searches</span>
+                </span>
+                {recentSearches.length > 0 && (
+                  <button
+                    type="button"
+                    onClick={handleClearHistory}
+                    className="text-[11px] font-mono text-outline hover:text-error flex items-center gap-1 transition-colors px-2 py-0.5 rounded hover:bg-error/10 cursor-pointer"
+                    title="Clear search history"
+                  >
+                    <span className="material-symbols-outlined text-xs">delete_sweep</span>
+                    <span>Clear History</span>
+                  </button>
+                )}
+              </div>
+
+              {recentSearches.length > 0 ? (
+                <div className="flex flex-wrap items-center gap-1.5 px-1">
+                  {recentSearches.map((term, i) => (
+                    <button
+                      key={i}
+                      type="button"
+                      onClick={() => setQuery(term)}
+                      className="px-2.5 py-1 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface text-xs font-mono border border-outline-variant/60 flex items-center gap-1 transition-all"
+                    >
+                      <span className="material-symbols-outlined text-[10px] text-outline">search</span>
+                      <span>{term}</span>
+                    </button>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-xs text-outline italic px-1 font-sans">
+                  No recent searches. Search history cleared.
+                </p>
+              )}
+            </div>
+          )}
+
           {/* Quick Navigation Shortcuts */}
           {!query && (
             <div className="space-y-1">
@@ -95,16 +168,22 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
               </span>
               <div className="grid grid-cols-2 gap-1.5">
                 <button
+                  type="button"
                   onClick={() => {
-                    onNavigate('bury-a-project');
+                    if (onOpenNewProject) {
+                      onOpenNewProject();
+                    } else {
+                      onNavigate('bury-a-project');
+                    }
                     onClose();
                   }}
                   className="flex items-center gap-2 p-2 rounded-lg bg-surface-container-low hover:bg-surface-container-high text-left text-xs transition-colors"
                 >
-                  <span className="material-symbols-outlined text-secondary text-base">spa</span>
-                  <span className="text-on-surface">Bury a New Project Ritual</span>
+                  <span className="material-symbols-outlined text-secondary text-base">add_circle</span>
+                  <span className="text-on-surface font-medium">+ Add / New Project</span>
                 </button>
                 <button
+                  type="button"
                   onClick={() => {
                     onNavigate('revival-compass');
                     onClose();
@@ -115,6 +194,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                   <span className="text-on-surface">Revival Compass Diagnostic</span>
                 </button>
                 <button
+                  type="button"
                   onClick={() => {
                     onNavigate('salvage-yard');
                     onClose();
@@ -125,6 +205,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                   <span className="text-on-surface">Browse Salvage Yard</span>
                 </button>
                 <button
+                  type="button"
                   onClick={() => {
                     onNavigate('graft-studio');
                     onClose();
@@ -149,6 +230,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                   <div
                     key={item.id}
                     onClick={() => {
+                      handleSaveSearch(item.title);
                       onSelectSpecimen(item);
                       onClose();
                     }}
@@ -189,6 +271,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                   <div
                     key={item.id}
                     onClick={() => {
+                      handleSaveSearch(item.title);
                       onNavigate('salvage-yard');
                       onClose();
                     }}

@@ -38,6 +38,8 @@ export const BuryProjectView: React.FC<BuryProjectViewProps> = ({
     '“Buried with honors on October 14, 2023 • Awaiting eventual graft”'
   );
   const [showSavedToast, setShowSavedToast] = useState(false);
+  const [isDraggingRelic, setIsDraggingRelic] = useState(false);
+  const [isVaultHovered, setIsVaultHovered] = useState(false);
 
   const toggleMaturity = (marker: string) => {
     if (selectedMaturity.includes(marker)) {
@@ -274,7 +276,7 @@ export const BuryProjectView: React.FC<BuryProjectViewProps> = ({
                   </span>
                   <h2 className="font-serif text-2xl text-on-surface">The Beginning</h2>
                 </div>
-                <span className="material-symbols-outlined text-primary/40 text-2xl">spa</span>
+                <span className="material-symbols-outlined text-primary/40 text-2xl">inventory_2</span>
               </div>
 
               <div className="space-y-4">
@@ -374,7 +376,7 @@ export const BuryProjectView: React.FC<BuryProjectViewProps> = ({
                   </span>
                   <h2 className="font-serif text-2xl text-on-surface">Specimen Remnants</h2>
                 </div>
-                <span className="material-symbols-outlined text-primary/40 text-2xl">spa</span>
+                <span className="material-symbols-outlined text-primary/40 text-2xl">inventory_2</span>
               </div>
 
               {/* Completion Slider Section */}
@@ -642,6 +644,84 @@ export const BuryProjectView: React.FC<BuryProjectViewProps> = ({
                   </span>
                 </div>
               </div>
+
+              {/* THE CANVAS PROTOCOL: Interactive Drag-and-Drop Burial Altar */}
+              <div className="pt-2 space-y-3.5">
+                <div className="flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-secondary animate-ping" />
+                  <span className="font-mono text-xs font-bold uppercase tracking-wider text-secondary">
+                    🎨 The Canvas Protocol • Action Zone
+                  </span>
+                </div>
+
+                {/* 1. The Draggable Inscription Relic */}
+                <div
+                  draggable
+                  onDragStart={(e) => {
+                    e.dataTransfer.setData('application/json', JSON.stringify({ type: 'burial-relic', title }));
+                    e.dataTransfer.effectAllowed = 'copyMove';
+                    setIsDraggingRelic(true);
+                  }}
+                  onDragEnd={() => setIsDraggingRelic(false)}
+                  className="p-4 rounded-2xl bg-secondary/15 border-2 border-secondary/50 flex items-center justify-between gap-3 shadow-md cursor-grab active:cursor-grabbing hover:scale-[1.01] transition-all select-none group"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-secondary text-on-secondary flex items-center justify-center font-bold shadow-sm group-hover:rotate-6 transition-transform">
+                      <span className="material-symbols-outlined text-xl">history_edu</span>
+                    </div>
+                    <div>
+                      <span className="font-serif text-sm font-bold text-on-surface block">
+                        {title || 'Sacred Project Folio'}
+                      </span>
+                      <span className="font-mono text-[11px] text-secondary font-semibold">
+                        ✥ DRAG THIS RELIC INTO THE SOIL VAULT BELOW ✥
+                      </span>
+                    </div>
+                  </div>
+                  <span className="material-symbols-outlined text-secondary text-xl animate-pulse">
+                    drag_indicator
+                  </span>
+                </div>
+
+                {/* 2. The Soil Burial Vault Drop Zone */}
+                <div
+                  onDragOver={(e) => {
+                    e.preventDefault();
+                    e.dataTransfer.dropEffect = 'copy';
+                    setIsVaultHovered(true);
+                  }}
+                  onDragLeave={() => setIsVaultHovered(false)}
+                  onDrop={(e) => {
+                    e.preventDefault();
+                    setIsVaultHovered(false);
+                    handleFinalBurial();
+                  }}
+                  className={`p-6 rounded-2xl border-2 border-dashed transition-all flex flex-col items-center justify-center text-center cursor-pointer select-none ${
+                    isVaultHovered
+                      ? 'bg-secondary/25 border-secondary scale-[1.02] shadow-xl ring-4 ring-secondary/30'
+                      : isDraggingRelic
+                      ? 'bg-secondary/10 border-secondary animate-pulse ring-2 ring-secondary/20'
+                      : 'bg-surface-container-low hover:bg-surface-container border-outline-variant/80'
+                  }`}
+                >
+                  <div className="w-12 h-12 rounded-2xl bg-secondary/20 text-secondary flex items-center justify-center mb-2 shadow-sm">
+                    <span className="material-symbols-outlined text-2xl">
+                      {isVaultHovered ? 'lock_open' : 'spa'}
+                    </span>
+                  </div>
+                  <h4 className="font-serif text-base font-bold text-on-surface">
+                    The Eternal Soil Burial Crypt
+                  </h4>
+                  <p className="font-sans text-xs text-on-surface-variant max-w-sm mt-1">
+                    {isVaultHovered
+                      ? 'Release Deed Here to Commit to the Graveyard!'
+                      : 'Drag and drop the Inscription Relic above into this Crypt to commit the project to rest.'}
+                  </p>
+                  <span className="mt-2.5 px-3 py-1 rounded-full bg-surface-container text-[10px] font-mono text-secondary border border-secondary/30 font-semibold uppercase tracking-wider">
+                    🎨 Drop Zone • Standard Submit Button Prohibited
+                  </span>
+                </div>
+              </div>
             </div>
           )}
 
@@ -724,14 +804,10 @@ export const BuryProjectView: React.FC<BuryProjectViewProps> = ({
                   <span className="material-symbols-outlined text-sm">arrow_forward</span>
                 </button>
               ) : (
-                <button
-                  type="button"
-                  onClick={handleFinalBurial}
-                  className="px-6 py-2.5 rounded-lg bg-secondary text-on-secondary hover:bg-secondary-fixed transition-all font-sans text-xs font-bold flex items-center gap-2 shadow-[0_4px_20px_rgba(242,189,121,0.45)]"
-                >
-                  <span className="material-symbols-outlined text-base">spa</span>
-                  <span>Bury with Honors & Harvest Modules</span>
-                </button>
+                <div className="flex items-center gap-2 text-secondary font-mono text-xs font-semibold px-3.5 py-2 rounded-xl bg-secondary/15 border border-secondary/35 shadow-xs">
+                  <span className="material-symbols-outlined text-sm animate-pulse">pan_tool</span>
+                  <span>Drag Relic into the Soil Crypt above to finalize</span>
+                </div>
               )}
             </div>
           </div>

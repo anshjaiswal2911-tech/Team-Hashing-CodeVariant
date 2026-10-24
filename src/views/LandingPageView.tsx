@@ -1,6 +1,6 @@
+import { Archive, ArrowUpRight } from 'lucide-react';
 import React, { useState } from 'react';
 import { ScreenId, ProjectSpecimen, SalvageModule } from '../types';
-import { useTheme } from '../context/ThemeContext';
 
 interface LandingPageViewProps {
   onNavigate: (screen: ScreenId) => void;
@@ -21,16 +21,98 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
   currentUser,
   onLogout,
 }) => {
-  const { setTheme } = useTheme();
 
-  // Lock Landing Page strictly to Claymorphic theme as requested
-  React.useEffect(() => {
-    setTheme('claymorphic');
-  }, [setTheme]);
+  const SAMPLE_SPECIMENS: ProjectSpecimen[] = [
+    {
+      id: 'SAMPLE-001',
+      specimenNumber: 'SAMPLE SPECIMEN #001',
+      folioNumber: 'Folio #SP-01',
+      title: 'Sample Project: Fertile Ground',
+      category: 'Sample Prototype • Regenerative Code',
+      description: 'A dormant codebase resting in digital soil — ready for its reusable modules to sprout into new applications.',
+      buriedDate: 'Demo Vault',
+      dormantDuration: 'Sample Stasis',
+      status: 'resting',
+      completionPercentage: 74,
+      revivalScore: 88,
+      rootCause: 'Scope Creep (Sample prototype preserved for architectural reference).',
+      causeCategory: 'Scope Creep',
+      techStack: ['TypeScript', 'React', 'TailwindCSS', 'PostgreSQL'],
+      preservedSalvageModules: [
+        { name: 'Auth JWT Engine', icon: 'token' },
+        { name: 'Reactive Data Store', icon: 'database' },
+        { name: 'Modular Theme Tokens', icon: 'palette' },
+      ],
+      unfinishedNotes: 'Sample project demonstrating zero-dependency component extraction and AI revival calculations.',
+      epitaph: '“Where dead projects become fertile ground.”',
+      plateImage: 'https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=800&q=80',
+      salvageViability: {
+        level: 'Prime (3 Reusable Modules)',
+        score: 88,
+      },
+      curatorAnalysis: 'Exemplary specimen structure. Clean separation between UI presentation and data layer makes it prime for modular grafting.',
+    },
+    {
+      id: 'SAMPLE-002',
+      specimenNumber: 'SAMPLE SPECIMEN #002',
+      folioNumber: 'Folio #SP-02',
+      title: 'Sample Project: Second Life',
+      category: 'Sample Prototype • Component Salvage',
+      description: 'Unfinished code preserved with dignified closure — extracting verified bricks for zero-dependency reuse.',
+      buriedDate: 'Demo Vault',
+      dormantDuration: 'Sample Stasis',
+      status: 'resting',
+      completionPercentage: 82,
+      revivalScore: 92,
+      rootCause: 'Time Shortage (Sample project paused during prototype phase).',
+      causeCategory: 'Time Shortage',
+      techStack: ['Web Audio API', 'TypeScript', 'Vite', 'Tailwind'],
+      preservedSalvageModules: [
+        { name: 'WebAudio Soundscape Core', icon: 'graphic_eq' },
+        { name: 'Focus Timer Engine', icon: 'timer' },
+      ],
+      unfinishedNotes: 'Sample ambient audio engine ready for instant component grafting.',
+      epitaph: '“Unfinished doesn\'t mean worthless. A second chance for abandoned ideas.”',
+      plateImage: 'https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=800&q=80',
+      salvageViability: {
+        level: 'Prime (2 Core Modules)',
+        score: 92,
+      },
+      curatorAnalysis: 'High viability audio pipeline with zero external dependencies.',
+    },
+    {
+      id: 'SAMPLE-003',
+      specimenNumber: 'SAMPLE SPECIMEN #003',
+      folioNumber: 'Folio #SP-03',
+      title: 'Sample Project: Revival Seed',
+      category: 'Sample Prototype • AI Resurrection',
+      description: 'Forensic autopsy diagnostics estimating viability and guiding developers through a 120-minute revival sprint.',
+      buriedDate: 'Demo Vault',
+      dormantDuration: 'Sample Stasis',
+      status: 'dormant',
+      completionPercentage: 65,
+      revivalScore: 80,
+      rootCause: 'Pivot to New Stack (Sample architecture preserved for study).',
+      causeCategory: 'Pivot to New Stack',
+      techStack: ['Canvas API', 'TypeScript', 'Node.js', 'D3'],
+      preservedSalvageModules: [
+        { name: 'Spatial Node Graph Engine', icon: 'hub' },
+        { name: 'SVG Geometry Parser', icon: 'gesture' },
+      ],
+      unfinishedNotes: 'Sample graph visualization pipeline ready for extraction.',
+      epitaph: '“The leaves rested, but the roots remain fertile for the next harvest.”',
+      plateImage: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=800&q=80',
+      salvageViability: {
+        level: 'High (Node Graph Engine)',
+        score: 80,
+      },
+      curatorAnalysis: 'Clean algorithmic canvas rendering with solid frame rates.',
+    },
+  ];
 
   // Active specimen for interactive vitrine
   const [activeSpecimenIndex, setActiveSpecimenIndex] = useState(0);
-  const activeSpecimen = specimens[activeSpecimenIndex] || specimens[0];
+  const activeSpecimen = SAMPLE_SPECIMENS[activeSpecimenIndex] || SAMPLE_SPECIMENS[0];
 
   // Active tab inside hero visual vitrine
   const [heroTab, setHeroTab] = useState<'autopsy' | 'salvage' | 'revival'>('autopsy');
@@ -83,7 +165,7 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
   };
 
   return (
-    <div className="min-h-screen bg-surface text-on-surface font-sans selection:bg-primary-container selection:text-on-primary-container pb-20">
+    <div className="landing-page min-h-screen bg-surface text-on-surface font-sans selection:bg-primary-container selection:text-on-primary-container pb-20">
       {/* ─────────────────────────────────────────────────────────────
           1. TOP NAVIGATION BAR (Fixed with Glassmorphism)
          ───────────────────────────────────────────────────────────── */}
@@ -95,14 +177,14 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
             className="flex items-center gap-3 cursor-pointer group"
           >
             <div className="w-9 h-9 rounded-2xl bg-secondary/15 text-secondary flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform border border-secondary/20">
-              <span className="material-symbols-outlined text-xl text-secondary">spa</span>
+              <Archive size={20} strokeWidth={1.6} aria-hidden="true" />
             </div>
             <div className="flex flex-col">
               <span className="font-serif text-lg font-normal tracking-wide text-on-surface">
                 Project Graveyard
               </span>
               <span className="font-sans text-[10px] text-on-surface-variant font-medium tracking-wider uppercase -mt-0.5">
-                Conservatory Protocol • Build 01
+                An archive for unfinished ideas
               </span>
             </div>
           </div>
@@ -125,7 +207,7 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
               href="#pillars"
               className="text-xs font-medium text-on-surface-variant hover:text-on-surface transition-colors"
             >
-              4 Pillars
+              How it works
             </a>
           </nav>
 
@@ -138,7 +220,7 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
                   onClick={() => onNavigate('login')}
                   className="h-9 px-3.5 rounded-xl border border-outline-variant bg-surface-container hover:bg-surface-container-high text-xs font-semibold text-on-surface transition-all flex items-center gap-1.5 shadow-sm cursor-pointer"
                 >
-                  <span className="material-symbols-outlined text-sm text-secondary">login</span>
+                  <span aria-hidden="true" className="material-symbols-outlined text-sm text-secondary">login</span>
                   <span>Sign In</span>
                 </button>
                 <button
@@ -146,7 +228,7 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
                   onClick={() => onNavigate('login')}
                   className="h-9 px-4 rounded-xl bg-primary text-on-primary font-medium text-xs flex items-center gap-1.5 shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
                 >
-                  <span className="material-symbols-outlined text-sm">person_add</span>
+                  <span aria-hidden="true" className="material-symbols-outlined text-sm">person_add</span>
                   <span>Create Account</span>
                 </button>
               </>
@@ -167,7 +249,7 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
                     className="p-1 rounded-lg text-on-surface-variant hover:text-error transition-colors"
                     title="Sign Out"
                   >
-                    <span className="material-symbols-outlined text-base">logout</span>
+                    <span aria-hidden="true" className="material-symbols-outlined text-base">logout</span>
                   </button>
                 </div>
                 <button
@@ -176,7 +258,7 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
                   className="h-9 px-4 rounded-xl bg-primary text-on-primary font-medium text-xs flex items-center gap-1.5 shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
                 >
                   <span>Enter Conservatory</span>
-                  <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                  <ArrowUpRight size={16} aria-hidden="true" />
                 </button>
               </div>
             )}
@@ -187,18 +269,18 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
       {/* ─────────────────────────────────────────────────────────────
           2. HERO SECTION: PUNCHY PITCH + INTERACTIVE SPECIMEN VITRINE
          ───────────────────────────────────────────────────────────── */}
-      <section id="concept" className="relative overflow-hidden pt-12 pb-20 lg:pt-16 lg:pb-28">
+      <section id="concept" className="relative overflow-hidden pt-14 pb-20 lg:pt-24 lg:pb-28">
         {/* Ambient background glows */}
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-primary/10 rounded-full blur-[120px] pointer-events-none -z-10" />
         <div className="absolute top-1/3 right-10 w-[400px] h-[400px] bg-secondary/10 rounded-full blur-[100px] pointer-events-none -z-10" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
             
             {/* Left Column: Vision & Value Proposition */}
             <div className="lg:col-span-7 space-y-6">
               {/* Main Headline */}
-              <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl text-on-surface leading-[1.1] tracking-tight">
+              <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl text-on-surface leading-[1.12] tracking-tight">
                 Where dead projects become{' '}
                 <span className="italic font-normal text-secondary underline decoration-secondary/30 underline-offset-8">
                   fertile ground.
@@ -221,11 +303,11 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
                 <button
                   type="button"
                   onClick={() => onNavigate('overview')}
-                  className="px-6 py-3.5 rounded-2xl bg-primary text-on-primary font-medium text-sm flex items-center gap-2 shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all"
+                  className="px-6 py-3.5 rounded-2xl bg-primary text-on-primary font-medium text-sm flex items-center gap-2 shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
                 >
-                  <span className="material-symbols-outlined text-lg">grid_view</span>
+                  <span aria-hidden="true" className="material-symbols-outlined text-lg">grid_view</span>
                   <span>Enter Cemetery & Dashboard</span>
-                  <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                  <span aria-hidden="true" className="material-symbols-outlined text-sm">arrow_forward</span>
                 </button>
 
                 <button
@@ -233,7 +315,7 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
                   onClick={() => onNavigate('bury-a-project')}
                   className="px-5 py-3.5 rounded-2xl border border-outline-variant bg-surface-container hover:bg-surface-container-high text-on-surface font-medium text-sm flex items-center gap-2 transition-all shadow-sm hover:border-outline"
                 >
-                  <span className="material-symbols-outlined text-lg text-secondary">add_circle_outline</span>
+                  <span aria-hidden="true" className="material-symbols-outlined text-lg text-secondary">add_circle_outline</span>
                   <span>Bury a Project</span>
                 </button>
 
@@ -242,7 +324,7 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
                   onClick={() => onNavigate('salvage-yard')}
                   className="px-4 py-3.5 rounded-2xl border border-outline-variant/60 hover:border-primary/50 text-on-surface-variant hover:text-on-surface text-sm flex items-center gap-1.5 transition-all"
                 >
-                  <span className="material-symbols-outlined text-lg">inventory_2</span>
+                  <span aria-hidden="true" className="material-symbols-outlined text-lg">inventory_2</span>
                   <span>Explore Salvage Yard</span>
                 </button>
               </div>
@@ -258,7 +340,7 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
                 {/* Specimen Header & Status */}
                 <div className="flex items-center justify-between pb-4 border-b border-outline-variant/50">
                   <div className="flex items-center gap-2">
-                    <span className="w-2.5 h-2.5 rounded-full bg-secondary animate-pulse" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-secondary" />
                     <span className="font-mono text-[11px] font-bold text-on-surface tracking-wider uppercase">
                       {activeSpecimen.specimenNumber} • DORMANT
                     </span>
@@ -275,7 +357,7 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
                     }`}
                     title="Play 432Hz Botanical Harmonic Chime"
                   >
-                    <span className="material-symbols-outlined text-xs">
+                    <span aria-hidden="true" className="material-symbols-outlined text-xs">
                       {isPlayingSound ? 'graphic_eq' : 'volume_up'}
                     </span>
                     <span>{isPlayingSound ? '432Hz Sounding' : 'Chime'}</span>
@@ -291,6 +373,14 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
                       className="w-full h-full object-cover object-center brightness-95 group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent" />
+                    
+                    {/* Website Agenda Mission Badge */}
+                    <div className="absolute top-2.5 left-2.5">
+                      <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-emerald-300 text-[10px] font-mono font-medium shadow-xs">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                        <span>Fertile Ground • Rebirth of Code</span>
+                      </span>
+                    </div>
                     
                     <div className="absolute bottom-3 left-3 right-3 text-white">
                       <div className="flex items-center justify-between">
@@ -382,7 +472,7 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
                             className="flex items-center justify-between p-1.5 rounded-lg bg-surface-container border border-outline-variant/50 text-xs"
                           >
                             <div className="flex items-center gap-2">
-                              <span className="material-symbols-outlined text-sm text-primary">
+                              <span aria-hidden="true" className="material-symbols-outlined text-sm text-primary">
                                 {mod.icon}
                               </span>
                               <span className="font-mono text-[11px] font-medium text-on-surface">
@@ -422,12 +512,12 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
                   {/* Bottom Action inside Chamber - visual showcase only */}
                   <div className="pt-2 flex items-center justify-between">
                     <div className="flex items-center gap-1.5 text-[11px] font-mono text-on-surface-variant">
-                      <span className="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-secondary" />
                       <span>Specimen Showcase • Live Preview</span>
                     </div>
 
                     <div className="flex items-center gap-1">
-                      {specimens.slice(0, 3).map((_, idx) => (
+                      {SAMPLE_SPECIMENS.map((_, idx) => (
                         <button
                           key={idx}
                           type="button"
@@ -437,7 +527,7 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
                               ? 'bg-primary w-5'
                               : 'bg-outline-variant hover:bg-outline'
                           }`}
-                          title={`Inspect Specimen #${idx + 1}`}
+                          title={`Inspect Sample #${idx + 1}`}
                         />
                       ))}
                     </div>
@@ -474,7 +564,7 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
             <div className="clay-card p-6 sm:p-8 rounded-3xl bg-surface-container border border-red-500/20 shadow-md space-y-5">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-2xl bg-red-500/10 text-red-400 flex items-center justify-center text-xl">
-                  <span className="material-symbols-outlined">delete_forever</span>
+                  <span aria-hidden="true" className="material-symbols-outlined">delete_forever</span>
                 </div>
                 <div>
                   <h3 className="font-serif text-xl text-on-surface font-normal">
@@ -486,7 +576,7 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
 
               <ul className="space-y-3 text-xs sm:text-sm text-on-surface-variant">
                 <li className="flex items-start gap-2.5">
-                  <span className="material-symbols-outlined text-red-400 text-base flex-shrink-0 mt-0.5">
+                  <span aria-hidden="true" className="material-symbols-outlined text-red-400 text-base flex-shrink-0 mt-0.5">
                     close
                   </span>
                   <span>
@@ -494,7 +584,7 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
                   </span>
                 </li>
                 <li className="flex items-start gap-2.5">
-                  <span className="material-symbols-outlined text-red-400 text-base flex-shrink-0 mt-0.5">
+                  <span aria-hidden="true" className="material-symbols-outlined text-red-400 text-base flex-shrink-0 mt-0.5">
                     close
                   </span>
                   <span>
@@ -502,7 +592,7 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
                   </span>
                 </li>
                 <li className="flex items-start gap-2.5">
-                  <span className="material-symbols-outlined text-red-400 text-base flex-shrink-0 mt-0.5">
+                  <span aria-hidden="true" className="material-symbols-outlined text-red-400 text-base flex-shrink-0 mt-0.5">
                     close
                   </span>
                   <span>
@@ -519,7 +609,7 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
               </div>
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-2xl bg-primary-container text-on-primary-container flex items-center justify-center text-xl">
-                  <span className="material-symbols-outlined">spa</span>
+                  <span aria-hidden="true" className="material-symbols-outlined">inventory_2</span>
                 </div>
                 <div>
                   <h3 className="font-serif text-xl text-on-surface font-normal">
@@ -531,7 +621,7 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
 
               <ul className="space-y-3 text-xs sm:text-sm text-on-surface-variant">
                 <li className="flex items-start gap-2.5">
-                  <span className="material-symbols-outlined text-primary text-base flex-shrink-0 mt-0.5">
+                  <span aria-hidden="true" className="material-symbols-outlined text-primary text-base flex-shrink-0 mt-0.5">
                     check_circle
                   </span>
                   <span>
@@ -539,7 +629,7 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
                   </span>
                 </li>
                 <li className="flex items-start gap-2.5">
-                  <span className="material-symbols-outlined text-primary text-base flex-shrink-0 mt-0.5">
+                  <span aria-hidden="true" className="material-symbols-outlined text-primary text-base flex-shrink-0 mt-0.5">
                     check_circle
                   </span>
                   <span>
@@ -547,7 +637,7 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
                   </span>
                 </li>
                 <li className="flex items-start gap-2.5">
-                  <span className="material-symbols-outlined text-primary text-base flex-shrink-0 mt-0.5">
+                  <span aria-hidden="true" className="material-symbols-outlined text-primary text-base flex-shrink-0 mt-0.5">
                     check_circle
                   </span>
                   <span>
@@ -585,7 +675,7 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
             >
               <div className="space-y-4">
                 <div className="w-12 h-12 rounded-2xl bg-secondary/15 text-secondary flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
-                  <span className="material-symbols-outlined">inventory_2</span>
+                  <span aria-hidden="true" className="material-symbols-outlined">inventory_2</span>
                 </div>
                 <div className="space-y-1">
                   <div className="font-mono text-[10px] text-secondary font-bold uppercase tracking-wider">
@@ -601,7 +691,7 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
               </div>
               <div className="flex items-center gap-1.5 text-xs font-medium text-primary group-hover:translate-x-1 transition-transform">
                 <span>Explore Cemetery</span>
-                <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                <span aria-hidden="true" className="material-symbols-outlined text-sm">arrow_forward</span>
               </div>
             </div>
 
@@ -612,7 +702,7 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
             >
               <div className="space-y-4">
                 <div className="w-12 h-12 rounded-2xl bg-primary-container text-on-primary-container flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
-                  <span className="material-symbols-outlined">precision_manufacturing</span>
+                  <span aria-hidden="true" className="material-symbols-outlined">precision_manufacturing</span>
                 </div>
                 <div className="space-y-1">
                   <div className="font-mono text-[10px] text-primary font-bold uppercase tracking-wider">
@@ -628,7 +718,7 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
               </div>
               <div className="flex items-center gap-1.5 text-xs font-medium text-primary group-hover:translate-x-1 transition-transform">
                 <span>Browse Code Yard</span>
-                <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                <span aria-hidden="true" className="material-symbols-outlined text-sm">arrow_forward</span>
               </div>
             </div>
 
@@ -639,7 +729,7 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
             >
               <div className="space-y-4">
                 <div className="w-12 h-12 rounded-2xl bg-[#DE8553]/15 text-[#DE8553] flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
-                  <span className="material-symbols-outlined">explore</span>
+                  <span aria-hidden="true" className="material-symbols-outlined">explore</span>
                 </div>
                 <div className="space-y-1">
                   <div className="font-mono text-[10px] text-[#DE8553] font-bold uppercase tracking-wider">
@@ -655,7 +745,7 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
               </div>
               <div className="flex items-center gap-1.5 text-xs font-medium text-primary group-hover:translate-x-1 transition-transform">
                 <span>Calculate Viability</span>
-                <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                <span aria-hidden="true" className="material-symbols-outlined text-sm">arrow_forward</span>
               </div>
             </div>
 
@@ -666,7 +756,7 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
             >
               <div className="space-y-4">
                 <div className="w-12 h-12 rounded-2xl bg-[#34D399]/15 text-[#34D399] flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
-                  <span className="material-symbols-outlined">hub</span>
+                  <span aria-hidden="true" className="material-symbols-outlined">hub</span>
                 </div>
                 <div className="space-y-1">
                   <div className="font-mono text-[10px] text-[#34D399] font-bold uppercase tracking-wider">
@@ -682,7 +772,7 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
               </div>
               <div className="flex items-center gap-1.5 text-xs font-medium text-primary group-hover:translate-x-1 transition-transform">
                 <span>Launch Graft Studio</span>
-                <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                <span aria-hidden="true" className="material-symbols-outlined text-sm">arrow_forward</span>
               </div>
             </div>
           </div>
@@ -697,7 +787,7 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
       <section className="py-20 relative overflow-hidden">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
           <div className="w-16 h-16 rounded-3xl bg-primary-container text-on-primary-container mx-auto flex items-center justify-center text-3xl shadow-lg border border-primary/30">
-            <span className="material-symbols-outlined">spa</span>
+            <span aria-hidden="true" className="material-symbols-outlined">inventory_2</span>
           </div>
 
           <h2 className="font-serif text-3xl sm:text-5xl text-on-surface leading-tight">
@@ -714,9 +804,9 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
               onClick={() => onNavigate('login')}
               className="px-8 py-4 rounded-2xl bg-primary text-on-primary font-semibold text-sm flex items-center gap-2 shadow-xl hover:shadow-2xl hover:scale-105 active:scale-95 transition-all cursor-pointer"
             >
-              <span className="material-symbols-outlined text-lg">person_add</span>
+              <span aria-hidden="true" className="material-symbols-outlined text-lg">person_add</span>
               <span>Create Account</span>
-              <span className="material-symbols-outlined text-sm">arrow_forward</span>
+              <span aria-hidden="true" className="material-symbols-outlined text-sm">arrow_forward</span>
             </button>
           </div>
         </div>
@@ -729,35 +819,17 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 pb-8">
           <div className="flex flex-col sm:flex-row items-center gap-2">
             <div className="flex items-center gap-2">
-              <span className="material-symbols-outlined text-secondary text-base">spa</span>
+              <span aria-hidden="true" className="material-symbols-outlined text-secondary text-base">inventory_2</span>
               <span className="font-serif text-sm text-on-surface font-semibold">Project Graveyard</span>
             </div>
             <span className="hidden sm:inline text-on-surface-variant/40">•</span>
             <span className="text-[11px] text-on-surface-variant">
-              Developed by <strong className="text-on-surface">Team Hashing</strong> (Rajiv Jha, Mitesh Jha, Ansh Jaiswal, Aryan Jaiswal) • <span className="font-mono text-secondary">PS 05 • Build 01</span>
+              Developed by <strong className="text-on-surface">Team Hashing</strong> (Rajiv Jha, Mitesh Jha, Ansh Jaiswal, Aryan Jaiswal)
             </span>
           </div>
 
-          <div className="flex items-center gap-4 text-[11px]">
-            <button
-              type="button"
-              onClick={() => onNavigate('settings')}
-              className="hover:text-on-surface transition-colors"
-            >
-              Theme Settings
-            </button>
-            <span className="text-on-surface-variant/40">•</span>
-            <button
-              type="button"
-              onClick={() => onNavigate('archive')}
-              className="hover:text-on-surface transition-colors"
-            >
-              Specimen Archive
-            </button>
-            <span className="text-on-surface-variant/40">•</span>
-            <span className="font-mono text-[10px] text-secondary font-bold px-2 py-0.5 rounded bg-secondary/10">
-              ROUND 2 READY
-            </span>
+          <div className="flex items-center gap-2 text-[11px] text-on-surface-variant font-serif italic">
+            <span>Where dead projects become fertile ground.</span>
           </div>
         </div>
       </footer>

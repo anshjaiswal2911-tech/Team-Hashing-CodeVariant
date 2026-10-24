@@ -3,6 +3,119 @@ import { EXTRA_SPECIMENS } from './mockSpecimensExtra';
 
 export const INITIAL_SPECIMENS: ProjectSpecimen[] = [
   {
+    id: 'SPEC-EV-01',
+    specimenNumber: 'SPECIMEN #001',
+    folioNumber: 'Folio #EV-01',
+    title: 'E-VSpot',
+    category: 'CleanTech & Mobility',
+    description: 'EV station finder & routing app with smart recommendations.',
+    buriedDate: 'Jan 12, 2024',
+    dormantDuration: '3 mos ago',
+    status: 'resting',
+    completionPercentage: 82,
+    revivalScore: 88,
+    primeCandidate: true,
+    rootCause: 'Scope Creep (Expanded into live grid load prediction).',
+    causeCategory: 'Scope Creep',
+    techStack: ['React', 'TypeScript', 'Mapbox GL', 'Node.js', 'PostGIS'],
+    preservedSalvageModules: [
+      { name: 'Station Routing Engine', icon: 'map' },
+      { name: 'Charger Status WebSocket', icon: 'bolt' }
+    ],
+    unfinishedNotes: 'Route optimization algorithm finished, payment integration pending.',
+    epitaph: '“Charged with ambition, paused at the final terminal.”',
+    plateImage: 'https://images.unsplash.com/photo-1593941707882-a5bba14938c7?auto=format&fit=crop&w=800&q=80',
+    salvageViability: {
+      level: 'Prime (2 Core Modules)',
+      score: 91
+    },
+    curatorAnalysis: 'High viability clean mobility app with ready Mapbox routing logic.'
+  },
+  {
+    id: 'SPEC-LL-02',
+    specimenNumber: 'SPECIMEN #002',
+    folioNumber: 'Folio #LL-02',
+    title: 'LOSTLINK',
+    category: 'Campus Utilities',
+    description: 'Lost & Found platform with real-time tracking.',
+    buriedDate: 'Nov 04, 2023',
+    dormantDuration: '5 mos ago',
+    status: 'resting',
+    completionPercentage: 65,
+    revivalScore: 74,
+    rootCause: 'Time Shortage (Developer graduated before launch).',
+    causeCategory: 'Time Shortage',
+    techStack: ['Next.js', 'Tailwind', 'Supabase', 'Leaflet'],
+    preservedSalvageModules: [
+      { name: 'Item Matcher AI', icon: 'search' },
+      { name: 'Claim Verification Flow', icon: 'verified_user' }
+    ],
+    unfinishedNotes: 'Notification system needs push integration.',
+    epitaph: '“Helping others find what was lost, until we lost our way.”',
+    plateImage: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80',
+    salvageViability: {
+      level: 'High (Matcher AI)',
+      score: 82
+    },
+    curatorAnalysis: 'Solid Supabase schema and clean item matching AI pipeline.'
+  },
+  {
+    id: 'SPEC-PDM-03',
+    specimenNumber: 'SPECIMEN #003',
+    folioNumber: 'Folio #PDM-03',
+    title: 'Placement Drive Manager',
+    category: 'EdTech & Career',
+    description: 'Manage placement drives and applications.',
+    buriedDate: 'Feb 20, 2024',
+    dormantDuration: '2 mos ago',
+    status: 'dormant',
+    completionPercentage: 70,
+    revivalScore: 80,
+    rootCause: 'Team Disbanded (Co-founder took corporate offer).',
+    causeCategory: 'Team Disbanded',
+    techStack: ['React', 'Express', 'MongoDB', 'TailwindCSS'],
+    preservedSalvageModules: [
+      { name: 'Resume Parser', icon: 'description' },
+      { name: 'Drive Scheduling Grid', icon: 'calendar_month' }
+    ],
+    unfinishedNotes: 'Applicant filtering and spreadsheet export complete.',
+    epitaph: '“Prepared thousands for careers, awaiting its own interview.”',
+    plateImage: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80',
+    salvageViability: {
+      level: 'High (Resume Engine)',
+      score: 85
+    },
+    curatorAnalysis: 'Resume parser and scheduling grid are zero-dependency ready.'
+  },
+  {
+    id: 'SPEC-AET-04',
+    specimenNumber: 'SPECIMEN #004',
+    folioNumber: 'Folio #AET-04',
+    title: 'AI-AETHRA',
+    category: 'AI & Community',
+    description: 'Club outreach & event management system.',
+    buriedDate: 'Mar 01, 2024',
+    dormantDuration: '1 mo ago',
+    status: 'dormant',
+    completionPercentage: 55,
+    revivalScore: 79,
+    rootCause: 'Better Idea Came (Pivoted to LLM hackathon project).',
+    causeCategory: 'Better Idea Came',
+    techStack: ['Python', 'FastAPI', 'React', 'Tailwind'],
+    preservedSalvageModules: [
+      { name: 'Smart Event Scheduler', icon: 'event' },
+      { name: 'Discord Bot Sync', icon: 'smart_toy' }
+    ],
+    unfinishedNotes: 'Event registration form and automated follow-ups.',
+    epitaph: '“Born from an ambitious night, preserved for a brighter dawn.”',
+    plateImage: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=800&q=80',
+    salvageViability: {
+      level: 'High (Discord Bot Sync)',
+      score: 81
+    },
+    curatorAnalysis: 'Event scheduler and Discord sync module can easily be decoupled.'
+  },
+  {
     id: 'SPEC-2023-094',
     specimenNumber: 'SPECIMEN #008',
     folioNumber: 'Folio #CC-23',

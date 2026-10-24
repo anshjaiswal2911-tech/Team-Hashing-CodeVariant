@@ -457,7 +457,7 @@ html[data-theme="botanical-light"] .panel-white {
 /* Claymorphic 3D (Pinterest Edition) tactile elevation */
 html.claymorphic .shadow-sm,
 html[data-theme="claymorphic"] .shadow-sm {
-  box-shadow: 
+  box-shadow:
     4px 6px 14px -2px rgba(120, 95, 70, 0.09),
     -3px -3px 8px 0 rgba(255, 255, 255, 0.85),
     inset 1px 1px 2px rgba(255, 255, 255, 0.9),
@@ -466,7 +466,7 @@ html[data-theme="claymorphic"] .shadow-sm {
 
 html.claymorphic .shadow-md,
 html[data-theme="claymorphic"] .shadow-md {
-  box-shadow: 
+  box-shadow:
     8px 14px 26px -4px rgba(110, 85, 60, 0.11),
     -6px -6px 16px 0 rgba(255, 255, 255, 0.9),
     inset 1.5px 1.5px 3px rgba(255, 255, 255, 0.9),
@@ -477,7 +477,7 @@ html.claymorphic .shadow-lg,
 html.claymorphic .shadow-xl,
 html[data-theme="claymorphic"] .shadow-lg,
 html[data-theme="claymorphic"] .shadow-xl {
-  box-shadow: 
+  box-shadow:
     12px 22px 36px -6px rgba(100, 75, 50, 0.13),
     -8px -8px 20px 0 rgba(255, 255, 255, 0.95),
     inset 2px 2px 4px rgba(255, 255, 255, 0.9),
@@ -486,7 +486,7 @@ html[data-theme="claymorphic"] .shadow-xl {
 
 html.claymorphic .shadow-2xl,
 html[data-theme="claymorphic"] .shadow-2xl {
-  box-shadow: 
+  box-shadow:
     18px 30px 52px -10px rgba(90, 65, 45, 0.16),
     -10px -10px 24px 0 rgba(255, 255, 255, 0.95),
     inset 2px 2px 5px rgba(255, 255, 255, 0.95);
@@ -497,7 +497,7 @@ html[data-theme="claymorphic"] .panel-dark {
   background: linear-gradient(145deg, #1D3B2B 0%, #13281E 100%);
   color: #FFFFFF;
   border: 1px solid rgba(255, 255, 255, 0.16);
-  box-shadow: 
+  box-shadow:
     10px 18px 32px -4px rgba(15, 35, 25, 0.35),
     inset 1px 1px 2px rgba(255, 255, 255, 0.25);
   border-radius: 28px;
@@ -507,7 +507,7 @@ html.claymorphic .panel-white,
 html[data-theme="claymorphic"] .panel-white {
   background-color: #FAF6F0;
   border: 1px solid #E0D5C5;
-  box-shadow: 
+  box-shadow:
     6px 10px 20px -3px rgba(120, 95, 70, 0.08),
     -4px -4px 10px rgba(255, 255, 255, 0.85),
     inset 1px 1px 2px rgba(255, 255, 255, 0.9);
@@ -517,7 +517,7 @@ html[data-theme="claymorphic"] .panel-white {
 /* Dark Glassmorphism Galactic Botanical Glass (Pinterest Reference) */
 html.glassmorphic body,
 html[data-theme="glassmorphic"] body {
-  background: 
+  background:
     radial-gradient(circle at 85% 15%, rgba(52, 211, 153, 0.08) 0%, transparent 45%),
     radial-gradient(circle at 15% 80%, rgba(45, 212, 191, 0.07) 0%, transparent 40%),
     radial-gradient(circle at 50% 50%, rgba(20, 40, 30, 0.4) 0%, transparent 70%),
@@ -533,7 +533,7 @@ html[data-theme="glassmorphic"] .panel-white {
   backdrop-filter: blur(24px) saturate(170%);
   -webkit-backdrop-filter: blur(24px) saturate(170%);
   border: 1px solid rgba(94, 234, 180, 0.22) !important;
-  box-shadow: 
+  box-shadow:
     0 16px 36px -8px rgba(0, 0, 0, 0.7),
     0 0 20px -2px rgba(52, 211, 153, 0.08),
     inset 1px 1px 2px rgba(255, 255, 255, 0.12),
@@ -543,7 +543,7 @@ html[data-theme="glassmorphic"] .panel-white {
 html.glassmorphic .clay-card:hover,
 html[data-theme="glassmorphic"] .clay-card:hover {
   border-color: rgba(94, 234, 180, 0.4) !important;
-  box-shadow: 
+  box-shadow:
     0 20px 44px -6px rgba(0, 0, 0, 0.8),
     0 0 28px 2px rgba(52, 211, 153, 0.18),
     inset 1px 1px 2px rgba(255, 255, 255, 0.2) !important;
@@ -555,7 +555,7 @@ html[data-theme="glassmorphic"] .panel-dark {
   backdrop-filter: blur(28px);
   -webkit-backdrop-filter: blur(28px);
   border: 1px solid rgba(94, 234, 180, 0.3);
-  box-shadow: 
+  box-shadow:
     0 20px 48px -10px rgba(0, 0, 0, 0.75),
     0 0 32px -4px rgba(52, 211, 153, 0.16),
     inset 1px 1px 3px rgba(255, 255, 255, 0.22);
@@ -607,7 +607,7 @@ html.claymorphic .glass-panel {
 
 .clay-card {
   border-radius: 26px;
-  box-shadow: 
+  box-shadow:
     6px 10px 22px -3px rgba(0, 0, 0, 0.06),
     -3px -3px 8px rgba(255, 255, 255, 0.85),
     inset 1px 1px 2px rgba(255, 255, 255, 0.9);
@@ -615,7 +615,7 @@ html.claymorphic .glass-panel {
 }
 
 html.dark .clay-card {
-  box-shadow: 
+  box-shadow:
     8px 14px 28px -4px rgba(0, 0, 0, 0.5),
     -2px -2px 6px rgba(255, 255, 255, 0.03),
     inset 1px 1px 2px rgba(179, 206, 178, 0.12);
@@ -634,7 +634,7 @@ html.dark .clay-inset {
 }
 
 .clay-pill {
-  box-shadow: 
+  box-shadow:
     3px 5px 10px -1px rgba(0, 0, 0, 0.07),
     -2px -2px 5px rgba(255, 255, 255, 0.7),
     inset 1px 1px 1.5px rgba(255, 255, 255, 0.8);
@@ -642,7 +642,7 @@ html.dark .clay-inset {
 }
 
 html.dark .clay-pill {
-  box-shadow: 
+  box-shadow:
     3px 5px 10px -1px rgba(0, 0, 0, 0.4),
     -1px -1px 4px rgba(255, 255, 255, 0.04),
     inset 1px 1px 1.5px rgba(179, 206, 178, 0.15);
@@ -669,7 +669,7 @@ html.claymorphic a.bg-primary,
   color: #FFFFFF !important;
   border: 1px solid rgba(255, 255, 255, 0.16) !important;
   border-radius: 14px;
-  box-shadow: 
+  box-shadow:
     0 6px 16px -2px rgba(14, 51, 46, 0.38),
     0 2px 4px 0 rgba(14, 51, 46, 0.2),
     inset 0 1px 1.5px rgba(255, 255, 255, 0.35),
@@ -682,7 +682,7 @@ html.claymorphic button.bg-primary:hover,
 html.claymorphic a.bg-primary:hover,
 .neo-tactile-btn-primary:hover {
   background: #14443D !important;
-  box-shadow: 
+  box-shadow:
     0 8px 20px -2px rgba(14, 51, 46, 0.48),
     inset 0 1px 2px rgba(255, 255, 255, 0.45) !important;
   transform: translateY(-1px) !important;
@@ -694,7 +694,7 @@ html.claymorphic button.bg-primary:active,
 html.claymorphic a.bg-primary:active,
 .neo-tactile-btn-primary:active {
   background: #092420 !important;
-  box-shadow: 
+  box-shadow:
     inset 2.5px 2.5px 5px rgba(0, 0, 0, 0.5),
     inset -1px -1px 2px rgba(255, 255, 255, 0.15) !important;
   transform: translateY(1px) !important;
@@ -708,7 +708,7 @@ html.claymorphic button.bg-surface-container-high,
   color: #132822 !important;
   border: 1px solid rgba(255, 255, 255, 0.95) !important;
   border-radius: 14px;
-  box-shadow: 
+  box-shadow:
     4px 6px 14px -2px rgba(130, 105, 80, 0.12),
     -3px -3px 8px 0 rgba(255, 255, 255, 0.95),
     inset 1px 1px 2px rgba(255, 255, 255, 0.95),
@@ -719,7 +719,7 @@ html.claymorphic button.bg-surface-container-high,
 html.claymorphic button.bg-surface-container:hover,
 html.claymorphic button.bg-surface-container-high:hover,
 .neo-tactile-btn-secondary:hover {
-  box-shadow: 
+  box-shadow:
     6px 8px 18px -2px rgba(130, 105, 80, 0.16),
     -4px -4px 10px 0 rgba(255, 255, 255, 1),
     inset 1px 1px 2px #FFFFFF !important;
@@ -730,7 +730,7 @@ html.claymorphic button.bg-surface-container-high:hover,
 html.claymorphic button.bg-surface-container:active,
 html.claymorphic button.bg-surface-container-high:active,
 .neo-tactile-btn-secondary:active {
-  box-shadow: 
+  box-shadow:
     inset 2.5px 2.5px 5px rgba(130, 105, 80, 0.18),
     inset -1px -1px 3px rgba(255, 255, 255, 0.8) !important;
   transform: translateY(1px) !important;
@@ -743,7 +743,7 @@ html.claymorphic select,
 .neo-tactile-well {
   background-color: #E8E0D4 !important;
   border: 1px solid #DFD5C6 !important;
-  box-shadow: 
+  box-shadow:
     inset 2.5px 2.5px 5px rgba(120, 95, 70, 0.15),
     inset -2px -2px 4px rgba(255, 255, 255, 0.85) !important;
   border-radius: 12px;
@@ -757,7 +757,7 @@ html.claymorphic select:focus,
 .neo-tactile-well:focus-within {
   outline: none !important;
   border-color: #0E332E !important;
-  box-shadow: 
+  box-shadow:
     inset 2px 2px 4px rgba(120, 95, 70, 0.15),
     0 0 0 3px rgba(14, 51, 46, 0.18) !important;
 }
@@ -767,7 +767,7 @@ html.claymorphic .tab-group-container,
 .neo-tactile-tabs {
   background-color: #E8E0D4 !important;
   border: 1px solid #DFD5C6 !important;
-  box-shadow: 
+  box-shadow:
     inset 2.5px 2.5px 5px rgba(120, 95, 70, 0.14),
     inset -1.5px -1.5px 3px rgba(255, 255, 255, 0.9) !important;
   border-radius: 16px;
@@ -778,7 +778,7 @@ html.claymorphic .tab-active,
 .neo-tactile-tab-active {
   background-color: #FAF6F0 !important;
   color: #0E332E !important;
-  box-shadow: 
+  box-shadow:
     3px 4px 10px rgba(130, 105, 80, 0.12),
     -2px -2px 6px rgba(255, 255, 255, 0.95),
     inset 1px 1px 2px #FFFFFF !important;
@@ -792,7 +792,7 @@ html.claymorphic .clay-card,
   background-color: #FAF6F0 !important;
   border: 1px solid rgba(255, 255, 255, 0.85) !important;
   border-radius: 24px;
-  box-shadow: 
+  box-shadow:
     8px 14px 26px -4px rgba(120, 95, 70, 0.11),
     -6px -6px 16px 0 rgba(255, 255, 255, 0.95),
     inset 1.5px 1.5px 3px rgba(255, 255, 255, 0.95),
@@ -802,7 +802,7 @@ html.claymorphic .clay-card,
 
 html.claymorphic .clay-card:hover,
 .neo-tactile-card:hover {
-  box-shadow: 
+  box-shadow:
     10px 18px 32px -4px rgba(120, 95, 70, 0.14),
     -8px -8px 20px 0 rgba(255, 255, 255, 1),
     inset 1.5px 1.5px 3px rgba(255, 255, 255, 1) !important;
@@ -814,7 +814,7 @@ html.claymorphic .clay-pill:not([class*="bg-"]),
 .neo-tactile-badge {
   background-color: #FAF6F0 !important;
   border: 1px solid rgba(255, 255, 255, 0.85) !important;
-  box-shadow: 
+  box-shadow:
     3px 4px 8px -1px rgba(130, 105, 80, 0.1),
     -2px -2px 5px rgba(255, 255, 255, 0.9),
     inset 1px 1px 1.5px rgba(255, 255, 255, 0.95) !important;
@@ -827,7 +827,7 @@ html.claymorphic a.bg-secondary,
   background: #DE8553 !important;
   color: #FFFFFF !important;
   border: 1px solid rgba(255, 255, 255, 0.3) !important;
-  box-shadow: 
+  box-shadow:
     0 6px 16px -2px rgba(222, 133, 83, 0.4),
     0 2px 4px 0 rgba(222, 133, 83, 0.2),
     inset 0 1px 1.5px rgba(255, 255, 255, 0.45),
@@ -838,7 +838,7 @@ html.claymorphic a.bg-secondary,
 html.claymorphic button.bg-secondary:hover,
 html.claymorphic a.bg-secondary:hover {
   background: #E8905E !important;
-  box-shadow: 
+  box-shadow:
     0 8px 20px -2px rgba(222, 133, 83, 0.5),
     inset 0 1px 2px rgba(255, 255, 255, 0.5) !important;
   transform: translateY(-1px) !important;
@@ -1026,3 +1026,62 @@ html.dark .panel-dark {
 }
 
 
+
+/* Refined elevation preserves the original palette and control colors. */
+
+html.claymorphic :is(.shadow-sm, .shadow-md) {
+  box-shadow: 0 2px 5px rgb(28 46 35 / 4%);
+}
+html.claymorphic :is(.shadow-lg, .shadow-xl, .shadow-2xl) {
+  box-shadow: 0 12px 36px -16px rgb(28 46 35 / 18%);
+}
+.clay-card, html.claymorphic .clay-card {
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 4%) !important;
+  transition: border-color 180ms ease, box-shadow 180ms ease;
+}
+.clay-card:hover, html.claymorphic .clay-card:hover {
+  transform: none;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 6%) !important;
+}
+
+/* Editorial hierarchy and accessible interactions. */
+html { scroll-padding-top: 6rem; }
+button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
+button:not(:disabled), [role="button"] { cursor: pointer; }
+:where(button, a, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--theme-primary);
+  outline-offset: 4px;
+}
+button:disabled { cursor: not-allowed; }
+.editorial-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--theme-on-surface-variant);
+}
+.assistant-launcher { box-shadow: 0 6px 20px rgb(0 0 0 / 12%); }
+.landing-page #concept { border-bottom: 1px solid var(--theme-outline-variant); }
+.landing-page header nav a { font-size: 0.8125rem; }
+.landing-page h1 { max-width: 15ch; }
+.landing-page section { scroll-margin-top: 1rem; }
+@media (max-width: 480px) {
+  .landing-page header > div { gap: 0.75rem; height: auto; min-height: 5rem; flex-wrap: wrap; padding-block: 0.75rem; }
+  .landing-page header > div > div:last-child { margin-left: auto; }
+  .landing-page header .font-serif { font-size: 1rem; }
+  .landing-page header .uppercase { font-size: 0.5rem; }
+  .landing-page h1 { font-size: 3rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

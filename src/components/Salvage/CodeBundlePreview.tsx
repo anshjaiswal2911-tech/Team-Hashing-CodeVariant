@@ -92,7 +92,7 @@ export const CodeBundlePreview: React.FC<CodeBundlePreviewProps> = ({
       {viewMode === 'modernized' && (
         <div className="px-4 py-2 bg-secondary/10 border-b border-secondary/20 flex flex-wrap items-center justify-between gap-2 text-[11px] font-mono">
           <div className="flex items-center gap-2 text-secondary font-semibold">
-            <span className="material-symbols-outlined text-xs">auto_awesome</span>
+            <span className="material-symbols-outlined text-xs">code</span>
             <span>AST Modernization Score: {report.score}%</span>
             <span className="text-on-surface-variant font-normal">• Edge Runtime Ready</span>
           </div>

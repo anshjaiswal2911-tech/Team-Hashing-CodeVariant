@@ -125,9 +125,9 @@ export const RevivalCompassView: React.FC<RevivalCompassViewProps> = ({
       {/* Top Specimen Folio Banner & Context */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div className="space-y-2 max-w-3xl">
-          <div className="flex items-center gap-2 text-secondary font-mono text-xs uppercase tracking-widest">
+          <div className="flex items-center gap-2 text-secondary font-mono text-xs uppercase tracking-widest font-semibold">
             <span className="material-symbols-outlined text-sm">explore</span>
-            <span>Folio Specimen No. 048 // Revival Compass</span>
+            <span>Revival Compass // Project Viability Diagnostic</span>
           </div>
 
           <h1 className="font-serif text-3xl sm:text-4xl lg:text-[40px] text-on-surface leading-tight">
@@ -135,8 +135,7 @@ export const RevivalCompassView: React.FC<RevivalCompassViewProps> = ({
           </h1>
 
           <p className="font-sans text-sm sm:text-base text-on-surface-variant max-w-2xl leading-relaxed">
-            Transparent, multidimensional evaluation for dormant projects. No black-box AI scores — only
-            explainable weights based on your momentum, context shift, and code readiness.
+            Clear, transparent viability assessment for your dormant projects. Understand exactly what code is reusable, why the idea still matters, and the fastest path to ship.
           </p>
         </div>
 
@@ -209,15 +208,23 @@ export const RevivalCompassView: React.FC<RevivalCompassViewProps> = ({
             {/* Ambient Aura */}
             <div className="absolute -top-16 left-1/2 -translate-x-1/2 w-72 h-72 bg-gradient-to-b from-black/5 dark:from-white/5 to-transparent rounded-full blur-2xl pointer-events-none"></div>
 
-            {/* Specimen Code Top-Corner Tag */}
-            <div className="w-full flex justify-between items-center mb-4">
-              <span className="font-mono text-[11px] text-on-surface-variant uppercase tracking-wider font-semibold">
-                {currentSpecimen.specimenNumber}
-              </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-high text-on-surface font-sans text-xs border border-outline-variant font-medium">
-                <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-                <span>Seedling Stage</span>
-              </span>
+            {/* Specimen Header & Identity */}
+            <div className="w-full text-left mb-4 pb-3 border-b border-surface-container-high/60">
+              <div className="flex items-center justify-between gap-2 mb-1">
+                <span className="font-mono text-[11px] text-on-surface-variant uppercase tracking-wider font-semibold">
+                  {currentSpecimen.specimenNumber} • {currentSpecimen.category}
+                </span>
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-secondary/15 text-secondary font-sans text-xs border border-secondary/30 font-medium">
+                  <span className="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse" />
+                  <span>Ready for Revival</span>
+                </span>
+              </div>
+              <h2 className="font-sans text-2xl font-bold text-on-surface tracking-tight">
+                {currentSpecimen.title}
+              </h2>
+              <p className="font-sans text-xs text-on-surface-variant mt-1 leading-relaxed">
+                {currentSpecimen.description}
+              </p>
             </div>
 
             {/* Radial Score Dial SVG */}
@@ -265,7 +272,7 @@ export const RevivalCompassView: React.FC<RevivalCompassViewProps> = ({
               {/* Inside Score Counter */}
               <div className="absolute inset-0 flex flex-col items-center justify-center">
                 <span className="font-mono text-[11px] uppercase tracking-widest text-on-surface-variant">
-                  Viability Index
+                  Revival Readiness
                 </span>
                 <div className="flex items-baseline gap-1 my-1">
                   <span className="font-sans text-5xl font-bold text-on-surface leading-none tracking-tight">
@@ -273,10 +280,16 @@ export const RevivalCompassView: React.FC<RevivalCompassViewProps> = ({
                   </span>
                   <span className="font-sans text-2xl text-on-surface-variant/70">/ 100</span>
                 </div>
-                <div className="flex items-center gap-1 text-on-surface">
-                  <span className="material-symbols-outlined text-sm">trending_up</span>
+                <div className="flex items-center gap-1.5 text-on-surface">
+                  <span className="material-symbols-outlined text-sm text-secondary">
+                    {totalScore >= 75 ? 'verified' : totalScore >= 50 ? 'trending_up' : 'info'}
+                  </span>
                   <span className="font-sans text-xs tracking-wide font-semibold">
-                    +{Math.max(4, totalScore - 64)} pts over baseline
+                    {totalScore >= 75
+                      ? 'High Resurrection Potential'
+                      : totalScore >= 50
+                      ? 'Moderate Effort Needed'
+                      : 'Salvage Components Only'}
                   </span>
                 </div>
               </div>
@@ -293,22 +306,40 @@ export const RevivalCompassView: React.FC<RevivalCompassViewProps> = ({
               <p className="font-sans text-xs opacity-80 max-w-sm mt-1 leading-relaxed">
                 {determinationDesc}
               </p>
-              <button
-                type="button"
-                onClick={() => setShowConfetti(true)}
-                className="mt-2.5 px-3.5 py-1.5 rounded-full bg-secondary/15 hover:bg-secondary/25 text-secondary border border-secondary/30 text-xs font-semibold flex items-center gap-1.5 transition-all shadow-sm active:scale-95"
-              >
-                <span className="material-symbols-outlined text-sm">celebration</span>
-                <span>Spark Revival Celebration</span>
-              </button>
+              <div className="flex flex-wrap items-center justify-center gap-2 mt-3">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowConfetti(true);
+                    setTimeout(() => onOpenGraftSprint(currentSpecimen), 300);
+                  }}
+                  className="px-4 py-2 rounded-xl bg-secondary hover:bg-secondary-fixed text-on-secondary text-xs font-bold flex items-center gap-1.5 transition-all shadow-md active:scale-95"
+                >
+                  <span className="material-symbols-outlined text-sm">rocket_launch</span>
+                  <span>Start 2-Hour Sprint</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setShowConfetti(true)}
+                  className="px-3.5 py-2 rounded-xl bg-surface-container-high/60 hover:bg-surface-container-high text-on-surface text-xs font-semibold flex items-center gap-1.5 transition-all border border-outline-variant/60 shadow-sm active:scale-95"
+                >
+                  <span className="material-symbols-outlined text-sm">celebration</span>
+                  <span>Celebrate</span>
+                </button>
+              </div>
             </div>
 
             {/* Specimen Executive Rationale */}
-            <div className="w-full mt-4 text-left bg-surface-container-low p-4 rounded-lg border border-surface-container-high/40">
-              <div className="flex items-center gap-2 mb-2 text-primary">
-                <span className="material-symbols-outlined text-base">psychiatry</span>
-                <span className="font-sans text-xs font-semibold text-on-surface">
-                  Curator's Analysis
+            <div className="w-full mt-4 text-left bg-surface-container-low p-4 rounded-lg border border-surface-container-high/40 space-y-2">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2 text-primary">
+                  <span className="material-symbols-outlined text-base">psychiatry</span>
+                  <span className="font-sans text-xs font-semibold text-on-surface">
+                    Curator's Analysis
+                  </span>
+                </div>
+                <span className="font-mono text-[10px] px-2 py-0.5 rounded bg-surface-container-high text-on-surface-variant font-medium">
+                  Pause Cause: {currentSpecimen.causeCategory}
                 </span>
               </div>
               <p className="font-sans text-xs text-on-surface-variant leading-relaxed">
@@ -349,177 +380,155 @@ export const RevivalCompassView: React.FC<RevivalCompassViewProps> = ({
 
         {/* Right Column: Factor Breakdown & Interactive Pulse Check (7 Cols) */}
         <div className="lg:col-span-7 flex flex-col space-y-6">
-          {/* Explainable Factor Breakdown Module */}
+          {/* Revival Viability Signals: 3 Core Pillars */}
           <div className="bg-surface-container rounded-[28px] p-6 shadow-md flex flex-col space-y-4 border border-outline-variant/60 clay-card">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 pb-1">
               <div>
-                <h2 className="font-sans text-lg text-on-surface font-semibold">
-                  Explainable Factor Breakdown
+                <h2 className="font-sans text-lg text-on-surface font-semibold flex items-center gap-2">
+                  <span>Revival Viability Signals</span>
+                  <span className="w-2 h-2 rounded-full bg-secondary"></span>
                 </h2>
                 <p className="font-sans text-xs text-on-surface-variant">
-                  Weighted contributions summing transparently to {totalScore} / 100 points
+                  3 simple, honest criteria that determine if this project is ready to ship
                 </p>
               </div>
-              <span className="self-start sm:self-auto px-2.5 py-1 rounded bg-surface-container-high text-primary font-mono text-xs">
-                6 Dimensions
+              <span className="self-start sm:self-auto px-2.5 py-1 rounded bg-secondary/15 text-secondary border border-secondary/30 font-mono text-xs font-semibold">
+                3 Key Pillars
               </span>
             </div>
 
-            {/* Factors List */}
-            <div className="space-y-3 pt-1">
-              {/* Factor 1: Code & Asset Completion */}
-              <div className="bg-surface-container-low p-4 rounded-lg space-y-2 border border-surface-container-high/30">
+            {/* The 3 Clear Health Pillars */}
+            <div className="space-y-4 pt-1">
+              {/* Pillar 1: Code & Assets Completed */}
+              <div className="bg-surface-container-low p-4 rounded-xl space-y-3 border border-surface-container-high/40 hover:border-secondary/30 transition-colors">
                 <div className="flex flex-wrap items-center justify-between gap-2">
-                  <div className="flex items-center gap-2">
-                    <span className="material-symbols-outlined text-primary text-base">code_blocks</span>
-                    <span className="font-sans text-xs font-semibold text-on-surface">
-                      Code & Asset Completion
-                    </span>
-                    <span className="font-mono text-[10px] text-outline bg-surface-container px-2 py-0.5 rounded">
-                      25% wt
-                    </span>
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+                      <span className="material-symbols-outlined text-base">code_blocks</span>
+                    </div>
+                    <div>
+                      <span className="font-sans text-xs font-bold text-on-surface block">
+                        1. Code & Reusable Assets Built
+                      </span>
+                      <span className="font-sans text-[11px] text-on-surface-variant">
+                        Foundation already coded & preserved
+                      </span>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-3 font-mono text-xs">
-                    <span className="text-on-surface font-semibold">{codeScore} / 100</span>
-                    <span className="text-secondary font-bold">+{codePts} pts</span>
-                  </div>
+                  <span className="px-2.5 py-1 rounded-full bg-primary/15 text-primary font-mono text-xs font-bold border border-primary/25">
+                    {codeScore}% Complete
+                  </span>
                 </div>
+
                 <div className="w-full h-2 rounded-full bg-surface-container-highest overflow-hidden">
-                  <div className="h-full bg-primary rounded-full" style={{ width: `${codeScore}%` }}></div>
+                  <div className="h-full bg-primary rounded-full transition-all duration-500" style={{ width: `${codeScore}%` }}></div>
                 </div>
-                <p className="font-sans text-xs text-on-surface-variant/90 pt-0.5">
-                  Auth, schema, and core UI components are already built and preserved in the vault.
+
+                {/* Practical Checklist Pills */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1">
+                  <div className="bg-surface-container px-2.5 py-1.5 rounded-lg flex items-center gap-1.5 border border-surface-container-high/60">
+                    <span className="material-symbols-outlined text-secondary text-sm">check_circle</span>
+                    <span className="font-sans text-[11px] text-on-surface">Auth & User Flow</span>
+                  </div>
+                  <div className="bg-surface-container px-2.5 py-1.5 rounded-lg flex items-center gap-1.5 border border-surface-container-high/60">
+                    <span className="material-symbols-outlined text-secondary text-sm">check_circle</span>
+                    <span className="font-sans text-[11px] text-on-surface">Database & Schema</span>
+                  </div>
+                  <div className="bg-surface-container px-2.5 py-1.5 rounded-lg flex items-center gap-1.5 border border-surface-container-high/60">
+                    <span className="material-symbols-outlined text-secondary text-sm">check_circle</span>
+                    <span className="font-sans text-[11px] text-on-surface">{currentSpecimen.preservedSalvageModules.length} Vault Modules</span>
+                  </div>
+                </div>
+
+                <p className="font-sans text-xs text-on-surface-variant/90 pt-0.5 leading-relaxed">
+                  💡 <span className="font-medium text-on-surface">Why it matters:</span> You won't start from scratch. The hardest backend architecture, models, and core UI are already preserved in the vault.
                 </p>
               </div>
 
-              {/* Factor 2: Core Idea Strength */}
-              <div className="bg-surface-container-low p-4 rounded-lg space-y-2 border border-surface-container-high/30">
+              {/* Pillar 2: Core Idea & Problem Urgency */}
+              <div className="bg-surface-container-low p-4 rounded-xl space-y-3 border border-surface-container-high/40 hover:border-secondary/30 transition-colors">
                 <div className="flex flex-wrap items-center justify-between gap-2">
-                  <div className="flex items-center gap-2">
-                    <span className="material-symbols-outlined text-secondary text-base">lightbulb</span>
-                    <span className="font-sans text-xs font-semibold text-on-surface">
-                      Core Idea Strength
-                    </span>
-                    <span className="font-mono text-[10px] text-outline bg-surface-container px-2 py-0.5 rounded">
-                      20% wt
-                    </span>
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-7 h-7 rounded-lg bg-secondary/15 flex items-center justify-center text-secondary">
+                      <span className="material-symbols-outlined text-base">lightbulb</span>
+                    </div>
+                    <div>
+                      <span className="font-sans text-xs font-bold text-on-surface block">
+                        2. Problem Relevance & Market Need
+                      </span>
+                      <span className="font-sans text-[11px] text-on-surface-variant">
+                        Customer problem hasn't vanished
+                      </span>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-3 font-mono text-xs">
-                    <span className="text-on-surface font-semibold">{ideaScore} / 100</span>
-                    <span className="text-secondary font-bold">+{ideaPts} pts</span>
-                  </div>
+                  <span className="px-2.5 py-1 rounded-full bg-secondary/20 text-secondary font-mono text-xs font-bold border border-secondary/30">
+                    High Demand ({ideaScore}%)
+                  </span>
                 </div>
+
                 <div className="w-full h-2 rounded-full bg-surface-container-highest overflow-hidden">
-                  <div className="h-full bg-secondary rounded-full" style={{ width: `${ideaScore}%` }}></div>
+                  <div className="h-full bg-secondary rounded-full transition-all duration-500" style={{ width: `${ideaScore}%` }}></div>
                 </div>
-                <p className="font-sans text-xs text-on-surface-variant/90 pt-0.5">
-                  Solves a verified coordination problem without direct modern alternatives.
+
+                {/* Plain english key takeaway */}
+                <div className="bg-surface-container p-2.5 rounded-lg border border-surface-container-high/60 space-y-1">
+                  <div className="flex items-center gap-1.5 text-xs font-semibold text-on-surface">
+                    <span className="material-symbols-outlined text-secondary text-sm">target</span>
+                    <span>Direct Problem Solved:</span>
+                  </div>
+                  <p className="font-sans text-xs text-on-surface-variant leading-relaxed">
+                    Addresses a real-world coordination barrier ({currentSpecimen.category}) with zero dominant lightweight solutions. Modern APIs make deployment faster today than when it was archived.
+                  </p>
+                </div>
+
+                <p className="font-sans text-xs text-on-surface-variant/90 pt-0.5 leading-relaxed">
+                  💡 <span className="font-medium text-on-surface">Why it matters:</span> The original pause was circumstantial ({currentSpecimen.causeCategory}), not a rejection of the idea itself.
                 </p>
               </div>
 
-              {/* Factor 3: Cause Fixability */}
-              <div className="bg-surface-container-low p-4 rounded-lg space-y-2 border border-surface-container-high/30">
+              {/* Pillar 3: Effort to Ship MVP */}
+              <div className="bg-surface-container-low p-4 rounded-xl space-y-3 border border-surface-container-high/40 hover:border-secondary/30 transition-colors">
                 <div className="flex flex-wrap items-center justify-between gap-2">
-                  <div className="flex items-center gap-2">
-                    <span className="material-symbols-outlined text-primary text-base">build_circle</span>
-                    <span className="font-sans text-xs font-semibold text-on-surface">
-                      Cause Fixability
-                    </span>
-                    <span className="font-mono text-[10px] text-outline bg-surface-container px-2 py-0.5 rounded">
-                      20% wt
-                    </span>
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+                      <span className="material-symbols-outlined text-base">timer</span>
+                    </div>
+                    <div>
+                      <span className="font-sans text-xs font-bold text-on-surface block">
+                        3. Effort to Ship to Production
+                      </span>
+                      <span className="font-sans text-[11px] text-on-surface-variant">
+                        Clear path to a single working feature
+                      </span>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-3 font-mono text-xs">
-                    <span className="text-on-surface font-semibold">{fixabilityScore} / 100</span>
-                    <span className="text-secondary font-bold">+{fixabilityPts} pts</span>
-                  </div>
+                  <span className="px-2.5 py-1 rounded-full bg-surface-container-highest text-on-surface font-mono text-xs font-bold border border-outline-variant/60">
+                    ~1 Weekend (8-12 hrs)
+                  </span>
                 </div>
-                <div className="w-full h-2 rounded-full bg-surface-container-highest overflow-hidden">
-                  <div className="h-full bg-primary rounded-full" style={{ width: `${fixabilityScore}%` }}></div>
-                </div>
-                <p className="font-sans text-xs text-on-surface-variant/90 pt-0.5">
-                  Original road block was circumstantial ({currentSpecimen.causeCategory}), not an architectural flaw.
-                </p>
-              </div>
 
-              {/* Factor 4: Rekindled Interest (Dynamic Slider) */}
-              <div className="bg-surface-container-low p-4 rounded-lg space-y-2 border border-surface-container-high/30">
-                <div className="flex flex-wrap items-center justify-between gap-2">
-                  <div className="flex items-center gap-2">
-                    <span className="material-symbols-outlined text-secondary text-base">local_fire_department</span>
-                    <span className="font-sans text-xs font-semibold text-on-surface">
-                      Rekindled Interest
-                    </span>
-                    <span className="font-mono text-[10px] text-outline bg-surface-container px-2 py-0.5 rounded">
-                      15% wt
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-3 font-mono text-xs">
-                    <span className="text-on-surface font-semibold">{excitement} / 100</span>
-                    <span className="text-secondary font-bold">+{interestPts} pts</span>
-                  </div>
-                </div>
                 <div className="w-full h-2 rounded-full bg-surface-container-highest overflow-hidden">
-                  <div
-                    className="h-full bg-secondary rounded-full transition-all duration-300"
-                    style={{ width: `${excitement}%` }}
-                  ></div>
+                  <div className="h-full bg-primary/80 rounded-full transition-all duration-500" style={{ width: `${effortScore}%` }}></div>
                 </div>
-                <p className="font-sans text-xs text-on-surface-variant/90 pt-0.5">
-                  Driven by your live Pulse Check response ({getExcitementText(excitement)}).
-                </p>
-              </div>
 
-              {/* Factor 5: Skill Growth (Dynamic Slider) */}
-              <div className="bg-surface-container-low p-4 rounded-lg space-y-2 border border-surface-container-high/30">
-                <div className="flex flex-wrap items-center justify-between gap-2">
-                  <div className="flex items-center gap-2">
-                    <span className="material-symbols-outlined text-primary text-base">school</span>
-                    <span className="font-sans text-xs font-semibold text-on-surface">
-                      Skill Growth Since Burial
-                    </span>
-                    <span className="font-mono text-[10px] text-outline bg-surface-container px-2 py-0.5 rounded">
-                      10% wt
-                    </span>
+                {/* 3 Step Action Blueprint */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1 font-sans text-xs">
+                  <div className="bg-surface-container p-2.5 rounded-lg border border-surface-container-high/60">
+                    <span className="font-bold text-secondary block text-[11px] uppercase tracking-wider mb-0.5">Step 1 • Prune</span>
+                    <span className="text-on-surface-variant text-[11px]">Cut 3-4 side tabs; keep only core workflow.</span>
                   </div>
-                  <div className="flex items-center gap-3 font-mono text-xs">
-                    <span className="text-on-surface font-semibold">{skillGrowth} / 100</span>
-                    <span className="text-secondary font-bold">+{skillPts} pts</span>
+                  <div className="bg-surface-container p-2.5 rounded-lg border border-surface-container-high/60">
+                    <span className="font-bold text-secondary block text-[11px] uppercase tracking-wider mb-0.5">Step 2 • Re-link</span>
+                    <span className="text-on-surface-variant text-[11px]">Connect modern DB keys and map tokens.</span>
+                  </div>
+                  <div className="bg-surface-container p-2.5 rounded-lg border border-surface-container-high/60">
+                    <span className="font-bold text-secondary block text-[11px] uppercase tracking-wider mb-0.5">Step 3 • Deploy</span>
+                    <span className="text-on-surface-variant text-[11px]">Ship working MVP on Vercel in 120 mins.</span>
                   </div>
                 </div>
-                <div className="w-full h-2 rounded-full bg-surface-container-highest overflow-hidden">
-                  <div
-                    className="h-full bg-primary rounded-full transition-all duration-300"
-                    style={{ width: `${skillGrowth}%` }}
-                  ></div>
-                </div>
-                <p className="font-sans text-xs text-on-surface-variant/90 pt-0.5">
-                  Increased mastery of modern frameworks since pausing; blockers are now routine.
-                </p>
-              </div>
 
-              {/* Factor 6: Remaining Effort to MVP */}
-              <div className="bg-surface-container-low p-4 rounded-lg space-y-2 border border-surface-container-high/30">
-                <div className="flex flex-wrap items-center justify-between gap-2">
-                  <div className="flex items-center gap-2">
-                    <span className="material-symbols-outlined text-outline text-base">timer</span>
-                    <span className="font-sans text-xs font-semibold text-on-surface">
-                      Remaining Effort to MVP
-                    </span>
-                    <span className="font-mono text-[10px] text-outline bg-surface-container px-2 py-0.5 rounded">
-                      10% wt
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-3 font-mono text-xs">
-                    <span className="text-on-surface font-semibold">{effortScore} / 100</span>
-                    <span className="text-secondary font-bold">+{effortPts} pts</span>
-                  </div>
-                </div>
-                <div className="w-full h-2 rounded-full bg-surface-container-highest overflow-hidden">
-                  <div className="h-full bg-outline-variant rounded-full" style={{ width: `${effortScore}%` }}></div>
-                </div>
-                <p className="font-sans text-xs text-on-surface-variant/90 pt-0.5">
-                  Requires ~16 focused hours to prune non-essential tabs and deliver a single clean workflow.
+                <p className="font-sans text-xs text-on-surface-variant/90 pt-0.5 leading-relaxed">
+                  💡 <span className="font-medium text-on-surface">Why it matters:</span> You don't need to finish the whole dream backlog. Delivering 1 working feature proves viability with minimal time risk.
                 </p>
               </div>
             </div>
@@ -534,15 +543,15 @@ export const RevivalCompassView: React.FC<RevivalCompassViewProps> = ({
                 </div>
                 <div>
                   <h3 className="font-sans text-base text-on-surface font-semibold">
-                    Pulse Check: Recalibrate
+                    Developer Pulse Check: Your Readiness Today
                   </h3>
                   <p className="font-sans text-xs text-on-surface-variant">
-                    Update the diagnostic with your feelings today
+                    Adjust the sliders below to calibrate recommendations based on your current enthusiasm and skills
                   </p>
                 </div>
               </div>
-              <span className="font-mono text-[11px] uppercase tracking-wider text-secondary font-medium">
-                Dynamic Weights
+              <span className="font-mono text-[11px] uppercase tracking-wider text-secondary font-semibold bg-secondary/10 px-2 py-0.5 rounded border border-secondary/20">
+                Live Calibrated
               </span>
             </div>
 
@@ -805,7 +814,7 @@ export const RevivalCompassView: React.FC<RevivalCompassViewProps> = ({
             )}
             <div className="space-y-1">
               <div className="flex items-center gap-1 text-outline">
-                <span className="material-symbols-outlined text-base">spa</span>
+                <span className="material-symbols-outlined text-base">inventory_2</span>
                 <span className="font-mono text-[10px] uppercase">Archetype 05</span>
               </div>
               <span className="font-sans text-xs font-semibold text-on-surface block">
