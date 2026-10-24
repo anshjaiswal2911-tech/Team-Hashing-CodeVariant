@@ -79,8 +79,8 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
               onClick={() => onNavigate('bury-a-project')}
               className="px-5 py-2.5 rounded-full bg-secondary text-on-secondary hover:brightness-110 active:scale-95 transition-all font-sans text-xs font-bold shadow-md flex items-center gap-2 border border-secondary/40 cursor-pointer"
             >
-              <span className="material-symbols-outlined text-base text-inherit">spa</span>
-              <span className="text-inherit font-bold tracking-wide">Bury a Project</span>
+              <span className="material-symbols-outlined text-base text-inherit">add_circle</span>
+              <span className="text-inherit font-bold tracking-wide">+ Add / New Project</span>
             </button>
             <button
               type="button"

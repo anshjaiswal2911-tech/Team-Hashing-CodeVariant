@@ -6,6 +6,7 @@ interface HeaderProps {
   onNavigate: (screen: ScreenId) => void;
   onOpenSearch: () => void;
   onOpenMobileMenu: () => void;
+  onOpenNewProject?: () => void;
   unreadNotificationsCount?: number;
   currentUser?: { name: string; email: string; role: string; avatar: string };
   onLogout?: () => void;
@@ -17,6 +18,7 @@ export const Header: React.FC<HeaderProps> = ({
   onNavigate,
   onOpenSearch,
   onOpenMobileMenu,
+  onOpenNewProject,
   unreadNotificationsCount = 2,
   currentUser,
   onLogout,
@@ -83,14 +85,15 @@ export const Header: React.FC<HeaderProps> = ({
 
         {/* Center / Right widgets matching AI Studio screenshot */}
         <div className="flex items-center gap-2 sm:gap-2.5">
-          {/* Quick Action Pill Button: + Bury a Project */}
+          {/* Quick Action Pill Button: + Add / New Project */}
           <button
             type="button"
-            onClick={() => onNavigate('bury-a-project')}
-            className="hidden sm:flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-secondary/15 hover:bg-secondary/25 text-on-surface border border-secondary/35 hover:border-secondary/60 transition-all font-sans text-xs font-semibold shadow-xs cursor-pointer"
+            onClick={onOpenNewProject || (() => onNavigate('bury-a-project'))}
+            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-secondary/15 hover:bg-secondary/25 text-on-surface border border-secondary/35 hover:border-secondary/60 transition-all font-sans text-xs font-semibold shadow-xs cursor-pointer"
+            title="Add New Project (Import from GitHub or Inscribe)"
           >
-            <span className="material-symbols-outlined text-sm text-secondary">add</span>
-            <span className="tracking-tight text-on-surface font-semibold">Bury a Project</span>
+            <span className="material-symbols-outlined text-sm text-secondary">add_circle</span>
+            <span className="tracking-tight text-on-surface font-semibold">+ Add / New Project</span>
           </button>
 
           {/* Theme Switcher Button & Dropdown Menu */}

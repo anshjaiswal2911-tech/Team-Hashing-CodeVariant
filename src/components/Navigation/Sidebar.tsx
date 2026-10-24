@@ -28,7 +28,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 }) => {
   const navItems = [
     { id: 'overview' as ScreenId, label: 'Overview / Cemetery', icon: 'grid_view' },
-    { id: 'bury-a-project' as ScreenId, label: 'Bury a Project', icon: 'add_circle_outline' },
+    { id: 'bury-a-project' as ScreenId, label: '+ Add / New Project', icon: 'add_circle_outline' },
     { id: 'revival-compass' as ScreenId, label: 'Revival Compass', icon: 'explore' },
     { id: 'salvage-yard' as ScreenId, label: 'Salvage Yard', icon: 'inventory_2' },
     { id: 'graft-studio' as ScreenId, label: 'Graft Studio', icon: 'hub' },

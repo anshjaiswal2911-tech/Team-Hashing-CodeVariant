@@ -12,6 +12,7 @@ import { MemorialAutopsyModal } from './components/Modals/MemorialAutopsyModal';
 import { GraftSprintModal } from './components/Modals/GraftSprintModal';
 import { MeetAiAgentModal } from './components/Modals/MeetAiAgentModal';
 import { KeyboardShortcutsModal } from './components/Modals/KeyboardShortcutsModal';
+import { NewProjectModal } from './components/Modals/NewProjectModal';
 import { ProjectAiChatbot } from './components/AiChatbot/ProjectAiChatbot';
 import aiBotImg from './assets/ai-bot.png';
 
@@ -127,6 +128,7 @@ export default function App() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isQuickJumpOpen, setIsQuickJumpOpen] = useState(false);
   const [isShortcutsOpen, setIsShortcutsOpen] = useState(false);
+  const [isNewProjectModalOpen, setIsNewProjectModalOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   // Full Screen / Collapsible Left Navigation (Zen Focus Mode)
@@ -136,6 +138,8 @@ export default function App() {
   useKeyboardShortcuts({
     'meta+k': () => setIsSearchOpen((prev) => !prev),
     'j': () => setIsQuickJumpOpen((prev) => !prev),
+    'b': () => setIsNewProjectModalOpen(true),
+    'n': () => setIsNewProjectModalOpen(true),
     '?': () => setIsShortcutsOpen((prev) => !prev),
     'Escape': () => {
       setIsSearchOpen(false);
@@ -143,6 +147,7 @@ export default function App() {
       setIsAutopsyOpen(false);
       setIsGraftSprintOpen(false);
       setIsShortcutsOpen(false);
+      setIsNewProjectModalOpen(false);
     },
   });
 
@@ -406,6 +411,7 @@ export default function App() {
           onNavigate={navigateWithAuth}
           onOpenSearch={() => setIsSearchOpen(true)}
           onOpenMobileMenu={() => setIsMobileMenuOpen(true)}
+          onOpenNewProject={() => setIsNewProjectModalOpen(true)}
           unreadNotificationsCount={2}
           currentUser={currentUser}
           onLogout={handleLogout}
@@ -614,6 +620,13 @@ export default function App() {
     <KeyboardShortcutsModal
       isOpen={isShortcutsOpen}
       onClose={() => setIsShortcutsOpen(false)}
+    />
+
+    {/* Add / New Project Modal with GitHub Importer */}
+    <NewProjectModal
+      isOpen={isNewProjectModalOpen}
+      onClose={() => setIsNewProjectModalOpen(false)}
+      onAddProject={handleProjectBuried}
     />
   </>
   );
