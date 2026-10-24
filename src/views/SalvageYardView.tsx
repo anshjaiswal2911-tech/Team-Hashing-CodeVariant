@@ -3,6 +3,7 @@ import { SalvageModule, ScreenId } from '../types';
 import { downloadSalvageZip, downloadSalvageTarGz } from '../utils/exportArchive';
 import { ExportRepoModal } from '../components/Modals/ExportRepoModal';
 import { CodeBundlePreview, DependencyGraph } from '../components/Salvage';
+import { EmptyState } from '../components/Common/EmptyState';
 
 interface SalvageYardViewProps {
   modules: SalvageModule[];
@@ -260,8 +261,20 @@ export const SalvageYardView: React.FC<SalvageYardViewProps> = ({
       <div className="grid grid-cols-1 xl:grid-cols-12 gap-6 items-start">
         {/* Catalog Grid / Specimen Cards Column (8 Cols) */}
         <div className="xl:col-span-8 flex flex-col gap-6">
-          {filteredModules.map((item) => {
-            const inBasket = basket.includes(item.id);
+          {filteredModules.length === 0 ? (
+            <EmptyState
+              icon="inventory_2"
+              title="No salvage modules found"
+              description="No extracted components matched your current category or stack filters. Try clearing active filters."
+              actionLabel="Reset All Filters"
+              onAction={() => {
+                setSelectedCategory('all');
+                setActiveStackFilter('all');
+              }}
+            />
+          ) : (
+            filteredModules.map((item) => {
+              const inBasket = basket.includes(item.id);
 
             return (
               <article
@@ -473,8 +486,9 @@ export const SalvageYardView: React.FC<SalvageYardViewProps> = ({
                 </div>
               </article>
             );
-          })}
-        </div>
+          })
+        )}
+      </div>
 
         {/* Action Sidebar: Salvage Basket & Grafting Dock (4 Cols Sticky) */}
         <aside className="xl:col-span-4 sticky top-20 flex flex-col gap-6">

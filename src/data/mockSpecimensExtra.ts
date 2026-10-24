@@ -25,6 +25,10 @@ export const EXTRA_SPECIMENS: ProjectSpecimen[] = [
     unfinishedNotes: 'The SQLite WAL mode writer is completely rock solid; just needs cloudflare D1 binding to become free to host.',
     epitaph: 'Built for millions of events per second; succumbed to cloud server bills before first subscription.',
     plateImage: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop&q=80',
+    salvageViability: {
+      level: 'High (Edge SQLite & SVG Radar)',
+      score: 92,
+    },
     curatorAnalysis: 'High architectural purity. The SQLite streaming engine can be extracted and run on modern serverless edge tiers for under $5/mo.',
   },
   {
@@ -50,6 +54,10 @@ export const EXTRA_SPECIMENS: ProjectSpecimen[] = [
     unfinishedNotes: 'Audio synthesizer algorithm tuned to 432Hz is complete. Needs simple export to CSV.',
     epitaph: 'A quiet rhythm keeper, sleeping peacefully until someone breathes sound into its sails.',
     plateImage: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&auto=format&fit=crop&q=80',
+    salvageViability: {
+      level: 'Solid (IndexedDB Vault)',
+      score: 85,
+    },
     curatorAnalysis: 'Zero third-party cloud dependencies. The IndexedDB wrapper is completely reusable in any modern client-side React app.',
   },
 ];
