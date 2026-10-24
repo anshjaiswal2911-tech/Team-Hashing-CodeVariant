@@ -1,4 +1,5 @@
 import { ProjectSpecimen, SalvageModule, ActivityItem } from '../types';
+import { EXTRA_SPECIMENS } from './mockSpecimensExtra';
 
 export const INITIAL_SPECIMENS: ProjectSpecimen[] = [
   {
@@ -231,7 +232,8 @@ export const INITIAL_SPECIMENS: ProjectSpecimen[] = [
       score: 52
     },
     curatorAnalysis: 'Pure archival artifact. The regex benchmark algorithms provide foundational learnings on stream parsing.'
-  }
+  },
+  ...EXTRA_SPECIMENS,
 ];
 
 export const SALVAGE_MODULES: SalvageModule[] = [
