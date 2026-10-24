@@ -1,7 +1,8 @@
-import { Archive, FolderOpen, ArrowUpRight, Activity } from 'lucide-react';
+import { Archive, FolderOpen } from 'lucide-react';
+import { ArchiveSummaryCard } from '../components/Archive/ArchiveSummaryCard';
 import React, { useState } from 'react';
 import { ProjectSpecimen, ActivityItem, ScreenId } from '../types';
-import { Badge, KbdShortcut, TelemetryChip } from '../components/ui';
+import { Badge, KbdShortcut } from '../components/ui';
 
 interface OverviewViewProps {
   specimens: ProjectSpecimen[];
@@ -46,6 +47,7 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
   const scrollToCemetery = () => {
     const el = document.getElementById('catalogued-remains');
     if (el) {
+      el.querySelector('h2')?.focus({ preventScroll: true });
       el.scrollIntoView({ behavior: 'smooth' });
     }
   };
@@ -98,39 +100,13 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
           </div>
         </div>
 
-        {/* Right Archive at a glance Card (4 Cols) */}
-        <div className="lg:col-span-4 p-6 md:p-7 rounded-[28px] bg-surface-container border border-outline-variant/60 flex flex-col justify-between shadow-sm relative overflow-hidden clay-card">
-          <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <span className="font-mono text-[11px] uppercase tracking-widest text-on-surface-variant font-semibold">
-                Archive at a glance
-              </span>
-              <span aria-hidden="true" className="material-symbols-outlined text-secondary text-lg">inventory_2</span>
-            </div>
-
-            <div className="space-y-1.5">
-              <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-primary" />
-                <h3 className="font-sans text-base font-semibold text-on-surface">
-                  Ready for another beginning
-                </h3>
-              </div>
-              <p className="font-sans text-xs text-on-surface-variant leading-relaxed">
-                {specimens.length} projects preserved. {specimens.filter((s) => s.revivalScore >= 70).length} with strong revival potential.
-              </p>
-            </div>
-
-            <div className="flex flex-wrap gap-2 pt-2">
-              <TelemetryChip label="Collection" value="Local demo" status="healthy" />
-              <TelemetryChip label="Review" value="On your terms" status="healthy" />
-            </div>
-          </div>
-
-          {/* Ambient Metric Footer */}
-          <div className="pt-4 border-t border-outline-variant/50 flex items-center justify-between text-xs font-mono text-on-surface-variant">
-            <span>Preserved, never forgotten.</span>
-            <span className="text-secondary font-medium">Your workspace</span>
-          </div>
+        <div className="lg:col-span-4 min-w-0 flex [&>section]:w-full">
+          <ArchiveSummaryCard
+            specimens={specimens}
+            onReviewCandidates={() => { setActiveFilter('high-potential'); scrollToCemetery(); }}
+            onBrowseProjects={() => { setActiveFilter('all'); scrollToCemetery(); }}
+            onAddProject={() => onNavigate('bury-a-project')}
+          />
         </div>
       </div>
 
@@ -278,7 +254,7 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
               <span aria-hidden="true" className="material-symbols-outlined text-sm">inventory_2</span>
               <span>The Conservatory Grounds // Specimen Folios</span>
             </span>
-            <h2 className="text-2xl sm:text-3xl font-serif text-on-surface tracking-tight mt-0.5">
+            <h2 tabIndex={-1} className="text-2xl sm:text-3xl font-serif text-on-surface tracking-tight mt-0.5">
               Preserved Specimens Catalog
             </h2>
           </div>
@@ -294,6 +270,7 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
               <button
                 key={tab.id}
                 type="button"
+                aria-pressed={activeFilter === tab.id}
                 onClick={() => setActiveFilter(tab.id as typeof activeFilter)}
                 className={`px-3.5 py-1.5 rounded-full text-xs font-sans whitespace-nowrap transition-all ${
                   activeFilter === tab.id
