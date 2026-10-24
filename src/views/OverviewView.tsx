@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ProjectSpecimen, ActivityItem, ScreenId } from '../types';
-import { Badge, KbdShortcut, TelemetryChip } from '../components/ui';
+import { Badge, KbdShortcut, TelemetryChip, StatCard } from '../components/ui';
 
 interface OverviewViewProps {
   specimens: ProjectSpecimen[];
